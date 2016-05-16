@@ -1,0 +1,91 @@
+\begin{thebibliography}{}
+
+\bibitem[Archibald and Roger(2002)Archibald and Roger]{Archibald_Roger:2002}
+Archibald, J.~M. and Roger, A.~J. 2002.
+\newblock Gene conversion and the evolution of euryarchaeal chaperonins: a
+  maximum likelihood-based method for detecting conflicting phylogenetic
+  signal.
+\newblock {\em J. Mol. Evol.}, {55}: 232--245.
+
+\bibitem[Bar-Hen and Kishino(2000)Bar-Hen and Kishino]{Bar-Hen_Kishino:2000}
+Bar-Hen, A. and Kishino, H. 2000.
+\newblock Comparing the likelihood functions of phylogenetic trees.
+\newblock {\em Ann. Inst. Stat. Math.}, {42}: 43--56.
+
+\bibitem[Blouin {\em et~al.}(2005)Blouin, Butt, and
+  Roger]{Blouin_Butt_Roger:2005}
+Blouin, C., Butt, D., and Roger, A.~J. 2005.
+\newblock The impact of taxon sampling on the estimation of rate of evolution
+  at sites.
+\newblock {\em Mol. Biol. Evol.}, {22}: 784--791.
+
+\bibitem[Bryant {\em et~al.}(2005)Bryant, Galtier, and
+  Poursat]{Bryant_Galtier_Poursat:2005}
+Bryant, D., Galtier, N., and Poursat, M.~A. 2005.
+\newblock Likelihood calculation in molecular phylogenetics.
+\newblock In O.~Gascuel, editor, {\em Mathematics of evolution and
+  phylogeny\/}, pages 33--62. Oxford University Press, Oxford.
+
+\bibitem[Efron(1979)Efron]{Efron:1979}
+Efron, B. 1979.
+\newblock Bootstrap methods: another look at the jackknife.
+\newblock {\em Ann. Stat.}, {7}: 1--26.
+
+\bibitem[Felsenstein(1985)Felsenstein]{Felsenstein:1985}
+Felsenstein, J. 1985.
+\newblock Confidence limits on phylogenies: an approach using the bootstrap.
+\newblock {\em Ann. Stat.}, {39}: 783--791.
+
+\bibitem[Felsenstein(2004)Felsenstein]{Felsenstein:2004}
+Felsenstein, J. 2004.
+\newblock {\em Inferring phylogenies\/}.
+\newblock Sinauer Associates, Sunderland (MA).
+
+\bibitem[Guindon and Gascuel(2003)Guindon and Gascuel]{Guindon_Gascuel:2003}
+Guindon, S. and Gascuel, O. 2003.
+\newblock A simple, fast and accurate algorithm to estimate large phylogenies
+  by maximum likelihood.
+\newblock {\em Syst. Biol.}, {52}: 696--704.
+
+\bibitem[Hampel(1974)Hampel]{Hampel:1974}
+Hampel, F.~R. 1974.
+\newblock The influence curve and its role in robust estimation.
+\newblock {\em J. Amer. Statist. Assoc.}, {69}: 383--393.
+
+\bibitem[Huber(2004)Huber]{Huber:2004}
+Huber, P.~J. 2004.
+\newblock {\em Robust statistics\/}.
+\newblock Wiley, Sussex.
+
+\bibitem[Miller(1974)Miller]{Miller:1974}
+Miller, R.~G. 1974.
+\newblock The jackknife---a review.
+\newblock {\em Biometrika\/}, {61}: 1--15.
+
+\bibitem[Penny and Hendy(1985)Penny and Hendy]{Penny_Hendy:1985}
+Penny, D. and Hendy, M.~D. 1985.
+\newblock The use of tree comparison metrics.
+\newblock {\em Syst. Zool.}, {34}: 75--82.
+
+\bibitem[Posada and Crandall(1998)Posada and Crandall]{Posada_Crandall:1998}
+Posada, D. and Crandall, K.~A. 1998.
+\newblock Modeltest: testing the model of {DNA} substitution.
+\newblock {\em Bioinformatics\/}, {14}: 817--818.
+
+\bibitem[Vandenkoornhuyse {\em et~al.}(2002)Vandenkoornhuyse, Baldauf, Leyval,
+  Straczek, and Young]{Vandenkoornhuyse_Baldauf_Leyval_Straczek_Young:2002}
+Vandenkoornhuyse, P., Baldauf, S.~L., Leyval, C., Straczek, J., and Young, J.
+  P.~W. 2002.
+\newblock Extensive and novel fungal diversity in plant roots.
+\newblock {\em Science\/}, {295}: 2051.
+
+\bibitem[Zucker {\em et~al.}(1999)Zucker, Mathews, and
+  Turner]{Zucker_Mathews_Turner:1999}
+Zucker, M., Mathews, D.~H., and Turner, D.~H. 1999.
+\newblock Algorithms and thermodynamics for {RNA} secondary structure
+  prediction: a practical guide.
+\newblock In J.~Barciszewski and B.~F.~C. Clark, editors, {\em RNA biochemistry
+  and biotechnology\/}, NATO ASI Series, pages 11--43. Kluwer Academic
+  Publishers, New York.
+
+\end{thebibliography}
