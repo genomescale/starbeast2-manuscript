@@ -367,7 +367,7 @@ DOI:10.1093/sysbio/\@jshort\@artid\\
 %{\it Syst. Biol.gdsgfs} \@jvolume(\@jissue):\@firstpage\@pageinfo, \@pubyear\\
 \copyright\ The Author 2013. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. All rights reserved.\\ For permissions, please email: journals.permissions@oup.com\\
 \rule[4pt]{\textwidth}{.5pt}\\
-{\fontsize{10}{10}\selectfont{\it Mol. Biol. Evol.} \@jvolume(\@jissue):\@firstpage\@pageinfo\quad doi:10.1093/molbev/\@jshort\@artid}\quad \accessfont{\@access\hfill{\foliofont \thepage}}\\[38pt]
+% {\fontsize{10}{10}\selectfont{\it Mol. Biol. Evol.} \@jvolume(\@jissue):\@firstpage\@pageinfo\quad doi:10.1093/molbev/\@jshort\@artid}\quad \accessfont{\@access\hfill{\foliofont \thepage}}\\[38pt]
 \end{tabular}}}
 \fi
 
@@ -2386,7 +2386,7 @@ urlbordercolor=0 0 0,bookmarks,bookmarksopen=true,bookmarksnumbered=true,pdfpage
 \multiply\minutes by 60
 \advance\minutes by \time
 \def\timenow{\two@digits{\the\hours}:\two@digits{\the\minutes}}
-\font\slugfont=CMR10 at 6pt
+% \font\slugfont=CMR10 at 6pt
 %
 \IfFileExists{crop.cfg}{}{%
   \renewcommand*\CROP@@info{\slugfont%
