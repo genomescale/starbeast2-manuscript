@@ -69,14 +69,20 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 
 \section{Results}
 
-\clearpage
+\subsection{StarBEAST2 is validated by simulation}
+
+
+
+\subsection{New operators and analytical integration improve computational performance}
+
+
 
 \begin{figure}[htb!]
 \centering
 \includegraphics[height=14cm]{speciesTreeHeight_ess_per_hour.pdf}
 \caption
 {Mean estimated sample size (ESS) per hour of the \textit{Pseudacris} species tree height.}
-\label{fig:essPerHour}
+\label{fig:realEssPerHour}
 \end{figure}
 
 \clearpage
@@ -86,26 +92,44 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 \includegraphics[height=14cm]{speciesTreeHeight_ess_per_mstates.pdf}
 \caption
 {Mean estimated sample size (ESS) per million states of the \textit{Pseudacris} species tree height.}
-\label{fig:essPerMstates}
+\label{fig:realEssPerMstates}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[height=17cm]{multiple.pdf}
+\includegraphics[width=16cm]{multiple_ess_per_hour.pdf}
 \caption
-{Comparison of estimated sample size (ESS) rates using different methods applied to simulated alignments.}
-\label{fig:loggedStatistics}
+{Convergence of different methods applied to simulated data. Methods are
+concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
+*BEAST settings and 22 loci, and StarBEAST2 with performant settings, 22 loci,
+and uncorrelated lognormal relaxed clocks applied to the gene tree (GT-UCLN) or
+to the species tree (ST-UCLN). Relative ESS per hour is the trimmed mean of
+estimated sample size per hour for each replicate divided by the slowest rate
+--- that of the species tree height estimated by StarBEAST2 with *BEAST
+settings. Trimmed means (25\% trim) were used to reduce the influence of
+outliers. All error bars are 95\% confidence intervals calculated by
+bootstrapping. N = 64.}
+\label{fig:simulatedEssPerHour}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[height=9cm]{species_tree_error.pdf}
+\includegraphics[width=6.5cm]{tree_error.pdf}
 \caption
-{Comparison of the accuracy of different methods applied to simulated alignments.}
+{Accuracy of different methods applied to simulated data. Methods are concatenation with 22 loci, concatenation with 220 loci
+(10X), StarBEAST2 with *BEAST settings and 22 loci, and StarBEAST2 with
+performant settings, 22 loci, and uncorrelated lognormal relaxed clocks applied
+to the gene tree (GT-UCLN) or to the species tree (ST-UCLN). (A) Trimmed mean of
+relative species tree error, a measure of branch length error. (B) Trimmed
+mean of mean pendant edge bias, which measures biased estimates of the ages of
+extant species. (C) Trimmed mean of mean rooted Robinson-Foulds distances, a
+measure of topological error. Trimmed means (25\% trim) were used to reduce the
+influence of outliers. All error bars are 95\% confidence intervals calculated
+by bootstrapping. N = 64.}
 \label{fig:speciesTreeError}
 \end{figure}
 
@@ -113,9 +137,16 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[height=14cm]{branch_rates_lm.pdf}
+\includegraphics[width=16cm]{branch_rates_lm.pdf}
 \caption
-{Recovery of species tree branch rates using concatenation and StarBEAST2.}
+{Recovery of species tree branch rates using concatenation and StarBEAST2.
+Methods are concatenation with 22 loci, concatenation with 220 loci (10X), and
+StarBEAST2 with performant settings, 22 loci, and an uncorrelated lognormal
+relaxed clocks applied to the species tree (ST-UCLN). Estimated rates are the
+posterior expectation of the branch rate conditional on the monophyly of the
+corresponding clade. $R^2$ values and lines of best fit were calculating using a separate
+simple linear regression for each method. Root branch rates, which were fixed at
+1.0, were excluded. N = 64.}
 \label{fig:branchRatesLM}
 \end{figure}
 
