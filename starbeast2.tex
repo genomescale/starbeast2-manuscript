@@ -69,9 +69,19 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 
 \section{Results}
 
-\subsection{StarBEAST2 is validated by simulation}
+\subsection{StarBEAST2 correctly implements the multispecies coalescent}
 
-
+New methods must be shown to be mathematically correct implementations of a
+given model. One way to accomplish this for MCMC methods is to estimate
+parameters from a prior distribution using the MCMC kernel, and also draw
+independent samples from the same prior distribution by simulation. The
+resulting parameter distributions should be identical if the implementation is
+correct. We used this method to test the correctness of the novel features in
+StarBEAST2; analytical population size integration, the four new operators, and
+the species tree relaxed clock. Simulated and StarBEAST2 estimated distributions
+were identical for species and gene tree topologies (Figure~S1,S2), species and
+gene tree node heights (Figure~S3,S4) and gene tree branch rates (Figure~S5).
+Those results support the mathematical correctness of StarBEAST2.
 
 \subsection{New operators and analytical integration improve computational performance}
 
@@ -81,7 +91,16 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 \centering
 \includegraphics[height=14cm]{speciesTreeHeight_ess_per_hour.pdf}
 \caption
-{Mean estimated sample size (ESS) per hour of the \textit{Pseudacris} species tree height.}
+{Effect of operators, population size integration and clock models on
+convergence. The performance of every combination of settings was measured when
+applied to 22 \textit{Pseudacris} loci. Topology operators refers to the
+replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
+operators refers to the addition of operators which make coordinated changes to
+internal node heights. Uncorrelated lognormal (UCLN) relaxed clocks were applied
+to either each gene tree or to the species tree. Trimmed means of species tree
+height estimated sample size (ESS) per hour were calculated from 32 independent
+chains. 25\% trim was used to reduce the influence of outliers. All error bars
+are 95\% confidence intervals calculated by bootstrapping.}
 \label{fig:realEssPerHour}
 \end{figure}
 
@@ -91,7 +110,17 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 \centering
 \includegraphics[height=14cm]{speciesTreeHeight_ess_per_mstates.pdf}
 \caption
-{Mean estimated sample size (ESS) per million states of the \textit{Pseudacris} species tree height.}
+{Effect of operators, population size integration and clock models on effective
+sample size (ESS) per million states. The performance of every combination of
+settings was measured when applied to 22 \textit{Pseudacris} loci. Topology operators refers to the
+replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
+operators refers to the addition of operators which make coordinated changes to
+internal node heights. Uncorrelated lognormal (UCLN) relaxed clocks were applied
+to either each gene tree or to the species tree. Trimmed means
+of species tree height ESS  per million states were calculated from 32
+independent chains. 25\% trim was used to reduce the influence
+of outliers. All error bars are 95\% confidence intervals calculated by
+bootstrapping.}
 \label{fig:realEssPerMstates}
 \end{figure}
 
@@ -108,7 +137,7 @@ and uncorrelated lognormal relaxed clocks applied to the gene tree (GT-UCLN) or
 to the species tree (ST-UCLN). Relative ESS per hour is the trimmed mean of
 estimated sample size per hour for each replicate divided by the slowest rate
 --- that of the species tree height estimated by StarBEAST2 with *BEAST
-settings. Trimmed means (25\% trim) were used to reduce the influence of
+settings. 25\% trim was used to reduce the influence of
 outliers. All error bars are 95\% confidence intervals calculated by
 bootstrapping. N = 64.}
 \label{fig:simulatedEssPerHour}
@@ -127,7 +156,7 @@ to the gene tree (GT-UCLN) or to the species tree (ST-UCLN). (A) Trimmed mean of
 relative species tree error, a measure of branch length error. (B) Trimmed
 mean of mean pendant edge bias, which measures biased estimates of the ages of
 extant species. (C) Trimmed mean of mean rooted Robinson-Foulds distances, a
-measure of topological error. Trimmed means (25\% trim) were used to reduce the
+measure of topological error. 25\% trim was used to reduce the
 influence of outliers. All error bars are 95\% confidence intervals calculated
 by bootstrapping. N = 64.}
 \label{fig:speciesTreeError}
