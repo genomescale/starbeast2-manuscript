@@ -67,7 +67,14 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 \centering
 \includegraphics[width=16cm]{species_topology_frequencies.pdf}
 \caption
-{aaa.}
+{Frequency of five-taxon species tree topologies sampled from a birth-death prior
+distribution. Topologies were sampled by simulating trees using biopy (red), or
+by using a StarBEAST2 MCMC chain (blue). Frequencies are identical apart from
+noise, indicating that StarBEAST2 is mathematically correct. Three levels of
+probability are evident from left to right --- high probability balanced
+topologies e.g. ((a,b),((c,d),e)), middle probability intermediate topologies
+e.g. (((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
+((((a,b),c),d),e).}
 \label{fig:speciesTopologyFrequencies}
 \end{figure}
 
@@ -77,7 +84,14 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 \centering
 \includegraphics[width=16cm]{gene_topology_frequencies.pdf}
 \caption
-{bbb.}
+{Frequency of five-taxon gene tree topologies sampled from a multispecies coalescent prior
+distribution. Topologies were sampled by simulating gene trees within species trees using biopy (red), or
+by using a StarBEAST2 MCMC chain (blue). Frequencies are identical apart from
+noise, indicating that StarBEAST2 is mathematically correct. Three levels of
+probability are evident from left to right --- high probability balanced
+topologies e.g. ((a,b),((c,d),e)), middle probability intermediate topologies
+e.g. (((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
+((((a,b),c),d),e).}
 \label{fig:geneTopologyFrequencies}
 \end{figure}
 
@@ -87,7 +101,12 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 \centering
 \includegraphics[width=16cm]{species_node_heights.pdf}
 \caption
-{ccc.}
+{Probability densities of five-taxon species tree node heights sampled from a
+birth-death prior distribution. Node heights were sampled by simulating trees
+using biopy (red), or by using a StarBEAST2 MCMC chain (blue). Probability
+densities are plotted separately for each ranked node giving four peaks, one
+for each internal node. Node height probability densities are identical apart
+from noise, indicating that StarBEAST2 is mathematically correct.}
 \label{fig:speciesNodeHeights}
 \end{figure}
 
@@ -97,7 +116,12 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 \centering
 \includegraphics[width=16cm]{gene_node_heights.pdf}
 \caption
-{ddd.}
+{Probability densities of five-taxon gene tree node heights sampled from a
+multispecies coalescent prior distribution. Node heights were sampled by simulating gene trees
+within species trees using biopy (red), or by using a StarBEAST2 MCMC chain (blue). Probability
+densities are plotted separately for each ranked node giving four peaks, one
+for each internal node. Node height probability densities are identical apart
+from noise, indicating that StarBEAST2 is mathematically correct.}
 \label{fig:geneNodeHeights}
 \end{figure}
 
@@ -107,7 +131,14 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 \centering
 \includegraphics[width=16cm]{gene_branch_rates.pdf}
 \caption
-{eee.}
+{Probability densities of five-taxon gene tree branch rates produced by a
+species tree uncorrelated lognormal (UCLN) relaxed clock. Branch rates were
+sampled by simulating gene trees within species trees using biopy and simulating
+species tree branch rates using scipy (red), or by using a StarBEAST2 MCMC chain
+(blue). Two lognormal distributions were used, one with a mean of 0.5 and the
+other with a mean of 2.0, resulting in two peaks. Branch rate probability
+densities are identical apart from noise, indicating that StarBEAST2 is
+mathematically correct.}
 \label{fig:geneBranchRates}
 \end{figure}
 
