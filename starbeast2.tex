@@ -42,22 +42,21 @@
 \usepackage{lineno}
 \usepackage{adjustbox}
 \usepackage{ragged2e}
+\usepackage{authblk}
 
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{2.0}
 
 \begin{document}
 
-\begin{minipage}[h]{\textwidth}
-	\title{StarBEAST2 enables accurate and precise inference of species trees, divergence times and clock rates}
-	\author{Huw A. Ogilvie$^{\ast,1,2}$ and Alexei J. Drummond,$^{2,3}$}
-    \maketitle
-\end{minipage}
+\title{StarBEAST2 enables accurate and precise inference of species trees, divergence times and clock rates}
+\author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
+\author[2,3]{Alexei J. Drummond}
+\affil[1]{Department of Evolution, Ecology and Genetics, Australian National University, Canberra, Australia}
+\affil[2]{Centre for Computational Evolution, University of Auckland, Auckland, New Zealand}
+\affil[3]{Department of Computer Science, University of Auckland, Auckland, New Zealand}
 
-\raggedright
-$^{1}$Department of Evolution, Ecology and Genetics, Australian National University, Canberra, Australia\\
-$^{2}$Centre for Computational Evolution, University of Auckland, Auckland, New Zealand\\
-$^{3}$Department of Computer Science, University of Auckland, Auckland, New Zealand
+\maketitle
 
 \clearpage
 
@@ -92,36 +91,37 @@ were identical for species and gene tree topologies (Figure~S1,S2), species and
 gene tree node heights (Figure~S3,S4) and gene tree branch rates (Figure~S5).
 This combination of results supports the mathematical correctness of StarBEAST2.
 
-\subsection{North American chorus frogs have intermediate coalescent branch lengths}
+\subsection{\textit{Pseudacris} chorus frogs have intermediate coalescent branch lengths}
 
-To determine which configuration of new features would achieve the fastest
-performance, we ran StarBEAST2 using different combinations of new operators,
-analytical integration of population sizes and relaxed clocks. The sequence data
-used for this analysis is from the North American chorus frog genus
-\textit{Pseudacris} originally collected and analyzed by \cite{Barrow201478}. A
-key metric of phylogenies that determines the necessity of multispecies
-coalescent models is the average branch length in coalescent units of
-$\nicefrac{\tau}{2Ne}$. Given short branch lengths, concatenation is unable to
-infer accurate species trees regardless of the number of loci used. Given long
-branch lengths, concatenation is approximately as accurate as the multispecies
-coalescent \citep{Ogilvie01052016}. Using StarBEAST2, the average branch length
-within this genus was determined to be $\nicefrac{1.69\tau}{2Ne}$. This is an
-intermediate average length compared to the shallow simulations analyzed by
-\cite{Ogilvie01052016}, which had short branch lengths of
-$\nicefrac{0.54\tau}{2Ne}$.
+To characterize the performance of new operators, methods of population size
+integration and relaxed cocks, we tested StarBEAST2 using real sequence data.
+The data set used for this analysis is from the North American chorus frog genus
+\textit{Pseudacris}, and was originally collected and analyzed by
+\cite{Barrow201478}. A key metric of phylogenies that can be used to judge
+whether it is necessary to employ multispecies coalescent models is the average
+branch length in coalescent units of $\nicefrac{\tau}{2Ne}$. Given short branch
+lengths, concatenation is unable to infer accurate species trees regardless of
+the number of loci used, but for long branch lengths, concatenation is
+approximately as accurate as *BEAST \citep{Ogilvie01052016}. Using StarBEAST2,
+the average branch length within this genus was determined to be
+$\nicefrac{1.69\tau}{2Ne}$. This is an intermediate average length, longer than
+the shallow simulations analyzed by \cite{Ogilvie01052016}, which had short
+branch lengths of $\nicefrac{0.54\tau}{2Ne}$.
 
 \subsection{New operators and analytical integration improve computational performance}
 
-To measure convergence both effective sample size (ESS) per hour and ESS per
-million states were computed for each independent chain. ESS per hour can be
-used calculate the total time required for a converged chain where ESS is equal
-to or above 200, and reflects the efficiency of new state proposals and the
-computational time required by each operator and likelihood calculation. In
-contrast, ESS per million states reflects only to the efficency of new state
-proposals, independent of calculation times. A variety of statistics were logged
-for each analysis, but the height of the species tree had the slowest
-convergence rates so we used this statistic to judge computational performance
-(Figure~S7-Sx).
+To determine which configuration of new features would achieve the fastest
+performance, we ran StarBEAST2 using different combinations of new operators,
+analytical integration of population sizes and relaxed clocks. To measure
+convergence both effective sample size (ESS) per hour and ESS per million states
+were computed for each independent chain. ESS per hour can be used calculate the
+total time required for a converged chain where ESS is equal to or above 200,
+and reflects the efficiency of new state proposals and the computational time
+required by each operator and likelihood calculation. In contrast, ESS per
+million states reflects only to the efficency of new state proposals,
+independent of calculation times. A variety of statistics were logged for each
+analysis, but the height of the species tree had the slowest convergence rates
+so we used this statistic to judge computational performance (Figure~S7-Sx).
 
 Coordinated topology operators consistently reduced ESS per hour convergence,
 regardless of the addition of height changing operators or the method of
@@ -131,18 +131,6 @@ The latter result suggests that coordinated topology operators are not more
 effective than na\"ive operators at proposing new states, and the former result
 shows how the increased complexity of these operators harms convergence because
 of their increased computational time cost.
-
-Coordinated height changing operators consistently improved convergence both in terms
-of ESS per hour and ESS per million states (Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}).
-Both species tree relaxed clock and gene tree relaxed clock analyses benefitted
-from enabling these new operators. Analytical integration of population sizes
-improved the computational performance of gene tree relaxed clock analyses, but
-not species tree relaxed clock analyses.
-
-Convergence of species tree relaxed clock analyses was dramatically slower than
-convergence of gene tree relaxed clock analyses, both in terms of ESS per hour
-and ESS per million states
-(Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}).
 
 \begin{figure}[htb!]
 \centering
@@ -179,7 +167,24 @@ bootstrapping.}
 \label{fig:realEssPerMstates}
 \end{figure}
 
-\clearpage
+Coordinated height changing operators consistently improved convergence both in
+terms of ESS per hour and ESS per million states
+(Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}). Both species tree
+relaxed clock and gene tree relaxed clock analyses benefitted from enabling
+these new operators. Unlike height changing operators analytical integration of
+population sizes only improved the computational performance of gene tree
+relaxed clock analyses, not the performance of species tree relaxed clock
+analyses.
+
+Convergence of species tree relaxed clock analyses was dramatically slower than
+convergence of gene tree relaxed clock analyses. The relative performance in ESS
+per hour was worse than the relative performance in ESS per million states
+(Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}), which shows that
+compared to gene tree relaxed clock analyses the likelihood calculations have a
+higher time cost, but also that new state proposals are less effective at
+exploring the space of phylogenies and parameters.
+
+\subsection{StarBEAST2 is on average three times faster than *BEAST}
 
 \begin{figure}[htb!]
 \centering
