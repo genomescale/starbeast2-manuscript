@@ -51,8 +51,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="419.11342"
-     inkscape:cy="435.1069"
+     inkscape:cx="196.87986"
+     inkscape:cy="515.9191"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -60,8 +60,8 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="3840"
-     inkscape:window-height="2031"
+     inkscape:window-width="2880"
+     inkscape:window-height="1671"
      inkscape:window-x="0"
      inkscape:window-y="55"
      inkscape:window-maximized="1" />
@@ -73,7 +73,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1027,5 +1027,38 @@
          y="-366.11813"
          x="-1753.3588 -1741.905 -1734.26 -1726.615 -1718.9701 -1715.1476 -1705.2201 -1697.5751 -1689.9301 -1686.8776 -1679.2325 -1672.3575 -1664.7125 -1657.0675 -1649.0376 -1641.0488 -1633.4038 -1625.7588 -1622.7063 -1615.0613 -1608.1863 -1604.3638 -1596.7188 -1593.6663 -1586.7913 -1582.9688 -1575.3239 -1567.6788 -1560.8038">Mean Robinson−Foulds distance</tspan>
     </text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-81.386887"
+       y="1087.5013"
+       id="text4570"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4572"
+         x="-81.386887"
+         y="1087.5013">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-81.386887"
+       y="1325.1638"
+       id="text4570-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4572-2"
+         x="-81.386887"
+         y="1325.1638">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-81.386887"
+       y="1562.8264"
+       id="text4570-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4572-9"
+         x="-81.386887"
+         y="1562.8264">C</tspan></text>
   </g>
 </svg>

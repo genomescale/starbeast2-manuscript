@@ -244,7 +244,19 @@ bootstrapping. N = 64.}
 \label{fig:simulatedEssPerHour}
 \end{figure}
 
-\subsection{Concatenation cannot reconstruct branch rates given intermediate branch lengths}
+\subsection{The relative accuracy of StarBEAST2 varies depending on metric}
+
+The accuracy of StarBEAST2 relative to concatenation varied depending on the
+metric used and whether equal numbers of loci were used. Relative species tree
+error measures the accuracy of estimated branch lengths; StarBEAST2 using 22
+loci outperformed concatenation using 22 loci, and matched the performance of
+concatenation using 220 loci (Figure~\ref{fig:speciesTreeError}a). Pendant
+edge bias measures systematic bias in the estimated ages of extant species;
+StarBEAST2 was much less biased than concatenation regardless of the number of loci
+(Figure~\ref{fig:speciesTreeError}b). Rooted Robinson-Foulds distances measure
+the topological accuracy of estimated trees; concatenation using 22 loci was
+almost as accurate as StarBEAST2, and much more accurate when using 220 loci
+(Figure~\ref{fig:speciesTreeError}c).
 
 \begin{figure}[htb!]
 \centering
@@ -263,6 +275,10 @@ by bootstrapping. N = 64.}
 \label{fig:speciesTreeError}
 \end{figure}
 
+\subsection{Concatenation cannot reconstruct branch rates given intermediate branch lengths}
+
+
+
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=16cm]{branch_rates.pdf}
@@ -277,8 +293,6 @@ simple linear regression for each method. Root branch rates, which were fixed at
 1.0, were excluded. N = 64.}
 \label{fig:branchRatesLM}
 \end{figure}
-
-\clearpage
 
 \section{Discussion}
 
@@ -300,7 +314,8 @@ Fellowship awarded to Craig Moritz by the Australian Research Council
 from the National Computational Infrastructure (NCI), which is supported by the
 Australian Government. We wish to thank Jason Bragg for help testing StarBEAST2,
 and Tim Vaughan for suggesting the addition of the root height changing
-operator.
+operator. We also wish to thank Joseph Heled for insight into the multispecies
+coalescent model, and Graham Jones for input regarding operator performance.
 
 \bibliographystyle{natbib}
 \bibliography{starbeast2}
