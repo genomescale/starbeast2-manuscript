@@ -46,13 +46,14 @@
 
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{2.0}
+\renewcommand\Affilfont{\small}
 
 \begin{document}
 
 \title{StarBEAST2 enables accurate and precise inference of species trees, divergence times and clock rates}
 \author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
 \author[2,3]{Alexei J. Drummond}
-\affil[1]{Department of Evolution, Ecology and Genetics, Australian National University, Canberra, Australia}
+\affil[1]{Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia}
 \affil[2]{Centre for Computational Evolution, University of Auckland, Auckland, New Zealand}
 \affil[3]{Department of Computer Science, University of Auckland, Auckland, New Zealand}
 
@@ -184,23 +185,47 @@ compared to gene tree relaxed clock analyses the likelihood calculations have a
 higher time cost, but also that new state proposals are less effective at
 exploring the space of phylogenies and parameters.
 
-\subsection{StarBEAST2 is over three times faster than *BEAST}
+\subsection{StarBEAST2 is approximately three times faster than *BEAST}
 
 Our reanalysis of \textit{Pseudacris} sequence data shows that analytical
 integration of population sizes and coordinated height changing operators both
-improve convergence. To show that this increased performance is general, and to
-demonstrate that StarBEAST2 can accurately reconstruct branch rates under a
-species tree relaxed clock model, we needed to apply StarBEAST2 to many
-different data sets for which the true species tree is known. Therefore we
+improve convergence. To show that this increased performance is generally
+applicable, and to demonstrate that StarBEAST2 can accurately reconstruct branch
+rates under a species tree relaxed clock model, we needed to apply StarBEAST2 to
+many different data sets for which the true species tree is known. Therefore we
 simulated 64 species trees of 19 taxa each under a birth-death model with
 lognormally distributed branch rates. Gene trees evolving within each species
 tree were simulated according to the multispecies coalescent model with
 lognormally distributed mean clock rates. Finally, sequences were simulated
-according to an HKY+$\Gamma$ process for each gene. The parameters used for these
-simulations were chosen to also produce intermediate branch lengths in
+according to an HKY+$\Gamma$ process for each gene. The parameters used for
+these simulations were chosen to also produce intermediate branch lengths in
 coalescent units; the average branch length was $\nicefrac{1.44\tau}{2Ne}$.
 
+StarBEAST2 with *BEAST settings -- explicit MCMC integration of population
+sizes, no coordinated operators, na\"ive NNI and SPR topology operators, and a
+UCLN relaxed clock applied to each gene tree. StarBEAST2 with performant
+settings -- analytical integration of population sizes, coordinated height
+changing operators and na\"ive NNI and SPR topology operators -- and a UCLN
+relaxed clock applied to each gene tree or alternatively to the species tree.
 
+Again the parameter with the slowest convergence for any multispecies coalescent
+settings was the height of the species tree. Based on that parameter, the
+average performance increase using StarBEAST2 with performant settings over
+*BEAST settings was 3.2 times, with a 95\% confidence interval between 2.6 and
+3.8 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
+concatenated analyses was the posterior log-probability. Using the same number
+of loci, the convergence of the posterior statistic using concatenation was
+114.5 times faster than the convergence of the species tree height statistic
+using StarBEAST2 with *BEAST settings. When concatenation was used with ten
+times the number of loci, the performance difference was minimal -- 1.2 times,
+with a confidence interval between 1.0 and 1.5 times
+(Figure~\ref{fig:simulatedEssPerHour}).
+
+Unlike the real data, using a species tree UCLN relaxed clock with performant
+settings was faster than *BEAST settings. However, this was still significantly
+slower than using gene tree relaxed clocks, as the average performance increase
+was smaller at 1.5 times with a confidence interval between 1.2 and 1.9
+(Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
@@ -212,14 +237,14 @@ concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
 and uncorrelated lognormal relaxed clocks applied to the gene tree (GT-UCLN) or
 to the species tree (ST-UCLN). Relative ESS per hour is the trimmed mean of
 effective sample size per hour for each replicate divided by the slowest rate
---- that of the species tree height estimated by StarBEAST2 with *BEAST
-settings. 25\% trim was used to reduce the influence of
+(the species tree height estimated using *BEAST
+settings). 25\% trim was used to reduce the influence of
 outliers. All error bars are 95\% confidence intervals calculated by
 bootstrapping. N = 64.}
 \label{fig:simulatedEssPerHour}
 \end{figure}
 
-\clearpage
+\subsection{Concatenation cannot reconstruct branch rates given intermediate branch lengths}
 
 \begin{figure}[htb!]
 \centering
@@ -237,8 +262,6 @@ influence of outliers. All error bars are 95\% confidence intervals calculated
 by bootstrapping. N = 64.}
 \label{fig:speciesTreeError}
 \end{figure}
-
-\clearpage
 
 \begin{figure}[htb!]
 \centering
@@ -264,12 +287,20 @@ simple linear regression for each method. Root branch rates, which were fixed at
 
 
 \section{Supplementary Material}
-Supplementary tables XX-XX and figures XX-XX are available at \textit{Molecular Biology and Evolution} online (http://www.mbe.oxfordjournals.org/).
 
+%Supplementary tables XX-XX and figures XX-XX are available at \textit{Molecular Biology and Evolution} online (http://www.mbe.oxfordjournals.org/).
+Supplementary tables and figures will be available online.
 
 \section{Acknowledgments}
-Blah blah blah
 
+This work was supported by a Rutherford Discovery Fellowship awarded to AJD by
+the Royal Society of New Zealand. HAO was supported by an Australian Laureate
+Fellowship awarded to Craig Moritz by the Australian Research Council
+(FL110100104). This research was undertaken with the assistance of resources
+from the National Computational Infrastructure (NCI), which is supported by the
+Australian Government. We wish to thank Jason Bragg for help testing StarBEAST2,
+and Tim Vaughan for suggesting the addition of the root height changing
+operator.
 
 \bibliographystyle{natbib}
 \bibliography{starbeast2}
