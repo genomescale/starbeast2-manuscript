@@ -201,11 +201,11 @@ according to an HKY+$\Gamma$ process for each gene. The parameters used for
 these simulations were chosen to also produce intermediate branch lengths in
 coalescent units; the average branch length was $\nicefrac{1.44\tau}{2Ne}$.
 
-StarBEAST2 with *BEAST settings -- explicit MCMC integration of population
+StarBEAST2 with *BEAST settings --- explicit MCMC integration of population
 sizes, no coordinated operators, na\"ive NNI and SPR topology operators, and a
 UCLN relaxed clock applied to each gene tree. StarBEAST2 with performant
-settings -- analytical integration of population sizes, coordinated height
-changing operators and na\"ive NNI and SPR topology operators -- and a UCLN
+settings --- analytical integration of population sizes, coordinated height
+changing operators and na\"ive NNI and SPR topology operators --- and a UCLN
 relaxed clock applied to each gene tree or alternatively to the species tree.
 
 Again the parameter with the slowest convergence for any multispecies coalescent
@@ -217,7 +217,7 @@ concatenated analyses was the posterior log-probability. Using the same number
 of loci, the convergence of the posterior statistic using concatenation was
 114.5 times faster than the convergence of the species tree height statistic
 using StarBEAST2 with *BEAST settings. When concatenation was used with ten
-times the number of loci, the performance difference was minimal -- 1.2 times,
+times the number of loci, the performance difference was minimal --- 1.2 times,
 with a confidence interval between 1.0 and 1.5 times
 (Figure~\ref{fig:simulatedEssPerHour}).
 
@@ -250,13 +250,15 @@ The accuracy of StarBEAST2 relative to concatenation varied depending on the
 metric used and whether equal numbers of loci were used. Relative species tree
 error measures the accuracy of estimated branch lengths; StarBEAST2 using 22
 loci outperformed concatenation using 22 loci, and matched the performance of
-concatenation using 220 loci (Figure~\ref{fig:speciesTreeError}a). Pendant
+concatenation using 220 loci (Figure~\ref{fig:speciesTreeError}A). Pendant
 edge bias measures systematic bias in the estimated ages of extant species;
 StarBEAST2 was much less biased than concatenation regardless of the number of loci
-(Figure~\ref{fig:speciesTreeError}b). Rooted Robinson-Foulds distances measure
+(Figure~\ref{fig:speciesTreeError}B). Rooted Robinson-Foulds distances measure
 the topological accuracy of estimated trees; concatenation using 22 loci was
 almost as accurate as StarBEAST2, and much more accurate when using 220 loci
-(Figure~\ref{fig:speciesTreeError}c).
+(Figure~\ref{fig:speciesTreeError}C). For no metric did the choice of gene tree
+or species tree relaxed clocks change the accuracy of StarBEAST2
+(Figure~\ref{fig:speciesTreeError}A,B,C).
 
 \begin{figure}[htb!]
 \centering
@@ -277,7 +279,24 @@ by bootstrapping. N = 64.}
 
 \subsection{Concatenation cannot reconstruct branch rates given intermediate branch lengths}
 
+While the convergence of species tree relaxed clocks analyses was slower than gene tree
+relaxed clock analyses using StarBEAST2, species tree relaxed clocks enable inference of per-branch
+substitution rates under the multispecies coalescent model. To gauge the
+accuracy of estimated branch rates, we used simple linear regression (SLR)
+models with the true rate of each simulated branch as the response variable, and
+the posterior expectation of the rate of that branch (conditional on the
+corresponding clade being monophyletic in the posterior sample) as the
+explanatory variable (Figure~\ref{fig:branchRatesLM}). If all estimates equal
+the truth, then the $R^2$ correlation coefficient of the SLR will equal 1, the
+slope of the SLR will also equal 1, and the intercept will equal zero.
 
+Using either 22 or 220 loci, concatenation was unable to correctly estimate
+branch lengths --- not only did $R^2 = 0.03$ and $0.04$ respectively, but the
+slope and intercept were $0.32x + 0.68$ and $0.79x + 0.21$ respectively. By
+applying a UCLN relaxed clock to the species tree, StarBEAST2 can be used to
+infer many branch rates --- the $R^2$ correlation was much stronger at $0.15$,
+and the slope and intercept were $0.93$ and $0.07$ respectively, much closer to
+the ideal values (Table~\ref{tab:branchRatesLM}).
 
 \begin{figure}[htb!]
 \centering
@@ -287,12 +306,38 @@ by bootstrapping. N = 64.}
 Methods are concatenation with 22 loci, concatenation with 220 loci (10X), and
 StarBEAST2 with performant settings, 22 loci, and an uncorrelated lognormal
 relaxed clocks applied to the species tree (ST-UCLN). Estimated rates are the
-posterior expectation of the branch rate conditional on the monophyly of the
-corresponding clade. $R^2$ values and lines of best fit were calculating using a separate
+posterior expectation of the branch rate. $R^2$ values and lines of best fit were calculating using a separate
 simple linear regression for each method. Root branch rates, which were fixed at
 1.0, were excluded. N = 64.}
 \label{fig:branchRatesLM}
 \end{figure}
+
+\begin{table}[htb!]
+\centering
+\caption{Simple linear regression of simulated and estimated species tree branch rates.}
+\label{tab:branchRatesLM}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\small
+$\begin{array}{|c|c|l|l|l|}
+\multicolumn{1}{c}{\text{Method}} & \multicolumn{1}{c}{\text{Number of loci}} & \multicolumn{1}{c}{\text{Intercept}} & \multicolumn{1}{c}{\text{Slope}} & \multicolumn{1}{c}{R^2}\tabularnewline
+\hline
+\text{Concatenation} & 22 & 0.68^{***} & 0.32^{***} & 0.03\tabularnewline
+\hline
+\text{Concatenation} & 220 & 0.79^{***} & 0.21^{***} & 0.04\tabularnewline
+\hline
+\text{StarBEAST2} & 22 & 0.07 & 0.93^{***} & 0.15\tabularnewline
+\hline
+\end{array}$
+\end{adjustbox}
+\begin{tablenotes}
+\small
+\item {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\clearpage
 
 \section{Discussion}
 
