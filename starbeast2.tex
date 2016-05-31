@@ -71,10 +71,57 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 
 \section{Introduction}
 
+Talk about Ogilvie 2016 a lot...
 
 \section{New Approaches}
 
+\subsection{Analytical integration of population sizes}
+
+BEST, then Jones...
+
 \subsection{Coordinated tree changing operators}
+
+One approach to improving the performance of fully Bayesian multispecies
+coalescent analyses which simultaneously estimate gene and species trees is to
+develop MCMC operators which propose coordinated changes to both the species
+tree and the gene trees in the same step. \cite{Yang01122014} and
+\cite{2015arXiv151203843R} introduced operators which make NNI and SPR changes
+to the species tree topology, and simultaneously make changes to the gene tree
+topologies that ensure compatibility of the gene trees within the proposed
+species tree. \cite{2015arXiv151203843R} also describe a proposal distribution
+which favours topological changes on shorter branches, and also less radical
+changes in topology. We implemented a simpler proposal distribution that also
+favours less radical changes, by applying equal probability weights to (less
+radical) NNI moves and (typically more radical) SPR moves.
+
+A novel class of coordinated Metropolis operators for ultrametric trees was
+introduced by \cite{Jones010199}. These operators change the height of a species
+tree node, and the heights of ``connected components'' of gene tree nodes, by an
+equal amount chosen from a uniform distribution. The lower bound of the uniform
+distribution is the negative length of the smallest child branch of a connected
+component or the species tree node, and the upper bound is the positive length
+of the smallest parent branch. As long as the connected components are chosen
+with reference only to the topology of the species tree, the topology of the
+gene trees, and the mapping of individuals to species, operators of this class
+are symmetric \citep{Jones010199}.
+
+We have developed a new operator that belongs to this class. The connected
+components moved by this operator are defined as groups of gene tree nodes which
+each have...
+
+Figure???
+
+We have also developed a new adaptive independent Metropolis-Hastings
+\citep{Andrieu2008} operator which makes coordinated changes to the height of
+the species tree and the height of connected components of gene tree nodes.
+Because the length of the root branch is undefined or infinite, a uniform change
+to node height cannot be chosen based on an upper bound. Instead we use
+importance sampling, where the new species tree node height is chosen from an
+exponential distribution. The exponential distribution is offset to begin at the
+lower bound, and the median of the distribution is adaptively modified over the
+course of an MCMC chain to equal the posterior expectation of the difference
+between the lower bound and the species tree height. Hasting ratio...
+exponential.
 
 \subsection{Species tree relaxed clocks}
 
@@ -111,7 +158,7 @@ $\nicefrac{1.69\tau}{2Ne}$. This is an intermediate average length, longer than
 the shallow simulations analyzed by \cite{Ogilvie01052016}, which had short
 branch lengths of $\nicefrac{0.54\tau}{2Ne}$.
 
-\subsection{New operators and analytical integration improve computational performance}
+\subsection{Coordinated operators and analytical integration improve computational performance}
 
 To determine which configuration of new features would achieve the fastest
 performance, we ran StarBEAST2 using different combinations of operators,
@@ -280,7 +327,7 @@ by bootstrapping. N = 64.}
 \label{fig:speciesTreeError}
 \end{figure}
 
-\subsection{Concatenation cannot reconstruct branch rates given intermediate branch lengths}
+\subsection{Concatenation cannot accurately infer branch rates given intermediate branch lengths}
 
 While the convergence of species tree relaxed clocks analyses was slower than
 gene tree relaxed clock analyses using StarBEAST2, species tree relaxed clocks

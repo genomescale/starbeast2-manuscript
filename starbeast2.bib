@@ -58,3 +58,58 @@ abstract = {<p>We present a new open source, extensible and flexible software pl
 number = {4},
 doi = {10.1371/journal.pcbi.1003537}
 }
+
+@article{Yang01122014,
+author = {Yang, Ziheng and Rannala, Bruce}, 
+title = {Unguided Species Delimitation Using DNA Sequence Data from Multiple Loci},
+volume = {31}, 
+number = {12}, 
+pages = {3125-3135}, 
+year = {2014}, 
+doi = {10.1093/molbev/msu279}, 
+abstract ={A method was developed for simultaneous Bayesian inference of species delimitation and species phylogeny using the multispecies coalescent model. The method eliminates the need for a user-specified guide tree in species delimitation and incorporates phylogenetic uncertainty in a Bayesian framework. The nearest-neighbor interchange algorithm was adapted to propose changes to the species tree, with the gene trees for multiple loci altered in the proposal to avoid conflicts with the newly proposed species tree. We also modify our previous scheme for specifying priors for species delimitation models to construct joint priors for models of species delimitation and species phylogeny. As in our earlier method, the modified algorithm integrates over gene trees, taking account of the uncertainty of gene tree topology and branch lengths given the sequence data. We conducted a simulation study to examine the statistical properties of the method using six populations (two sequences each) and a true number of three species, with values of divergence times and ancestral population sizes that are realistic for recently diverged species. The results suggest that the method tends to be conservative with high posterior probabilities being a confident indicator of species status. Simulation results also indicate that the power of the method to delimit species increases with an increase of the divergence times in the species tree, and with an increased number of gene loci. Reanalyses of two data sets of cavefish and coast horned lizards suggest considerable phylogenetic uncertainty even though the data are informative about species delimitation. We discuss the impact of the prior on models of species delimitation and species phylogeny and of the prior on population size parameters (θ) on Bayesian species delimitation.}, 
+URL = {http://mbe.oxfordjournals.org/content/31/12/3125.abstract}, 
+eprint = {http://mbe.oxfordjournals.org/content/31/12/3125.full.pdf+html}, 
+journal = {Molecular Biology and Evolution} 
+}
+
+@ARTICLE{2015arXiv151203843R,
+author = {{Rannala}, B. and {Yang}, Z.},
+title = "{Efficient Bayesian species tree inference under the multi-species coalescent}",
+journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+eprint = {1512.03843},
+primaryClass = "q-bio.PE",
+keywords = {Quantitative Biology - Populations and Evolution},
+year = 2015,
+month = dec,
+adsurl = {http://adsabs.harvard.edu/abs/2015arXiv151203843R},
+adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article {Jones010199,
+author = {Jones, Graham R},
+title = {Species delimitation and phylogeny estimation under the multispecies coalescent},
+year = {2015},
+doi = {10.1101/010199},
+publisher = {Cold Spring Harbor Labs Journals},
+abstract = {This article describes a Bayesian method for inferring both species delimitations and species trees under the multispecies coalescent model using DNA sequences from multiple loci. The focus here is on species delimitation with no a priori assignment of individuals to species, and no guide tree. The method uses a new model for the population sizes along the branches of the species tree, and three new operators for sampling from the posterior using the Markov chain Monte Carlo (MCMC) algorithm. The correctness of the moves is demonstrated both by proofs and by tests of the implementation. Current practice, using a pipeline approach to species delimitation under the multispecies coalescent, has been shown to have major problems on simulated data (Olave et al, 2014). The same simulated data set is used to demonstrate the accuracy and efficiency of the present method. The method is implemented in a package called STACEY for BEAST2.},
+URL = {http://biorxiv.org/content/early/2015/03/22/010199},
+eprint = {http://biorxiv.org/content/early/2015/03/22/010199.full.pdf},
+journal = {bioRxiv}
+}
+
+@Article{Andrieu2008,
+author="Andrieu, Christophe
+and Thoms, Johannes",
+title="A tutorial on adaptive MCMC",
+journal="Statistics and Computing",
+year="2008",
+volume="18",
+number="4",
+pages="343--373",
+abstract="We review adaptive Markov chain Monte Carlo algorithms (MCMC) as a mean to optimise their performance. Using simple toy examples we review their theoretical underpinnings, and in particular show why adaptive MCMC algorithms might fail when some fundamental properties are not satisfied. This leads to guidelines concerning the design of correct algorithms. We then review criteria and the useful framework of stochastic approximation, which allows one to systematically optimise generally used criteria, but also analyse the properties of adaptive MCMC algorithms. We then propose a series of novel adaptive algorithms which prove to be robust and reliable in practice. These algorithms are applied to artificial and high dimensional scenarios, but also to the classic mine disaster dataset inference problem.",
+issn="1573-1375",
+doi="10.1007/s11222-008-9110-y",
+url="http://dx.doi.org/10.1007/s11222-008-9110-y"
+}
