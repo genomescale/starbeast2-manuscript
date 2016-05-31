@@ -184,7 +184,23 @@ compared to gene tree relaxed clock analyses the likelihood calculations have a
 higher time cost, but also that new state proposals are less effective at
 exploring the space of phylogenies and parameters.
 
-\subsection{StarBEAST2 is on average three times faster than *BEAST}
+\subsection{StarBEAST2 is over three times faster than *BEAST}
+
+Our reanalysis of \textit{Pseudacris} sequence data shows that analytical
+integration of population sizes and coordinated height changing operators both
+improve convergence. To show that this increased performance is general, and to
+demonstrate that StarBEAST2 can accurately reconstruct branch rates under a
+species tree relaxed clock model, we needed to apply StarBEAST2 to many
+different data sets for which the true species tree is known. Therefore we
+simulated 64 species trees of 19 taxa each under a birth-death model with
+lognormally distributed branch rates. Gene trees evolving within each species
+tree were simulated according to the multispecies coalescent model with
+lognormally distributed mean clock rates. Finally, sequences were simulated
+according to an HKY+$\Gamma$ process for each gene. The parameters used for these
+simulations were chosen to also produce intermediate branch lengths in
+coalescent units; the average branch length was $\nicefrac{1.44\tau}{2Ne}$.
+
+
 
 \begin{figure}[htb!]
 \centering
@@ -226,7 +242,7 @@ by bootstrapping. N = 64.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{branch_rates_lm.pdf}
+\includegraphics[width=16cm]{branch_rates.pdf}
 \caption
 {Recovery of species tree branch rates using concatenation and StarBEAST2.
 Methods are concatenation with 22 loci, concatenation with 220 loci (10X), and
