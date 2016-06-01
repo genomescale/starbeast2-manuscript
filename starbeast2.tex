@@ -43,6 +43,7 @@
 \usepackage{adjustbox}
 \usepackage{ragged2e}
 \usepackage{authblk}
+\usepackage{multirow}
 
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{2.0}
@@ -77,9 +78,28 @@ Talk about Ogilvie 2016 a lot...
 
 \subsection{Analytical integration of population sizes}
 
-BEST \citep{EVO:EVO414}.
+MCMC numerically integrates over many parameters to produce explicit estimates
+of those parameter values. From a researcher's perspective, some of these may be
+``nuisance'' parameters not of scientific interest. For example species tree
+topology and divergence times may be of interest, but not population sizes. For
+analytically tractical parameters, an analytical solution will integrate over
+the entire range of values at each MCMC step, and may be more performant than
+numerical integration. However explicit estimates will not be produced and this
+integration is only suitable for nuisance parameters. Among-site rate variation
+is already analytically integrated; the likelihood of each site is calculated
+for all possible discrete gamma rates at each step, so the individual site rates
+are not estimated \citep{Yang1994}.
 
-\subsection{Coordinated tree changing operators}
+Analytical integration of constant per-branch population sizes was first
+implemented as part of BEST \citep{EVO:EVO414}. The analytical solution, which
+we have added to StarBEAST2, uses an inverse gamma conjugate prior for
+population sizes. By default StarBEAST2 fixes the shape of the distribution
+$\alpha = 2$ and only estimates the scale $\beta$. Because the mean of an
+inverse gamma distribution equals $\nicefrac{\beta}{\alpha - 1}$, under default
+settings the hyperprior parameter $\beta$ is an estimate of mean (effective)
+population size.
+
+\subsection{Coordinated tree topology changing operators}
 
 One approach to improving the performance of fully Bayesian multispecies
 coalescent analyses which simultaneously estimate gene and species trees is to
@@ -93,21 +113,24 @@ operater in StarBEAST2 called ``CoordinatedExchange''.
 \cite{2015arXiv151203843R} also describe a proposal distribution which favours
 topological changes on shorter branches, and also less radical changes in
 topology. StarBEAST2 implements a simpler proposal distribution but still
-favours less radical changes, by applying adjustable proposal probability
+favours less radical changes by applying adjustable proposal probability
 weights to (less radical) NNI moves and (typically more radical) SPR moves.
+
+\subsection{Coordinated node height changing operators}
 
 A novel class of coordinated Metropolis operators was introduced by
 \cite{Jones010199}. These operators change the height of a non-root non-leaf
 species tree node, and the heights of ``connected components'' of gene tree
-nodes, are changed by an amount $\epsilon$ chosen from a uniform distribution. Roughly, the lower
-bound of the uniform distribution is the negative length of the shortest child
-branch of a connected component or the species tree node, and the upper bound is
-the positive length of the shortest parent branch. As long as the connected
-components are chosen with reference only to the topology of the species tree,
-the topology of the gene trees, and the mapping of individuals to species,
-operators of this class are symmetric \citep{Jones010199}.
+nodes, are changed by an amount $\epsilon$ chosen from a uniform distribution.
+Roughly, the lower bound of the uniform distribution is the negative length of
+the shortest child branch of a connected component or of the species tree node,
+and the upper bound is the positive length of the shortest parent branch. As
+long as the connected components are chosen with reference only to the topology
+of the species tree, the topology of the gene trees, and the mapping of
+individuals to species, operators of this class are symmetric
+\citep{Jones010199}.
 
-We have developed a new operator, called ``CoordinatedUniform'' that belongs to
+We have developed a new operator called ``CoordinatedUniform'' that belongs to
 this class. Individuals from extant species which descend from a species tree
 node, or are directly descended from a gene tree node, are referred to as
 descendant individuals. The gene tree nodes selected by this operator are those
@@ -115,25 +138,106 @@ for which (1) at least one descendant individual is also a descendant individual
 of each child node of the selected species tree node and (2) all descendent
 individuals are also descendent individuals of the selected species tree node.
 
-We have also developed a new adaptive independent MH \citep{Andrieu2008}
-operator which makes coordinated changes to the height of the species tree and
-the height of connected components of gene tree nodes. The moved species tree
-node is always the root, and the moved gene tree nodes are those for which at
-least one descendant individual is also a descendant individual of each child
-node of the species tree root node. Because the length of the root branch is
-undefined or infinite, a uniform distribution cannot be used for $\epsilon$.
-Instead we use importance sampling, where the new species tree node height is
-chosen from an exponential distribution. The exponential distribution is offset
-to begin at the lower bound, and the median of the distribution is adaptively
-modified over the course of an MCMC chain to equal the posterior expectation of
-the difference between the lower bound and the species tree height. The Hastings
-ratio of this operator is derived from the exponential distribution:
+We have also developed a new adaptive MH \citep{Andrieu2008} operator called
+``CoordinatedExponential'' which changes the height of the species tree root and
+the height of connected components of gene tree nodes by an amount $\epsilon$.
+The moved gene tree nodes are those for which at least one descendant individual
+is also a descendant individual of each child node of the species tree root.
+Because the length of parent branches of the species tree root or connected
+components will be undefined, a different method must be used to choose
+$\epsilon$ compared to CoordinatedUniform.
 
-\begin{equation}
-HR = \lambda * \epsilon
-\end{equation}
+First the lower bound of the species tree root height is defined as the current
+height minus the length of the shortest child branch of a connected component or
+of the species tree root. The difference between the lower bound and the current
+root height is referred to as $x$, and a new random value $x'$ chosen from an
+exponential distribution. The value of $x - x'$ is then used for $\epsilon$. The
+median of the exponential distribution is adaptively modified over the course of
+an MCMC chain to equal the posterior expectation of $x$.
+
+Because the proposal distribution for the new species tree root height $x'$ is
+independent of the current height $x$, the Hastings ratio which is usually
+$\nicefrac{q(x', dx)}{q(x, dx')}$ can be simplified to $\nicefrac{q(x')}{q(x)}$.
+The (log) Hastings ratio may then be derived from the respective
+exponential probability densities of $x$ and $x'$:
+
+\begin{align}
+\frac{q(x')}{q(x)} &= \frac{\lambda e^{-\lambda x'}}{\lambda e^{-\lambda x}} = \frac{e^{-\lambda x'}}{e^{-\lambda x}}\\
+\therefore \ln\left(\frac{q(x')}{q(x)}\right) &= \ln\left(e^{-\lambda x'}\right) - \ln\left(e^{-\lambda x}\right)\\
+& = \lambda x \cdot \ln\left(e\right) - \lambda x' \cdot \ln\left(e\right)\\
+& = \lambda \left(x - x'\right) = \lambda \epsilon
+\end{align}
 
 \subsection{Species tree relaxed clocks}
+
+While *BEAST has been sucessfully used with relaxed clocks
+\citep{Berv2014120,Lambert2015146}, this involves estimating per-branch
+substitution rates (branch rates) separately for each branch of each gene tree.
+Gene tree relaxed clock models may accomodate variation in substitution rates
+between lineages, but do not produce estimates of per-lineage rates. To enable
+inference of species branch rates, we have developed a new species tree relaxed
+clock model.
+
+The challenge of applying a relaxed clock to the species tree is that
+phylogenetic likelihood calculations require branch rates for each branch of
+each gene tree. Our clock model uses the total expected number of substitutions
+$\Sigma \mathbb{E}(S)$ accumulated by a gene tree branch through all containing
+species tree branches. Substitutions are expected to be accumulated at the mean
+clock rate of the gene tree $c$, for example 0.01 for hominoid primate
+mitochondrial DNA \citep{doi:10.1146/annurev.es.18.110187.001413}, multiplied
+by the lengths of time $L$ spent traversing each species tree branch, multiplied
+by the rates of the corresponding species tree branches $R$
+(Table~\ref{tab:branchRateModel}).
+
+\begin{table}[htb!]
+\centering
+\caption{Expected numbers of substitutions under a species tree relaxed clock.}
+\label{tab:branchRateModel}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Branch} & \multirow{2}{*}{$c$} & \multicolumn{3}{c|}{$L$} & \multicolumn{3}{c|}{$R$} & \multicolumn{3}{c|}{$\mathbb{E}(S) = c\cdot L\cdot R$} & \multirow{2}{*}{$\Sigma \mathbb{E}(S)$}\tabularnewline
+\cline{3-11}
+ & & A & B & AB & A & B & AB & A & B & AB & \tabularnewline
+\hline
+a & \multirow{2}{*}{0.01} & 1.0 & 0.0 & 0.5 & \multirow{2}{*}{0.7} & \multirow{2}{*}{1.0} & \multirow{2}{*}{1.3} & 0.0070 & 0.0000 & 0.0065 & 0.0135\tabularnewline
+\cline{1-1} \cline{3-5} \cline{9-12}
+b & & 0.0 & 1.0 & 0.5 & & & & 0.0000 & 0.0100 & 0.0065 & 0.0165\tabularnewline
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{threeparttable}
+\end{table}
+
+The gene tree branch rates $r$ can then be derived by dividing the total
+expected number of substitutions by the total length of that branch $l$. The
+gene tree branch rates for the illustrated example
+(Figure~\ref{fig:branchRateModel}; Table~\ref{tab:branchRateModel}) are
+therefore:
+
+\begin{align}
+r_a &= \frac{\Sigma \mathbb{E}(S_a)}{l_a} = \frac{0.0135}{1.5} = 0.009\\
+r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.0165}{1.5} = 0.011
+\end{align}
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=9cm]{relaxed_clock.pdf}
+\caption
+{Example multispecies coalescent phylogeny to illustrate species tree relaxed
+clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
+Within the species tree there is a single gene tree with extant individuals ``a''
+and ``b''. The single speciation event occurs at time T1, and the single coalescent
+event occurs at time t1.}
+\label{fig:branchRateModel}
+\end{figure}
+
+The new species tree relaxed clock model is available in StarBEAST2. At present
+only the well-established uncorrelated lognormal (UCLN) branch rate model
+\citep{10.1371/journal.pbio.0040088} is supported, but there is no theoretical
+or practical barrier to implementing support for any other type of branch rate
+model in the future.
 
 \section{Results}
 
@@ -403,6 +507,8 @@ perfect values. % (Table~\ref{tab:branchRatesLM}).
 
 \section{Discussion}
 
+More extreme values expected because of SPILS?
+
 \section{Conclusions}
 
 StarBEAST2 is open source and free software, its source code and development
@@ -410,6 +516,7 @@ history is available through GitHub
 (\url{https://github.com/genomescale/starbeast2}).
 
 \section{Materials and Methods}
+
 
 
 \section{Supplementary Material}
@@ -424,10 +531,11 @@ the Royal Society of New Zealand. HAO was supported by an Australian Laureate
 Fellowship awarded to Craig Moritz by the Australian Research Council
 (FL110100104). This research was undertaken with the assistance of resources
 from the National Computational Infrastructure (NCI), which is supported by the
-Australian Government. We wish to thank Jason Bragg for help testing StarBEAST2,
-and Tim Vaughan for suggesting the addition of the root height changing
-operator. We also wish to thank Joseph Heled for insight into the multispecies
-coalescent model, and Graham Jones for input regarding operator performance.
+Australian Government. We wish to thank Jason Bragg and Renee Catullo for
+testing StarBEAST2 before its official release, Tim Vaughan for suggesting the
+addition of the root height changing operator, Joseph Heled for insight into the
+multispecies coalescent model, and Graham Jones for input regarding operator
+performance.
 
 \bibliographystyle{natbib}
 \bibliography{starbeast2}
