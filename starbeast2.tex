@@ -279,13 +279,14 @@ performance, we ran StarBEAST2 using different combinations of operators,
 methods of population size integration and different relaxed clocks. To measure
 convergence both effective sample size (ESS) per hour and ESS per million states
 were computed for each independent chain. ESS per hour can be used calculate the
-total time required for a converged chain (where ESS equals or exceeds 200),
-and reflects how effectively operators explore the space of trees and parameters, and the computational time
-required by each operator proposal and likelihood calculation. In contrast, ESS per
-million states reflects only the exploration of tree and parameter space,
-independent of calculation times. A variety of statistics were logged for each
-analysis, but the height of the species tree had the slowest convergence rates
-so we used this statistic to judge computational performance (Figure~S7-Sx).
+total time required for a converged chain (where ESS equals or exceeds 200), and
+reflects how effectively operators explore the space of trees and parameters,
+and the computational time required by each operator proposal and likelihood
+calculation. In contrast, ESS per million states reflects only the exploration
+of tree and parameter space independently of calculation times. A variety of
+statistics were logged for each analysis, but the height of the species tree had
+the slowest average convergence rates so we used this statistic to judge
+computational performance (Figure~S7-Sx).
 
 Coordinated topology operators consistently reduced ESS per hour convergence,
 regardless of the addition of height changing operators or the method of
@@ -302,7 +303,8 @@ of their longer calculation times.
 \caption
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
-applied to 22 \textit{Pseudacris} loci. Topology operators refers to the
+applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
+settings. Topology operators refers to the
 replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
 operators refers to the addition of operators which make coordinated changes to
 internal node heights. Uncorrelated lognormal (UCLN) relaxed clocks were applied
@@ -319,7 +321,8 @@ are 95\% confidence intervals calculated by bootstrapping.}
 \caption
 {Effect of operators, population size integration and clock models on effective
 sample size (ESS) per million states. The performance of every combination of
-settings was measured when applied to 22 \textit{Pseudacris} loci. Topology operators refers to the
+settings was measured when applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
+settings. Topology operators refers to the
 replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
 operators refers to the addition of operators which make coordinated changes to
 internal node heights. Uncorrelated lognormal (UCLN) relaxed clocks were applied
@@ -344,7 +347,7 @@ convergence of gene tree relaxed clock analyses. The relative performance in ESS
 per hour was worse than the relative performance in ESS per million states
 (Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}), which shows that
 compared to gene tree relaxed clock analyses the likelihood calculations have a
-higher time cost, but also that new state proposals are less effective at
+higher time cost, but also that new state proposals become effective at
 exploring tree and parameter space.
 
 \subsection{StarBEAST2 is approximately three times faster than *BEAST}
@@ -354,7 +357,7 @@ integration of population sizes and coordinated height changing operators both
 improve convergence. To show that this increased performance is generally
 applicable, and to demonstrate that StarBEAST2 can accurately reconstruct branch
 rates under a species tree relaxed clock model, we needed to apply StarBEAST2 to
-many different data sets for which the true species tree is known. Therefore we
+many different data sets for which the true species tree is known. To accomplish this we
 simulated 64 species trees of 19 taxa each under a birth-death model with
 lognormally distributed branch rates. Gene trees evolving within each species
 tree were simulated according to the multispecies coalescent model with
@@ -378,18 +381,18 @@ settings was the height of the species tree. Based on that parameter, the
 average performance increase using StarBEAST2 with performant settings over
 *BEAST settings was 3.2 times, with a 95\% confidence interval between 2.6 and
 3.8 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
-concatenated analyses was the posterior probability. Using the same number
-of loci, the convergence of the posterior statistic using concatenation was
-114.5 times faster than the convergence of the species tree height statistic
+concatenated analyses was the posterior probability, and when using the same number
+of loci convergence of the posterior statistic using concatenation was
+114 times faster than the the species tree height statistic
 using StarBEAST2 with *BEAST settings. When concatenation was used with ten
 times the number of loci, the performance difference was minimal --- 1.2 times,
 with a confidence interval between 1.0 and 1.5 (Figure~\ref{fig:simulatedEssPerHour}).
 
-Unlike \textit{Pseudacris} analyses, using a species tree UCLN relaxed clock with performant
-settings was faster than *BEAST settings. However, this was still significantly
-slower than using gene tree relaxed clocks, as the average performance increase
-was smaller at 1.5 times with a confidence interval between 1.2 and 1.9
-(Figure~\ref{fig:simulatedEssPerHour}).
+Unlike \textit{Pseudacris}, using a species tree UCLN relaxed clock with
+performant settings was faster than *BEAST settings. However, this was still
+significantly slower than using gene tree relaxed clocks, as the average
+performance increase was smaller at 1.5 times with a confidence interval between
+1.2 and 1.9 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
@@ -517,7 +520,15 @@ history is available through GitHub
 
 \section{Materials and Methods}
 
+Pseudacris data processing
 
+Pseudacris StarBEAST2 runs
+
+Simulations
+
+Simulation runs
+
+Tree error and SLR
 
 \section{Supplementary Material}
 
