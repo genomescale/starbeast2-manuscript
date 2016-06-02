@@ -479,33 +479,7 @@ slope and intercept were $0.32x + 0.68$ and $0.79x + 0.21$ respectively. By
 applying a UCLN relaxed clock to the species tree, StarBEAST2 can be used to
 infer many branch rates --- the $R^2$ correlation was much stronger at $0.15$,
 and the slope and intercept were $0.93$ and $0.07$ respectively, close to
-perfect values. % (Table~\ref{tab:branchRatesLM}).
-
-% \begin{table}[htb!]
-% \centering
-% \caption{Simple linear regression of branch rates.}
-% \label{tab:branchRatesLM}
-% \begin{threeparttable}
-% \begin{adjustbox}{center}
-% \small
-% $\begin{array}{|c|c|l|l|l|}
-% \multicolumn{1}{c}{\text{Method}} & \multicolumn{1}{c}{\text{Number of loci}} & \multicolumn{1}{c}{\text{Intercept}} & \multicolumn{1}{c}{\text{Slope}} & \multicolumn{1}{c}{R^2}\tabularnewline
-% \hline
-% \text{Concatenation} & 22 & 0.68^{***} & 0.32^{***} & 0.03\tabularnewline
-% \hline
-% \text{Concatenation} & 220 & 0.79^{***} & 0.21^{***} & 0.04\tabularnewline
-% \hline
-% \text{StarBEAST2} & 22 & 0.07 & 0.93^{***} & 0.15\tabularnewline
-% \hline
-% \end{array}$
-% \end{adjustbox}
-% \begin{tablenotes}
-% \small
-% \centering
-% \item {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$.
-% \end{tablenotes}
-% \end{threeparttable}
-% \end{table}
+perfect values.
 
 \clearpage
 
@@ -546,7 +520,7 @@ Birth rate & Fixed at 200.0\tabularnewline
 \hline
 Death rate & Fixed at 100.0\tabularnewline
 \hline
-Species tree branch rates & Log-normal ($M = 1.0, S = 0.16$)\tabularnewline
+Species tree branch rates & Log-normal ($\mu* = 1.0, \sigma = 0.16$)\tabularnewline
 \hline
 Haploid population sizes & Inverse gamma ($\alpha = 2.0, \beta = 0.002$)\tabularnewline
 \hline
@@ -558,6 +532,10 @@ Per-locus mean clock rates & 0.5, 2.0\tabularnewline
 \hline
 \end{tabular}
 \end{adjustbox}
+\begin{tablenotes}
+\small
+\item {*}: Mean in real space.
+\end{tablenotes}
 \end{threeparttable}
 \end{table}
 
@@ -571,12 +549,52 @@ species tree \textit{per se}, we used only those 22 loci. To rank sampled
 individual frogs by sequence quality, we counted the number of unambiguous base
 calls for both haplotypes across all 22 HKY loci. To further avoid any waste of
 computational resources, we then reduced the sequence data to both haplotypes
-from the best-sequenced individual from each of the 19 ingroup putatitive
-species in \cite{Barrow201478}.
+from the best-sequenced individual from each of the 19 ingroup extant lineages
+in \cite{Barrow201478}.
 
 \subsection*{StarBEAST2 reanalysis of \textit{Pseudacris} sequence data}
 
+For inference of \textit{Pseudacris} trees, we ran StarBEAST2 with a birth-death
+prior on the species tree and estimated the net diversification and exinction
+fraction hyperparameters. An inverse gamma prior was used for per-branch
+constant population sizes with a shape fixed at 2.0 and the mean population size
+hyperparameter was estimated. Relative per-locus clock rates were estimated
+using a log-normal prior distribution with the mean fixed at 1.0 in real space
+and the standard deviation hyperparameter was estimated. An HKY+$\Gamma$
+substitution model with four gamma rate categories was applied to all loci and
+all base frequencies were estimated separately for each locus. The HKY $\kappa$
+and gamma shape parameters were estimated and shared by all loci.
 
+The rate of the root species tree branch was estimated for species tree relaxed
+clock analyses, but the rates of gene tree root branches were not estimated as
+it does not affect the phylogenetic likelihood. The standard deviation of the
+UCLN clock model was fixed at 0.16 and 0.32 for species tree and gene tree
+relaxed clocks respectively. The number of UCLN rate categories was set to equal
+the number of species tree branches for species tree relaxed clocks (i.e. 37)
+and the number of gene tree branches except the root branch for gene tree
+relaxed clocks (i.e. 74).
+
+To ensure convergence of all chains, we ran each chain for an initial length of
+$2^{23}$ states, sampling every $2^{10}$ states. ESS values were computed for
+all logged statistics after discarding 12.5\% of state samples as burnin. Logged
+statistics included the posterior probability, the multispecies coalescent
+(probability of gene trees given the species tree), birth death prior
+probability of the species tree, the phylogenetic likelihood, the net
+diversification rate, the extinction fraction, the HKY $\kappa$ parameter, the
+among-site rate variation $\alpha$ parameter, the standard deviation of per-
+locus clock rates, the mean population size, and the height of the species tree.
+
+If any logged statistic had an ESS of below 200, the chain was resumed until the
+length of the chain was doubled. ESS values were then re-evaluated, again after
+discarding 12.5\% of state samples. The length of the chain was doubled and ESS
+values re-evaluated until the ESS values of all logged statistics were above
+200. The rate at which trees and statistics were sampled was halved every chain
+doubling so that the total number of samples remained constant.
+
+ESS per hour was calculated by dividing the final ESS value for a given
+statistic by 87.5\% of the total CPU time used by that chain to account for
+burnin. Likewise ESS per million states was calculated by dividing the final ESS
+value by 87.5\% of the total number of the states in the chain.
 
 \subsection*{Simulation of trees and sequence data}
 
@@ -612,14 +630,30 @@ a transition/transversion $\kappa$ value of 3.0, and a discretized gamma model
 of among-site rate variation with a shape $\alpha$ value of 0.2
 \citep{Yang1994}.
 
-\subsection*{Measuring the accuracy of StarBEAST2 and concatenation}
+\subsection*{Performance and accuracy of StarBEAST2 and concatenation}
 
+The settings used for StarBEAST2 analyses of simulated sequence data was
+identical to the analysis of \textit{Pseudacris} sequence data, except 100 rate
+categories were used for all UCLN relaxed clocks. Concatenation used the same
+settings as StarBEAST2, but instead of inferring each gene tree within a species
+tree, a single concatenated tree was inferred using the likelihoods of all loci.
+The same strategy to ensure convergence was used as the \textit{Pseudacris}
+analysis, but slightly modified for concatenated analyses; population sizes and
+multispecies coalescent probabilities were not logged because they are not
+estimated, and the initial chain length was only $2^{20}$ states, sampling every
+$2^{7}$ states. ESS rates were calculated the same way as for
+\textit{Pseudacris} analyses.
 
+Relative species tree error
+
+Pendant edge length bias
+
+Rooted Robinson-Foulds distance
 
 \section*{Supplementary Material}
 
-%Supplementary tables XX-XX and figures XX-XX are available at \textit{Molecular Biology and Evolution} online (http://www.mbe.oxfordjournals.org/).
-Supplementary tables and figures will be available online.
+Supplementary tables, figures, simulated data sets, and BEAST XML files will be
+made available online.
 
 \section*{Acknowledgments}
 
