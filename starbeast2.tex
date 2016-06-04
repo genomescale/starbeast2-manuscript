@@ -371,17 +371,26 @@ and the computational time required by each operator proposal and likelihood
 calculation. In contrast, ESS per million states reflects only the exploration
 of tree and parameter space independently of calculation times. A variety of
 statistics were logged for each analysis, but the height of the species tree had
-the slowest average convergence rates so we used this statistic to judge
+the slowest average convergence rates so we used that statistic to judge
 computational performance (Figure~S7-Sx).
 
-Coordinated topology operators consistently reduced ESS per hour,
-regardless of the addition of height changing operators or the method of
-population size integration (Figure~\ref{fig:realEssPerHour}). However these
-operators had little effect on ESS per million states (Figure~\ref{fig:realEssPerMstates}).
-The latter result suggests that coordinated topology operators are no more
-effective than na\"ive operators at proposing new states, and the former result
-shows how the increased complexity of these operators slows convergence because
-of their longer calculation times.
+Multiple linear regressions with log transformed ESS rates as the response
+variables were used to measure the effect of adding topology changing operators,
+node height changing operators, and of the method of population size
+integration. Each addition was treated as a binary indicator variable, so that
+we were able to quantify the change in performance as a percentage by
+exponentiating the coefficient for each addition
+(Table~\ref{tab:convergenceLM}).
+
+Coordinated topology operators had a negative effect on ESS per hour of gene
+tree relaxed clock analyses, regardless of the addition of height changing
+operators or the method of population size integration
+(Figure~\ref{fig:realEssPerHour}). There was no change to ESS per million states
+(Figure~\ref{fig:realEssPerMstates}), and made no significant difference to the
+convergence of species tree relaxed clock analyses
+(Table~\ref{tab:convergenceLM}). These results suggest that coordinated topology
+operators are not substantially more effective than na\"ive operators at
+proposing new states.
 
 \begin{figure}[htb!]
 \centering
@@ -390,9 +399,9 @@ of their longer calculation times.
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
 applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
-settings. Topology operators refers to the
-replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
-operators refers to the addition of operators which make coordinated changes to
+settings. Topology refers to the
+replacement of na\"ive NNI and SPR operators with coordinated operators. Height
+refers to the addition of operators which make coordinated changes to
 internal node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
 to either each gene tree or to the species tree. Trimmed means of species tree
 height effective sample size (ESS) per hour were calculated from 32 independent
@@ -408,9 +417,9 @@ are 95\% confidence intervals calculated by bootstrapping.}
 {Effect of operators, population size integration and clock models on effective
 sample size (ESS) per million states. The performance of every combination of
 settings was measured when applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
-settings. Topology operators refers to the
-replacement of na\"ive NNI and SPR operators with coordinated operators. Heights
-operators refers to the addition of operators which make coordinated changes to
+settings. Topology refers to the
+replacement of na\"ive NNI and SPR operators with coordinated operators. Height
+refers to the addition of operators which make coordinated changes to
 internal node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
 to either each gene tree or to the species tree. Trimmed means
 of species tree height ESS per million states were calculated from 32
@@ -420,21 +429,48 @@ bootstrapping.}
 \label{fig:realEssPerMstates}
 \end{figure}
 
-Coordinated height changing operators consistently improved convergence both in
-terms of ESS per hour and ESS per million states
-(Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}). Both species tree
-and gene tree relaxed clock analyses benefitted from enabling those operators.
-Analytical integration of population sizes only improved the computational
-performance of gene tree relaxed clock analyses; unlike height changing
-operators it did not change the performance of species tree relaxed clock analyses.
+\begin{table}[htb!]
+\centering
+\caption{Convergence performance change induced by StarBEAST2 settings.}
+\label{tab:convergenceLM}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\begin{tabular}{|l|l|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{Relaxed clock} & \multicolumn{1}{c|}{ESS rate per} & \multicolumn{1}{c|}{Topology} & \multicolumn{1}{c|}{Height} & \multicolumn{1}{c|}{Analytical integration}\tabularnewline
+\hline
+Gene trees & hour & -22\%{***} & 134\%{***} & 23\%{***}\tabularnewline
+\hline
+Gene trees & million states & -5\%\hphantom{***} & 158\%{***} & 26\%{***}\tabularnewline
+\hline
+Species tree & hour & -9\%\hphantom{***} & 111\%{***} & 7\%\hphantom{***}\tabularnewline
+\hline
+Species tree & million states & 6\%\hphantom{***} & 125\%{***} & 9\%\hphantom{***}\tabularnewline
+\hline
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}
+\small
+\item \hspace{1cm} {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Coordinated height changing operators significantly improved convergence both in
+terms of ESS per hour and ESS per million states. Both species tree and gene
+tree relaxed clock analyses benefitted from enabling those operators. Analytical
+integration of population sizes only improved the computational performance of
+gene tree relaxed clock analyses; unlike height changing operators it did not
+significantly change the performance of species tree relaxed clock analyses
+(Table~\ref{tab:convergenceLM}).
 
 Convergence of species tree relaxed clock analyses was largely slower than
-convergence of gene tree relaxed clock analyses. The relative performance in ESS
-per hour was worse than the relative performance in ESS per million states
+convergence of gene tree relaxed clock analyses. The decrease in performance in
+terms of ESS per hour was worse than for ESS per million states
 (Figure~\ref{fig:realEssPerHour},\ref{fig:realEssPerMstates}), which shows that
 compared to gene tree relaxed clock analyses the likelihood calculations have a
-higher time cost, but also that operators become less effective at
-exploring tree and parameter space.
+higher time cost, but also that operators become less effective at exploring
+tree and parameter space.
 
 \subsection*{StarBEAST2 is approximately three times faster than *BEAST}
 
