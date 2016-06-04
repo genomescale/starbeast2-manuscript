@@ -70,17 +70,18 @@ Concatenation is a popular estimator of species tree topology but is
 statistically inconsistent inside the anomaly zone of short branch lengths. The
 ages of extant species inferred using concatenation can also be severely
 overestimated. These known biases have motivated the development and use of
-multispecies coalescent methods of species tree inference. Summary methods like
-ASTRAL are becoming increasing popular as they are fast enough to use with large
-phylogenomic data sets, but cannot estimate divergence times and extract less
-information per gene compared to fully Bayesian methods like *BEAST. In response
-we have developed StarBEAST2, a fully Bayesian method with improved
-computational performance. StarBEAST2 will enable inference of more accurate and
-precise species trees and divergence times by increasing the maximum number of
-loci that is practical for a given analysis. StarBEAST2 also adds support for
-species tree relaxed clocks, and we show that unlike concatenation it can
-accurately estimate per-species substitution rates. StarBEAST2 is available
-through the BEAUTi package manager in BEAST 2.4 and above.
+multispecies coalescent (MSC) methods of species tree inference. Summary MSC
+methods like ASTRAL are becoming increasing popular as they are fast enough to
+use with large phylogenomic data sets, but cannot estimate divergence times and
+extract less information per gene compared to fully Bayesian methods like
+*BEAST. In response we have developed StarBEAST2, a fully Bayesian method with
+improved computational performance. StarBEAST2 will enable inference of more
+accurate and precise species trees and divergence times by increasing the
+maximum number of loci that is practical for a given analysis. StarBEAST2 also
+adds support for species tree relaxed clocks, and we show that unlike
+concatenation it can accurately estimate per-species substitution rates.
+StarBEAST2 is available through the BEAUTi package manager in BEAST 2.4 and
+above.
 
 Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation.
 
@@ -89,75 +90,73 @@ Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies c
 The throughput of sequencing technologies has improved many-fold over the past
 two decades, culminating in next generation sequencing (NGS), and it is now
 feasible to sequence whole or partial genomes or transcriptomes for phylogenetic
-studies \citep{annurev-ecolsys-110512-135822}. Next generation sequencing
-produces hundreds or thousands of phylogenetically useful loci (see for example
-\cite{Blom056085}), with potentially millions of characters in a data set of
-multiple sequence alignments.
+studies \citep{annurev-ecolsys-110512-135822}. NGS produces hundreds or
+thousands of phylogenetically useful loci (see for example \cite{Blom056085}),
+with potentially millions of sites spread across a dataset of multiple
+sequence alignments.
 
-Fully Bayesian species tree inference methods such as *BEAST were originally developed to
-operate on a handful of loci, and are challenging to use with phylogenomic data
-sets \citep{Ogilvie01052016}. One reaction to this conundrum has been to return
-to computationally simple methods such as concatenation, or make computational
-shortcuts such as binning loci. These approaches promised to unlock the
-potential in phylogenomic data sets to resolve difficult nodes and enable more
-precise estimates of evolutionary dates and rates. However recent results show
-that such methods are counterproductive, producing statistically inconsistent
-results which assign high confidence to incorrect nodes and times due to model
-misspecification \citep{Ogilvie01052016, NYAS:NYAS12747}.
-
-While NGS offers hundreds or thousands of loci at relatively low
-cost, making inferences from the enormous amount of data being produced is
-particularly challenging. In the case of *BEAST, which implements the multispecies coalescent
-\citep{Degnan2009332}, a realistic and robust evolutionary model, it becomes
-exponentially slower as the number of loci in an analysis is increased. This
-scaling behaviour causes *BEAST to become intractably slow after a certain
-number of loci (the exact number will depend on the other parameters of the data
-set, see \cite{Ogilvie01052016}). Given the current impossibility of using large
-phylogenomic data sets with *BEAST, there are three broad alternatives available
-to researchers; concatenate sequences from multiple genes, use multispecies
+While NGS offers hundreds or thousands of loci at relatively low cost, making
+inferences from the enormous amount of data produced is particularly
+challenging. In the case of *BEAST, a fully Bayesian method of species tree
+inference which implements a realistic and robust evolutionary model in the
+multispecies coalescent \citep{Degnan2009332}, it becomes exponentially slower
+as the number of loci in an analysis is increased. This scaling behaviour causes
+*BEAST to become intractably slow after a certain number of loci (the exact
+number will depend on the other parameters of the data set, see
+\cite{Ogilvie01052016}). Given the current impossibility of using large
+phylogenomic data sets with *BEAST there have been three broad alternatives available
+to researchers; concatenate sequences from multiple loci, use multispecies
 coalescent methods which use summary statistics instead of the full sequence
-data, or choose a tractable subset of genes to use with *BEAST.
+data, or choose a tractable subset of loci to use with *BEAST.
 
-Concatenating sequences from multiple genes, will
-reconstruct the single tree that best fits all gene sequences. Popular
-concatenation methods include the RAxML and ExaML maximum likelihood methods
-\citep{Stamatakis01052014, Kozlov01082015}, and the ExaBayes and BEAST Bayesian
-methods \citep{Aberer01102014, Drummond2007}. Branch lengths inferred by
-concatenation will reflect the expected number of substitutions per site across
-all concatenated genes. Divergence times, determined by branch lengths on a time
-tree, will therefore reflect the average coalescence times of all genes. This
-misspecification leads to overestimation of divergence times, which can be
-particularly severe in terms of the ages of extant species \citep{Ogilvie01052016}. Topologies inferred
-using concatenation will also be the best fitting topology for all gene
-sequences. In the so-called ``anomaly zone'' of short branch lengths, the most
-likely gene tree topology will be different from the species tree, and
-concatenated tree topologies will likely differ from the true species tree topologies
-\citep{journal.pgen.0020068, Kubatko01022007}. Concatenated trees are therefore
-not an accurate approximation of the species tree in either branch lengths or
-topology.
+Concatenating sequences from multiple loci will reconstruct the single tree that
+best fits the combined sequence alignment. Popular concatenation methods include
+the RAxML and ExaML maximum likelihood methods \citep{Stamatakis01052014,
+Kozlov01082015}, and the ExaBayes and BEAST Bayesian methods
+\citep{Aberer01102014, Drummond2007}. Recent results shows that concatenation
+is counterproductive, producing statistically inconsistent results which assign
+high confidence to incorrect nodes due to model misspecification
+\citep{NYAS:NYAS12747}. In the so-called ``anomaly zone'' of short branch
+lengths, the most likely gene tree topology will be different from the species
+tree, and concatenated tree topologies will likely differ from the true species
+tree topologies \citep{journal.pgen.0020068, Kubatko01022007}.
 
-As an alternative to concatenation for phylogenomic data, methods which use
-summary statistics instead of the full sequence data have been developed.
+More recently identified problems with concatenation is overestimation of
+divergence times and biased estimation of substitution rates. Branch lengths
+inferred by concatenation will reflect the expected number of substitutions per
+site across all concatenated loci. Divergence times, as determined by branch
+lengths on a time tree, will therefore reflect the average coalescence times of
+all genes. This misspecification leads to overestimation which can be
+particularly severe in terms of the ages of extant species
+\citep{Ogilvie01052016}. Trees inferred using concatenation are therefore not a
+reliable approximation of the species tree in terms of branch lengths or
+topology. Per-species substitution rates inferred using a relaxed clock model
+with concatenation may also be substantially overestimated or underestimated
+depending on their relationship with the gene trees \citep{Mendes28022016}.
+
+As an alternative to concatenation methods which use summary statistics instead
+of the full sequence data have been developed for use with phylogenomic data.
 Popular summary methods include MP-EST and ASTRAL \citep{Liu2010,
-Mirarab01092014}. Recent results show that MP-EST should be avoided, as recent
-results show that it is sensitive to gene tree error \citep{Mirarab15062015,
-Xi201563}. At low levels of incomplete lineage sorting (ILS), it may be less
-accurate than concatenation at inferring topologies, and even at high levels of
-ILS it may be no more accurate than concatenation \citep{Ogilvie01052016}. While
-other summary methods like ASTRAL may be more reliable than MP-EST, none of
-these methods can infer branch lengths in substitution units. Divergence times,
-estimated using a molecular clock based on the estimated number of substitutions
-per site, therefore cannot be calculated using summary methods. If concatenation
-is used to estimate branch lengths and/or divergence times for a fixed species
-tree topology estimated using a summary method, those estimates will be
+Mirarab01092014}, but recent results show that MP-EST should be avoided as it is
+sensitive to gene tree error \citep{Mirarab15062015, Xi201563}. At low levels of
+incomplete lineage sorting (ILS) it may be less accurate than concatenation at
+inferring topologies, and even at high levels of ILS it may be no more accurate
+than concatenation \citep{Ogilvie01052016}. While other summary methods like
+ASTRAL may be more reliable than MP-EST, none of these methods can infer branch
+lengths in substitution units. Divergence times therefore cannot be
+reconstructed using summary methods. If concatenation is used to estimate branch
+lengths, divergence times, and/or substitution rates for a fixed species tree
+topology estimated using a summary method, then those estimates will be
 unreliable for the same reasons as pure concatenation.
 
-With the aim of improving the computational performance of fully Bayesian multispecies
-coalescent inference of species trees and other phylogenetic parameters, we have
-developed StarBEAST2, an upgrade to *BEAST available as a package for BEAST 2
+With the aim of improving the computational performance of fully Bayesian
+multispecies coalescent inference of species trees we have developed an upgrade
+to *BEAST called ``StarBEAST2'', which available as a package for BEAST 2
 \citep{10.1371/journal.pcbi.1003537}. By improving computational performance,
 StarBEAST2 should enable the use of more loci, thereby improving the precision
-of estimated parameters and providing an alternative to concatenation.
+of estimated parameters and providing an alternative to concatenation. We have
+also developed and included in StarBEAST2 a new multispecies coalescent relaxed
+clock model to enable accurate inference of per-species substitution rates.
 
 \section*{New Approaches}
 
