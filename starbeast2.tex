@@ -240,17 +240,18 @@ exponential distribution. The value of $x' - x$ is then used for $\epsilon$. The
 median of the exponential distribution is adaptively modified over the course of
 an MCMC chain to equal the posterior expectation of $x$.
 
-Because the proposal distribution for the new species tree root height $x'$ is
-independent of the current height $x$, the Hastings ratio which is usually
-$\nicefrac{q(x', dx)}{q(x, dx')}$ can be simplified to $\nicefrac{q(x')}{q(x)}$.
-The (log) Hastings ratio may then be derived from the respective
-exponential probability densities of $x$ and $x'$:
+Because the proposal distribution for a new species tree root height is
+independent of the current height, the Hastings ratio which is usually
+$\nicefrac{q(x|x')}{q(x'|x)}$ \citep{2015arXiv150401896R} can be simplified to
+$\nicefrac{q(x)}{q(x')}$. The natural logarithm of the Hastings ratio may then
+be derived from the respective probability densities of $x$ and
+$x'$ drawn from an exponential distribution with the rate $\lambda$:
 
 \begin{align}
-\frac{q(x')}{q(x)} &= \frac{\lambda e^{-\lambda x'}}{\lambda e^{-\lambda x}} = \frac{e^{-\lambda x'}}{e^{-\lambda x}}\\
-\therefore \ln\left(\frac{q(x')}{q(x)}\right) &= \ln\left(e^{-\lambda x'}\right) - \ln\left(e^{-\lambda x}\right)\\
-& = \lambda x \cdot \ln\left(e\right) - \lambda x' \cdot \ln\left(e\right)\\
-& = \lambda \left(x - x'\right) = \lambda \epsilon
+\frac{q(x)}{q(x')} &= \frac{\lambda e^{-\lambda x}}{\lambda e^{-\lambda x'}} = \frac{e^{-\lambda x}}{e^{-\lambda x'}}\\
+\therefore \ln\left(\frac{q(x)}{q(x')}\right) &= \ln\left(e^{-\lambda x}\right) - \ln\left(e^{-\lambda x'}\right)\\
+& = \lambda x' \cdot \ln\left(e\right) - \lambda x \cdot \ln\left(e\right)\\
+& = \lambda \left(x' - x\right) = \lambda \epsilon
 \end{align}
 
 \subsection*{Species tree relaxed clocks}
