@@ -313,7 +313,7 @@ r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.0165}{1.5} = 0.011
 {Example multispecies coalescent phylogeny to illustrate species tree relaxed
 clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
 Within the species tree there is a single gene tree with extant individuals ``a''
-and ``b''. The single speciation event occurs at time T1, and the single coalescent
+and ``b''. The single speciation event occurs at time T1, and the single coalescence
 event occurs at time t1.}
 \label{fig:branchRateModel}
 \end{figure}
@@ -401,7 +401,7 @@ applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *B
 settings. Topology refers to the
 replacement of na\"ive NNI and SPR operators with coordinated operators. Height
 refers to the addition of operators which make coordinated changes to
-internal node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
+node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
 to either each gene tree or to the species tree. Trimmed means of species tree
 height effective sample size (ESS) per hour were calculated from 32 independent
 chains. 25\% trim was used to reduce the influence of outliers. All error bars
@@ -419,7 +419,7 @@ settings was measured when applied to 22 \textit{Pseudacris} loci. The bar marke
 settings. Topology refers to the
 replacement of na\"ive NNI and SPR operators with coordinated operators. Height
 refers to the addition of operators which make coordinated changes to
-internal node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
+node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
 to either each gene tree or to the species tree. Trimmed means
 of species tree height ESS per million states were calculated from 32
 independent chains. 25\% trim was used to reduce the influence
@@ -470,6 +470,8 @@ terms of ESS per hour was worse than for ESS per million states
 compared to gene tree relaxed clock analyses the likelihood calculations have a
 higher time cost, but also that operators become less effective at exploring
 tree and parameter space.
+
+\clearpage
 
 \subsection*{StarBEAST2 is approximately three times faster than *BEAST}
 
@@ -612,8 +614,8 @@ The increased performance of StarBEAST2 will enable researchers to analyse
 results faster and disseminate their findings sooner. A large MCMC analysis
 which would currently take three weeks can now be performed in just one week. In
 the case of phylogenomic data which has been subsetted for use with *BEAST,
-StarBEAST2 can alternatively be used to analysed more data for more precise
-estimates of species trees and other parameters in the same amount of time as a
+StarBEAST2 can alternatively be used to analyse more data for more precise
+estimates of species tree and other parameters in the same amount of time as a
 more limited *BEAST analysis.
 
 Previous research on the scaling behaviour of *BEAST has shown that the
@@ -621,7 +623,7 @@ relationship between the number of loci in a given analysis and the convergence
 in terms of ESS per hour follows a power law with an coefficient $-2.81$ for the
 log number of loci \citep{Ogilvie01052016}. If the number of loci for a given
 analysis is increased by 50\%, the decrease in performance is therefore expected
-to be $\exp{-2.81 \cdot \ln(1.5)} = 3.125$, roughly cancelling out the improved
+to be $\exp(-2.81 \cdot \ln(1.5)) = 3.125$, roughly cancelling out the improved
 computational performance of StarBEAST2 compared to *BEAST.
 
 \subsection*{Concatenation can still be inferior given intermediate branch lengths}
@@ -749,9 +751,13 @@ in \cite{Barrow201478}.
 \subsection*{StarBEAST2 reanalysis of \textit{Pseudacris} sequence data}
 
 For inference of \textit{Pseudacris} trees, we ran 32 independent StarBEAST2
-chains for each condition. Each chain used the same sequence data, but was an
-independent estimate of convergence because different random seeds were used to
-initialize each chain.
+chains for all 16 conditions for a total of 512 chains. The conditions were each
+possible combination of species or gene tree relaxed clocks, analytical or
+numerical population size integration, coordinated or na\"ive topology changing
+operators, and the inclusion or exclusion of coordinated height changing
+operators. Each chain used the same sequence data, but was an independent
+estimate of convergence because different random seeds were used to initialize
+each chain.
 
 A birth-death prior was used for the species tree and the net diversification
 and exinction fraction hyperparameter were estimated. An inverse gamma prior was
@@ -800,17 +806,17 @@ All simulation parameters were chosen to be broadly similar to those observed in
 or estimated from the \textit{Pseudacris} data set.
 
 First, 64 species trees were simulated according to a birth-death process
-\citep{Gernhard2008769} using biopy with 19 extant species, a
-speciation rate of 200.0 and a death rate of 50.0. This corresponds to a net
-diversification rate of 150.0 and an extinction fraction of 0.25. Haploid
-effective population sizes for each branch were chosen independently from an
-inverse gamma distribution with a shape of 2.0 and a scale of 0.002. For a
-species with annual generation times, including \textit{Pseudacris ornata} and
-\textit{P. nigrita} \citep{10.2307/1446044}, this corresponds to a diploid
-effective population size of 1000 individuals per generation. Species branch
-rates were chosen from a log-normal distribution with a mean in real space of 1.0
-and a standard deviation of 0.16, then scaled so that the mean of the branch
-rates for a given species tree was exactly 1.0.
+\citep{Gernhard2008769} using biopy with 19 extant species, a speciation rate of
+200.0 and a death rate of 50.0. This corresponds to a net diversification rate
+of 150.0 and an extinction fraction of 0.25. Haploid effective population sizes
+for each branch were chosen independently from an inverse gamma distribution
+with a shape of 2.0 and a scale of 0.002. For a species with annual generation
+times, as is the case for \textit{Pseudacris ornata} and \textit{P. nigrita}
+\citep{10.2307/1446044}, this corresponds to a diploid effective population size
+of 1000 individuals per generation. Species branch rates were chosen from a
+log-normal distribution with a mean in real space of 1.0 and a standard
+deviation of 0.16, then scaled so that the mean of the branch rates for a given
+species tree was exactly 1.0.
 
 For each species tree, 220 gene trees with two sampled individuals per species
 were simulated according to the multispecies coalescent process using biopy. The
@@ -830,12 +836,18 @@ of among-site rate variation with a shape $\alpha$ value of 0.2
 
 \subsection*{Performance and accuracy of StarBEAST2 and concatenation}
 
+The five methods of inference used for this section were concatenation with 22
+loci, concatenation with 220 loci, StarBEAST2 with *BEAST settings, StarBEAST2
+with performant settings and gene tree relaxed clocks, and StarBEAST2 with
+performance settings and species tree relaxed clocks. A single MCMC chain was
+run for each method of inference for all 64 replicates, a total of 320 chains.
+
 The settings used for StarBEAST2 analyses of simulated sequence data were
-identical to the analysis of \textit{Pseudacris} sequence data, except that 100 rate
-categories were used for all UCLN relaxed clocks. Concatenation used the same
-settings as StarBEAST2, but instead of inferring each gene tree within a species
-tree, a single concatenated tree was inferred using the likelihoods of all loci.
-Heterozygous sites were ambiguity coded for concatenation analyses.
+identical to the analysis of \textit{Pseudacris} sequence data, except that 100
+rate categories were used for all UCLN relaxed clocks. Concatenation used the
+same settings as StarBEAST2, but instead of inferring each gene tree within a
+species tree, a single concatenated tree was inferred using the likelihoods of
+all loci. Heterozygous sites were ambiguity coded for concatenation analyses.
 The same strategy to ensure convergence was used as for \textit{Pseudacris}
 analyses, but slightly modified for concatenated analyses; population sizes and
 multispecies coalescent probabilities were not logged because they are not
