@@ -93,7 +93,7 @@ two decades, culminating in next generation sequencing (NGS), and it is now
 feasible to sequence whole or partial genomes or transcriptomes for phylogenetic
 studies \citep{annurev-ecolsys-110512-135822}. NGS produces hundreds or
 thousands of phylogenetically useful loci (see for example \cite{Blom056085}),
-with potentially millions of sites spread across a dataset of multiple
+with potentially millions of sites spread across a data set of multiple
 sequence alignments.
 
 While NGS offers hundreds or thousands of loci at relatively low cost, making
@@ -167,8 +167,8 @@ Markov Chain Monte Carlo (MCMC) methods like *BEAST numerically integrate over
 many parameters to produce explicit estimates of those parameter values. From a
 researcher's perspective, some may be ``nuisance'' parameters not of scientific
 interest. For example species tree topology and divergence times may be of
-interest, but not population sizes. For analytically tractical parameters, an
-analytical solution will integrate over the entire range of values at each MCMC
+interest, but not population sizes. For analytically tractable parameters, an
+analytic solution will integrate over the entire range of values at each MCMC
 step, and may be more performant than numerical integration. However explicit
 estimates will not be produced so this integration is suitable only for nuisance
 parameters. Among-site rate variation is already analytically integrated; the
@@ -176,7 +176,7 @@ likelihood of each site is calculated for all possible discrete gamma rates at
 each step, so the individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
-implemented as part of BEST \citep{EVO:EVO414}. The analytical solution, which
+implemented as part of BEST \citep{EVO:EVO414}. The analytic solution, which
 we have added to StarBEAST2, uses an inverse gamma conjugate prior for
 population sizes. By default StarBEAST2 fixes the shape of the distribution
 $\alpha = 2$ and only estimates the scale $\beta$. Because the mean of an
@@ -193,7 +193,7 @@ the same step. \cite{Yang01122014} and \cite{2015arXiv151203843R} introduced
 Metropolis-Hastings (MH) operators which make nearest-neighbor interchange (NNI) and subtree prune and regraft (SPR) changes to the species
 tree topology, and simultaneously make changes to the gene tree topologies that
 preserve compatibility of the gene trees within the proposed species tree. We have
-reimplemented those operators as a new operater in StarBEAST2 called
+reimplemented those operators as a new operator in StarBEAST2 called
 ``CoordinatedExchange''. \cite{2015arXiv151203843R} also describe a proposal
 distribution which favours topological changes on shorter branches, and also
 less radical changes in topology. StarBEAST2 implements a simpler proposal
@@ -256,10 +256,10 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 
 \subsection*{Species tree relaxed clocks}
 
-While *BEAST has been sucessfully used with relaxed clocks
+While *BEAST has been successfully used with relaxed clocks
 \citep{Berv2014120,Lambert2015146}, this involves estimating per-branch
 substitution rates (branch rates) separately for each branch of each gene tree.
-Gene tree relaxed clock models may accomodate variation in substitution rates
+Gene tree relaxed clock models may accommodate variation in substitution rates
 between species, but do not produce estimates of species branch rates. To enable
 inference of species branch rates, we have developed a new species tree relaxed
 clock model.
@@ -335,7 +335,7 @@ parameters from a prior distribution using the MCMC kernel, and to also draw
 independent samples from an identical distribution by simulation. The
 resulting parameter distributions should also be identical if the implementation is
 correct. We used this method to test the correctness of the novel features in
-StarBEAST2; analytical population size integration, coordianted operators, and
+StarBEAST2; analytical population size integration, coordinated operators, and
 species tree relaxed clocks. Simulated and StarBEAST2 estimated distributions
 were identical for species and gene tree topologies (Figure~S1,S2), species and
 gene tree node heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5).
@@ -344,7 +344,7 @@ This combination of results supports the mathematical correctness of StarBEAST2.
 \subsection*{\textit{Pseudacris} chorus frogs have intermediate coalescent branch lengths}
 
 To characterize the performance of coordinated operators, methods of population size
-integration and relaxed cocks, we tested StarBEAST2 using real sequence data.
+integration and relaxed clocks, we tested StarBEAST2 using real sequence data.
 The data set used for this analysis is from the North American chorus frog genus
 \textit{Pseudacris}, and was originally collected and analyzed by
 \cite{Barrow201478}. A key metric of phylogenies that can be used to judge
@@ -458,7 +458,7 @@ Species tree & million states & 6\%\hphantom{***} & 125\%{***} & 9\%\hphantom{**
 
 Coordinated height changing operators significantly improved convergence both in
 terms of ESS per hour and ESS per million states. Both species tree and gene
-tree relaxed clock analyses benefitted from enabling those operators (Table~\ref{tab:convergenceLM}). Analytical
+tree relaxed clock analyses benefited from enabling those operators (Table~\ref{tab:convergenceLM}). Analytical
 integration of population sizes only improved the computational performance of
 gene tree relaxed clock analyses; unlike height changing operators it did not
 significantly change the performance of species tree relaxed clock analyses
@@ -489,7 +489,7 @@ parameters used for these simulations were chosen to produce intermediate
 branch lengths in coalescent units; the average simulated branch length was
 $\nicefrac{1.44\tau}{2Ne}$.
 
-Simulated data was analysed using BEAST with concatenation and with StarBEAST2.
+Simulated data was analyzed using BEAST with concatenation and with StarBEAST2.
 The different settings used for StarBEAST2 were *BEAST settings, performant
 settings with gene tree relaxed clocks, and performant settings with species
 tree relaxed clocks. *BEAST settings matched the configuration of *BEAST prior
@@ -610,11 +610,11 @@ perfect values.
 
 \subsection*{StarBEAST2 will enable faster and/or more precise inference}
 
-The increased performance of StarBEAST2 will enable researchers to analyse
+The increased performance of StarBEAST2 will enable researchers to analyze
 results faster and disseminate their findings sooner. A large MCMC analysis
 which would currently take three weeks can now be performed in just one week. In
 the case of phylogenomic data which has been subsetted for use with *BEAST,
-StarBEAST2 can alternatively be used to analyse more data for more precise
+StarBEAST2 can alternatively be used to analyze more data for more precise
 estimates of species trees and other parameters in the same amount of time as a
 more limited *BEAST analysis.
 
@@ -657,7 +657,7 @@ StarBEAST2.
 We show that given intermediate branch lengths, concatenation is unable to
 accurately infer per-species substitution rates, and it is reasonable to assume
 that shorter branch lengths in coalescent units would exacerbate the problem.
-StarBEAST2 can recover many branch rates, and given a more informative dataset
+StarBEAST2 can recover many branch rates, and given a more informative data set
 than our simulation study of 22$\times$400nt loci should be able to further improve
 the accuracy of estimated rates.
 
