@@ -371,7 +371,7 @@ calculation. In contrast, ESS per million states reflects only the exploration
 of tree and parameter space independently of calculation times. A variety of
 statistics were logged for each analysis, but the height of the species tree had
 the slowest average convergence rates so we used that statistic to judge
-computational performance (Table~S1).
+computational performance (Table~S1,S2).
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of adding topology changing operators,
@@ -499,12 +499,12 @@ population sizes, coordinated height changing operators, and na\"ive NNI and SPR
 topology operators.
 
 Again the parameter with the slowest convergence given any StarBEAST2
-setting was the height of the species tree (Table~S2). Based on that parameter, the
+setting was the height of the species tree (Table~S3,S4). Based on that parameter, the
 average performance increase using StarBEAST2 with performant settings over
 *BEAST settings was 3.1 times, with a 95\% confidence interval between 2.5 and
 3.7 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
-concatenated analyses was the posterior probability, and when using the same number
-of loci as StarBEAST2, convergence of the posterior statistic using concatenation was
+concatenated analyses was the phylogenetic likelihood, and when using the same number
+of loci as StarBEAST2, convergence of that statistic using concatenation was
 114 times faster than the convergence of species tree height
 using StarBEAST2 with *BEAST settings. When concatenation was used with ten
 times the number of loci as StarBEAST2, the performance difference was minimal --- 1.2 times,

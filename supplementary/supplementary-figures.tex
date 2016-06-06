@@ -2,7 +2,7 @@
 
 \usepackage{fixltx2e}
 \usepackage{textcomp}
-\usepackage{fullpage}
+\usepackage[cm]{fullpage}
 \usepackage{amsfonts}
 \usepackage{verbatim}
 \usepackage[english]{babel}
@@ -49,9 +49,11 @@
 \renewcommand{\baselinestretch}{2.0}
 \renewcommand\Affilfont{\small}
 
+\newcommand\ontop[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
 \begin{document}
 
-\title{Supplementary figures for StarBEAST2}
+\title{Supplementary figures and tables for StarBEAST2}
 \author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
 \author[2,3]{Alexei J. Drummond}
 \affil[1]{Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia}
@@ -151,5 +153,211 @@ indicating that StarBEAST2 is mathematically correct.}
 \end{figure}
 
 \clearpage
+
+\begin{landscape}
+
+\section*{Convergence rates}
+
+\begin{table}[htb!]
+\centering
+\caption{Average ESS per hour convergence for \textit{Pseudacris} data.}
+\label{tab:pseudacrisPerHour}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\renewcommand{\arraystretch}{2.0}
+\tiny
+$\begin{array}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{\ontop{\text{Birth-death}}{\text{probability}}} & \multicolumn{1}{c}{\ontop{\text{Clock rate}}{\text{stdev}}} & \multicolumn{1}{c}{\ontop{\text{Extinction}}{\text{fraction}}} & \multicolumn{1}{c}{\ontop{\text{Among-site}}{\text{rate variation}}} & \multicolumn{1}{c}{\ontop{\text{Transition/}}{\text{Transversion} \kappa}} & \multicolumn{1}{c}{\ontop{\text{Phylogenetic}}{\text{likelihood}}} & \multicolumn{1}{c}{\ontop{\text{Diversification}}{\text{rate}}} & \multicolumn{1}{c}{\ontop{\text{Population}}{\text{Mean}}} & \multicolumn{1}{c}{\text{Log-posterior}} & \multicolumn{1}{c}{\text{Log-prior}} & \multicolumn{1}{c}{\ontop{\text{Species}}{\text{tree height}}} & \multicolumn{1}{c}{\ontop{\text{Coalescent}}{\text{probability}}}\tabularnewline
+\hline
+\lozenge\lozenge\lozenge\lozenge & \ontop{81.17}{72.63 - 90.76} & \ontop{191.87}{156.80 - 230.16} & \ontop{175.68}{149.78 - 200.22} & \ontop{213.00}{163.96 - 260.56} & \ontop{232.13}{171.69 - 292.36} & \ontop{19.28}{17.13 - 21.94} & \ontop{180.93}{151.64 - 208.18} & \ontop{26.19}{23.93 - 28.39} & \ontop{21.54}{19.22 - 23.62} & \ontop{29.03}{26.85 - 31.39} & \ontop{9.00}{7.27 - 10.82} & \ontop{18.69}{16.83 - 20.41}\tabularnewline
+\hline
+\lozenge\lozenge\lozenge\blacklozenge & \ontop{120.88}{110.50 - 130.72} & \ontop{245.78}{219.62 - 274.10} & \ontop{207.20}{196.39 - 221.40} & \ontop{366.51}{297.24 - 437.96} & \ontop{379.40}{309.91 - 451.51} & \ontop{27.12}{23.64 - 31.57} & \ontop{217.49}{205.57 - 232.31} & \ontop{35.74}{32.67 - 39.06} & \ontop{30.14}{27.87 - 32.43} & \ontop{32.50}{29.68 - 35.67} & \ontop{20.18}{17.70 - 23.06} & \ontop{24.59}{22.42 - 26.52}\tabularnewline
+\hline
+\lozenge\lozenge\blacklozenge\lozenge & \ontop{65.20}{59.16 - 71.02} & \ontop{128.99}{112.54 - 153.36} & \ontop{131.65}{115.04 - 151.08} & \ontop{154.34}{124.58 - 187.17} & \ontop{154.72}{122.66 - 194.87} & \ontop{17.20}{15.39 - 18.93} & \ontop{129.48}{111.80 - 153.61} & \ontop{19.80}{18.12 - 21.69} & \ontop{16.34}{14.39 - 18.40} & \ontop{23.84}{22.15 - 25.96} & \ontop{6.96}{5.70 - 8.67} & \ontop{14.39}{13.03 - 15.83}\tabularnewline
+\hline
+\lozenge\lozenge\blacklozenge\blacklozenge & \ontop{89.67}{82.52 - 95.96} & \ontop{191.02}{177.18 - 209.55} & \ontop{174.11}{168.89 - 181.21} & \ontop{257.02}{226.39 - 321.95} & \ontop{270.16}{237.73 - 338.65} & \ontop{23.26}{21.41 - 26.85} & \ontop{175.59}{170.98 - 184.43} & \ontop{27.97}{25.58 - 30.47} & \ontop{23.23}{21.05 - 25.62} & \ontop{28.92}{26.35 - 32.05} & \ontop{14.10}{12.41 - 16.27} & \ontop{19.22}{17.62 - 20.90}\tabularnewline
+\hline
+\lozenge\blacklozenge\lozenge\lozenge & \ontop{30.84}{26.39 - 36.01} & \ontop{54.00}{49.19 - 67.75} & \ontop{53.52}{48.22 - 66.75} & \ontop{55.48}{50.22 - 68.60} & \ontop{54.95}{49.36 - 68.88} & \ontop{11.56}{10.62 - 12.71} & \ontop{54.63}{47.82 - 68.05} & \ontop{18.86}{17.64 - 20.13} & \ontop{15.78}{14.52 - 16.87} & \ontop{17.28}{16.10 - 18.34} & \ontop{2.65}{2.28 - 3.06} & \ontop{14.20}{13.26 - 15.13}\tabularnewline
+\hline
+\lozenge\blacklozenge\lozenge\blacklozenge & \ontop{59.92}{54.07 - 66.45} & \ontop{121.74}{99.96 - 144.25} & \ontop{109.32}{93.37 - 126.86} & \ontop{135.65}{106.34 - 165.54} & \ontop{137.53}{109.60 - 168.17} & \ontop{18.10}{16.51 - 19.50} & \ontop{107.49}{92.75 - 124.62} & \ontop{24.72}{22.68 - 26.70} & \ontop{22.39}{20.85 - 24.02} & \ontop{23.04}{21.26 - 24.67} & \ontop{6.04}{5.09 - 7.44} & \ontop{17.75}{16.76 - 18.82}\tabularnewline
+\hline
+\lozenge\blacklozenge\blacklozenge\lozenge & \ontop{32.56}{27.19 - 38.34} & \ontop{66.16}{52.73 - 79.77} & \ontop{63.87}{51.62 - 78.27} & \ontop{67.60}{54.17 - 81.65} & \ontop{67.44}{52.79 - 83.10} & \ontop{10.31}{9.14 - 11.51} & \ontop{63.08}{50.58 - 76.63} & \ontop{16.27}{15.29 - 17.78} & \ontop{13.12}{11.99 - 14.57} & \ontop{15.72}{14.41 - 17.07} & \ontop{2.73}{2.20 - 3.50} & \ontop{11.78}{10.94 - 12.86}\tabularnewline
+\hline
+\lozenge\blacklozenge\blacklozenge\blacklozenge & \ontop{49.05}{46.26 - 54.24} & \ontop{100.35}{79.78 - 124.45} & \ontop{91.61}{79.22 - 105.58} & \ontop{112.83}{85.26 - 150.83} & \ontop{114.60}{90.93 - 151.10} & \ontop{15.90}{14.63 - 16.94} & \ontop{90.57}{75.75 - 106.52} & \ontop{21.89}{20.34 - 23.58} & \ontop{20.52}{19.28 - 22.14} & \ontop{20.48}{19.49 - 21.45} & \ontop{5.06}{4.32 - 6.19} & \ontop{16.83}{15.85 - 18.18}\tabularnewline
+\hline
+\blacklozenge\lozenge\lozenge\lozenge & \ontop{105.06}{97.34 - 115.15} & \ontop{179.95}{150.03 - 214.83} & \ontop{172.42}{151.16 - 196.51} & \ontop{203.17}{165.26 - 246.52} & \ontop{207.79}{166.86 - 256.37} & \ontop{23.50}{18.95 - 28.27} & \ontop{176.84}{154.62 - 203.53} & \ontop{44.94}{41.37 - 48.77} & \ontop{30.32}{27.66 - 33.77} & \ontop{148.76}{131.95 - 169.80} & \ontop{10.18}{8.97 - 11.78} & \ontop{29.16}{27.48 - 31.63}\tabularnewline
+\hline
+\blacklozenge\lozenge\lozenge\blacklozenge & \ontop{128.14}{119.55 - 137.30} & \ontop{264.81}{234.58 - 294.45} & \ontop{217.48}{206.22 - 227.23} & \ontop{437.72}{364.18 - 524.05} & \ontop{473.23}{395.11 - 574.22} & \ontop{33.40}{30.42 - 36.71} & \ontop{223.37}{208.29 - 242.50} & \ontop{68.99}{62.98 - 75.23} & \ontop{48.07}{44.09 - 52.47} & \ontop{200.95}{186.61 - 216.83} & \ontop{25.86}{20.07 - 32.75} & \ontop{38.90}{35.28 - 42.40}\tabularnewline
+\hline
+\blacklozenge\lozenge\blacklozenge\lozenge & \ontop{79.89}{71.26 - 88.70} & \ontop{140.45}{114.42 - 168.94} & \ontop{138.36}{116.38 - 157.75} & \ontop{167.47}{125.98 - 212.55} & \ontop{167.52}{121.74 - 222.07} & \ontop{18.95}{16.00 - 23.01} & \ontop{136.58}{114.54 - 159.51} & \ontop{35.79}{32.23 - 40.39} & \ontop{24.31}{21.41 - 26.91} & \ontop{117.73}{98.10 - 139.36} & \ontop{7.50}{5.96 - 9.68} & \ontop{21.56}{19.11 - 23.84}\tabularnewline
+\hline
+\blacklozenge\lozenge\blacklozenge\blacklozenge & \ontop{106.27}{100.15 - 112.27} & \ontop{226.17}{208.22 - 240.78} & \ontop{188.59}{177.86 - 198.21} & \ontop{396.26}{335.14 - 423.12} & \ontop{433.79}{371.98 - 462.97} & \ontop{30.35}{27.09 - 34.52} & \ontop{196.85}{187.70 - 207.01} & \ontop{63.46}{55.38 - 70.58} & \ontop{42.76}{38.34 - 47.49} & \ontop{174.14}{162.62 - 187.45} & \ontop{22.76}{18.91 - 26.59} & \ontop{35.72}{32.48 - 38.94}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\lozenge\lozenge & \ontop{34.03}{27.36 - 42.44} & \ontop{56.77}{47.74 - 77.19} & \ontop{55.81}{48.08 - 72.20} & \ontop{56.21}{47.25 - 73.84} & \ontop{57.42}{47.80 - 77.58} & \ontop{13.95}{12.14 - 15.87} & \ontop{55.62}{47.55 - 70.22} & \ontop{29.61}{26.73 - 33.23} & \ontop{22.53}{20.26 - 25.33} & \ontop{48.02}{41.44 - 62.87} & \ontop{2.62}{2.20 - 3.44} & \ontop{20.68}{18.68 - 22.51}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\lozenge\blacklozenge & \ontop{69.96}{63.68 - 76.47} & \ontop{132.89}{110.44 - 159.87} & \ontop{119.14}{99.81 - 135.28} & \ontop{153.68}{124.68 - 205.19} & \ontop{155.31}{125.62 - 210.20} & \ontop{20.72}{18.96 - 23.09} & \ontop{118.61}{102.46 - 133.98} & \ontop{46.33}{43.48 - 49.96} & \ontop{36.03}{33.88 - 38.59} & \ontop{113.99}{96.89 - 134.90} & \ontop{6.14}{5.37 - 7.62} & \ontop{30.75}{29.14 - 32.43}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\blacklozenge\lozenge & \ontop{30.43}{25.44 - 37.93} & \ontop{56.19}{44.34 - 78.43} & \ontop{54.35}{43.22 - 73.28} & \ontop{56.69}{43.29 - 81.79} & \ontop{58.86}{44.03 - 86.11} & \ontop{12.94}{11.75 - 14.10} & \ontop{55.01}{42.47 - 75.09} & \ontop{26.35}{23.85 - 29.97} & \ontop{18.98}{17.03 - 21.40} & \ontop{47.03}{39.35 - 61.27} & \ontop{2.46}{1.97 - 3.38} & \ontop{16.87}{15.36 - 19.05}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\blacklozenge\blacklozenge & \ontop{60.49}{54.41 - 66.13} & \ontop{110.21}{90.91 - 129.13} & \ontop{101.06}{88.23 - 115.16} & \ontop{124.00}{99.77 - 147.73} & \ontop{126.94}{101.34 - 153.67} & \ontop{18.89}{17.68 - 20.38} & \ontop{97.93}{85.12 - 111.34} & \ontop{41.45}{38.85 - 43.95} & \ontop{32.08}{30.04 - 34.22} & \ontop{94.88}{80.40 - 111.86} & \ontop{5.24}{4.55 - 6.15} & \ontop{26.99}{25.26 - 28.79}\tabularnewline
+\hline
+\end{array}$
+\end{adjustbox}
+\begin{tablenotes}
+\scriptsize
+\item Top numbers show trimmed means (25\% trim was applied to reduce the influence of outliers)
+\item Bottom numbers show 95\% confidence intervals for the trimmed mean calculated by bootstrapping
+\item Filled diamonds indicate which new features are enabled. From left-to-right; analytical integration of population sizes, species tree relaxed clocks, coordinated topology operators, and coordinated height operators.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[htb!]
+\centering
+\caption{Average ESS per million states convergence for \textit{Pseudacris} data.}
+\label{tab:pseudacrisPerMstates}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\renewcommand{\arraystretch}{2.0}
+\tiny
+$\begin{array}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{\ontop{\text{Birth-death}}{\text{probability}}} & \multicolumn{1}{c}{\ontop{\text{Clock rate}}{\text{stdev}}} & \multicolumn{1}{c}{\ontop{\text{Extinction}}{\text{fraction}}} & \multicolumn{1}{c}{\ontop{\text{Among-site}}{\text{rate variation}}} & \multicolumn{1}{c}{\ontop{\text{Transition/}}{\text{Transversion} \kappa}} & \multicolumn{1}{c}{\ontop{\text{Phylogenetic}}{\text{likelihood}}} & \multicolumn{1}{c}{\ontop{\text{Diversification}}{\text{rate}}} & \multicolumn{1}{c}{\ontop{\text{Population}}{\text{Mean}}} & \multicolumn{1}{c}{\text{Log-posterior}} & \multicolumn{1}{c}{\text{Log-prior}} & \multicolumn{1}{c}{\ontop{\text{Species}}{\text{tree height}}} & \multicolumn{1}{c}{\ontop{\text{Coalescent}}{\text{probability}}}\tabularnewline
+\hline
+\lozenge\lozenge\lozenge\lozenge & \ontop{7.29}{6.53 - 8.16} & \ontop{17.20}{13.99 - 20.54} & \ontop{15.75}{13.56 - 17.92} & \ontop{19.04}{14.77 - 23.57} & \ontop{20.83}{15.60 - 26.06} & \ontop{1.72}{1.54 - 1.98} & \ontop{16.21}{13.74 - 18.85} & \ontop{2.36}{2.17 - 2.56} & \ontop{1.94}{1.74 - 2.13} & \ontop{2.61}{2.42 - 2.81} & \ontop{0.81}{0.66 - 0.96} & \ontop{1.68}{1.53 - 1.84}\tabularnewline
+\hline
+\lozenge\lozenge\lozenge\blacklozenge & \ontop{12.41}{11.33 - 13.46} & \ontop{25.19}{22.43 - 28.12} & \ontop{21.38}{20.11 - 22.76} & \ontop{37.90}{30.87 - 45.61} & \ontop{39.27}{32.02 - 46.43} & \ontop{2.79}{2.43 - 3.26} & \ontop{22.38}{21.11 - 23.79} & \ontop{3.66}{3.36 - 4.00} & \ontop{3.08}{2.85 - 3.36} & \ontop{3.35}{3.04 - 3.67} & \ontop{2.07}{1.80 - 2.36} & \ontop{2.52}{2.32 - 2.74}\tabularnewline
+\hline
+\lozenge\lozenge\blacklozenge\lozenge & \ontop{7.43}{6.82 - 8.11} & \ontop{14.59}{12.72 - 17.12} & \ontop{15.00}{12.96 - 17.27} & \ontop{17.43}{14.37 - 21.74} & \ontop{17.62}{13.97 - 22.51} & \ontop{1.96}{1.74 - 2.15} & \ontop{14.72}{12.65 - 17.20} & \ontop{2.25}{2.08 - 2.49} & \ontop{1.86}{1.64 - 2.10} & \ontop{2.71}{2.51 - 2.95} & \ontop{0.79}{0.64 - 0.97} & \ontop{1.63}{1.47 - 1.79}\tabularnewline
+\hline
+\lozenge\lozenge\blacklozenge\blacklozenge & \ontop{10.88}{10.04 - 11.61} & \ontop{23.12}{21.47 - 25.44} & \ontop{21.06}{20.56 - 21.76} & \ontop{31.02}{27.45 - 38.53} & \ontop{32.84}{28.79 - 40.87} & \ontop{2.83}{2.61 - 3.27} & \ontop{21.29}{20.72 - 22.47} & \ontop{3.38}{3.11 - 3.73} & \ontop{2.80}{2.55 - 3.07} & \ontop{3.50}{3.19 - 3.81} & \ontop{1.71}{1.50 - 1.97} & \ontop{2.33}{2.11 - 2.52}\tabularnewline
+\hline
+\lozenge\blacklozenge\lozenge\lozenge & \ontop{4.58}{3.92 - 5.36} & \ontop{8.02}{7.31 - 9.79} & \ontop{7.94}{7.13 - 9.98} & \ontop{8.23}{7.45 - 10.20} & \ontop{8.17}{7.34 - 10.35} & \ontop{1.72}{1.60 - 1.88} & \ontop{8.08}{7.15 - 10.23} & \ontop{2.80}{2.62 - 2.97} & \ontop{2.34}{2.16 - 2.52} & \ontop{2.56}{2.41 - 2.72} & \ontop{0.39}{0.33 - 0.46} & \ontop{2.11}{1.97 - 2.25}\tabularnewline
+\hline
+\lozenge\blacklozenge\lozenge\blacklozenge & \ontop{9.72}{8.85 - 10.60} & \ontop{19.72}{16.49 - 23.69} & \ontop{17.74}{15.31 - 20.33} & \ontop{22.02}{17.78 - 26.79} & \ontop{22.32}{17.70 - 27.70} & \ontop{2.94}{2.69 - 3.20} & \ontop{17.51}{15.06 - 20.24} & \ontop{4.01}{3.68 - 4.35} & \ontop{3.65}{3.41 - 3.91} & \ontop{3.74}{3.43 - 4.00} & \ontop{0.98}{0.80 - 1.21} & \ontop{2.89}{2.73 - 3.08}\tabularnewline
+\hline
+\lozenge\blacklozenge\blacklozenge\lozenge & \ontop{5.80}{4.76 - 6.90} & \ontop{11.74}{9.26 - 14.25} & \ontop{11.36}{9.04 - 13.91} & \ontop{12.02}{9.62 - 14.70} & \ontop{12.00}{9.49 - 14.47} & \ontop{1.84}{1.61 - 2.07} & \ontop{11.21}{8.85 - 13.50} & \ontop{2.89}{2.71 - 3.16} & \ontop{2.33}{2.13 - 2.58} & \ontop{2.80}{2.57 - 3.05} & \ontop{0.49}{0.40 - 0.60} & \ontop{2.10}{1.94 - 2.28}\tabularnewline
+\hline
+\lozenge\blacklozenge\blacklozenge\blacklozenge & \ontop{9.17}{8.64 - 10.00} & \ontop{18.70}{15.19 - 23.33} & \ontop{17.02}{14.58 - 19.66} & \ontop{20.96}{15.74 - 27.31} & \ontop{21.33}{16.88 - 28.85} & \ontop{2.96}{2.71 - 3.16} & \ontop{16.90}{14.21 - 20.03} & \ontop{4.07}{3.75 - 4.44} & \ontop{3.82}{3.58 - 4.12} & \ontop{3.80}{3.59 - 3.97} & \ontop{0.94}{0.81 - 1.17} & \ontop{3.15}{2.95 - 3.37}\tabularnewline
+\hline
+\blacklozenge\lozenge\lozenge\lozenge & \ontop{9.68}{8.97 - 10.51} & \ontop{16.72}{14.12 - 19.89} & \ontop{15.99}{14.04 - 18.22} & \ontop{18.78}{15.15 - 23.02} & \ontop{19.20}{15.41 - 24.09} & \ontop{2.17}{1.73 - 2.61} & \ontop{16.43}{14.39 - 18.78} & \ontop{4.14}{3.82 - 4.53} & \ontop{2.80}{2.57 - 3.13} & \ontop{13.76}{12.25 - 15.67} & \ontop{0.94}{0.82 - 1.09} & \ontop{2.69}{2.54 - 2.91}\tabularnewline
+\hline
+\blacklozenge\lozenge\lozenge\blacklozenge & \ontop{13.56}{12.64 - 14.40} & \ontop{27.89}{24.59 - 31.06} & \ontop{22.93}{21.67 - 24.03} & \ontop{46.06}{38.11 - 54.77} & \ontop{49.79}{41.93 - 59.84} & \ontop{3.53}{3.16 - 3.84} & \ontop{23.58}{22.08 - 25.56} & \ontop{7.26}{6.64 - 7.89} & \ontop{5.06}{4.63 - 5.52} & \ontop{21.23}{19.77 - 22.92} & \ontop{2.72}{2.12 - 3.44} & \ontop{4.08}{3.73 - 4.48}\tabularnewline
+\hline
+\blacklozenge\lozenge\blacklozenge\lozenge & \ontop{9.28}{8.19 - 10.23} & \ontop{16.30}{13.16 - 19.22} & \ontop{16.08}{13.67 - 18.38} & \ontop{19.41}{14.49 - 24.52} & \ontop{19.39}{14.06 - 25.64} & \ontop{2.20}{1.87 - 2.65} & \ontop{15.89}{13.19 - 18.65} & \ontop{4.19}{3.75 - 4.67} & \ontop{2.82}{2.47 - 3.13} & \ontop{13.65}{11.28 - 16.15} & \ontop{0.87}{0.68 - 1.14} & \ontop{2.51}{2.22 - 2.78}\tabularnewline
+\hline
+\blacklozenge\lozenge\blacklozenge\blacklozenge & \ontop{13.12}{12.24 - 14.01} & \ontop{27.94}{25.70 - 29.69} & \ontop{23.19}{21.94 - 24.43} & \ontop{48.66}{41.48 - 52.10} & \ontop{53.59}{45.66 - 56.35} & \ontop{3.73}{3.37 - 4.19} & \ontop{24.28}{22.97 - 25.62} & \ontop{7.76}{6.85 - 8.61} & \ontop{5.24}{4.73 - 5.82} & \ontop{21.44}{20.05 - 23.05} & \ontop{2.80}{2.29 - 3.25} & \ontop{4.39}{4.00 - 4.79}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\lozenge\lozenge & \ontop{5.16}{4.20 - 6.41} & \ontop{8.61}{7.30 - 11.51} & \ontop{8.47}{7.33 - 10.93} & \ontop{8.56}{7.19 - 11.20} & \ontop{8.75}{7.31 - 11.86} & \ontop{2.12}{1.82 - 2.39} & \ontop{8.46}{7.31 - 10.76} & \ontop{4.51}{4.04 - 5.00} & \ontop{3.43}{3.11 - 3.85} & \ontop{7.29}{6.33 - 9.77} & \ontop{0.40}{0.33 - 0.52} & \ontop{3.15}{2.87 - 3.42}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\lozenge\blacklozenge & \ontop{11.65}{10.60 - 12.74} & \ontop{22.04}{18.29 - 26.69} & \ontop{19.77}{17.18 - 22.39} & \ontop{25.52}{20.80 - 33.99} & \ontop{25.76}{20.92 - 34.51} & \ontop{3.44}{3.15 - 3.85} & \ontop{19.69}{17.17 - 22.13} & \ontop{7.69}{7.17 - 8.31} & \ontop{5.97}{5.64 - 6.39} & \ontop{18.90}{15.90 - 22.59} & \ontop{1.02}{0.89 - 1.23} & \ontop{5.11}{4.85 - 5.38}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\blacklozenge\lozenge & \ontop{5.54}{4.64 - 6.82} & \ontop{10.19}{8.13 - 14.65} & \ontop{9.88}{7.91 - 13.12} & \ontop{10.30}{7.96 - 14.39} & \ontop{10.69}{8.38 - 15.26} & \ontop{2.36}{2.16 - 2.56} & \ontop{9.99}{7.59 - 13.58} & \ontop{4.79}{4.34 - 5.40} & \ontop{3.46}{3.09 - 3.89} & \ontop{8.57}{7.19 - 11.07} & \ontop{0.45}{0.37 - 0.62} & \ontop{3.07}{2.80 - 3.43}\tabularnewline
+\hline
+\blacklozenge\blacklozenge\blacklozenge\blacklozenge & \ontop{11.44}{10.30 - 12.54} & \ontop{20.88}{17.40 - 24.52} & \ontop{19.17}{16.45 - 22.02} & \ontop{23.53}{19.05 - 28.15} & \ontop{24.06}{19.35 - 28.92} & \ontop{3.59}{3.36 - 3.89} & \ontop{18.55}{15.92 - 21.06} & \ontop{7.89}{7.40 - 8.38} & \ontop{6.09}{5.69 - 6.56} & \ontop{17.95}{15.22 - 21.11} & \ontop{0.99}{0.87 - 1.16} & \ontop{5.12}{4.78 - 5.50}\tabularnewline
+\hline
+\end{array}$
+\end{adjustbox}
+\begin{tablenotes}
+\scriptsize
+\item Top numbers show trimmed means (25\% trim was applied to reduce the influence of outliers)
+\item Bottom numbers show 95\% confidence intervals for the trimmed mean calculated by bootstrapping
+\item Filled diamonds indicate which new features are enabled. From left-to-right; analytical integration of population sizes, species tree relaxed clocks, coordinated topology operators, and coordinated height operators.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\clearpage
+
+\begin{table}[htb!]
+\centering
+\caption{Average ESS per hour convergence for simulated data.}
+\label{tab:simulatedPerHour}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\renewcommand{\arraystretch}{1.2}
+\scriptsize
+\begin{tabular}{|l|r|r|r|r|r|}
+\multicolumn{1}{c}{Statistic} & \multicolumn{1}{c}{Concatenation} & \multicolumn{1}{c}{Concatenation 10X} & \multicolumn{1}{c}{*BEAST} & \multicolumn{1}{c}{StarBEAST2 GT-UCLN} & \multicolumn{1}{c}{StarBEAST2 ST-UCLN}\tabularnewline
+\hline
+Net diversification rate & 1094.16 (1040.68--1151.99) & 94.68 (90.82--98.24) & 137.22 (120.54--155.10) & 219.46 (200.84--232.51) & 139.83 (119.58--158.86)\tabularnewline
+\hline
+Species tree height & 1217.81 (1085.54--1365.04) & 16.37 (13.74--19.15) & 6.72 (5.79--7.85) & 19.28 (16.07--23.40) & 9.77 (7.49--12.36)\tabularnewline
+\hline
+Log-posterior & 747.02 (715.84--782.22) & 7.65 (7.24--8.11) & 18.16 (16.18--20.28) & 45.58 (40.36--50.94) & 35.02 (31.70--39.09)\tabularnewline
+\hline
+Clock rates $\sigma$ & 1490.15 (1386.61--1585.20) & 45.65 (43.78--47.73) & 139.58 (122.94--160.29) & 235.90 (214.83--257.39) & 163.52 (138.89--191.78)\tabularnewline
+\hline
+Coalescent probability & NA & NA & 16.30 (14.44--18.35) & 41.73 (37.08--46.49) & 31.47 (28.22--35.03)\tabularnewline
+\hline
+Phylogenetic likelihood & 739.39 (707.38--768.55) & 7.52 (7.13--7.93) & 45.61 (41.80--50.21) & 86.22 (80.43--93.29) & 54.45 (48.42--60.37)\tabularnewline
+\hline
+Birth-death probability & 1259.28 (1139.97--1385.56) & 32.70 (29.78--36.03) & 76.66 (70.11--84.47) & 136.60 (124.52--148.54) & 92.99 (79.35--105.65)\tabularnewline
+\hline
+Substitution model $\kappa$ & 5019.08 (4771.54--5241.62) & 150.66 (145.19--156.68) & 154.45 (133.23--181.26) & 448.47 (369.20--536.10) & 241.69 (184.95--305.02)\tabularnewline
+\hline
+Substitution model $\alpha$ & 2329.41 (2169.04--2544.35) & 139.52 (133.67--147.32) & 150.20 (131.60--175.26) & 405.45 (343.30--473.03) & 224.42 (176.69--277.86)\tabularnewline
+\hline
+Extinction fraction & 936.24 (882.08--997.05) & 94.33 (90.91--97.86) & 137.11 (119.90--155.44) & 214.50 (196.60--227.75) & 135.34 (117.27--155.23)\tabularnewline
+\hline
+Log-prior & 1535.13 (1395.10--1646.65) & 26.99 (25.73--28.16) & 29.66 (27.62--31.85) & 196.12 (176.71--214.91) & 136.12 (114.69--161.55)\tabularnewline
+\hline
+Population mean & NA & NA & 25.09 (22.82--28.07) & 66.07 (58.37--75.49) & 50.11 (45.17--55.72)\tabularnewline
+\hline
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}
+\scriptsize
+\item 25\% trim was applied to reduce the influence of outliers
+\item Numbers in parentheses show 95\% confidence intervals calculated by bootstrapping
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[htb!]
+\centering
+\caption{Average ESS per million states convergence for simulated data.}
+\label{tab:simulatedPerMstates}
+\begin{threeparttable}
+\begin{adjustbox}{center}
+\renewcommand{\arraystretch}{1.2}
+\scriptsize
+\begin{tabular}{|l|r|r|r|r|r|}
+\multicolumn{1}{c}{Statistic} & \multicolumn{1}{c}{Concatenation} & \multicolumn{1}{c}{Concatenation 10X} & \multicolumn{1}{c}{*BEAST} & \multicolumn{1}{c}{StarBEAST2 GT-UCLN} & \multicolumn{1}{c}{StarBEAST2 ST-UCLN}\tabularnewline
+\hline
+Net diversification rate & 223.23 (210.64--234.98) & 150.74 (145.28--156.62) & 11.58 (10.23--13.07) & 21.88 (20.03--23.24) & 20.39 (17.23--23.54)\tabularnewline
+\hline
+Species tree height & 246.58 (222.15--276.06) & 26.10 (22.65--30.19) & 0.57 (0.48--0.67) & 1.92 (1.59--2.34) & 1.43 (1.11--1.79)\tabularnewline
+\hline
+Log-posterior & 151.68 (145.38--157.75) & 12.30 (11.72--12.91) & 1.54 (1.38--1.74) & 4.54 (4.01--5.07) & 5.13 (4.63--5.74)\tabularnewline
+\hline
+Clock rates $\sigma$ & 298.94 (272.73--320.24) & 74.34 (70.81--77.57) & 11.82 (10.35--13.47) & 23.47 (21.28--25.39) & 24.05 (20.41--28.17)\tabularnewline
+\hline
+Coalescent probability & NA & NA & 1.38 (1.22--1.56) & 4.16 (3.63--4.66) & 4.60 (4.13--5.17)\tabularnewline
+\hline
+Phylogenetic likelihood & 149.16 (143.48--154.57) & 12.06 (11.45--12.68) & 3.86 (3.55--4.32) & 8.61 (7.95--9.35) & 7.98 (7.16--8.77)\tabularnewline
+\hline
+Birth-death probability & 259.16 (235.06--280.29) & 52.26 (48.03--56.60) & 6.48 (5.91--7.17) & 13.63 (12.54--14.84) & 13.59 (11.63--15.48)\tabularnewline
+\hline
+Substitution model $\kappa$ & 1014.25 (978.66--1049.24) & 241.48 (236.41--244.07) & 13.07 (11.33--15.84) & 44.62 (36.83--52.56) & 35.59 (26.69--45.34)\tabularnewline
+\hline
+Substitution model $\alpha$ & 469.22 (434.27--517.28) & 224.25 (217.62--230.63) & 12.71 (11.05--15.12) & 40.36 (34.20--47.00) & 32.91 (25.03--40.75)\tabularnewline
+\hline
+Extinction fraction & 190.12 (179.70--200.75) & 150.98 (147.15--155.02) & 11.59 (10.14--13.12) & 21.42 (19.74--22.70) & 19.83 (17.28--22.59)\tabularnewline
+\hline
+Log-prior & 313.40 (282.00--339.19) & 43.80 (42.07--45.38) & 2.50 (2.34--2.69) & 19.55 (17.71--21.43) & 19.95 (16.70--23.50)\tabularnewline
+\hline
+Population mean & NA & NA & 2.12 (1.92--2.34) & 6.61 (5.85--7.49) & 7.33 (6.57--8.24)\tabularnewline
+\hline
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}
+\scriptsize
+\item 25\% trim was applied to reduce the influence of outliers
+\item Numbers in parentheses show 95\% confidence intervals calculated by bootstrapping
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{landscape}
 
 \end{document}
