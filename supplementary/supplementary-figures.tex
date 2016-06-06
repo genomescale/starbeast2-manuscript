@@ -41,27 +41,30 @@
 \usepackage[flushleft]{threeparttable}
 \usepackage{lineno}
 \usepackage{adjustbox}
+\usepackage{ragged2e}
+\usepackage{authblk}
+\usepackage{multirow}
 
-%Rename figure or table label number
-\renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\thetable}{S\arabic{table}}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{2.0}
+\renewcommand\Affilfont{\small}
 
 \begin{document}
 
-\begin{minipage}[h]{\textwidth}
-	\title{Supplementary information for StarBEAST2}
-	\author{Huw A. Ogilvie$^{\ast,1,2}$ and Alexei J. Drummond,$^{2,3}$}
-    \maketitle
-\end{minipage}
+\title{Supplementary figures for StarBEAST2}
+\author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
+\author[2,3]{Alexei J. Drummond}
+\affil[1]{Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia}
+\affil[2]{Centre for Computational Evolution, University of Auckland, Auckland, New Zealand}
+\affil[3]{Department of Computer Science, University of Auckland, Auckland, New Zealand}
 
-\raggedright
-$^{1}$Department of Evolution, Ecology and Genetics, Australian National University, Canberra, Australia\\
-$^{2}$Centre for Computational Evolution, University of Auckland, Auckland, New Zealand\\
-$^{3}$Department of Computer Science, University of Auckland, Auckland, New Zealand
+\maketitle
 
 \clearpage
 
-\section{Validation of correctness}
+\justifying
+
+\section*{Validation of correctness}
 
 \begin{figure}[htb!]
 \centering
@@ -84,13 +87,16 @@ e.g. (((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
 \centering
 \includegraphics[width=16cm]{gene_topology_frequencies.pdf}
 \caption
-{Frequency of five-taxon gene tree topologies sampled from a multispecies coalescent prior
-distribution. Topologies were sampled by simulating gene trees within species trees using biopy (red), or
-by using a StarBEAST2 MCMC chain (blue). Frequencies are identical apart from
-noise, indicating that StarBEAST2 is mathematically correct. Three levels of
-probability are evident from left to right --- high probability balanced
-topologies e.g. ((a,b),((c,d),e)), middle probability intermediate topologies
-e.g. (((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
+{Frequency of five-taxon gene tree topologies sampled from a multispecies
+coalescent prior distribution. Topologies were sampled by simulating gene trees
+within species trees using biopy (red), or by using a StarBEAST2 MCMC chain
+(blue). Gene trees were sampled with two clock rates, 0.5 (circles) and 2.0
+(triangles), although clock rate should not affect topology or node heights in
+units of time. Frequencies are identical apart from noise, indicating that
+StarBEAST2 is mathematically correct. Three levels of probability are evident
+from left to right --- high probability balanced topologies e.g.
+((a,b),((c,d),e)), middle probability intermediate topologies e.g.
+(((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
 ((((a,b),c),d),e).}
 \label{fig:geneTopologyFrequencies}
 \end{figure}
@@ -117,11 +123,14 @@ from noise, indicating that StarBEAST2 is mathematically correct.}
 \includegraphics[width=16cm]{gene_node_heights.pdf}
 \caption
 {Probability densities of five-taxon gene tree node heights sampled from a
-multispecies coalescent prior distribution. Node heights were sampled by simulating gene trees
-within species trees using biopy (red), or by using a StarBEAST2 MCMC chain (blue). Probability
-densities are plotted separately for each ranked node giving four peaks, one
-for each internal node. Node height probability densities are identical apart
-from noise, indicating that StarBEAST2 is mathematically correct.}
+multispecies coalescent prior distribution. Node heights were sampled by
+simulating gene trees within species trees using biopy (red), or by using a
+StarBEAST2 MCMC chain (blue). Gene trees were sampled with two clock rates, 0.5
+and 2.0, and node heights from both sets of gene trees were combined as clock
+rate should not affect topology or node heights in units of time. Probability
+densities are plotted separately for each ranked node giving four peaks, one for
+each internal node. Node height probability densities are identical apart from
+noise, indicating that StarBEAST2 is mathematically correct.}
 \label{fig:geneNodeHeights}
 \end{figure}
 
@@ -135,10 +144,9 @@ from noise, indicating that StarBEAST2 is mathematically correct.}
 species tree uncorrelated lognormal (UCLN) relaxed clock. Branch rates were
 sampled by simulating gene trees within species trees using biopy and simulating
 species tree branch rates using scipy (red), or by using a StarBEAST2 MCMC chain
-(blue). Two lognormal distributions were used, one with a mean of 0.5 and the
-other with a mean of 2.0, resulting in two peaks. Branch rate probability
-densities are identical apart from noise, indicating that StarBEAST2 is
-mathematically correct.}
+(blue). Gene trees were sampled with two clock rates, 0.5 and 2.0, resulting in
+two peaks. Branch rate probability densities are identical apart from noise,
+indicating that StarBEAST2 is mathematically correct.}
 \label{fig:geneBranchRates}
 \end{figure}
 
