@@ -499,23 +499,25 @@ applied to each gene tree. Performant settings included analytical integration o
 population sizes, coordinated height changing operators, and na\"ive NNI and SPR
 topology operators.
 
-Again the parameter with the slowest convergence given any StarBEAST2
-setting was the height of the species tree (Table~S3,S4). Based on that parameter, the
+Again the parameter with the slowest convergence given any StarBEAST2 setting
+was the height of the species tree (Table~S3,S4). Based on that parameter, the
 average performance increase using StarBEAST2 with performant settings over
 *BEAST settings was 3.1 times, with a 95\% confidence interval between 2.5 and
-3.7 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
-concatenated analyses was the phylogenetic likelihood, and when using the same number
-of loci as StarBEAST2, convergence of that statistic using concatenation was
-114 times faster than the convergence of species tree height
-using StarBEAST2 with *BEAST settings. When concatenation was used with ten
-times the number of loci as StarBEAST2, the performance difference was minimal --- 1.2 times,
-with a confidence interval between 1.0 and 1.5 (Figure~\ref{fig:simulatedEssPerHour}).
+3.6 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
+concatenated analyses was the phylogenetic likelihood, and when using the same
+number of loci as StarBEAST2, convergence of that statistic using concatenation
+was 114 times faster than the convergence of species tree height using
+StarBEAST2 with *BEAST settings. When concatenation was used with ten times the
+number of loci as StarBEAST2, the performance difference was minimal --- 1.2
+times, with a confidence interval between 1.0 and 1.5
+(Figure~\ref{fig:simulatedEssPerHour}).
 
-Unlike \textit{Pseudacris}, using a species tree relaxed clock with
-performant settings was faster than *BEAST settings. However, this was still
-significantly slower than using gene tree relaxed clocks, as the average
-performance increase over *BEAST settings was smaller at 1.5 times with a confidence interval between
-1.2 and 1.9 (Figure~\ref{fig:simulatedEssPerHour}).
+Consistent with analyses of \textit{Pseudacris} sequence data, using a species
+tree relaxed clock with performant settings was faster than a *BEAST settings.
+Also like \texit{Pseudacris}, use of species tree relaxed clocks was slower than
+gene tree relaxed clocks with performant settings; the average performance
+increase over *BEAST settings was only 1.5 times with a confidence interval
+between 1.2 and 1.9 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
