@@ -67,20 +67,20 @@
 
 \section*{Abstract}
 
-Concatenation is a popular estimator of species tree topology but is
-statistically inconsistent inside the anomaly zone of short branch lengths. The
-ages of extant species inferred using concatenation can also be severely
-overestimated. These known biases have motivated the development and use of
-multispecies coalescent (MSC) methods of species tree inference. Summary MSC
-methods like ASTRAL are becoming increasing popular as they are fast enough to
-use with large phylogenomic data sets, but cannot estimate divergence times and
-extract less information per gene compared to fully Bayesian methods like
-*BEAST. In response we have developed StarBEAST2, a fully Bayesian method with
-improved computational performance. StarBEAST2 will enable inference of more
-accurate and precise species trees and divergence times by increasing the
-maximum number of loci that is practical for a given analysis. StarBEAST2 also
-adds support for species tree relaxed clocks, and we show that unlike
-concatenation it can accurately estimate per-species substitution rates.
+Concatenation of multiple loci to infer a single tree is a popular estimator of
+species tree topology, but is statistically inconsistent inside the anomaly zone
+of short branch lengths. The ages of extant species inferred using concatenation
+can also be severely overestimated. These known biases have motivated the
+development and use of multispecies coalescent (MSC) methods of species tree
+inference. Summary MSC methods like ASTRAL are becoming increasing popular as
+they are fast enough to use with large phylogenomic data sets, but cannot
+estimate divergence times and extract less information per gene compared to
+fully Bayesian methods like *BEAST. We have developed StarBEAST2, a fully
+Bayesian method with improved computational performance. StarBEAST2 will enable
+inference of more accurate and precise species trees and divergence times by
+increasing the maximum number of loci that is practical for a given analysis.
+StarBEAST2 also adds support for species tree relaxed clocks, and we show that
+unlike concatenation it can accurately estimate per-species substitution rates.
 StarBEAST2 is available through the BEAUTi package manager in BEAST 2.4 and
 above.
 
@@ -97,25 +97,25 @@ with potentially millions of sites spread across a data set of multiple
 sequence alignments.
 
 While NGS offers hundreds or thousands of loci at relatively low cost, making
-inferences from the enormous amount of data produced is particularly
+accurate inferences from the enormous amount of data produced is particularly
 challenging. In the case of *BEAST, a fully Bayesian method of species tree
 inference which implements a realistic and robust evolutionary model in the
 multispecies coalescent \citep[MSC;][]{Degnan2009332}, it becomes exponentially
 slower as the number of loci in an analysis is increased. This scaling behaviour
 causes *BEAST to become intractably slow after a certain number of loci (the
 exact number will depend on the other parameters of the data set, see
-\cite{Ogilvie01052016}). Given the current impossibility of using large
+\cite{Ogilvie01052016}). Given the current challenges of using large
 phylogenomic data sets with *BEAST there have been three broad alternatives
-available to researchers; concatenate sequences from multiple loci, use MSC
-methods which use summary statistics instead of the full sequence data, or
-choose a tractable subset of loci to use with *BEAST.
+available to researchers; concatenate sequences from multiple loci, use
+alternative MSC methods which are based on summary statistics instead of the
+full sequence data, or choose a tractable subset of loci to use with *BEAST.
 
 Concatenating sequences from multiple loci will reconstruct the single tree that
 best fits the combined sequence alignment. Popular concatenation methods include
 the RAxML and ExaML maximum likelihood methods \citep{Stamatakis01052014,
 Kozlov01082015}, and the ExaBayes and BEAST Bayesian methods
 \citep{Aberer01102014, Drummond2007}. Recent results show that concatenation
-is counterproductive, producing statistically inconsistent results which assign
+can be counterproductive, producing statistically inconsistent results which assign
 high confidence to incorrect nodes due to model misspecification
 \citep{NYAS:NYAS12747}. In the so-called ``anomaly zone'' of short branch
 lengths, the most likely gene tree topology will be different from the species
@@ -135,7 +135,7 @@ topology. Per-species substitution rates inferred using a relaxed clock model
 with concatenation may also be substantially overestimated or underestimated
 depending on their relationship with the gene trees \citep{Mendes28022016}.
 
-As an alternative to concatenation methods which use summary statistics instead
+As an alternative to concatenation, MSC methods which use summary statistics instead
 of the full sequence data have been developed for use with phylogenomic data.
 Popular summary methods include MP-EST and ASTRAL \citep{Liu2010,
 Mirarab01092014}, but recent results show that MP-EST should be avoided as it is
@@ -163,17 +163,18 @@ clock model to enable accurate inference of per-species substitution rates.
 
 \subsection*{Analytical integration of population sizes}
 
-Markov Chain Monte Carlo (MCMC) methods like *BEAST numerically integrate over
-many parameters to produce explicit estimates of those parameter values. From a
+Markov Chain Monte Carlo (MCMC) methods like *BEAST simultaneously integrate
+over many parameters by proposing small changes at each step to eventually
+produce a probability distribution for all those parameter values. From a
 researcher's perspective, some may be ``nuisance'' parameters not of scientific
 interest. For example species tree topology and divergence times may be of
-interest, but not population sizes. For analytically tractable parameters, an
+interest, but not effective population sizes. For tractable parameters, an
 analytic solution will integrate over the entire range of values at each MCMC
-step, and may be more performant than numerical integration. However explicit
-estimates will not be produced so this integration is suitable only for nuisance
-parameters. Among-site rate variation is already analytically integrated; the
-likelihood of each site is calculated for all possible discrete gamma rates at
-each step, so the individual site rates are not estimated \citep{Yang1994}.
+step, and may be more performant than MCMC integration. However explicit
+estimates will not be produced so this approach is suitable only for nuisance
+parameters. Among-site rate variation is already integrated out at each step;
+the likelihood of each site is calculated for all possible discrete gamma rates
+at each step, so the individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
 implemented as part of BEST \citep{EVO:EVO414}. The analytic solution, which
@@ -257,7 +258,7 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 \subsection*{Species tree relaxed clocks}
 
 While *BEAST has been successfully used with relaxed clocks
-\citep{Berv2014120,Lambert2015146}, this involves estimating per-branch
+(see for example \cite{Berv2014120}, also \cite{Lambert2015146}), this involves estimating per-branch
 substitution rates (branch rates) separately for each branch of each gene tree.
 Gene tree relaxed clock models may accommodate variation in substitution rates
 between species, but do not produce estimates of species branch rates. To enable
@@ -329,17 +330,18 @@ models in the future.
 
 \subsection*{StarBEAST2 correctly implements the multispecies coalescent}
 
-New methods must be shown to be mathematically correct implementations of a
-given model. One way to accomplish this for MCMC methods is to estimate
+New methods must be shown to be mathematically correct implementations of the
+target model. One way to accomplish this for MCMC methods is to estimate
 parameters from a prior distribution using the MCMC kernel, and to also draw
-independent samples from an identical distribution by simulation. The
-resulting parameter distributions should also be identical if the implementation is
-correct. We used this method to test the correctness of the novel features in
-StarBEAST2; analytical population size integration, coordinated operators, and
-species tree relaxed clocks. Simulated and StarBEAST2 estimated distributions
-were identical for species and gene tree topologies (Figure~S1,S2), species and
-gene tree node heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5).
-This combination of results supports the mathematical correctness of StarBEAST2.
+independent samples from an identical distribution by simulation. The resulting
+parameter distributions should be identical if the implementation is correct. We
+used this method to test the correctness of the novel features in StarBEAST2;
+analytical population size integration, coordinated operators, and species tree
+relaxed clocks. Simulated and StarBEAST2 estimated distributions were identical
+for species and gene tree topologies (Figure~S1,S2), species and gene tree node
+heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5). This
+combination of results supports the correctness of the StarBEAST2
+implementation.
 
 \subsection*{\textit{Pseudacris} chorus frogs have intermediate coalescent branch lengths}
 
@@ -364,15 +366,15 @@ To determine which configuration of new features would achieve the fastest
 performance, we ran StarBEAST2 using different combinations of operators,
 methods of population size integration and different relaxed clocks. To measure
 convergence both effective sample size (ESS) per hour and ESS per million states
-were computed for each independent chain. ESS per hour can be used calculate the
-total time required for a converged chain (where ESS equals or exceeds 200), and
-reflects how effectively operators explore the space of trees and parameters,
-and the computational time required by each operator proposal and likelihood
-calculation. In contrast, ESS per million states reflects only the exploration
-of tree and parameter space independently of calculation times. A variety of
-statistics were logged for each analysis, but the height of the species tree had
-the slowest average convergence rates so we used that statistic to judge
-computational performance (Table~S1,S2).
+were computed for each independent chain. ESS per hour can be used to calculate
+the total time required for a converged chain (nominally where ESS equals or
+exceeds 200), and reflects how effectively operators explore the space of trees
+and parameters, and the computational time required by each operator proposal
+and likelihood calculation. In contrast, ESS per million states reflects only
+the exploration of tree and parameter space independently of calculation times.
+A variety of statistics were logged for each analysis, but the height of the
+species tree had the slowest average convergence rates so we used that statistic
+to judge computational performance (Table~S1,S2).
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of adding topology changing operators,
