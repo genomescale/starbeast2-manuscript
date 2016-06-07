@@ -320,11 +320,11 @@ event occurs at time t1.}
 \label{fig:branchRateModel}
 \end{figure}
 
-The new species tree relaxed clock model is available in StarBEAST2. At present
-only the well-established uncorrelated log-normal (UCLN) branch rate model
-\citep{10.1371/journal.pbio.0040088} is supported, but there is no theoretical
-or practical barrier to implementing support for other types of branch rate
-models in the future.
+The new species tree relaxed clock model is available in StarBEAST2. Branch rate
+models that can be used with a species tree relaxed clock currently include the
+well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
+(UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
+local clock (RLC) model \citep{Drummond2010}.
 
 \section*{Results}
 
@@ -339,7 +339,7 @@ used this method to test the correctness of the novel features in StarBEAST2;
 analytical population size integration, coordinated operators, and species tree
 relaxed clocks. Simulated and StarBEAST2 estimated distributions were identical
 for species and gene tree topologies (Figure~S1,S2), species and gene tree node
-heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5). This
+heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5,S6). This
 combination of results supports the correctness of the StarBEAST2
 implementation.
 
@@ -696,14 +696,15 @@ For all StarBEAST2 and concatenation analyses, the version of BEAST used was
 
 \subsection*{Mathematical correctness of StarBEAST2}
 
-Simulated trees were generated using biopy, and trees sampled from
-a prior distribution were generated using StarBEAST2 with all new features
-enabled. This included analytical integration of population sizes, coordinated
-tree topology and node height changing operators, and a species tree relaxed
-clock. 100,000 species trees were simulated, and 100,000 trees were sampled from
-the prior at a rate of one every 1000 after a 10\% burn-in period. Identical
-parameters were used for the simulation and for the StarBEAST2 run including the
-prior distributions (Table~\ref{tab:correctParameters}).
+Simulated trees were generated using biopy, and trees sampled from a prior
+distribution were generated using StarBEAST2 with all new features enabled. This
+included analytical integration of population sizes, coordinated tree topology
+and node height changing operators, and a species tree relaxed clock. 100,000
+species trees were simulated, and 100,000 trees were sampled from the prior at a
+rate of one every 1000 after a 10\% burn-in period. Identical parameters were
+used for the simulation and for the StarBEAST2 run including the prior
+distributions (Table~\ref{tab:correctParameters}). This entire procedure was
+repeated separately for UCLN and for UCED species branch rates.
 
 \begin{table}[htb!]
 \centering
@@ -719,7 +720,9 @@ Birth rate & Fixed at 200.0\tabularnewline
 \hline
 Death rate & Fixed at 100.0\tabularnewline
 \hline
-Species tree branch rates & Log-normal ($\mu^* = 1.0, \sigma = 0.16$)\tabularnewline
+UCLN branch rates & Log-normal ($\mu^* = 1.0, \sigma = 0.16$)\tabularnewline
+\hline
+UCED branch rates & Exponential ($\lambda = 1.0$)\tabularnewline
 \hline
 Haploid population sizes & Inverse gamma ($\alpha = 2.0, \beta = 0.002$)\tabularnewline
 \hline
@@ -802,7 +805,17 @@ remained constant.
 ESS per hour was calculated by dividing the final ESS value for a given
 statistic by 87.5\% of the total CPU time used by that chain to account for
 burn-in. Likewise ESS per million states was calculated by dividing the final ESS
-value by 87.5\% of the total number of the states in the chain.
+value by 87.5\% of the total number of the states in the chain. 
+
+Average branch length in coalescent units was calculated by concatenating the
+output of the two longest chains using the combination of numerical population
+size integration, na\"ive topology operators, coordinated node height operators
+and species tree branch rates. Both chains had been run for $2^{30}$ states for
+a total of $2^{31}$ states. For every sample in the combined posterior
+distribution, the coalescent length of each branch was calculated from the
+length in substitution units and effective population size recorded at that
+step. The mean coalescent length of all branches across all samples was taken as
+the average.
 
 \subsection*{Simulation of trees and sequence data}
 
