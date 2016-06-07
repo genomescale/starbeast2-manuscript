@@ -641,18 +641,21 @@ concatenation can be used with a much greater number of loci
 We have shown that concatenation can still be inferior to *BEAST and StarBEAST2
 given longer, intermediate branch lengths. For the same number of loci, a higher
 relative species tree error indicates that concatenation is less accurate at
-estimating branch lengths, and a large pendant edge bias indicates a positive bias when
-estimating the ages of extant species. Unlike for short branch lengths,
-concatenation with 10 times more loci can catch up to StarBEAST2 in terms of relative
-species tree error, but like for short branch lengths, cannot catch up to StarBEAST2
-in terms of pendant edge bias.
+estimating branch lengths, and a large pendant edge bias indicates a positive
+bias when estimating the ages of extant species. Unlike for short branch
+lengths, concatenation with 10 times more loci can catch up to StarBEAST2 in
+terms of relative species tree error, but is then slower than StarBEAST2 with
+performant settings. In other words, for intermediate branch lengths StarBEAST2
+can be just as accurate as concatenation but needs less investment in both
+sequencing and computational time.
 
+Concatenation cannot catch up to StarBEAST2 in terms of pendant edge bias.
 Pendant edge bias is important because many published phylogenies show evidence
 of a slowdown in diversification rate \citep{Moen2014190}. If the ages of extant
-species are overestimated, this will artificially reduce the number of recent speciation events,
-mimicking a slowdown. We suggest that accurate inference of changing
-diversification rates requires the use of fully Bayesian MSC methods like
-StarBEAST2.
+species are overestimated, this will artificially reduce the number of recent
+speciation events, mimicking a slowdown. We suggest that accurate inference of
+changing diversification rates requires the use of fully Bayesian MSC methods
+like StarBEAST2.
 
 \subsection*{A multispecies coalescent model is required when inferring species branch rates}
 
