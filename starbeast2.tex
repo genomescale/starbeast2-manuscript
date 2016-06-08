@@ -445,9 +445,9 @@ Gene trees & hour & -22\%{***} & 134\%{***} & 23\%{***}\tabularnewline
 \hline
 Gene trees & million states & -5\%\hphantom{***} & 158\%{***} & 26\%{***}\tabularnewline
 \hline
-Species tree & hour & -9\%\hphantom{***} & 111\%{***} & 7\%\hphantom{***}\tabularnewline
+Species tree & hour & -9\%\hphantom{***} & 114\%{***} & 7\%\hphantom{***}\tabularnewline
 \hline
-Species tree & million states & 6\%\hphantom{***} & 125\%{***} & 9\%\hphantom{***}\tabularnewline
+Species tree & million states & 6\%\hphantom{***} & 128\%{***} & 9\%\hphantom{***}\tabularnewline
 \hline
 \end{tabular}
 \end{adjustbox}
@@ -460,11 +460,11 @@ Species tree & million states & 6\%\hphantom{***} & 125\%{***} & 9\%\hphantom{**
 
 Coordinated height changing operators significantly improved convergence both in
 terms of ESS per hour and ESS per million states. Both species tree and gene
-tree relaxed clock analyses benefited from enabling those operators (Table~\ref{tab:convergenceLM}). Analytical
-integration of population sizes only improved the computational performance of
-gene tree relaxed clock analyses; unlike height changing operators it did not
-significantly change the performance of species tree relaxed clock analyses
-(Table~\ref{tab:convergenceLM}).
+tree relaxed clock analyses benefited from enabling those operators
+(Table~\ref{tab:convergenceLM}). Analytical integration of population sizes only
+improved the computational performance of gene tree relaxed clock analyses;
+unlike height changing operators it did not significantly change the performance
+of species tree relaxed clock analyses (Table~\ref{tab:convergenceLM}).
 
 Convergence of species tree relaxed clock analyses was slower than convergence
 of gene tree relaxed clock analyses (Figure~\ref{fig:realEssPerHour}). The
@@ -505,13 +505,13 @@ Again the parameter with the slowest convergence given any StarBEAST2 setting
 was the height of the species tree (Table~S3,S4). Based on that parameter, the
 average performance increase using StarBEAST2 with performant settings over
 *BEAST settings was 3.1 times, with a 95\% confidence interval between 2.5 and
-3.6 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
+3.7 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
 concatenated analyses was the phylogenetic likelihood, and when using the same
 number of loci as StarBEAST2, convergence of that statistic using concatenation
-was 114 times faster than the convergence of species tree height using
+was 112 times faster than the convergence of species tree height using
 StarBEAST2 with *BEAST settings. When concatenation was used with ten times the
-number of loci as StarBEAST2, the performance difference was minimal --- 1.2
-times, with a confidence interval between 1.0 and 1.5
+number of loci as StarBEAST2, the performance difference was minimal --- 1.1
+times, with a confidence interval between 1.0 and 1.4
 (Figure~\ref{fig:simulatedEssPerHour}).
 
 Consistent with analyses of \textit{Pseudacris} sequence data, using a species
@@ -567,7 +567,7 @@ mean of mean pendant edge bias, which measures biased estimates of the ages of
 extant species. (C) Trimmed mean of mean rooted Robinson-Foulds distances, a
 measure of topological error. 25\% trim was used to reduce the
 influence of outliers. All error bars are 95\% confidence intervals calculated
-by bootstrapping. N = 64.}
+by bootstrapping. N $\ge$ 56.}
 \label{fig:speciesTreeError}
 \end{figure}
 
@@ -594,17 +594,17 @@ StarBEAST2 with performant settings, 22 loci, and an uncorrelated log-normal
 relaxed clock applied to the species tree (ST-UCLN). Estimated rates are the
 posterior expectation of the branch rate. $R^2$ values and lines of best fit were calculating using a separate
 simple linear regression for each method. Root branch rates, which were fixed at
-1.0, were excluded. N = 64.}
+1.0, were excluded. N $\ge$ 56.}
 \label{fig:branchRatesLM}
 \end{figure}
 
 Using either 22 or 220 loci, concatenation was unable to correctly estimate
 branch lengths --- not only did $R^2 = 0.03$ and $0.04$ respectively, but the
-slope and intercept were $0.32x + 0.68$ and $0.79x + 0.21$ respectively. By
+slope and intercept were $0.32x + 0.68$ and $0.21x + 0.79$ respectively. By
 applying a UCLN relaxed clock to the species tree, StarBEAST2 can be used to
-infer many branch rates --- the $R^2$ correlation was much stronger at $0.15$,
-and the slope and intercept were $0.93$ and $0.07$ respectively, close to
-perfect values.
+infer many branch rates --- the $R^2$ correlation was much stronger at $0.16$,
+and the slope and intercept were close to perfect at $0.93$ and $0.07$
+respectively.
 
 \clearpage
 
@@ -622,11 +622,11 @@ more limited *BEAST analysis.
 
 Previous research on the scaling behaviour of *BEAST has shown that the
 relationship between the number of loci in a given analysis and the convergence
-in terms of ESS per hour follows a power law with the coefficient $-2.81$ for the
-log number of loci \citep{Ogilvie01052016}. If the number of loci for a given
-analysis is increased by 50\%, the decrease in performance is therefore expected
-to be $\exp(-2.81 \cdot \ln(1.5)) = 3.125$, roughly cancelling out the improved
-computational performance of StarBEAST2 compared to *BEAST.
+in terms of ESS per hour follows a power law with the coefficient $-2.81$ for
+the log number of loci \citep{Ogilvie01052016}. If the number of loci for a
+given analysis is increased by 50\%, the decrease in performance is therefore
+expected to be $\exp(-2.81 \cdot \ln(1.5)) = 3.125$, approximately cancelling
+out the improved computational performance of StarBEAST2 compared to *BEAST.
 
 \subsection*{Concatenation can still be inferior given intermediate branch lengths}
 
@@ -803,7 +803,7 @@ discarding 12.5\% of state samples. The length of the chain was continually
 doubled and ESS values re-evaluated until the ESS values of all logged
 statistics were above 200. The rate at which trees and statistics were sampled
 was halved with every chain doubling so that the total number of samples
-remained constant.
+remained constant. At the time of submission all chains had converged.
 
 ESS per hour was calculated by dividing the final ESS value for a given
 statistic by 87.5\% of the total CPU time used by that chain to account for
@@ -859,7 +859,7 @@ of among-site rate variation with a shape $\alpha$ value of 0.2
 The five methods of inference used for this section were concatenation with 22
 loci, concatenation with 220 loci, StarBEAST2 with *BEAST settings, StarBEAST2
 with performant settings and gene tree relaxed clocks, and StarBEAST2 with
-performance settings and species tree relaxed clocks. A single MCMC chain was
+performant settings and species tree relaxed clocks. A single MCMC chain was
 run for each method of inference for all 64 replicates, a total of 320 chains.
 
 The settings used for StarBEAST2 analyses of simulated sequence data were
@@ -868,12 +868,17 @@ rate categories were used for all UCLN relaxed clocks. Concatenation used the
 same settings as StarBEAST2, but instead of inferring each gene tree within a
 species tree, a single concatenated tree was inferred using the likelihoods of
 all loci. Heterozygous sites were ambiguity coded for concatenation analyses.
+
 The same strategy to ensure convergence was used as for \textit{Pseudacris}
-analyses, but slightly modified for concatenated analyses; mean population sizes and
-coalescent probabilities were not logged because they are not
-estimated, and the initial chain length was only $2^{20}$ states, sampling every
-$2^{7}$ states. ESS rates were calculated the same way as for
-\textit{Pseudacris} analyses.
+analyses, but slightly modified for concatenated analyses; mean population sizes
+and coalescent probabilities were not logged because they are not estimated, and
+the initial chain length was only $2^{20}$ states, sampling every $2^{7}$
+states. By the time of submission all chains had been run for a maximum of
+$2^{30}$ states and all had converged except for 8 *BEAST chains and one species
+tree relaxed clock chain. ESS per hour and ESS per million states were
+calculated using all chains regardless of convergence in the same way as for
+\textit{Pseudacris} analyses. Measures of accuracy were calculated using only
+converged chains.
 
 Relative species tree error is based on ``rooted branch score''
 \citep[RBS;][]{Heled2013}. Given two trees $T_1$ and $T_2$, the sets of
