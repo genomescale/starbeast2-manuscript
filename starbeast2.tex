@@ -86,6 +86,8 @@ above.
 
 Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation.
 
+\clearpage
+
 \section*{Introduction}
 
 The throughput of sequencing technologies has improved many-fold over the past
@@ -158,6 +160,8 @@ StarBEAST2 should enable the use of more loci, thereby improving the precision
 of estimated parameters and providing an alternative to concatenation. We have
 also developed and include in StarBEAST2 a new MSC relaxed
 clock model to enable accurate inference of per-species substitution rates.
+
+\clearpage
 
 \section*{New Approaches}
 
@@ -342,6 +346,8 @@ well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
 (UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
 local clock (RLC) model \citep{Drummond2010}.
 
+\clearpage
+
 \section*{Results}
 
 \subsection*{StarBEAST2 correctly implements the multispecies coalescent}
@@ -412,7 +418,7 @@ proposing new states.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[height=14cm]{speciesTreeHeight_ess_per_hour.pdf}
+\includegraphics[width=10cm]{speciesTreeHeight_ess_per_hour.pdf}
 \caption
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
@@ -430,7 +436,7 @@ are 95\% confidence intervals calculated by bootstrapping.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[height=14cm]{speciesTreeHeight_ess_per_mstates.pdf}
+\includegraphics[width=10cm]{speciesTreeHeight_ess_per_mstates.pdf}
 \caption
 {Effect of operators, population size integration and clock models on effective
 sample size (ESS) per million states. The performance of every combination of
@@ -539,7 +545,7 @@ between 1.2 and 1.9 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=9cm]{multiple_ess_per_hour.pdf}
+\includegraphics[width=10cm]{multiple_ess_per_hour.pdf}
 \caption
 {Convergence of different methods applied to simulated data. Methods are
 concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
@@ -693,6 +699,8 @@ substitution rates seen in our 220-locus concatenation analyses
 (Figure~\ref{fig:branchRatesLM}), where many branches have very low or very high
 estimated rates regardless of their true rates.
 
+\clearpage
+
 \section*{Conclusions}
 
 When estimating dates and rates, the choice is often between using a subset of
@@ -706,6 +714,8 @@ tree relaxed clock will enable accurate inference of species branch rates despit
 ILS. StarBEAST2 is free and open source software, and its source code and
 development history is available through GitHub
 (\url{https://github.com/genomescale/starbeast2}).
+
+\clearpage
 
 \section*{Materials and Methods}
 
@@ -922,6 +932,8 @@ Rooted Robinson-Foulds distances \citep{ROBINSON1981131} are defined as the
 count of clades present only one of $T_1$ and $T_2$. In this study, the mean
 rooted Robinson-Foulds distance is the average of all distances between each
 estimated tree and the true tree for all posterior samples.
+
+\clearpage
 
 \section*{Supplementary Material}
 
