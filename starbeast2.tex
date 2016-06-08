@@ -762,7 +762,7 @@ in \cite{Barrow201478}.
 For inference of \textit{Pseudacris} trees, we ran 32 independent StarBEAST2
 chains for all 16 conditions for a total of 512 chains. The conditions were each
 possible combination of species or gene tree relaxed clocks, analytical or
-numerical population size integration, coordinated or na\"ive topology changing
+MCMC population size integration, coordinated or na\"ive topology changing
 operators, and the inclusion or exclusion of coordinated height changing
 operators. Each chain used the same sequence data, but was an independent
 estimate of convergence because different random seeds were used to initialize
@@ -811,7 +811,7 @@ burn-in. Likewise ESS per million states was calculated by dividing the final ES
 value by 87.5\% of the total number of the states in the chain. 
 
 Average branch length in coalescent units was calculated by concatenating the
-output of the two longest chains using the combination of numerical population
+output of the two longest chains using the combination of MCMC population
 size integration, na\"ive topology operators, coordinated node height operators
 and species tree branch rates. Both chains had been run for $2^{30}$ states for
 a total of $2^{31}$ states. For every sample in the combined posterior
