@@ -257,13 +257,28 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 
 \subsection*{Species tree relaxed clocks}
 
-While *BEAST has been successfully used with relaxed clocks
-(see for example \cite{Berv2014120}, also \cite{Lambert2015146}), this involves estimating per-branch
-substitution rates (branch rates) separately for each branch of each gene tree.
-Gene tree relaxed clock models may accommodate variation in substitution rates
-between species, but do not produce estimates of species branch rates. To enable
-inference of species branch rates, we have developed a new species tree relaxed
-clock model.
+The overall rate of evolution occurring at a given locus belonging to a given
+species is influenced by the nature of the particular gene and also by the
+natural history of the particular species \citep{Rasmussen01122007}. The average
+substitution rate for a given gene may depend on neutral processes such as the
+timing of replication for the corresponding genomic region in humans
+\citep{Stamatoyannopoulos2009}, or the effects of selection such as the faster
+molecular evolution of sex-biased genes in \textit{Arabidopsis thaliana}
+\citep{Gossmann01032014}. The average substitution rate for a given species is
+correlated with a multitude of traits including metabolic rate, body size, and
+fecundity, although causal relationships are difficult to pin down
+\citep{Bromham2503}.
+
+Because differences in the nature and therefore in substitution rates between
+genes and between species are expected, multispecies coalescent models should
+take both per-gene and per-species rate variation into account. *BEAST can
+accommodate both types of rate variation using gene tree relaxed clock models
+(for examples see \cite{Berv2014120}, and \cite{Lambert2015146}). This involves
+estimating per-branch substitution rates (branch rates) separately for each
+branch of each gene tree. While gene tree relaxed clocks may accommodate
+variation in substitution rates between species, they do not produce estimates
+of species branch rates. To enable accurate inference of species branch rates,
+we have developed a new species tree relaxed clock model.
 
 The challenge of applying a relaxed clock to the species tree is that
 phylogenetic likelihood calculations require branch rates for each branch of
