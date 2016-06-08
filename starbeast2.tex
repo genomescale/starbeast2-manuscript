@@ -262,16 +262,18 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 \subsection*{Species tree relaxed clocks}
 
 The overall rate of evolution occurring at a given locus belonging to a given
-species is influenced by the nature of the particular gene and also by the
-natural history of the particular species \citep{Rasmussen01122007}. The average
-substitution rate for a given gene may depend on neutral processes such as the
-timing of replication for the corresponding genomic region in humans
+species will be influenced by the nature of the particular gene and also by the
+natural history of the particular species. For a given gene, the average
+substitution rate may depend on neutral processes such as the timing of
+replication for the corresponding genomic region in humans
 \citep{Stamatoyannopoulos2009}, or the effects of selection such as the faster
 molecular evolution of sex-biased genes in \textit{Arabidopsis thaliana}
-\citep{Gossmann01032014}. The average substitution rate for a given species is
+\citep{Gossmann01032014}. For a given species, the average substitution rate is
 correlated with a multitude of traits including metabolic rate, body size, and
 fecundity, although causal relationships are difficult to pin down
-\citep{Bromham2503}.
+\citep{Bromham2503}. Unsurprisingly, empirical analysis has shown that the two
+major factors contributing to rate variation among gene branches is the per-gene
+rate and the per-species rate \citep{Rasmussen01122007}.
 
 Because variation is expected in the nature of different genes and species, and
 therefore variation also expected in the average substitution rate of different
@@ -341,8 +343,6 @@ models that can be used with a species tree relaxed clock currently include the
 well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
 (UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
 local clock (RLC) model \citep{Drummond2010}.
-
-\clearpage
 
 \section*{Results}
 
@@ -595,7 +595,7 @@ true rate of each simulated branch as the response variable, and the posterior
 expectation of the rate of that branch (conditional on the corresponding clade
 being monophyletic in the posterior samples) as the explanatory variable
 (Figure~\ref{fig:branchRatesLM}). If all estimates equal the truth, then the
-$R^2$ correlation coefficient will equal 1, the slope will also equal 1, and the
+$R^2$ coefficient of determination will equal 1, the slope will also equal 1, and the
 intercept will equal zero.
 
 \begin{figure*}[htb!]
