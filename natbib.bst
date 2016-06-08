@@ -1088,7 +1088,7 @@ FUNCTION {calc.label}
   *
   year duplicate$ empty$
      { pop$ "????" }
-     { purify$ #-1 #4 substring$ }
+     { purify$ #-1 #64 substring$ }
   if$
   *
   'label :=

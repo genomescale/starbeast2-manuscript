@@ -355,7 +355,7 @@ email: journals.permissions@oup.com}
 \end{center}\vspace*{4pt}}
 \end{boxedminipage}\\[34pt]
 {\it Syst. Biol.} \@jvolume(\@jissue):\@firstpage\@pageinfo, \@pubyear\\
-\copyright\ The Author(s) 2013. Published by Oxford University Press, on behalf of the Society of Systematic Biologists. All rights reserved.\\
+\copyright\ The Author(s) 2016. Published by Oxford University Press, on behalf of the Society of Systematic Biologists. All rights reserved.\\
 For Permissions, please email: journals.permissions@oup.com\\
 DOI:10.1093/sysbio/\@jshort\@artid\\
 \accessfont{\@access}
@@ -365,9 +365,9 @@ DOI:10.1093/sysbio/\@jshort\@artid\\
 \\[-30.4pt]
 \if@bookreview\\[48.2pt]\else\\[-15.4pt]\fi
 %{\it Syst. Biol.gdsgfs} \@jvolume(\@jissue):\@firstpage\@pageinfo, \@pubyear\\
-\copyright\ The Author 2013. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. All rights reserved.\\ For permissions, please email: journals.permissions@oup.com\\
+\copyright\ The Authors 2016. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. All rights reserved.\\ For permissions, please email: journals.permissions@oup.com\\
 \rule[4pt]{\textwidth}{.5pt}\\
-% {\fontsize{10}{10}\selectfont{\it Mol. Biol. Evol.} \@jvolume(\@jissue):\@firstpage\@pageinfo\quad doi:10.1093/molbev/\@jshort\@artid}\quad \accessfont{\@access\hfill{\foliofont \thepage}}\\[38pt]
+{\fontsize{10}{10}\selectfont{\it Mol. Biol. Evol.} \@jvolume(\@jissue):\@firstpage\@pageinfo\quad doi:10.1093/molbev/\@jshort\@artid}\quad \accessfont{\@access\hfill{\foliofont \thepage}}\\[38pt]
 \end{tabular}}}
 \fi
 
@@ -2241,7 +2241,7 @@ doi:10.1093/sysbio/\@shortjname\@artid
 \else
 \usepackage[authoryear,sort]{cpl-natbib}
 \let\mycite\citet
-\let\cite\citep
+%\let\cite\citep
 \setlength{\bibhang}{13pt}
 \bibsep=0pt
 \fi

@@ -1,73 +1,49 @@
-\documentclass[12pt]{article}
+\documentclass[nogrid]{MBE}%
 
-\usepackage{fixltx2e}
-\usepackage{textcomp}
-\usepackage{fullpage}
-\usepackage{amsfonts}
-\usepackage{verbatim}
-\usepackage[english]{babel}
-\usepackage{pifont}
-\usepackage{color}
-\usepackage{setspace}
-\usepackage{lscape}
-\usepackage{indentfirst}
-\usepackage[normalem]{ulem}
-\usepackage{booktabs}
-% \usepackage{nag}
-\usepackage{natbib}
-% \usepackage{bibtex}
-\usepackage{float}
-\usepackage{latexsym}
-\usepackage{hyperref}
+
 \usepackage{url}
-% \usepackage{html}
-\usepackage{epsfig}
-\usepackage{graphicx}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage{array}
-%\usepackage{mhchem}
-\usepackage{ifthen}
-\usepackage{caption}
-\usepackage{xcolor}
-\usepackage{amsthm}
-\usepackage{amstext}
 \usepackage{nicefrac}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage[scientific-notation=true]{siunitx}
-\usepackage{subfigure}
 \usepackage[flushleft]{threeparttable}
-\usepackage{lineno}
 \usepackage{adjustbox}
-\usepackage{ragged2e}
-\usepackage{authblk}
-\usepackage{multirow}
-\usepackage[T1]{fontenc}
 
-\setlength{\parskip}{1em}
-\renewcommand{\baselinestretch}{2.0}
-\renewcommand\Affilfont{\small}
+\jshort{mst}
+
+\volname{}
+
+\jvolume{0}
+
+\jvol{}
+
+\jissue{0}
+
+\pubyear{2016}
+
+\mstype{Article}
+
+% \artid{012}
+
+% \access{Advance Access publication March 3, 2013}
+
 
 \begin{document}
 
-\title{StarBEAST2 brings faster species tree inference and accurate estimates of substitution rates}
-\author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
-\author[2,3]{Alexei J. Drummond}
-\affil[1]{Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia}
-\affil[2]{Centre for Computational Evolution, University of Auckland, Auckland, New Zealand}
-\affil[3]{Department of Computer Science, University of Auckland, Auckland, New Zealand}
+\title[StarBEAST2]{StarBEAST2 brings faster species tree inference and accurate estimates of substitution rates}
 
-\maketitle
 
-\clearpage
+\author[Ogilvie and Drummond]{Huw A. \surname{Ogilvie}$^{\ast,1,2}$ and Alexei J. Drummond$^{2,3}$}
 
-\justifying
+\address{$^{1}$Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia\\
+$^{2}$Centre for Computational Evolution, University of Auckland, Auckland, New Zealand\\
+$^{3}$Department of Computer Science, University of Auckland, Auckland, New Zealand}
 
-\section*{Abstract}
 
-Concatenation of multiple loci to infer a single tree is a popular estimator of
+% \history{Received 13 July 2011; reviews returned 26 November 2012; accepted 30 November 2012}
+
+\coresp{E-mail: huw.ogilvie@anu.edu.au.}
+
+% \editor{Robb Brumfield}
+
+\abstract{Concatenation of multiple loci to infer a single tree is a popular estimator of
 species tree topology, but is statistically inconsistent inside the anomaly zone
 of short branch lengths. The ages of extant species inferred using concatenation
 can also be severely overestimated. These known biases have motivated the
@@ -83,12 +59,13 @@ StarBEAST2 also adds support for species tree relaxed clocks, and we show that
 unlike concatenation it can accurately estimate per-species substitution rates.
 StarBEAST2 is available through the BEAUTi package manager in BEAST 2.4 and
 above.
+}
 
-Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation.
+\keyword{Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation.}
 
-\clearpage
+\maketitle
 
-\section*{Introduction}
+\section{Introduction}
 
 The throughput of sequencing technologies has improved many-fold over the past
 two decades, culminating in next generation sequencing (NGS), and it is now
@@ -102,7 +79,7 @@ While NGS offers hundreds or thousands of loci at relatively low cost, making
 accurate inferences from the enormous amount of data produced is particularly
 challenging. In the case of *BEAST, a fully Bayesian method of species tree
 inference which implements a realistic and robust evolutionary model in the
-multispecies coalescent \citep[MSC;][]{Degnan2009332}, it becomes exponentially
+multispecies\\\\coalescent \citep[MSC;][]{Degnan2009332}, it becomes exponentially
 slower as the number of loci in an analysis is increased. This scaling behaviour
 causes *BEAST to become intractably slow after a certain number of loci
 \citep[the exact number will depend on the other parameters of the data set, see][]{Ogilvie01052016}.
@@ -161,11 +138,9 @@ of estimated parameters and providing an alternative to concatenation. We have
 also developed and include in StarBEAST2 a new MSC relaxed
 clock model to enable accurate inference of per-species substitution rates.
 
-\clearpage
+\section{New Approaches}
 
-\section*{New Approaches}
-
-\subsection*{Analytical integration of population sizes}
+\subsection{Analytical integration of population sizes}
 
 Markov Chain Monte Carlo (MCMC) methods like *BEAST simultaneously integrate
 over many parameters by proposing small changes at each step to eventually
@@ -189,7 +164,7 @@ inverse gamma distribution is equal to $\nicefrac{\beta}{\alpha - 1}$, under def
 settings the hyperparameter $\beta$ is an estimate of mean effective
 population size.
 
-\subsection*{Coordinated tree topology changing operators}
+\subsection{Coordinated tree topology changing operators}
 
 One approach to improving the performance of MSC analyses which simultaneously
 estimate gene and species trees (such as *BEAST) is to develop MCMC operators
@@ -206,7 +181,7 @@ distribution but still favours less radical changes by applying adjustable
 proposal probability weights to (less radical) NNI moves and (more radical) SPR
 moves.
 
-\subsection*{Coordinated node height changing operators}
+\subsection{Coordinated node height changing operators}
 
 A novel class of coordinated Metropolis operators was introduced by
 \cite{Jones010199}. These operators change the height of a non-root non-leaf
@@ -259,7 +234,7 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 & = \lambda \left(x' - x\right) = \lambda \epsilon
 \end{align}
 
-\subsection*{Species tree relaxed clocks}
+\subsection{Species tree relaxed clocks}
 
 The overall rate of evolution occurring at a given locus belonging to a given
 species is influenced by the nature of the particular gene and also by the
@@ -326,7 +301,7 @@ r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.0165}{1.5} = 0.011
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=9cm]{relaxed_clock.pdf}
+\includegraphics[width=8cm]{relaxed_clock.eps}
 \caption
 {Multispecies coalescent phylogeny used to illustrate species tree relaxed
 clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
@@ -342,11 +317,9 @@ well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
 (UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
 local clock (RLC) model \citep{Drummond2010}.
 
-\clearpage
+\section{Results}
 
-\section*{Results}
-
-\subsection*{StarBEAST2 correctly implements the multispecies coalescent}
+\subsection{StarBEAST2 correctly implements the multispecies coalescent}
 
 New methods must be shown to be mathematically correct implementations of the
 target model. One way to accomplish this for MCMC methods is to estimate
@@ -361,7 +334,7 @@ heights (Figure~S3,S4), and for gene tree branch rates (Figure~S5,S6). This
 combination of results supports the correctness of the StarBEAST2
 implementation.
 
-\subsection*{\textit{Pseudacris} chorus frogs have intermediate coalescent branch lengths}
+\subsection{\textit{Pseudacris} chorus frogs have intermediate coalescent branch lengths}
 
 To characterize the performance of coordinated operators, methods of population size
 integration and relaxed clocks, we tested StarBEAST2 using real sequence data.
@@ -378,7 +351,7 @@ $\nicefrac{1.69\tau}{2Ne}$. This is an intermediate average length, longer than
 the shallow simulations analyzed by \cite{Ogilvie01052016} which had a short
 average length of $\nicefrac{0.54\tau}{2Ne}$.
 
-\subsection*{Coordinated height changing operators and analytical integration improve performance}
+\subsection{Coordinated height changing operators and analytical integration improve performance}
 
 To determine which configuration of new features would achieve the best
 performance, we ran StarBEAST2 using different combinations of operators,
@@ -414,7 +387,7 @@ proposing new states.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=10cm]{speciesTreeHeight_ess_per_hour.pdf}
+\includegraphics[width=8cm]{speciesTreeHeight_ess_per_hour.eps}
 \caption
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
@@ -432,7 +405,7 @@ are 95\% confidence intervals calculated by bootstrapping.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=10cm]{speciesTreeHeight_ess_per_mstates.pdf}
+\includegraphics[width=8cm]{speciesTreeHeight_ess_per_mstates.eps}
 \caption
 {Effect of operators, population size integration and clock models on effective
 sample size (ESS) per million states. The performance of every combination of
@@ -488,7 +461,7 @@ to gene tree relaxed clock analyses the likelihood calculations have a higher
 time cost, but also that operators become less effective at exploring tree and
 parameter space.
 
-\subsection*{StarBEAST2 is approximately three times faster than *BEAST}
+\subsection{StarBEAST2 is approximately three times faster than *BEAST}
 
 Our reanalysis of \textit{Pseudacris} sequence data shows that analytical
 integration of population sizes and coordinated height changing operators both
@@ -537,7 +510,7 @@ between 1.2 and 1.9 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=10cm]{multiple_ess_per_hour.pdf}
+\includegraphics[width=8cm]{multiple_ess_per_hour.eps}
 \caption
 {Convergence of different methods applied to simulated data. Methods are
 concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
@@ -551,7 +524,7 @@ bootstrapping. N = 64.}
 \label{fig:simulatedEssPerHour}
 \end{figure}
 
-\subsection*{Relative accuracy varies depending on metric}
+\subsection{Relative accuracy varies depending on metric}
 
 The accuracy of StarBEAST2 relative to concatenation varied depending on the
 metric and whether equal numbers of loci were used. Relative species tree error
@@ -570,7 +543,7 @@ gene or species tree relaxed clocks affect the accuracy of StarBEAST2
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=6.5cm]{tree_error.pdf}
+\includegraphics[width=7cm]{tree_error.eps}
 \caption
 {Accuracy of different methods applied to simulated data. Methods are concatenation with 22 loci, concatenation with 220 loci
 (10X), StarBEAST2 with *BEAST settings and 22 loci, and StarBEAST2 with
@@ -585,7 +558,7 @@ by bootstrapping. N $\ge$ 56.}
 \label{fig:speciesTreeError}
 \end{figure}
 
-\subsection*{Concatenation cannot accurately infer branch rates given intermediate branch lengths}
+\subsection{Concatenation cannot accurately infer branch rates given intermediate branch lengths}
 
 While the convergence of species tree relaxed clock analyses was slower than
 gene tree relaxed clock analyses using performant settings, species tree relaxed
@@ -620,11 +593,9 @@ applying a relaxed clock to the species tree, StarBEAST2 can be used to infer
 many branch rates --- the $R^2$ correlation was much stronger at $0.16$, and the
 slope and intercept was close to perfect at $0.93x + 0.07$.
 
-\clearpage
+\section{Discussion}
 
-\section*{Discussion}
-
-\subsection*{StarBEAST2 will enable faster and/or more precise inference}
+\subsection{StarBEAST2 will enable faster and/or more precise inference}
 
 The increased performance of StarBEAST2 will enable researchers to analyze
 results faster and disseminate their findings sooner. A large MCMC analysis
@@ -642,7 +613,7 @@ given analysis is increased by 50\%, the decrease in performance is therefore
 expected to be $\exp(-2.81 \cdot \ln(1.5)) = 3.125$, approximately cancelling
 out the improved computational performance of StarBEAST2 compared to *BEAST.
 
-\subsection*{Concatenation can still be inferior given intermediate branch lengths}
+\subsection{Concatenation can still be inferior given intermediate branch lengths}
 
 For short branch lengths in coalescent units, concatenation cannot accurately
 estimate branch lengths. *BEAST using just four loci will be more accurate than
@@ -671,7 +642,7 @@ speciation events, mimicking a slowdown. We suggest that accurate inference of
 changing diversification rates requires the use of fully Bayesian MSC methods
 like StarBEAST2.
 
-\subsection*{A multispecies coalescent model is required when inferring species branch rates}
+\subsection{A multispecies coalescent model is required when inferring species branch rates}
 
 We show that given intermediate branch lengths, concatenation is unable to
 accurately estimate per-species substitution rates, and it is reasonable to assume
@@ -692,9 +663,7 @@ substitution rates seen in our 220-locus concatenation analyses
 (Figure~\ref{fig:branchRatesLM}), where many branches have very low or very high
 estimated rates regardless of their true rates.
 
-\clearpage
-
-\section*{Conclusions}
+\section{Conclusions}
 
 When estimating dates and rates, the choice is often between using a subset of
 available loci with a fully Bayesian MSC method, or all available loci with
@@ -708,14 +677,12 @@ ILS. StarBEAST2 is free and open source software, and its source code and
 development history is available through GitHub
 (\url{https://github.com/genomescale/starbeast2}).
 
-\clearpage
-
-\section*{Materials and Methods}
+\section{Materials and Methods}
 
 For all StarBEAST2 and concatenation analyses, the version of BEAST used was
 2.4.0. For all simulations, the version of biopy used was 0.1.9 (\url{http://www.cs.auckland.ac.nz/~yhel002/biopy/}).
 
-\subsection*{Mathematical correctness of StarBEAST2}
+\subsection{Mathematical correctness of StarBEAST2}
 
 Simulated trees were generated using biopy, and trees sampled from a prior
 distribution were generated using StarBEAST2 with all new features enabled. This
@@ -733,6 +700,7 @@ repeated separately for UCLN and for UCED species branch rates.
 \label{tab:correctParameters}
 \begin{threeparttable}
 \begin{adjustbox}{center}
+\small
 \begin{tabular}{|r|l|}
 \hline
 Number of species & 5\tabularnewline
@@ -761,7 +729,7 @@ Per-locus clock rates & Fixed at 0.5 and 2.0\tabularnewline
 \end{threeparttable}
 \end{table}
 
-\subsection*{Preprocessing of \textit{Pseudacris} sequence data}
+\subsection{Preprocessing of \textit{Pseudacris} sequence data}
 
 Phased and aligned \textit{Pseudacris} sequence data was retrieved from Dryad
 (\url{http://dx.doi.org/10.5061/dryad.23rc0}). In the original analysis, an HKY nucleotide substitution
@@ -774,7 +742,7 @@ computational resources, we then reduced the sequence data to both haplotypes
 from the best-sequenced individual from each of the 19 extant ingroup lineages
 in \cite{Barrow201478}.
 
-\subsection*{StarBEAST2 reanalysis of \textit{Pseudacris} sequence data}
+\subsection{StarBEAST2 reanalysis of \textit{Pseudacris} sequence data}
 
 For inference of \textit{Pseudacris} trees, we ran 32 independent StarBEAST2
 chains for all 16 conditions for a total of 512 chains. The conditions were each
@@ -837,7 +805,7 @@ length in substitution units $\tau$ and effective population size $Ne$ recorded 
 step. The mean coalescent length of all branches across all samples was taken as
 the average.
 
-\subsection*{Simulation of trees and sequence data}
+\subsection{Simulation of trees and sequence data}
 
 All simulation parameters were chosen to be broadly similar to those observed in
 or estimated from the \textit{Pseudacris} data set.
@@ -871,7 +839,7 @@ equal base frequencies, a $\kappa$ value of 3.0, and a four rate category discre
 of among-site rate variation with a shape $\alpha$ value of 0.2
 \citep{Yang1994}.
 
-\subsection*{Performance and accuracy of StarBEAST2 and concatenation}
+\subsection{Performance and accuracy of StarBEAST2 and concatenation}
 
 The five methods of inference used for this section were concatenation with 22
 loci, concatenation with 220 loci, StarBEAST2 with *BEAST settings, StarBEAST2
@@ -925,14 +893,11 @@ count of clades present only one of $T_1$ and $T_2$. In this study, the mean
 rooted Robinson-Foulds distance is the average of all distances between each
 estimated tree and the true tree for all posterior samples.
 
-\clearpage
+\section{Supplementary Material}
+Supplementary tables S1--S4 and figures S1--S6 are available at Molecular Biology and Evolution
+online (http://www.mbe.oxfordjournals.org/).
 
-\section*{Supplementary Material}
-
-Supplementary figures and tables, simulated data sets, and BEAST XML files will
-be made available online.
-
-\section*{Acknowledgments}
+\section{Acknowledgments}
 
 This work was supported by a Rutherford Discovery Fellowship awarded to A.J.D. by
 the Royal Society of New Zealand. H.A.O. was supported by an Australian Laureate
@@ -945,9 +910,7 @@ addition of the root height changing operator, Joseph Heled for insight into the
 multispecies coalescent, and Graham Jones for input regarding operator
 performance.
 
-\clearpage
-
-\bibliographystyle{natbib}
-\bibliography{starbeast2}
+\bibliographystyle{natbib}%%%%natbib.sty
+\bibliography{starbeast2-mbe}%%%refs.bib
 
 \end{document}
