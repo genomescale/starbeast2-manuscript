@@ -297,17 +297,15 @@ by the rates $R$ of the corresponding species tree branches
 (Table~\ref{tab:branchRateModel}).
 
 \begin{table*}[htb!]
-\caption{Expected numbers of substitutions under a species tree relaxed clock}
+\caption{Expected numbers of substitutions $\Sigma \mathbb{E}(S)$ under a species tree relaxed clock}
 \label{tab:branchRateModel}
 \begin{threeparttable}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}|c|c|c|c|c|c|c|c|c|c|c|c|@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccccccccccc@{}}
 \hline
-\multirow{2}{*}{Branch} & \multirow{2}{*}{$c$} & \multicolumn{3}{c|}{$L$} & \multicolumn{3}{c|}{$R$} & \multicolumn{3}{c|}{$\mathbb{E}(S) = c\cdot L\cdot R$} & \multirow{2}{*}{$\Sigma \mathbb{E}(S)$}\tabularnewline
-\cline{3-11}
- & & A & B & AB & A & B & AB & A & B & AB & \tabularnewline
+Gene & Gene & \multicolumn{3}{c}{Length within $L$} & \multicolumn{3}{c}{Species rate $R$} & \multicolumn{3}{c}{$\mathbb{E}(S) = c\cdot L\cdot R$} & \multirow{2}{*}{$\Sigma \mathbb{E}(S)$}\tabularnewline
+branch & rate $c$ & A & B & AB & A & B & AB & A & B & AB & \tabularnewline
 \hline
 a & \multirow{2}{*}{0.01} & 1.0 & 0.0 & 0.5 & \multirow{2}{*}{0.7} & \multirow{2}{*}{1.0} & \multirow{2}{*}{1.3} & 0.0070 & 0.0000 & 0.0065 & 0.0135\tabularnewline
-\cline{1-1} \cline{3-5} \cline{9-12}
 b & & 0.0 & 1.0 & 0.5 & & & & 0.0000 & 0.0100 & 0.0065 & 0.0165\tabularnewline
 \hline
 \end{tabular*}
@@ -452,16 +450,13 @@ bootstrapping.}
 \caption{Change in convergence performance induced by new features}
 \label{tab:convergenceLM}
 \begin{threeparttable}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}|r|r|r|r|r|@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrr@{}}
 \hline
 Relaxed clock & ESS rate per & Topology & Height & Analytical integration\tabularnewline
 \hline
 Gene trees & hour & -22\%{***} & 134\%{***} & 23\%{***}\tabularnewline
-\hline
 Gene trees & million states & -5\%\hphantom{***} & 158\%{***} & 26\%{***}\tabularnewline
-\hline
 Species tree & hour & -9\%\hphantom{***} & 114\%{***} & 7\%\hphantom{***}\tabularnewline
-\hline
 Species tree & million states & 6\%\hphantom{***} & 128\%{***} & 9\%\hphantom{***}\tabularnewline
 \hline
 \end{tabular*}
@@ -727,24 +722,18 @@ repeated separately for UCLN and for UCED species branch rates.
 \begin{threeparttable}
 \begin{adjustbox}{center}
 \small
-\begin{tabular}{|r|l|}
+\begin{tabular}{rl}
 \hline
-Number of species & 5\tabularnewline
+Parameter & Distribution\tabularnewline
 \hline
+Number of species & Fixed at 5\tabularnewline
 Birth rate & Fixed at 200.0\tabularnewline
-\hline
 Death rate & Fixed at 100.0\tabularnewline
-\hline
 UCLN branch rates & Log-normal ($\mu^a = 1.0, \sigma = 0.16$)\tabularnewline
-\hline
 UCED branch rates & Exponential ($\lambda = 1.0$)\tabularnewline
-\hline
 Haploid population sizes & Inv. gamma ($\alpha = 2.0, \beta = 0.002$)\tabularnewline
-\hline
-Haplotypes per species & 1\tabularnewline
-\hline
-Number of gene trees & 2\tabularnewline
-\hline
+Haplotypes per species & Fixed at 1\tabularnewline
+Number of gene trees & Fixed at 2\tabularnewline
 Per-locus clock rates & Fixed at 0.5 and 2.0\tabularnewline
 \hline
 \end{tabular}
