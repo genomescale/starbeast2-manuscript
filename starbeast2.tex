@@ -193,22 +193,24 @@ population size.
 One approach to improving the performance of MSC analyses which simultaneously
 estimate gene and species trees (such as *BEAST) is to develop MCMC operators
 which propose coordinated changes to both the species tree and the gene trees in
-the same step. \cite{Yang01122014} and \cite{2015arXiv151203843R} introduced
-Metropolis-Hastings (MH) operators which make nearest-neighbor interchange (NNI) and subtree prune and regraft (SPR) changes to the species
-tree topology, and simultaneously make changes to the gene tree topologies that
-preserve compatibility of the gene trees within the proposed species tree. We have
-reimplemented those operators as a new operator in StarBEAST2 called
-``CoordinatedExchange''. \cite{2015arXiv151203843R} also describe a proposal
-distribution which favours topological changes on shorter branches, and also
-less radical changes in topology. StarBEAST2 implements a simpler proposal
-distribution but still favours less radical changes by applying adjustable
-proposal probability weights to (less radical) NNI moves and (more radical) SPR
-moves.
+the same step. \cite{Yang01122014} introduced a Metropolis-Hastings (MH)
+operator which makes nearest-neighbor interchange (NNI) changes to the species
+tree topology, and simultaneously makes changes to gene tree topologies which
+preserve compatibility of the gene trees within the proposed species tree.
+Later, both \cite{Jones2016} and \cite{2015arXiv151203843R} introduced more
+general coordinated operators which make subtree prune and regraft (SPR) changes
+to the species tree. We have reimplemented these coordinated NNI and SPR moves
+in StarBEAST2 in a single new operator called ``CoordinatedExchange''.
+\cite{2015arXiv151203843R} also describe a proposal distribution which favours
+topological changes on shorter branches, and also less radical changes in
+topology. StarBEAST2 implements a simpler proposal distribution but still
+favours less radical changes by applying adjustable proposal probability weights
+to (less radical) NNI moves and (more radical) SPR moves.
 
 \subsection{Coordinated node height changing operators}
 
 A novel class of coordinated Metropolis operators was introduced by
-\cite{Jones010199}. These operators change the height of a non-root non-leaf
+\cite{Jones2016}. These operators change the height of a non-root non-leaf
 species tree node, and the heights of ``connected components'' of gene tree
 nodes, by an amount $\epsilon$ chosen from a uniform distribution.
 The lower bound of the uniform distribution is the negative length of
@@ -217,7 +219,7 @@ and the upper bound is the positive length of the shortest parent branch. As
 long as the connected components are chosen with reference only to the topology
 of the species tree, the topology of the gene trees, and the mapping of
 sampled individuals to species, operators of this class are symmetric
-\citep{Jones010199}.
+\citep{Jones2016}.
 
 We have developed a new operator called ``CoordinatedUniform'' that belongs to
 this class. Individuals from extant species which descend from a species tree
