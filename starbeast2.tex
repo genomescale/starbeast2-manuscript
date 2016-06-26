@@ -67,8 +67,8 @@
 
 \section*{Abstract}
 
-Concatenation of multiple loci to infer a single tree is a popular
-estimator of species tree topology and times, but is statistically inconsistent inside the
+Concatenation of multiple loci to infer a single tree is a popular estimator of
+species tree topology and times, but is statistically inconsistent inside the
 anomaly zone of short branch lengths. The ages of extant species inferred using
 concatenation can also be severely overestimated. These known biases have
 motivated the development and use of multispecies coalescent (MSC) methods of
@@ -373,7 +373,7 @@ lengths, concatenation is unable to infer accurate species trees regardless of
 the number of loci used, but for long branch lengths, concatenation is
 approximately as accurate as *BEAST \citep{Ogilvie01052016}. Using StarBEAST2,
 the average branch length within this genus was determined to be
-$\nicefrac{1.69\tau}{2Ne}$. This is an intermediate average length, longer than
+$\nicefrac{1.61\tau}{2Ne}$. This is an intermediate average length, longer than
 the shallow simulations analyzed by \cite{Ogilvie01052016} which had a short
 average length of $\nicefrac{0.54\tau}{2Ne}$.
 
@@ -389,9 +389,9 @@ exceeds 200), and reflects how effectively operators explore the space of trees
 and parameters, and the computational time required by each operator proposal
 and likelihood calculation. In contrast, ESS per million states reflects only
 the exploration of tree and parameter space independently of calculation times.
-A variety of statistics were logged for each analysis, but the height of the
-species tree had the slowest average convergence rates so we used that statistic
-to judge computational performance (Table~S1,S2).
+A variety of statistics were logged for each analysis (Table~S1,S2), and for
+each configuration for each replicate the minimum ESS statistic was used to
+measure computational performance.
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of adding topology changing operators,
@@ -413,7 +413,7 @@ proposing new states.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=8cm]{speciesTreeHeight_ess_per_hour.pdf}
+\includegraphics[width=8cm]{minimum_ess_per_hour.pdf}
 \caption
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
@@ -431,7 +431,7 @@ are 95\% confidence intervals calculated by bootstrapping.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=8cm]{speciesTreeHeight_ess_per_mstates.pdf}
+\includegraphics[width=8cm]{minimum_ess_per_mstates.pdf}
 \caption
 {Effect of operators, population size integration and clock models on effective
 sample size (ESS) per million states. The performance of every combination of
@@ -452,14 +452,14 @@ bootstrapping.}
 \caption{Change in convergence performance induced by new features}
 \label{tab:convergenceLM}
 \begin{threeparttable}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrr@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrrr@{}}
 \hline
-Relaxed clock & ESS rate per & Topology & Height & Analytical integration\tabularnewline
+Relaxed clock & ESS rate per & Topology & Height & Analytical & Height $\times$ Analytical\tabularnewline
 \hline
-Gene trees & hour & -22\%{***} & 134\%{***} & 23\%{***}\tabularnewline
-Gene trees & million states & -5\%\hphantom{***} & 158\%{***} & 26\%{***}\tabularnewline
-Species tree & hour & -9\%\hphantom{***} & 114\%{***} & 7\%\hphantom{***}\tabularnewline
-Species tree & million states & 6\%\hphantom{***} & 128\%{***} & 9\%\hphantom{***}\tabularnewline
+Gene trees & hour & -18\%{***} & 144\%{***} & 7\%\hphantom{***} & 31\%{**}\hphantom{*}\tabularnewline
+Gene trees & million states & -1\%\hphantom{***} & 181\%{***} & 11\%\hphantom{***} & 29\%{*}\hphantom{**}\tabularnewline
+Species tree & hour & -2\%\hphantom{***} & 506\%{***} & 12\%\hphantom{***} & 22\%\hphantom{***}\tabularnewline
+Species tree & million states & 7\%\hphantom{***} & 762\%{***} & 10\%\hphantom{***} & 26\%{*}\hphantom{**}\tabularnewline
 \hline
 \end{tabular*}
 \begin{tablenotes}
@@ -484,6 +484,8 @@ to gene tree relaxed clock analyses the likelihood calculations have a higher
 time cost, but also that operators become less effective at exploring tree and
 parameter space.
 
+\clearpage
+
 \subsection{StarBEAST2 is approximately three times faster than *BEAST}
 
 Our reanalysis of \textit{Pseudacris} sequence data shows that analytical
@@ -499,7 +501,8 @@ log-normally distributed mean clock rates. Finally, sequences were simulated
 according to an HKY process for each gene \citep{Hasegawa1985, Goldman1993}. The
 parameters used for these simulations were chosen to produce intermediate
 branch lengths in coalescent units; the average simulated branch length was
-$\nicefrac{1.44\tau}{2Ne}$.
+$\nicefrac{1.61\tau}{2Ne}$, the same as for \textit{Pseudacris} to two decimal
+places.
 
 Simulated data was analyzed using concatenation with BEAST and using the MSC with
 StarBEAST2. The different settings used for StarBEAST2 were *BEAST settings,
@@ -513,34 +516,34 @@ na\"ive NNI and SPR topology operators.
 
 Again the parameter with the slowest convergence given any StarBEAST2 setting
 was the height of the species tree (Table~S3,S4). Based on that parameter, the
-average performance increase using StarBEAST2 with high performance settings over
-*BEAST settings was 3.1 times, with a 95\% confidence interval between 2.7 and
-3.6 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
-concatenated analyses was the phylogenetic likelihood, and when using the same
-number of loci as StarBEAST2, convergence of that statistic using concatenation
-was 112 times faster than the convergence of species tree height using
-*BEAST settings. When concatenation was used with ten times the
-number of loci as StarBEAST2, the performance difference was minimal --- 1.2
-times, with a confidence interval between 1.1 and 1.4
+average performance increase using StarBEAST2 with high performance settings
+over *BEAST settings was 2.8 times, with a 95\% confidence interval between 2.5
+and 3.2 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter
+for concatenated analyses was the phylogenetic likelihood, and when using the
+same number of loci as StarBEAST2, convergence of that statistic using
+concatenation was 28.6 times faster than the convergence of species tree height
+using *BEAST settings. When concatenation was used with ten times the number of
+loci as StarBEAST2, the performance was actually worse than *BEAST --- 0.8
+times, with a confidence interval between 0.7 and 0.9
 (Figure~\ref{fig:simulatedEssPerHour}).
 
 Consistent with analyses of \textit{Pseudacris} sequence data, using a species
 tree relaxed clock with high performance settings was faster than *BEAST settings.
 Also like \textit{Pseudacris}, use of species tree relaxed clocks was slower than
 gene tree relaxed clocks with high performance settings; the average performance
-increase over *BEAST settings was only 1.4 times with a confidence interval
-between 1.2 and 1.7 (Figure~\ref{fig:simulatedEssPerHour}).
+increase over *BEAST settings was only 2.2 times with a confidence interval
+between 2.0 and 2.4 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=8cm]{multiple_ess_per_hour.pdf}
+\includegraphics[width=8cm]{minimum_relative_ess_per_hour.pdf}
 \caption
 {Convergence of different methods applied to simulated data. Methods are
 concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
 *BEAST settings and 22 loci, and StarBEAST2 with high performance settings, 22 loci,
 and uncorrelated log-normal relaxed clocks applied to the gene trees (GT-UCLN) or
 to the species tree (ST-UCLN). Relative estimated sample size (ESS) per hour is the trimmed mean for all replicates of
-ESS per hour divided by species tree height ESS per hour estimated using *BEAST
+ESS per hour divided by the ESS per hour estimated using *BEAST
 settings. 25\% trim was used to reduce the influence of
 outliers. All error bars are 95\% confidence intervals calculated by
 bootstrapping. N = 96.}
