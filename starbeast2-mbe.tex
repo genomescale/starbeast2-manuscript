@@ -43,8 +43,8 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 
 % \editor{Robb Brumfield}
 
-\abstract{Concatenation of multiple loci to infer a single tree is a popular
-estimator of species tree topology and times, but is statistically inconsistent inside the
+\abstract{Concatenation of multiple loci to infer a single tree is a popular estimator of
+species tree topology and times, but is statistically inconsistent inside the
 anomaly zone of short branch lengths. The ages of extant species inferred using
 concatenation can also be severely overestimated. These known biases have
 motivated the development and use of multispecies coalescent (MSC) methods of
@@ -70,10 +70,10 @@ package manager in BEAST 2.4 and above.}
 \section{Introduction}
 
 The throughput of sequencing technologies has improved many-fold over the past
-two decades, culminating in next generation sequencing (NGS), and it is now
+two decades culminating in next generation sequencing (NGS), and it is now
 feasible to sequence whole or partial genomes or transcriptomes for phylogenetic
 studies \citep{annurev-ecolsys-110512-135822}. NGS produces hundreds or
-thousands of phylogenetically useful loci \citep[see for example][]{Blom20160181},
+thousands of phylogenetically useful loci \citep[see for example][]{Blom20160181}
 with potentially millions of sites spread across a data set of multiple
 sequence alignments.
 
@@ -86,7 +86,7 @@ inference which implements a realistic and robust evolutionary model in the
 multispecies coalescent \citep[MSC;][]{Degnan2009332, Heled01032010}, it becomes exponentially
 slower as the number of loci in an analysis is increased. This scaling behaviour
 causes *BEAST to become intractably slow after a certain number of loci
-\citep[the exact number will depend on the other parameters of the data set, see][]{Ogilvie01052016}.
+\citep[the exact number will depend on other parameters of the data set, see][]{Ogilvie01052016}.
 Given the current challenges of using large phylogenomic data sets with *BEAST
 there have been three broad alternatives available to researchers; concatenate
 sequences from multiple loci, use alternative MSC methods which are based on
@@ -95,8 +95,8 @@ subset of loci to use with *BEAST.
 
 Concatenating sequences from multiple loci will reconstruct the single tree that
 best fits the combined sequence alignment. Popular concatenation methods include
-the RAxML and ExaML maximum likelihood methods \citep{Stamatakis01052014,
-Kozlov01082015}, and the ExaBayes and BEAST Bayesian methods
+the RAxML, PAML and PhyML maximum likelihood methods \citep{Stamatakis01052014,
+Yang01082007,Guindon01052010}, and the ExaBayes and BEAST Bayesian methods
 \citep{Aberer01102014, Drummond2007}. Recent results show that concatenation
 can be counterproductive, producing statistically inconsistent results which assign
 high confidence to incorrect nodes due to model misspecification
@@ -105,82 +105,101 @@ lengths, the most likely gene tree topology will be different from the species
 tree, and concatenated tree topologies will likely differ from the true species
 tree topologies \citep{journal.pgen.0020068, Kubatko01022007}.
 
-More recently identified problems with concatenation are overestimation of
-divergence times and systematic error when estimating substitution rates. Branch lengths
-inferred by concatenation will reflect the expected number of substitutions per
-site across all concatenated loci. Divergence times, as determined by branch
-lengths on a time tree, will therefore reflect the average coalescence times of
-all genes. This misspecification leads to overestimation which can be
-particularly severe in terms of the ages of extant species
-\citep{Ogilvie01052016}. Trees inferred using concatenation are therefore not a
-reliable approximation of the species tree in terms of branch lengths or
-topology. Per-species substitution rates inferred using a relaxed clock model
-with concatenation may also be substantially overestimated or underestimated
-depending on their relationship with the gene trees \citep{Mendes28022016}.
+More recently identified problems with concatenation are systematic errors when
+estimating branch lengths, including overestimation of divergence times. Because
+some time is required for genes to coalescence looking backwards in time from
+a speciation event, the expected molecular distance between two species is
+greater than the true divergence time. This leads concatenation to overestimate
+the divergence times across a species tree in proportion to effective population size
+\citep{Angelis874}. Such overestimation of divergence times can result in dramatic
+inflation of estimated tip branch lengths \citep{Ogilvie01052016}.
+
+Incomplete lineage sorting (ILS) also causes systematic errors in estimated
+branch lengths when using concatenation, because substitutions on a discordant gene tree branch
+which has no corresponding species tree branch must be explained by multiple
+substitutions on different species tree branches. This is known as substitutions
+induced by ILS (SPILS), and it causes concatenation to overestimate the lengths of specific
+branches and underestimate the lengths of others, which produces apparent
+substitution rate variation where none exists \citep{Mendes01072016}. For all
+the above reasons, trees
+inferred using concatenation are therefore not a reliable approximation of the
+species tree in terms of branch lengths or topology.
 
 As an alternative to concatenation, MSC methods which use summary statistics instead
 of the full sequence data have been developed for use with phylogenomic data.
 Popular summary methods include MP-EST and ASTRAL \citep{Liu2010,
-Mirarab01092014}, but recent results show that MP-EST should be avoided as it is
-sensitive to gene tree error \citep{Mirarab15062015, Xi201563}. At low levels of
-incomplete lineage sorting (ILS) MP-EST is less accurate than concatenation at
+Mirarab01092014}, but recent results show that MP-EST should be used with caution as it is
+sensitive to gene tree errors \citep{Mirarab15062015, Xi201563}. At low levels of
+ILS, MP-EST is less accurate than concatenation at
 inferring topologies, and even at high levels of ILS it may be no more accurate
 than concatenation \citep{Ogilvie01052016}. While other summary methods like
 ASTRAL may be more reliable than MP-EST, none of these methods can infer branch
 lengths in substitution units. Divergence times therefore cannot be
 reconstructed using summary methods. If concatenation is used to estimate branch
-lengths, divergence times, and/or substitution rates for a fixed species tree
+lengths or divergence times for a fixed species tree
 topology estimated using a summary method, then those estimates will be
 unreliable for the same reasons as pure concatenation.
 
 With the aim of improving the computational performance of fully Bayesian
-MSC inference of species trees we have developed an upgrade
-to *BEAST called ``StarBEAST2'', which is available as a package for BEAST 2
-\citep{10.1371/journal.pcbi.1003537}. By improving computational performance
-StarBEAST2 should enable the use of more loci, thereby improving the precision
-of estimated parameters and providing an alternative to concatenation. We have
-also developed and include in StarBEAST2 a new MSC relaxed
-clock model to enable accurate inference of per-species substitution rates.
+MSC inference of species trees, we have developed an upgrade
+to *BEAST --- StarBEAST2 --- which is available as a package for BEAST 2
+\citep{10.1371/journal.pcbi.1003537}. By improving computational performance,
+StarBEAST2 should enable the use of more loci and thereby improve the precision
+of estimated parameters and provide an alternative to concatenation. We have
+also developed and include in StarBEAST2 new MSC relaxed
+clock models to enable accurate inference of per-species substitution rates.
 
 \section{New Approaches}
 
 \subsection{Analytical integration of population sizes}
 
-Markov Chain Monte Carlo (MCMC) methods like *BEAST simultaneously integrate
+Markov Chain Monte Carlo (MCMC) methods like *BEAST jointly integrate
 over many parameters by proposing small changes at each step to eventually
 produce a probability distribution for all parameters. From a
 researcher's perspective, some may be ``nuisance'' parameters not of scientific
 interest. For example species tree topology and divergence times may be of
 interest, but not effective population sizes. For tractable parameters, an
 analytic solution will integrate over the entire range of values at each MCMC
-step, and may be more high performance than MCMC integration. However explicit
+step, and may be faster than MCMC integration. However explicit
 estimates will not be produced so this approach is suitable only for nuisance
 parameters. Among-site rate variation is already integrated out at each step;
 the likelihood of each site is calculated for all possible discrete gamma rates
-at each step, so the individual site rates are not estimated \citep{Yang1994}.
+at each step, so individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
-implemented as part of BEST \citep{EVO:EVO414}. The analytic solution, which
-we have added to StarBEAST2, uses an inverse gamma conjugate prior for
-population sizes. By default StarBEAST2 fixes the shape of the distribution
-$\alpha = 2$ and only estimates the scale $\beta$. Because the mean of an
-inverse gamma distribution is equal to $\nicefrac{\beta}{\alpha - 1}$, under default
-settings the hyperparameter $\beta$ is an estimate of mean effective
-population size.
+implemented as part of BEST \citep{EVO:EVO414}. The analytic solution, which we
+have added to StarBEAST2, uses an inverse gamma conjugate prior for population
+sizes. By default StarBEAST2 fixes the shape of the distribution $\alpha = 3$
+and only estimates the mean of the distribution $\mu$, which is proportional to the
+scale parameter $\beta$:
+
+\begin{equation}
+\mu = \frac{\beta}{\alpha - 1} = \frac{\beta}{2}
+\end{equation}
+
+In this special case where $\alpha = 3$, the standard deviation is identical to
+the mean:
+
+\begin{equation}
+\sigma = \sqrt{\frac{\beta^2}{(\alpha - 1)^2 \times (\alpha - 2)}} = \sqrt{\frac{\beta^2}{2^2}} = \frac{\beta}{2} = \mu
+\end{equation}
+
+The coefficient of variation $c_\mathrm{v} = \nicefrac{\sigma}{\mu}$ of the
+prior distribution for effective population sizes is therefore 1.
 
 \subsection{Coordinated tree topology changing operators}
 
 One approach to improving the performance of MSC analyses which simultaneously
 estimate gene and species trees (such as *BEAST) is to develop MCMC operators
 which propose coordinated changes to both the species tree and the gene trees in
-the same step. \cite{Yang01122014} introduced a Metropolis-Hastings (MH)
+the same step. \cite{Yang01122014} introduced a Metropolis-Hastings \citep[MH;][]{Metropolis1953, Hastings1970}
 operator which makes nearest-neighbor interchange (NNI) changes to the species
 tree topology, and simultaneously makes changes to gene tree topologies which
 preserve compatibility of the gene trees within the proposed species tree.
 Later, both \cite{Jones2016} and \cite{2015arXiv151203843R} introduced more
 general coordinated operators which make subtree prune and regraft (SPR) changes
 to the species tree. We have reimplemented these coordinated NNI and SPR moves
-in StarBEAST2 in a single new operator called ``CoordinatedExchange''.
+in StarBEAST2 as a single new operator called ``CoordinatedExchange''.
 \cite{2015arXiv151203843R} also describe a proposal distribution which favours
 topological changes on shorter branches, and also less radical changes in
 topology. StarBEAST2 implements a simpler proposal distribution but still
@@ -204,18 +223,18 @@ sampled individuals to species, operators of this class are symmetric
 We have developed a new operator called ``CoordinatedUniform'' that belongs to
 this class. Individuals from extant species which descend from a species tree
 node, or are directly descended from a gene tree node, are referred to as
-descendant individuals. The gene tree nodes selected by this operator are those
+descendant individuals. The gene tree nodes selected by this operator to be shifted in height are those
 for which (1) at least one descendant individual is also a descendant individual
-per direct child of the selected species tree node and (2) all descendent
+of the left child of the selected species tree node, (2) the same but for the right child, and (3) all descendent
 individuals are also descendent individuals of the selected species tree node.
 
 We have also developed a new adaptive MH \citep{Andrieu2008} operator called
 ``CoordinatedExponential'' which changes the height of the species tree root and
 the height of connected components of gene tree nodes by an amount $\epsilon$.
-The changed gene tree nodes are those for which at least one descendant individual
-is also a descendant individual per direct child of the species tree root.
+Just as for CoordinatedUniform, the changed gene tree nodes are those for which at least one descendant individual
+is also a descendant individual for each child of the species tree root.
 Because the length of parent branches of the species tree root or connected
-components will be undefined, a different method must be used to choose
+components which include a gene tree root will be undefined, a different method must be used to choose
 $\epsilon$ compared to CoordinatedUniform.
 
 First the lower bound of the species tree root height is defined as the current
@@ -235,8 +254,8 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 
 \begin{align}
 \frac{\pi(x)}{\pi(x')} &= \frac{\lambda e^{-\lambda x}}{\lambda e^{-\lambda x'}} = \frac{e^{-\lambda x}}{e^{-\lambda x'}}\\
-\therefore \ln\left(\frac{\pi(x)}{\pi(x')}\right) &= \ln\left(e^{-\lambda x}\right) - \ln\left(e^{-\lambda x'}\right)\\
-& = \lambda x' \cdot \ln\left(e\right) - \lambda x \cdot \ln\left(e\right)\\
+\therefore \ln\frac{\pi(x)}{\pi(x')} &= \ln e^{-\lambda x} - \ln e^{-\lambda x'}\\
+& = \lambda x' \cdot \ln e - \lambda x \cdot \ln e\\
 & = \lambda \left(x' - x\right) = \lambda \epsilon
 \end{align}
 
@@ -251,9 +270,9 @@ effects of selection such as the faster molecular evolution of sex-biased genes
 in \textit{Arabidopsis thaliana} \citep{Gossmann01032014}. For a given species,
 the average substitution rate is correlated with a multitude of traits including
 metabolic rate, body size, and fecundity, although causal relationships are
-difficult to pin down \citep{Bromham2503}. Unsurprisingly, empirical analysis
+difficult to pin down \citep{Bromham2503}. Unsurprisingly in light of the above, empirical analysis
 has shown that two major factors contributing to rate variation among gene
-branches is the per-gene rate and the per-species rate
+branches are the per-gene rate and the per-species rate
 \citep{Rasmussen01122007}.
 
 Because variation is expected in the nature of different genes and species, and
@@ -261,7 +280,7 @@ therefore variation is also expected in the average substitution rate of differe
 genes and species, multispecies coalescent models should take both per-gene and
 per-species rate variation into account. *BEAST can accommodate both types of
 rate variation using gene tree relaxed clock models \citep[for examples see][]{Berv2014120, Lambert2015146}.
-This involves estimating per-branch substitution rates (branch rates) separately
+This involves estimating per-branch substitution rates separately
 for each branch of each gene tree. While gene tree relaxed clocks may
 accommodate variation in substitution rates between species, they do not produce
 estimates of species branch rates. To enable accurate inference of species
@@ -315,7 +334,7 @@ local clock (RLC) model \citep{Drummond2010}.
 \centering
 \includegraphics[width=8cm]{relaxed_clock.pdf}
 \caption
-{Multispecies coalescent phylogeny used to illustrate species tree relaxed
+{Two-species phylogeny used to illustrate species tree relaxed
 clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
 Within the species tree there is a single gene tree with extant individuals ``a''
 and ``b''. The single speciation event occurs at time T1, and the single coalescence
@@ -327,7 +346,7 @@ event occurs at time t1.}
 
 \subsection{StarBEAST2 correctly implements the multispecies coalescent}
 
-New methods must be shown to be mathematically correct implementations of the
+New methods must be shown to be correct implementations of the
 target model. One way to accomplish this for MCMC methods is to estimate
 parameters from a prior distribution using the MCMC kernel, and to also draw
 independent samples from an identical distribution by simulation. The resulting
@@ -348,14 +367,14 @@ The data set used for this analysis is from the North American chorus frog genus
 \textit{Pseudacris}, and was originally collected and analyzed by
 \cite{Barrow201478}. A key metric of phylogenies that can be used to judge
 whether it is necessary to employ MSC models is the average
-branch length in coalescent units $\nicefrac{\tau}{2Ne}$. Given short branch
+branch length in coalescent units $\nicefrac{\tau}{2N_e}$. Given short branch
 lengths, concatenation is unable to infer accurate species trees regardless of
 the number of loci used, but for long branch lengths, concatenation is
 approximately as accurate as *BEAST \citep{Ogilvie01052016}. Using StarBEAST2,
 the average branch length within this genus was determined to be
-$\nicefrac{1.69\tau}{2Ne}$. This is an intermediate average length, longer than
-the shallow simulations analyzed by \cite{Ogilvie01052016} which had a short
-average length of $\nicefrac{0.54\tau}{2Ne}$.
+$\nicefrac{3.22\tau}{2N_e}$. This is an intermediate average length compared to
+the shallow simulations analyzed by \cite{Ogilvie01052016} which had a shorter
+average length of $\nicefrac{0.54\tau}{2N_e}$.
 
 \subsection{Coordinated height changing operators and analytical integration improve performance}
 
@@ -366,80 +385,86 @@ convergence both effective sample size (ESS) per hour and ESS per million states
 were computed for each independent chain. ESS per hour can be used to calculate
 the total time required for a converged chain (nominally where ESS equals or
 exceeds 200), and reflects how effectively operators explore the space of trees
-and parameters, and the computational time required by each operator proposal
+and parameters, as well as the computational time required by each operator proposal
 and likelihood calculation. In contrast, ESS per million states reflects only
 the exploration of tree and parameter space independently of calculation times.
-A variety of statistics were logged for each analysis, but the height of the
-species tree had the slowest average convergence rates so we used that statistic
-to judge computational performance (Table~S1,S2).
+A variety of statistics were logged for each analysis (see Materials and Methods), and for
+each replicate the statistic with the slowest ESS rate for that particular chain
+was used when computing average ESS per hour and per million states.
 
 Multiple linear regressions with log transformed ESS rates as the response
-variables were used to measure the effect of adding topology changing operators,
-node height changing operators, and of the method of population size
-integration. Each additional feature was treated as a binary indicator variable, so that
-we were able to quantify the change in performance as a percentage by
+variables were used to measure the effect of coordinated topology changing operators,
+coordinated node height changing operators, and the method of population size
+integration. Each additional feature was treated as a binary indicator variable
+so that we could quantify the relative performance as a percentage by
 exponentiating the coefficient for each addition
-(Table~\ref{tab:convergenceLM}).
+(Table~\ref{tab:convergenceLM}). An interaction term for height changing
+operators and population size integration was included because visualization of
+ESS rates (Figure~\ref{fig:realEssPerHour}) suggested such an interaction existed.
 
 Coordinated topology operators had a negative effect on ESS per hour of gene
 tree relaxed clock analyses, regardless of the addition of height changing
 operators or the method of population size integration
-(Figure~\ref{fig:realEssPerHour}). There was no change to ESS per million states
-(Figure~\ref{fig:realEssPerMstates}), and it made no significant difference to the
-convergence of species tree relaxed clock analyses
-(Table~\ref{tab:convergenceLM}). These results suggest that coordinated topology
-operators are not substantially more effective than na\"ive operators at
-proposing new states.
+(Figure~\ref{fig:realEssPerHour}). Unaffected ESS per million states
+(Figure~S7) suggests that coordinated topology operators are no
+more effective than na\"ive operators at proposing new states. A decrease in the
+number of states per hour (Figure~S8) shows that they are more computationally
+expensive than na\"ive operators, and explains the negative effect on ESS per
+hour.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=8cm]{speciesTreeHeight_ess_per_hour.pdf}
+\includegraphics[width=8cm]{minimum_ess_per_hour.pdf}
 \caption
 {Effect of operators, population size integration and clock models on
 convergence. The performance of every combination of settings was measured when
-applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
-settings, and settings for bars marked with $\ast\ast$ are StarBEAST2 defaults. Topology refers to the
-replacement of na\"ive nearest-neighbor interchange and subtree prune and regraft operators with coordinated operators. Height
-refers to the addition of operators which make coordinated changes to
-node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
-to either each gene tree or to the species tree. Trimmed means of species tree
-height effective sample size (ESS) per hour were calculated from independent
-chains (N = 32). 25\% trim was used to reduce the influence of outliers. All error bars
-are 95\% confidence intervals calculated by bootstrapping.}
+applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents
+*BEAST settings, and settings for bars marked with $\ast\ast$ are StarBEAST2
+defaults. Topology refers to the replacement of na\"ive nearest-neighbor
+interchange and subtree prune and regraft operators with coordinated operators.
+Height refers to the addition of operators which make coordinated changes to
+node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied to
+either each gene tree or to the species tree. Trimmed means of effective
+sample size (ESS) per hour were calculated from independent chains (N = 32).
+25\% trim was used to reduce the influence of outliers. All error bars are 95\%
+confidence intervals calculated by bootstrapping.}
 \label{fig:realEssPerHour}
 \end{figure}
 
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=8cm]{speciesTreeHeight_ess_per_mstates.pdf}
-\caption
-{Effect of operators, population size integration and clock models on effective
-sample size (ESS) per million states. The performance of every combination of
-settings was measured when applied to 22 \textit{Pseudacris} loci. The bar marked with $\ast$ represents *BEAST
-settings, and settings for bars marked with $\ast\ast$ are StarBEAST2 defaults. Topology refers to the
-replacement of na\"ive nearest-neighbor interchange and subtree prune and regraft operators with coordinated operators. Height
-refers to the addition of operators which make coordinated changes to
-node heights. Uncorrelated log-normal (UCLN) relaxed clocks were applied
-to either each gene tree or to the species tree. Trimmed means
-of species tree height ESS per million states were calculated from
-independent chains (N = 32). 25\% trim was used to reduce the influence
-of outliers. All error bars are 95\% confidence intervals calculated by
-bootstrapping.}
-\label{fig:realEssPerMstates}
-\end{figure}
+Coordinated height changing operators improved convergence of gene tree relaxed
+clock analyses by 147\%. Without the new height changing operators convergence
+of species tree relaxed clock analyses was very slow, but with them convergence
+was improved by 659\% (Table~\ref{tab:convergenceLM}). This dramatic increase
+suggests that coordinated height changing operators are necessary for tractable
+implementations of species tree relaxed clocks.
+
+Species tree relaxed clocks with coordinated height changing operators were
+faster in terms of ESS per million states than gene tree relaxed clocks
+(Figure~S7), showing that new state proposals are more effective. However
+changing a species tree branch rate requires updating the phylogenetic
+likelihood for all gene trees so the computational cost is much higher than for
+gene tree relaxed clocks (Figure~S8), and species tree relaxed clocks are still
+moderately slower than gene tree relaxed clocks in terms of ESS per hour
+(Figure~\ref{fig:realEssPerHour}).
+
+In the absence of coordinated height changing operators, analytical population
+size integration had no significant effect on performance in any
+circumstance. However when combined with those operators, significant increases
+to ESS per hour and ESS per million states were observed for both gene tree and
+species tree relaxed clock analyses (Table~\ref{tab:convergenceLM}).
 
 \begin{table*}[htb!]
 \caption{Change in convergence performance induced by new features}
 \label{tab:convergenceLM}
 \begin{threeparttable}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrr@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrrr@{}}
 \hline
-Relaxed clock & ESS rate per & Topology & Height & Analytical integration\tabularnewline
+Relaxed clock & ESS rate per & Topology & H(eight) & A(nalytical) & H $\times$ A\tabularnewline
 \hline
-Gene trees & hour & -22\%{***} & 134\%{***} & 23\%{***}\tabularnewline
-Gene trees & million states & -5\%\hphantom{***} & 158\%{***} & 26\%{***}\tabularnewline
-Species tree & hour & -9\%\hphantom{***} & 114\%{***} & 7\%\hphantom{***}\tabularnewline
-Species tree & million states & 6\%\hphantom{***} & 128\%{***} & 9\%\hphantom{***}\tabularnewline
+Gene trees & hour & -17\%{***} & 147\%{***} & 7\%\hphantom{***} & 31\%{**}\hphantom{*}\tabularnewline
+Gene trees & million states & 1\%\hphantom{***} & 178\%{***} & 10\%\hphantom{***} & 30\%{*}\hphantom{**}\tabularnewline
+Species tree & hour & -9\%\hphantom{***} & 659\%{***} & 11\%\hphantom{***} & 23\%{*}\hphantom{**}\tabularnewline
+Species tree & million states & 6\%\hphantom{***} & 712\%{***} & 14\%\hphantom{***} & 22\%{*}\hphantom{**}\tabularnewline
 \hline
 \end{tabular*}
 \begin{tablenotes}
@@ -448,38 +473,78 @@ Species tree & million states & 6\%\hphantom{***} & 128\%{***} & 9\%\hphantom{**
 \end{threeparttable}
 \end{table*}
 
-Coordinated height changing operators significantly improved convergence both in
-terms of ESS per hour and ESS per million states. Both species and gene
-tree relaxed clock analyses benefited from enabling those operators
-(Table~\ref{tab:convergenceLM}). Analytical integration of population sizes only
-improved the computational performance of gene tree relaxed clock analyses;
-unlike height changing operators it did not significantly change the performance
-of species tree relaxed clock analyses (Table~\ref{tab:convergenceLM}).
+\subsection{Species tree relaxed clocks prevent SPILS}
 
-Convergence of species tree relaxed clock analyses was slower than convergence
-of gene tree relaxed clock analyses (Figure~\ref{fig:realEssPerHour}). The
-decrease in performance was less severe but still present in terms of ESS per
-million states (Figure~\ref{fig:realEssPerMstates}), which shows that compared
-to gene tree relaxed clock analyses the likelihood calculations have a higher
-time cost, but also that operators become less effective at exploring tree and
-parameter space.
+When using concatenation to infer a species tree, SPILS cause apparent
+substitution rate variation among predictable species tree branches. In a five-taxon
+species tree with extant species A through E, ILS within the AB branch is
+expected to increase the branch lengths of species A and B, and ILS within the
+ABC branch should increase the branch lengths of A, B and C. However in an
+ultrametric framework like BEAST, branch lengths are constrained so that
+terminal species begin at time zero. We hypothesized that if a relaxed clock is
+used with concatenation in an ultrametric framework, SPILS will be absorbed as
+faster substitution rates for branches that would be lengthened by SPILS in a
+non-ultrametric framework, and slower substitution rates for other branches.
 
-\subsection{StarBEAST2 is approximately three times faster than *BEAST}
+We used BEAST concatenation and StarBEAST2 with a species tree relaxed clock to
+infer the branch lengths and substitution rates of simulated fully asymmetric species
+trees with extant species A through E, using sequence alignments simulated using
+a strict clock. As hypothesized, substitution rates for the A and B branches
+(which are affected by ILS within AB and ABC branches) inferred using
+concatenation were biased towards being faster than the true rate of 1
+(Figure~\ref{fig:spilsRates}). Substitution rates for the C branch (which is not
+affected by ILS within the AB branch) showed a large spread, presumably
+depending on the differing degrees of ILS within the AB and ABC branches.
+Substitution rates for the D and E branches were biased towards being slower
+than 1. No biases were observed in branch rates estimated using StarBEAST2
+(Figure~\ref{fig:spilsRates}).
 
-Our reanalysis of \textit{Pseudacris} sequence data shows that analytical
-integration of population sizes and coordinated height changing operators both
+\begin{figure*}[htb!]
+\centering
+\includegraphics[width=\textwidth]{spils.pdf}
+\caption
+{Distributions of per-branch substitution rates inferred by concatenation and StarBEAST2. Estimated branch
+rates are the posterior expectation of the overall substitution rate for each
+species tree branch. Each panel shows the distributions for the labelled extant or
+ancestral branch.}
+\label{fig:spilsRates}
+\end{figure*}
+
+A number of estimated branch rates had 95\% credible intervals that excluded the
+true rate of 1 when using concatenation, that is were false positives. Using the
+credible interval criterion, in 34 out of 96 replicates the clock rate of the D
+branch was inferred to be slower than 1 (Figure~\ref{fig:spilsFalsePositives}),
+despite the sequence data being simulated using a strict clock. No false
+positive results were produced using StarBEAST2.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=8cm]{false_positives.pdf}
+\caption
+{Number of false positive per-species substitution rates estimated using concatenation. False positive
+branches are those with 95\% credibility intervals which do not include 1, the
+true rate of all branches. The first number above each branch is the count of
+false positive rates faster than 1, and second is the count of false positive
+rates slower than 1. The false positive counts are out of 96 total replicates.}
+\label{fig:spilsFalsePositives}
+\end{figure}
+
+\subsection{StarBEAST2 is approximately 6.6 times faster than *BEAST}
+
+Our reanalysis of \textit{Pseudacris} sequence data shows that coordinated height changing operators
+(and analytical integration of population sizes when combined with those operators)
 improve convergence. To show that this increased performance is generally
-applicable, and to demonstrate that StarBEAST2 can accurately reconstruct branch
-rates under a species tree relaxed clock model, we needed to apply StarBEAST2 to
-many different data sets for which the true species tree is known. To accomplish
-this we simulated 96 species trees of 19 taxa each under a birth-death model
-with log-normally distributed branch rates. Gene trees evolving within each
-species tree were simulated according to the MSC model with
-log-normally distributed mean clock rates. Finally, sequences were simulated
-according to an HKY process for each gene \citep{Hasegawa1985, Goldman1993}. The
-parameters used for these simulations were chosen to produce intermediate
-branch lengths in coalescent units; the average simulated branch length was
-$\nicefrac{1.44\tau}{2Ne}$.
+applicable, and to demonstrate that StarBEAST2 can accurately reconstruct
+species trees, we needed to apply StarBEAST2 to many different data sets for
+which the true species tree is known. To accomplish this we simulated 96 species
+trees of 19 taxa each under a birth-death model with log-normally distributed
+branch rates. Gene trees evolving within each species tree were simulated
+according to the MSC model with log-normally distributed mean clock rates.
+Finally, sequences were simulated according to an HKY process for each gene
+\citep{Hasegawa1985, Goldman1993}. The parameters used for these simulations
+were chosen to produce intermediate branch lengths in coalescent units; the
+average simulated branch length was $\nicefrac{3.22\tau}{2N_e}$, the same as for
+\textit{Pseudacris} to two decimal places.
 
 Simulated data was analyzed using concatenation with BEAST and using the MSC with
 StarBEAST2. The different settings used for StarBEAST2 were *BEAST settings,
@@ -491,43 +556,39 @@ relaxed clock applied to each gene tree. High performance settings included anal
 integration of population sizes, coordinated height changing operators, and
 na\"ive NNI and SPR topology operators.
 
-Again the parameter with the slowest convergence given any StarBEAST2 setting
-was the height of the species tree (Table~S3,S4). Based on that parameter, the
-average performance increase using StarBEAST2 with high performance settings over
-*BEAST settings was 3.1 times, with a 95\% confidence interval between 2.7 and
-3.6 (Figure~\ref{fig:simulatedEssPerHour}). The slowest converging parameter for
-concatenated analyses was the phylogenetic likelihood, and when using the same
-number of loci as StarBEAST2, convergence of that statistic using concatenation
-was 112 times faster than the convergence of species tree height using
-*BEAST settings. When concatenation was used with ten times the
-number of loci as StarBEAST2, the performance difference was minimal --- 1.2
-times, with a confidence interval between 1.1 and 1.4
-(Figure~\ref{fig:simulatedEssPerHour}).
+The average convergence rate of StarBEAST2 with high performance settings
+was 6.6$\times$ that of *BEAST, with a 95\% confidence interval between
+5.7 and 7.6 (Figure~\ref{fig:simulatedEssPerHour}). However StarBEAST2 is still
+slower than concatenation with the same number of loci, which was 69$\times$
+faster than *BEAST, with a 95\% confidence interval between 59 and 84. When
+concatenation was used with ten times the number of loci as *BEAST and StarBEAST2, the
+performance was similar to *BEAST --- 0.85$\times$, with a confidence interval
+between 0.73 and 0.99 (Figure~\ref{fig:simulatedEssPerHour}), and therefore
+slower than StarBEAST2.
 
 Consistent with analyses of \textit{Pseudacris} sequence data, using a species
-tree relaxed clock with high performance settings was faster than *BEAST settings.
-Also like \textit{Pseudacris}, use of species tree relaxed clocks was slower than
-gene tree relaxed clocks with high performance settings; the average performance
-increase over *BEAST settings was only 1.4 times with a confidence interval
-between 1.2 and 1.7 (Figure~\ref{fig:simulatedEssPerHour}).
+tree relaxed clock with high performance settings was faster than *BEAST settings, but slower than
+gene tree relaxed clocks with high performance settings. The average performance
+increase over *BEAST settings was 5.0 times with a confidence interval
+between 4.3 and 5.7 (Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=8cm]{multiple_ess_per_hour.pdf}
+\includegraphics[width=8cm]{minimum_relative_ess_per_hour.pdf}
 \caption
 {Convergence of different methods applied to simulated data. Methods are
 concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
 *BEAST settings and 22 loci, and StarBEAST2 with high performance settings, 22 loci,
 and uncorrelated log-normal relaxed clocks applied to the gene trees (GT-UCLN) or
 to the species tree (ST-UCLN). Relative estimated sample size (ESS) per hour is the trimmed mean for all replicates of
-ESS per hour divided by species tree height ESS per hour estimated using *BEAST
+ESS per hour divided by the ESS per hour estimated using *BEAST
 settings. 25\% trim was used to reduce the influence of
 outliers. All error bars are 95\% confidence intervals calculated by
 bootstrapping. N = 96.}
 \label{fig:simulatedEssPerHour}
 \end{figure}
 
-\subsection{Relative accuracy varies according to the type of error}
+\subsection{Concatenation is a worse estimator of branch lengths than topology}
 
 The accuracy of StarBEAST2 relative to concatenation varied depending on the
 type of error and whether equal numbers of loci were used. Relative species tree
@@ -546,7 +607,7 @@ choice of gene or species tree relaxed clocks affect the accuracy of StarBEAST2
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=7cm]{tree_error.pdf}
+\includegraphics[width=7.5cm]{tree_error.pdf}
 \caption
 {Accuracy of different methods applied to simulated data. Methods are concatenation with 22 loci, concatenation with 220 loci
 (10X), StarBEAST2 with *BEAST settings and 22 loci, and StarBEAST2 with
@@ -561,64 +622,69 @@ by bootstrapping. N = 96.}
 \label{fig:speciesTreeError}
 \end{figure}
 
-\clearpage
-
-\subsection{Concatenation cannot accurately infer branch rates given intermediate branch lengths}
+\subsection{StarBEAST2 is superior at inferring substitution rates given intermediate branch lengths}
 
 While the convergence of species tree relaxed clock analyses was slower than
-gene tree relaxed clock analyses using high performance settings, species tree relaxed
-clocks enable inference of species branch rates under the MSC. To gauge the
-accuracy of estimated branch rates, we used simple linear regressions with the
-true rate of each simulated branch as the response variable, and the posterior
-expectation of the rate of that branch (conditional on the corresponding clade
-being monophyletic in the posterior samples) as the explanatory variable. If all
-estimates equal the truth, then the $R^2$ coefficient of determination will
-equal 1.
+gene tree relaxed clock analyses using high performance settings, species tree
+relaxed clocks enable inference of species branch rates within an MSC framework.
+To gauge the accuracy of estimated branch rates, we used simple linear
+regressions with the true rate of each simulated branch as the explanatory
+variable, and the posterior expectation of the rate of that branch (conditional
+on the corresponding clade being monophyletic in the posterior samples) as the
+response variable. If all estimates equal the truth, then the $R^2$ coefficient
+of determination will equal 1.
 
-Using either 22 or 220 loci, concatenation was unable to accurately estimate
-branch lengths. $R^2$ was very weak at $0.04$ or $0.06$ respectively, and the
-deviation from the truth was actually worse when the number of loci was
-increased 10-fold (Figure~\ref{fig:deviation}). By applying a relaxed clock to
-the species tree, StarBEAST2 can be used to infer many branch rates. Deviation
-from the true simulated rates was superior to concatenation
-(Figure~\ref{fig:deviation}), and $R^2$ was concordantly higher at $0.17$.
+When estimating branch rates using concatenation with either 22 or 220 loci,
+$R^2$ was very weak at $0.07$ and $0.09$ respectively. By applying a relaxed
+clock to the species tree using StarBEAST2, the $R^2$ was much higher at $0.21$
+using just 22 loci (Figure~\ref{fig:branchRates}).
+
+The standard deviation of simulated branch rates was 0.16, and the standard
+deviation for the 220 locus concatenation analysis was 0.14. In contrast the
+sample standard deviations for 22 locus analyses were 0.08 and 0.07 for
+concatenation and StarBEAST2 respectively. This is because when the sequence
+alignments are less informative for a given branch (as happens when less loci are
+used), the posterior expectation of the rate will be close to the prior
+expectation which is 1. This is evident in Figure~\ref{fig:branchRates} as the
+large number of branch rates around 1 for both 22 locus analyses.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=7cm]{branch_rate_deviation.pdf}
+\includegraphics[width=7.5cm]{branch_rates.pdf}
 \caption
-{Deviation of species tree branch rates using concatenation versus StarBEAST2.
+{Estimates of species tree branch rates using concatenation versus StarBEAST2.
 Methods are concatenation with 22 loci, concatenation with 220 loci (10X), and
 StarBEAST2 with high performance settings, 22 loci, and a relaxed clock applied
 to the species tree. Estimated rates are the posterior expectations of each
-branch rate from each replicate. Root branch rates, which were fixed at 1.0,
-were excluded. N = 96.}
-\label{fig:deviation}
+branch rate from each replicate. Root branch rates, which were fixed at 1,
+were excluded. In blue are simple linear regression lines of best fit. N = 96.}
+\label{fig:branchRates}
 \end{figure}
 
 \section{Discussion}
 
-\subsection{StarBEAST2 will enable faster and/or more precise inference}
+\subsection{StarBEAST2 will enable faster and more precise inference}
 
 The increased performance of StarBEAST2 will enable researchers to analyze
 results faster and disseminate their findings sooner. A large MCMC analysis
-which would currently take three weeks can now be performed in just one week. In
-the case of phylogenomic data which has been subsetted for use with *BEAST,
-StarBEAST2 can alternatively be used to analyze more data for more precise
-estimates of species trees and other parameters in the same amount of time as a
-more limited *BEAST analysis.
+which would currently take six to seven weeks can now be performed in as little
+as one week. In the case of phylogenomic data which has been subsetted for use
+with *BEAST, StarBEAST2 can alternatively be used to analyze more data for more
+precise estimates of species trees and other parameters in the same amount of
+time as a more limited *BEAST analysis.
 
 Previous research on the scaling behaviour of *BEAST has shown that the
 relationship between the number of loci in a given analysis and the convergence
 in terms of ESS per hour follows a power law with the coefficient $-2.81$ for
 the log number of loci \citep{Ogilvie01052016}. If the number of loci for a
-given analysis is increased by 50\%, the decrease in performance is therefore
-expected to be $\exp(-2.81 \cdot \ln(1.5)) = 3.125$, approximately cancelling
+given analysis is doubled, the convergence rate is therefore
+expected to be $\exp(-2.81 \cdot \ln(2)) = 0.143 \approx \nicefrac{1}{7}$ that
+of the original analysis, approximately cancelling
 out the improved computational performance of StarBEAST2 compared to *BEAST.
 
 \subsection{Concatenation can still be inferior given intermediate branch lengths}
 
-For short branch lengths in coalescent units, concatenation cannot accurately
+For short branch lengths (in coalescent units), concatenation cannot accurately
 estimate branch lengths. *BEAST using just four loci will be more accurate than
 concatenation using 4096 loci in terms in relative species tree error and
 pendant edge bias. *BEAST will also be more accurate at estimating species tree
@@ -627,44 +693,49 @@ concatenation can be used with a much greater number of loci
 \citep{Ogilvie01052016}.
 
 We have shown that concatenation can still be inferior to *BEAST and StarBEAST2
-given longer, intermediate branch lengths. For the same number of loci, a higher
+given longer intermediate branch lengths. For the same number of loci, a higher
 relative species tree error indicates that concatenation is less accurate at
-estimating branch lengths, and a large pendant edge bias indicates a positive
-bias when estimating the ages of extant species. Unlike for short branch
-lengths, concatenation with 10 times more loci can catch up to StarBEAST2 in
+estimating branch lengths, and a large pendant edge bias indicates that
+concatenation tends to overestimate tip branch lengths --- equivalent to the
+ages of extant species given complete species sampling. Unlike the short branch
+length case, concatenation with 10 times more loci can catch up to StarBEAST2 in
 terms of relative species tree error, but is then slower than StarBEAST2 with
-high performance settings. In other words, for intermediate branch lengths StarBEAST2
-can be just as accurate as concatenation but needs less investment in both
-sequencing and computational time.
+high performance settings. In other words, for intermediate branch lengths
+StarBEAST2 can be just as accurate as concatenation but needs less investment in
+both sequencing and computational time.
 
 Concatenation cannot catch up to StarBEAST2 in terms of pendant edge bias.
 Pendant edge bias is important because many published phylogenies show evidence
 of a slowdown in diversification rate \citep{Moen2014190}. If the ages of extant
 species are overestimated, this will artificially reduce the number of recent
 speciation events, mimicking a slowdown. We suggest that accurate inference of
-changing diversification rates requires the use of fully Bayesian MSC methods
+changing diversification rates requires species trees inferred by fully Bayesian MSC methods
 like StarBEAST2.
 
-\subsection{A multispecies coalescent model is required when inferring species branch rates}
+\subsection{The multispecies coalescent should be used to infer per-species branch rates}
 
-We show that given intermediate branch lengths, concatenation is unable to
-accurately estimate per-species substitution rates, and it is reasonable to
-assume that shorter branch lengths in coalescent units would exacerbate the
-problem. StarBEAST2 can recover many branch rates, and given a more informative
-data set than our simulation study of 22$\times$400nt loci should be able to
-further improve the accuracy of estimated rates to a point. There are intrinsic
-limits to our ability to estimate substitution rates, primarily that branch
-length is confounded with substitution rate \citep{Thorne01092002}.
+Concatenation is already known to have difficulty inferring branch lengths
+because of SPILS. When a gene tree contains a branch absent from the species
+tree, substitutions along that branch must be attributed to multiple species tree
+branches in a concatenation analysis, lengthening those branches. Conversely,
+when a species tree contains a branch absent from a gene tree, no substitutions
+can be attributed to that branch, shortening the branch \citep{Mendes01072016}.
+We show that in an ultrametric framework using concatenation with a relaxed
+clock, the estimated substitution rate of branches lengthened by
+SPILS will be increased, and estimated substitution rate of other
+branches will be decreased. This causes false positive results when asking if substitution rates
+are constant across a species tree. In contrast, StarBEAST2 is resistant to
+SPILS and did not produce any false positive results.
 
-Concatenation is already known to have difficulty inferring substitution rates
-because of substitutions produced by ILS (SPILS). When a gene tree contains a
-branch absent from the species tree, substitution along that branch must be
-attributed to multiple species tree branches in a concatenation analysis,
-increasing the substitution rate of those branches. Conversely, when a species
-tree contains a branch absent from a gene tree, no substitutions will be
-attributed to that branch, decreasing the substitution rate
-\citep{Mendes28022016}. This could account for the troubling decline in accuracy
-of concatenation when the number of loci is increased.
+When given intermediate branch lengths, concatenation is unable to accurately
+estimate per-species substitution rates even when using 220 loci, and it is
+reasonable to assume that shorter coalescent branch lengths would
+exacerbate the problem. StarBEAST2 can recover many branch rates, and given a
+more informative data set than our simulation study of 22$\times$400nt loci
+should be able to further improve the accuracy of estimated rates to a point.
+There are intrinsic limits to our ability to estimate substitution rates,
+primarily that branch length is confounded with substitution rate
+\citep{Thorne01092002}.
 
 \section{Conclusions}
 
@@ -713,7 +784,7 @@ Birth rate & Fixed at 200.0\tabularnewline
 Death rate & Fixed at 100.0\tabularnewline
 UCLN branch rates & Log-normal ($\mu^a = 1.0, \sigma = 0.16$)\tabularnewline
 UCED branch rates & Exponential ($\lambda = 1.0$)\tabularnewline
-Haploid population sizes & Inv. gamma ($\alpha = 2.0, \beta = 0.002$)\tabularnewline
+Haploid population sizes & Inv. gamma ($\alpha = 3.0, \beta = 0.002$)\tabularnewline
 Haplotypes per species & Fixed at 1\tabularnewline
 Number of gene trees & Fixed at 2\tabularnewline
 Per-locus clock rates & Fixed at 0.5 and 2.0\tabularnewline
@@ -746,40 +817,36 @@ chains for all 16 conditions for a total of 512 chains. The conditions were each
 possible combination of species or gene tree relaxed clocks, analytical or
 MCMC population size integration, coordinated or na\"ive topology changing
 operators, and the inclusion or exclusion of coordinated height changing
-operators. Each chain used the same sequence data, but was an independent
-estimate of convergence because different random seeds were used to initialize
+operators. Each chain used the same sequence data but was an independent
+estimate of convergence because a different random seed was used to initialize
 each chain.
 
-A birth-death prior was used for the species tree and both the net diversification
-and extinction fraction hyperparameters were estimated. An inverse gamma prior was
-used for per-branch constant population sizes with a shape fixed at 2.0 and the
-mean population size hyperparameter was estimated. Relative per-locus clock
-rates were estimated using a log-normal prior distribution with the mean fixed
-at 1.0 in real space and the standard deviation hyperparameter was estimated. An
-HKY+$\Gamma$ substitution model with four gamma rate categories was applied to
-all loci and all base frequencies were estimated separately for each locus. The
-HKY transition/transversion bias $\kappa$ and gamma shape parameters were estimated and shared across all loci.
-
-The rate of the root species tree branch was estimated for species tree relaxed
-clock analyses, but the rates of gene tree root branches were not estimated as
-they do not affect the phylogenetic likelihood. The standard deviation of the
-UCLN clock model was fixed at 0.16 and 0.32 for species tree and gene tree
-relaxed clocks respectively. The number of UCLN rate categories was set to equal
-the number of species branches for species tree relaxed clocks (i.e. 37), or
-equal the number of gene tree branches excluding the root for gene tree
-relaxed clocks (i.e. 74).
+A birth-death prior was used for the species tree and both the net
+diversification and extinction fraction hyperparameters were estimated. An
+inverse gamma prior was used for per-branch constant population sizes with a
+shape fixed at 3 and the mean population size hyperparameter was estimated.
+Relative per-locus clock rates were estimated using a log-normal prior
+distribution with the mean fixed at 1 in real space and the standard deviation
+hyperparameter was estimated. An HKY+$\Gamma$ substitution model with four gamma
+rate categories was applied to all loci and all base frequencies were estimated
+separately for each locus. The HKY transition/transversion bias $\kappa$ and
+gamma shape parameters were estimated and shared across all loci. The standard
+deviation of the UCLN clock model was fixed at 0.16 and 0.32 for species tree
+and gene tree relaxed clocks respectively, and 100 rate categories were used for
+both types of relaxed clocks.
 
 To ensure convergence of all chains, we ran each chain for an initial length of
 $2^{23}$ states, sampling every $2^{10}$ states. ESS values were computed for
-all logged statistics after discarding 12.5\% of state samples as burn-in. Logged
-statistics included the posterior probability, the
-coalescent probabilities of gene trees, the birth death prior
-probability of the species tree, the phylogenetic likelihood, the net
-diversification rate, the extinction fraction, the HKY $\kappa$ parameter, the
-among-site rate variation $\alpha$ parameter, the standard deviation of
-per-locus clock rates, the mean population size, and the height of the species tree.
+all logged statistics after discarding 12.5\% of state samples as burn-in.
+Logged statistics included (1) the posterior probability, (2) the coalescent
+probabilities of gene trees, (3) the overall prior probability, (4) the birth
+death prior probability of the species tree, (5) the phylogenetic likelihood,
+(6) the net diversification rate, (7) the extinction fraction, (8) the HKY
+$\kappa$ parameter, (9) the among-site rate variation $\alpha$ parameter, (10)
+the standard deviation of per-locus clock rates, (11) the mean population size,
+(12) the height of the species tree, and (13) the length of the species tree.
 
-If any logged statistic had an ESS of below 200, the chain was resumed until the
+If any logged statistic had an ESS below 200, the chain was resumed until the
 length of the chain was doubled. ESS values were then re-evaluated, again after
 discarding 12.5\% of state samples. The length of the chain was continually
 doubled and ESS values re-evaluated until the ESS values of all logged
@@ -789,52 +856,86 @@ remained constant. By the time of submission all chains had converged.
 
 ESS per hour was calculated by dividing the final ESS value for a given
 statistic by 87.5\% of the total CPU time used by that chain to account for
-burn-in. Likewise ESS per million states was calculated by dividing the final ESS
-value by 87.5\% of the total number of the states in the chain. 
+burn-in. Likewise ESS per million states was calculated by dividing the final
+ESS value by 87.5\% of the total number of the states in the chain, then
+multiplied by one million. For all analyses of computational performance
+including graphs and linear models, the ESS rate for any given chain was that of
+the slowest converging statistic for that particular chain.
 
 Average branch length in coalescent units was calculated by concatenating the
-output of the two longest chains using the combination of MCMC population
-size integration, na\"ive topology operators, coordinated node height operators
-and species tree branch rates. Both chains had been run for $2^{30}$ states for
-a total of $2^{31}$ states. For every sample in the combined posterior
-distribution, the coalescent length of each branch $\nicefrac{\tau}{2Ne}$ was calculated from the
-length in substitution units $\tau$ and effective population size $Ne$ recorded at that
-step. The mean coalescent length of all branches across all samples was taken as
-the average.
+output (after discarding the first 12.5\% of states as burn-in from each chain) of all 32 chains
+which used the combination of MCMC population size integration, na\"ive topology
+operators, coordinated node height operators and species tree branch rates. For
+every sample in the combined posterior distribution, the coalescent length of
+each branch $\nicefrac{\tau}{2N_e}$ was calculated from its length in
+substitution units $\tau$ and its effective population size $N_e$. The mean
+coalescent length of all branches across all samples was taken as the average.
 
-\subsection{Simulation of trees and sequence data}
+\subsection{Testing the effects of SPILS on estimated substitution rates}
+
+To test how SPILS affected estimates of per-species branch substitution rates,
+96 fully asymmetric species trees were simulated with the topology
+(((A,B),C),D),E. All species trees were simulated according to a pure birth Yule
+process \citep{Yule21} with a speciation rate of 10.0.
+
+Haploid population sizes for each branch were chosen independently from an
+inverse gamma distribution with a shape of 3 and a scale of 0.2. 100 gene trees
+with one individual per extant species were then simulated for each species tree
+according to the MSC process using biopy. Finally 1000nt sequence alignments
+were then simulated for each gene tree according to the Jukes-Cantor
+substitution model \citep{JUKES196921}, equal base frequencies, no among-site
+rate variation, a strict molecular clock, and a substitution rate of 1 for each
+locus. Sequence alignments were simulated using Seq-Gen \citep{Rambaut01061997}.
+
+BEAST concatenation and StarBEAST2 were then used to estimate the branch rates
+and divergence times with the species tree topology fixed to the truth. The same
+substitution model used for simulating sequences (i.e. Jukes-Cantor, no rate
+variation among sites or loci) was also used for inference. UCLN relaxed
+clocks were applied to the tree inferred by BEAST concatenation and to the
+StarBEAST2 species tree.
+
+A slightly modified strategy to ensure convergence was used compared to
+\textit{Pseudacris} analyses. HKY $\kappa$, among-site rate variation $\alpha$,
+and per-locus clock rates were not estimated so those parameters were not
+logged. Likewise for concatenation analyses mean population sizes and coalescent
+probabilities were not logged. For StarBEAST2 the initial chain length was
+$2^{24}$ states, sampling every $2^{11}$ states. For concatenation the initial
+chain length was $2^{22}$ states, sampling every $2^{9}$ states. By the time of
+submission all chains had converged.
+
+For every converged chain, the posterior expectation and 95\% credibility
+intervals of per-species branch rates were calculated using the TreeAnnotator
+program supplied with BEAST.
+
+\subsection{Simulations to measure computational performance and statistical accuracy}
 
 All simulation parameters were chosen to be broadly similar to those observed in
 or estimated from the \textit{Pseudacris} data set.
 
 First, 96 species trees were simulated according to a birth-death process
 \citep{Gernhard2008769} using biopy with 19 extant species, a speciation rate of
-200.0 and a death rate of 50.0. This corresponds to a net diversification rate
-of 150.0 and an extinction fraction of 0.25. Haploid effective population sizes
+160.0 and a death rate of 80.0. This corresponds to a net diversification rate
+of 80.0 and an extinction fraction of 0.5. Haploid population sizes
 for each branch were chosen independently from an inverse gamma distribution
-with a shape of 2.0 and a scale of 0.002. For a species with annual generation
+with a shape of 3 and a scale of 0.004. For a species with annual generation
 times, as is the case for at least some \textit{Pseudacris} species
-\citep{10.2307/1446044}, this corresponds to a diploid effective population size
-of 1000 individuals per generation. Species branch rates were chosen from a
-log-normal distribution with a mean in real space of 1.0 and a standard
+\citep{10.2307/1446044}, this corresponds to an effective population size
+of around 1000 individuals per generation. Species branch rates were chosen from a
+log-normal distribution with a mean in real space of 1 and a standard
 deviation of 0.16, then scaled so that the mean of the branch rates for a given
-species tree was exactly 1.0.
+species tree was exactly 1. This ensured that per-branch rates always reflected
+relative differences in substitution rates.
 
-For each species tree, 220 gene trees with two sampled haplotype sequences per species
-were simulated according to the MSC process using biopy. The
-mean clock rate for each locus was chosen from a log-normal distribution with a
-mean in real space of 1.0 and a standard deviation of 0.3. The clock rates of
-each sequential block of 22 loci were then scaled so that the mean of the clock
-rates for a given block was exactly 1.0. Scaling branch rates and clock rates
-was done to ensure that the measured accuracy of StarBEAST2 and concatenation reflected
-relative rather than absolute differences between simulated and estimated times
-and rates.
+For each species tree, 220 gene trees with two sampled haplotype sequences per
+species were simulated according to the MSC process using biopy. The mean clock
+rate for each locus was chosen from a log-normal distribution with a mean in
+real space of 1 and a standard deviation of 0.3.
 
 For each gene tree, 400nt long sequence alignments were simulated using Seq-Gen
 \citep{Rambaut01061997}. An HKY model was used for all sequence alignments with
-equal base frequencies, a $\kappa$ value of 3.0, and a four rate category discretized gamma model
-of among-site rate variation with a shape $\alpha$ value of 0.2
-\citep{Yang1994}.
+equal base frequencies, a $\kappa$ value of 3, and a four rate category
+discretized gamma model of among-site rate variation with a shape $\alpha$ value
+of 0.2 \citep{Yang1994}.
 
 \subsection{Performance and accuracy of StarBEAST2 and concatenation}
 
@@ -845,22 +946,21 @@ high performance settings and species tree relaxed clocks. A single MCMC chain w
 run for each method of inference for all 96 replicates, a total of 480 chains.
 
 The settings used for StarBEAST2 analyses of simulated sequence data were
-identical to the analysis of \textit{Pseudacris} sequence data, except that 100
-rate categories were used for all UCLN relaxed clocks. Concatenation used the
-same settings as StarBEAST2, but instead of inferring each gene tree within a
-species tree, a single concatenated tree was inferred using the likelihoods of
-all loci. In addition to the rates of concatenated tree branches, we estimated
-the per-gene rates, a model equivalent to that described by \cite{Rasmussen01122007}.
-Heterozygous sites were ambiguity coded for concatenation analyses.
+identical to the analysis of \textit{Pseudacris} sequence data. Concatenation
+used the same settings as StarBEAST2, but instead of inferring each gene tree
+within a species tree, a single concatenated tree was inferred using the
+likelihoods of all loci. In addition to the rates of concatenated tree branches,
+we estimated the per-locus rates in the same way as for StarBEAST2, a model
+equivalent to that described by \cite{Rasmussen01122007}. Heterozygous sites
+were ambiguity coded for concatenation analyses.
 
-The same strategy to ensure convergence was used as for \textit{Pseudacris}
-analyses, but slightly modified for concatenated analyses; mean population sizes
-and coalescent probabilities were not logged because they are not estimated, and
-the initial chain length was only $2^{20}$ states, sampling every $2^{7}$
-states. By the time of submission all chains had converged. ESS per hour and ESS
-per million states were calculated using all chains regardless of convergence in
-the same way as for \textit{Pseudacris}. Measures of accuracy were calculated
-from only the converged chains.
+Again a slightly modified strategy to ensure convergence was used compared to
+\textit{Pseudacris} analyses. Mean population sizes and coalescent probabilities
+are not estimated and hence were not logged for concatenation analyses. The
+initial chain length for concatenation was $2^{20}$ states, sampling every
+$2^{7}$ states. By the time of submission all chains had converged. ESS per hour
+and ESS per million states were calculated in the same way as for
+\textit{Pseudacris}.
 
 Relative species tree error is based on ``rooted branch score''
 \citep[RBS;][]{Heled2013}. Given two trees $T_1$ and $T_2$, the sets of
@@ -891,21 +991,21 @@ rooted Robinson-Foulds distance is the average of all distances between each
 estimated tree and the true tree for all posterior samples.
 
 \section{Supplementary Material}
-Supplementary tables S1--S4 and figures S1--S6 are available at Molecular Biology and Evolution
-online (http://www.mbe.oxfordjournals.org/).
+Supplementary figures S1--S8 will be made available online.
 
 \section{Acknowledgments}
 
-This work was supported by a Rutherford Discovery Fellowship awarded to A.J.D. by
-the Royal Society of New Zealand. H.A.O. was supported by an Australian Laureate
-Fellowship awarded to Craig Moritz by the Australian Research Council
+This work was supported by a Rutherford Discovery Fellowship awarded to A.J.D.
+by the Royal Society of New Zealand. H.A.O. was supported by an Australian
+Laureate Fellowship awarded to Craig Moritz by the Australian Research Council
 (FL110100104). This research was undertaken with the assistance of resources
 from the National Computational Infrastructure (NCI), which is supported by the
 Australian Government. We wish to thank Jason Bragg and Renee Catullo for
-testing StarBEAST2 before its official release, Tim Vaughan for suggesting the
-addition of the root height changing operator, Joseph Heled for insight into the
-multispecies coalescent, and Graham Jones for input regarding operator
-performance.
+testing StarBEAST2 before its official release, Timothy Vaughan for suggesting
+the addition of a root height changing operator, Joseph Heled for insight into
+the multispecies coalescent, and Graham Jones for input regarding operator
+performance. We also thank F\'abio Mendes and Matthew Hahn for discussing the
+apparent substitution rate variation induced by SPILS.
 
 \bibliographystyle{natbib}%%%%natbib.sty
 \bibliography{starbeast2-mbe}%%%refs.bib

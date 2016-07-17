@@ -33,14 +33,17 @@ eprint = {http://sysbio.oxfordjournals.org/content/65/3/381.full.pdf+html},
 journal = {Systematic Biology} 
 }
 
-@article{Mendes28022016,
-author = {Mendes, Fábio K. and Hahn, Matthew W.}, 
+@article{Mendes01072016,
+author = {Mendes, F\'abio K. and Hahn, Matthew W.}, 
 title = {Gene Tree Discordance Causes Apparent Substitution Rate Variation},
+volume = {65}, 
+number = {4}, 
+pages = {711--721}, 
 year = {2016}, 
 doi = {10.1093/sysbio/syw018}, 
 abstract ={Substitution rates are known to be variable among genes, chromosomes, species, and lineages due to multifarious biological processes. Here, we consider another source of substitution rate variation due to a technical bias associated with gene tree discordance. Discordance has been found to be rampant in genome-wide data sets, often due to incomplete lineage sorting (ILS). This apparent substitution rate variation is caused when substitutions that occur on discordant gene trees are analyzed in the context of a single, fixed species tree. Such substitutions have to be resolved by proposing multiple substitutions on the species tree, and we therefore refer to this phenomenon as Substitutions Produced by ILS (SPILS). We use simulations to demonstrate that SPILS has a larger effect with increasing levels of ILS, and on trees with larger numbers of taxa. Specific branches of the species trees are consistently, but erroneously, inferred to be longer or shorter, and we show that these branches can be predicted based on discordant tree topologies. Moreover, we observe that fixing a species tree topology when performing tests of positive selection increases the false positive rate, particularly for genes whose discordant topologies are most affected by SPILS. Finally, we use data from multiple Drosophila species to show that SPILS can be detected in nature. Although the effects of SPILS are modest per gene, it has the potential to affect substitution rate variation whenever high levels of ILS are present, particularly in rapid radiations. The problems outlined here have implications for character mapping of any type of trait, and for any biological process that causes discordance. We discuss possible solutions to these problems, and areas in which they are likely to have caused faulty inferences of convergence and accelerated evolution.}, 
-URL = {http://sysbio.oxfordjournals.org/content/early/2016/04/06/sysbio.syw018.abstract}, 
-eprint = {http://sysbio.oxfordjournals.org/content/early/2016/04/06/sysbio.syw018.full.pdf+html}, 
+URL = {http://sysbio.oxfordjournals.org/content/65/4/711.abstract}, 
+eprint = {http://sysbio.oxfordjournals.org/content/65/4/711.full.pdf+html}, 
 journal = {Systematic Biology} 
 }
 
@@ -53,7 +56,7 @@ year = {2014},
 month = {04},
 volume = {10},
 url = {http://dx.doi.org/10.1371%2Fjournal.pcbi.1003537},
-pages = {1--6},
+pages = {e1003537},
 abstract = {<p>We present a new open source, extensible and flexible software platform for Bayesian evolutionary analysis called BEAST 2. This software platform is a re-design of the popular BEAST 1 platform to correct structural deficiencies that became evident as the BEAST 1 software evolved. Key among those deficiencies was the lack of post-deployment extensibility. BEAST 2 now has a fully developed package management system that allows third party developers to write additional functionality that can be directly installed to the BEAST 2 analysis platform via a package manager without requiring a new software release of the platform. This package architecture is showcased with a number of recently published new models encompassing birth-death-sampling tree priors, phylodynamics and model averaging for substitution models and site partitioning. A second major improvement is the ability to read/write the entire state of the MCMC chain to/from disk allowing it to be easily shared between multiple instances of the BEAST software. This facilitates checkpointing and better support for multi-processor and high-end computing extensions. Finally, the functionality in new packages can be easily added to the user interface (BEAUti 2) by a simple XML template-based mechanism because BEAST 2 has been re-designed to provide greater integration between the analysis engine and the user interface so that, for example BEAST and BEAUti use exactly the same XML file format.</p>},
 number = {4},
 doi = {10.1371/journal.pcbi.1003537}
@@ -80,7 +83,6 @@ journal = {ArXiv e-prints},
 archivePrefix = "arXiv",
 eprint = {1512.03843},
 primaryClass = "q-bio.PE",
-keywords = {Quantitative Biology - Populations and Evolution},
 year = 2015,
 month = dec,
 adsurl = {http://adsabs.harvard.edu/abs/2015arXiv151203843R},
@@ -92,11 +94,11 @@ author="Jones, Graham",
 title="Algorithmic improvements to species delimitation and phylogeny estimation under the multispecies coalescent",
 journal="Journal of Mathematical Biology",
 year="2016",
-pages="1--21",
 abstract="The focus of this article is a Bayesian method for inferring both species delimitations and species trees under the multispecies coalescent model using molecular sequences from multiple loci. The species delimitation requires no a priori assignment of individuals to species, and no guide tree. The method is implemented in a package called STACEY for BEAST2, and is a extension of the author's DISSECT package. Here we demonstrate considerable efficiency improvements by using three new operators for sampling from the posterior using the Markov chain Monte Carlo algorithm, and by using a model for the population size parameters along the branches of the species tree which allows these parameters to be integrated out. The correctness of the moves is demonstrated by tests of the implementation. The practice of using a pipeline approach to species delimitation under the multispecies coalescent, has been shown to have major problems on simulated data (Olave et al. in Syst Biol 63:263--271. doi:10.1093/sysbio/syt106, 2014). The same simulated data set is used to demonstrate the accuracy and improved convergence of the present method. We also compare performance with *BEAST for a fixed delimitation analysis on a large data set, and again show improved convergence.",
 issn="1432-1416",
 doi="10.1007/s00285-016-1034-0",
-url="http://dx.doi.org/10.1007/s00285-016-1034-0"
+url="http://dx.doi.org/10.1007/s00285-016-1034-0",
+note = {Advance access}
 }
 
 @article{Andrieu2008,
@@ -191,7 +193,6 @@ author = {C Moritz and T E Dowling and W M Brown},
 title = {Evolution of Animal Mitochondrial {DNA}: Relevance for Population Biology and Systematics},
 journal = {Annual Review of Ecology and Systematics},
 volume = {18},
-number = {1},
 pages = {269--292},
 year = {1987},
 doi = {10.1146/annurev.es.18.110187.001413},
@@ -208,7 +209,7 @@ year = {2006},
 month = {03},
 volume = {4},
 url = {http://dx.doi.org/10.1371%2Fjournal.pbio.0040088},
-pages = {},
+pages = {e88},
 abstract = {This new method can simultaneously infer phylogeny and estimate the molecular clock. The authors run their method on several large alignments to show its phylogenetic accuracy and ability to infer a timescale to evolution.},
 number = {5},
 doi = {10.1371/journal.pbio.0040088}
@@ -257,7 +258,7 @@ url="http://dx.doi.org/10.1007/BF00166252"
 @misc{biopy,
 Author = {Heled, Joseph},
 Howpublished = {\url{https://figshare.com/articles/biopy_a_Library_for_Phylogenetic_Exploration/761224}},
-Title = {biopy - a Library for Phylogenetic Exploration},
+Title = {biopy --- a Library for Phylogenetic Exploration},
 Year = {2013}
 }
 
@@ -277,7 +278,7 @@ keywords = "Phylogenetics",
 keywords = "Macroevolutionary models",
 keywords = "Birth–death process",
 keywords = "Reconstructed process ",
-abstract = "We investigate a neutral model for speciation and extinction, the constant rate birth–death process. The process is conditioned to have n extant species today, we look at the tree distribution of the reconstructed trees—i.e. the trees without the extinct species. Whereas the tree shape distribution is well-known and actually the same as under the pure birth process, no analytic results for the speciation times were known. We provide the distribution for the speciation times and calculate the expectations analytically. This characterizes the reconstructed trees completely. We will show how the results can be used to date phylogenies. "
+abstract = "We investigate a neutral model for speciation and extinction, the constant rate birth--death process. The process is conditioned to have n extant species today, we look at the tree distribution of the reconstructed trees--i.e. the trees without the extinct species. Whereas the tree shape distribution is well-known and actually the same as under the pure birth process, no analytic results for the speciation times were known. We provide the distribution for the speciation times and calculate the expectations analytically. This characterizes the reconstructed trees completely. We will show how the results can be used to date phylogenies."
 }
 
 @article{10.2307/1446044,
@@ -312,7 +313,7 @@ journal = {Computer applications in the biosciences}
 title = "Comparison of phylogenetic trees",
 journal = "Mathematical Biosciences",
 volume = "53",
-number = "1",
+number = "1--2",
 pages = "131--147",
 year = "1981",
 note = "",
@@ -433,8 +434,7 @@ title="{BEAST}: Bayesian evolutionary analysis by sampling trees",
 journal="BMC Evolutionary Biology",
 year="2007",
 volume="7",
-number="1",
-pages="1--8",
+pages="214",
 issn="1471-2148",
 doi="10.1186/1471-2148-7-214",
 url="http://dx.doi.org/10.1186/1471-2148-7-214"
@@ -475,8 +475,7 @@ title="A maximum pseudo-likelihood approach for estimating species trees under t
 journal="BMC Evolutionary Biology",
 year="2010",
 volume="10",
-number="1",
-pages="1--18",
+pages="302",
 issn="1471-2148",
 doi="10.1186/1471-2148-10-302",
 url="http://dx.doi.org/10.1186/1471-2148-10-302"
@@ -543,41 +542,14 @@ author = "James H. Degnan and Noah A. Rosenberg",
 abstract = "The field of phylogenetics is entering a new era in which trees of historical relationships between species are increasingly inferred from multilocus and genomic data. A major challenge for incorporating such large amounts of data into inference of species trees is that conflicting genealogical histories often exist in different genes throughout the genome. Recent advances in genealogical modeling suggest that resolving close species relationships is not quite as simple as applying more data to the problem. Here we discuss the complexities of genealogical discordance and review the issues that new methods for multilocus species tree inference will need to address to account successfully for naturally occurring genomic variability in evolutionary histories. "
 }
 
-@article{Blom056085,
-author = {Blom, Mozes P.K. and Bragg, Jason G. and Potter, Sally and Moritz, Craig},
-title = {Accounting for Uncertainty in Gene Tree Estimation: Summary-Coalescent Species Tree Inference in a Challenging Radiation of {Australian} Lizards},
-year = {2016},
-doi = {10.1101/056085},
-publisher = {Cold Spring Harbor Labs Journals},
-abstract = {Accurate gene tree inference is an important aspect of species tree estimation in a summary-coalescent framework. Yet, in empirical studies, inferred gene trees differ in accuracy due to stochastic variation in phylogenetic signal between targeted loci. Empiricists should therefore examine the consistency of species tree inference, while accounting for the observed heterogeneity in gene tree resolution of phylogenomic datasets. Here, we assess the impact of gene tree estimation error on summary-coalescent species tree inference by screening ~2000 exonic loci based on gene tree resolution prior to phylogenetic inference. We focus on a phylogenetically challenging radiation of Australian lizards (genus Cryptoblepharus, Scincidae) and explore effects on topology and support. We identify a well-supported topology based on all loci and find that a relatively small number of high-resolution gene trees can be sufficient to converge on the same topology. Adding gene trees with decreasing resolution produced a generally consistent topology, and increased confidence for specific bipartitions that were poorly supported when using a small number of informative loci. This corroborates coalescent-based simulation studies that have highlighted the need for a large number of loci to confidently resolve challenging relationships and refutes the notion that low-resolution gene trees introduce phylogenetic noise. Further, our study also highlights the value of quantifying changes in nodal support across locus subsets of increasing size (but decreasing gene tree resolution). Such detailed analyses can reveal anomalous fluctuations in support at some nodes, suggesting the possibility of model violation. By characterizing the heterogeneity in phylogenetic signal among loci, we can account for uncertainty in gene tree estimation and assess its effect on the consistency of the species tree estimate. We suggest that the evaluation of gene tree resolution should be incorporated in the analysis of empirical phylogenomic datasets. This will ultimately increase our confidence in species tree estimation using summary-coalescent methods and enable us to exploit genomic data for phylogenetic inference.},
-URL = {http://biorxiv.org/content/early/2016/05/30/056085},
-eprint = {http://biorxiv.org/content/early/2016/05/30/056085.full.pdf},
-journal = {bioRxiv}
-}
-
-@article{2015arXiv150401896R,
-author = {{Robert}, C.~P.},
-title = "{The Metropolis-Hastings algorithm}",
-journal = {ArXiv e-prints},
-archivePrefix = "arXiv",
-eprint = {1504.01896},
-primaryClass = "stat.CO",
-keywords = {Statistics - Computation},
-year = 2015,
-month = apr,
-adsurl = {http://adsabs.harvard.edu/abs/2015arXiv150401896R},
-adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}
-
 @Article{Drummond2010,
 author="Drummond, Alexei J. and Suchard, Marc A.",
 title="Bayesian random local clocks, or one rate to rule them all",
 journal="BMC Biology",
 year="2010",
 volume="8",
-number="1",
-pages="1--12",
-abstract="Relaxed molecular clock models allow divergence time dating and ``relaxed phylogenetic'' inference, in which a time tree is estimated in the face of unequal rates across lineages. We present a new method for relaxing the assumption of a strict molecular clock using Markov chain Monte Carlo to implement Bayesian modeling averaging over random local molecular clocks. The new method approaches the problem of rate variation among lineages by proposing a series of local molecular clocks, each extending over a subregion of the full phylogeny. Each branch in a phylogeny (subtending a clade) is a possible location for a change of rate from one local clock to a new one. Thus, including both the global molecular clock and the unconstrained model results, there are a total of 22n-2 possible rate models available for averaging with 1, 2, ..., 2n - 2 different rate categories.",
+pages="114",
+abstract="Relaxed molecular clock models allow divergence time dating and ``relaxed phylogenetic'' inference, in which a time tree is estimated in the face of unequal rates across lineages. We present a new method for relaxing the assumption of a strict molecular clock using Markov chain Monte Carlo to implement Bayesian modeling averaging over random local molecular clocks. The new method approaches the problem of rate variation among lineages by proposing a series of local molecular clocks, each extending over a subregion of the full phylogeny. Each branch in a phylogeny (subtending a clade) is a possible location for a change of rate from one local clock to a new one. Thus, including both the global molecular clock and the unconstrained model results, there are a total of 22n-2 possible rate models available for averaging with 1, 2, ..., 2n-2 different rate categories.",
 issn="1741-7007",
 doi="10.1186/1741-7007-8-114",
 url="http://dx.doi.org/10.1186/1741-7007-8-114"
@@ -670,6 +642,18 @@ volume = {57},
 year = {1970}
 }
 
+@article{Metropolis1953,
+author = "Metropolis, Nicholas and Rosenbluth, Arianna W. and Rosenbluth, Marshall N. and Teller, Augusta H. and Teller, Edward",
+title = "Equation of State Calculations by Fast Computing Machines",
+journal = "The Journal of Chemical Physics",
+year = "1953",
+volume = "21",
+number = "6", 
+pages = "1087--1092",
+url = "http://scitation.aip.org/content/aip/journal/jcp/21/6/10.1063/1.1699114",
+doi = "http://dx.doi.org/10.1063/1.1699114" 
+}
+
 @article{Heled01032010,
 author = {Heled, Joseph and Drummond, Alexei J.}, 
 title = {Bayesian Inference of Species Trees from Multilocus Data},
@@ -759,9 +743,8 @@ journal = {Philosophical Transactions of the Royal Society B: Biological Science
 }
 
 @incollection{JUKES196921,
-title = "\{CHAPTER\} 24 - Evolution of Protein Molecules ",
-editor = "MUNRO, H.N. ",
-booktitle = "Mammalian Protein Metabolism ",
+title = "Evolution of Protein Molecules",
+booktitle = "Mammalian Protein Metabolism",
 publisher = "Academic Press",
 edition = "",
 address = "",
@@ -770,5 +753,5 @@ pages = "21--132",
 isbn = "978-1-4832-3211-9",
 doi = "http://dx.doi.org/10.1016/B978-1-4832-3211-9.50009-7",
 url = "http://www.sciencedirect.com/science/article/pii/B9781483232119500097",
-author = "THOMAS H. JUKES and CHARLES R. CANTOR"
+author = "THOMAS H. Jukes and CHARLES R. Cantor"
 }
