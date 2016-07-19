@@ -63,7 +63,7 @@ relaxed clocks, and we show that unlike concatenation it can accurately estimate
 per-species substitution rates. StarBEAST2 is available through the BEAUTi
 package manager in BEAST 2.4 and above.}
 
-\keyword{Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation.}
+\keyword{Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation, incomplete lineage sorting.}
 
 \maketitle
 
@@ -93,19 +93,22 @@ sequences from multiple loci, use alternative MSC methods which are based on
 summary statistics instead of the full sequence data, or choose a tractable
 subset of loci to use with *BEAST.
 
-Concatenating sequences from multiple loci will reconstruct the single tree that
-best fits the combined sequence alignment. Popular concatenation methods include
-the RAxML, PAML and PhyML maximum likelihood methods \citep{Stamatakis01052014,
-Yang01082007,Guindon01052010}, and the ExaBayes and BEAST Bayesian methods
-\citep{Aberer01102014, Drummond2007}. Recent results show that concatenation
+Using maximum likelihood phylogenetic methods to infer a species tree based on concatenated
+sequences will return the single tree that
+best fits the combined sequence alignment according to the phylogenetic likelihood function \citep{Felsenstein1981}. Popular maximum-likelihood concatenation methods include
+RAxML, PAML and PhyML \citep{Stamatakis01052014,
+Yang01082007,Guindon01052010}. Bayesian methods, such as ExaBayes and BEAST
+\citep{Aberer01102014, Drummond2007}, will instead return a distribution of trees which are probable
+given the combined sequence alignment, a set of priors, and the same likelihood function.
+Recent results show that likelihood-based concatenation
 can be counterproductive, producing statistically inconsistent results which assign
 high confidence to incorrect nodes due to model misspecification
 \citep{NYAS:NYAS12747}. In the so-called ``anomaly zone'' of short branch
-lengths, the most likely gene tree topology will be different from the species
-tree, and concatenated tree topologies will likely differ from the true species
+lengths, the most probable gene tree topology will be different from the species
+tree, and estimated tree topologies will likely differ from the true species
 tree topologies \citep{journal.pgen.0020068, Kubatko01022007}.
 
-More recently identified problems with concatenation are systematic errors when
+More recently identified problems with likelihood-based concatenation are systematic errors when
 estimating branch lengths, including overestimation of divergence times. Because
 some time is required for genes to coalescence looking backwards in time from
 a speciation event, the expected molecular distance between two species is
@@ -118,7 +121,7 @@ Incomplete lineage sorting (ILS) also causes systematic errors in estimated
 branch lengths when using concatenation, because substitutions on a discordant gene tree branch
 which has no corresponding species tree branch must be explained by multiple
 substitutions on different species tree branches. This is known as substitutions
-induced by ILS (SPILS), and it causes concatenation to overestimate the lengths of specific
+produced by ILS (SPILS), and it causes concatenation to overestimate the lengths of specific
 branches and underestimate the lengths of others, which produces apparent
 substitution rate variation where none exists \citep{Mendes01072016}. For all
 the above reasons, trees
@@ -130,11 +133,11 @@ of the full sequence data have been developed for use with phylogenomic data.
 Popular summary methods include MP-EST and ASTRAL \citep{Liu2010,
 Mirarab01092014}, but recent results show that MP-EST should be used with caution as it is
 sensitive to gene tree errors \citep{Mirarab15062015, Xi201563}. At low levels of
-ILS, MP-EST is less accurate than concatenation at
+ILS, MP-EST is less accurate than likelihood-based or neighbor-joining concatenation at
 inferring topologies, and even at high levels of ILS it may be no more accurate
 than concatenation \citep{Ogilvie01052016}. While other summary methods like
-ASTRAL may be more reliable than MP-EST, none of these methods can infer branch
-lengths in substitution units. Divergence times therefore cannot be
+ASTRAL may be more reliable than MP-EST, these methods estimate branch lengths
+in coalescent units instead of substitutions. Molecular-clock informed divergence times therefore cannot be
 reconstructed using summary methods. If concatenation is used to estimate branch
 lengths or divergence times for a fixed species tree
 topology estimated using a summary method, then those estimates will be
@@ -368,7 +371,7 @@ The data set used for this analysis is from the North American chorus frog genus
 \cite{Barrow201478}. A key metric of phylogenies that can be used to judge
 whether it is necessary to employ MSC models is the average
 branch length in coalescent units $\nicefrac{\tau}{2N_e}$. Given short branch
-lengths, concatenation is unable to infer accurate species trees regardless of
+lengths, likelihood-based or neighbor-joining concatenation is unable to infer accurate species trees regardless of
 the number of loci used, but for long branch lengths, concatenation is
 approximately as accurate as *BEAST \citep{Ogilvie01052016}. Using StarBEAST2,
 the average branch length within this genus was determined to be
@@ -475,7 +478,7 @@ Species tree & million states & 6\%\hphantom{***} & 712\%{***} & 14\%\hphantom{*
 
 \subsection{Species tree relaxed clocks prevent SPILS}
 
-When using concatenation to infer a species tree, SPILS cause apparent
+When using concatenation to infer a species tree, SPILS causes apparent
 substitution rate variation among predictable species tree branches. Given a
 species tree with the toplogy (((A,B),C),D),E, ILS within the AB branch is
 expected to increase the branch lengths of species A and B, and ILS within the
@@ -487,14 +490,14 @@ faster substitution rates for branches that would be lengthened by SPILS in a
 non-ultrametric framework, and slower substitution rates for other branches.
 
 We used BEAST concatenation and StarBEAST2 with a species tree relaxed clock to
-infer the branch lengths and substitution rates of simulated fully asymmetric species
-trees with extant species A through E, using sequence alignments simulated using
+infer the branch lengths and substitution rates of simulated species
+trees with the toplogy (((A,B),C),D),E, using sequence alignments simulated using
 a strict clock. As hypothesized, substitution rates for the A and B branches
-(which are affected by ILS within AB and ABC branches) inferred using
+(which are affected by discordant coalescence events in the ABC and ABCD branches) inferred using
 concatenation were biased towards being faster than the true rate of 1
-(Figure~\ref{fig:spilsRates}). Substitution rates for the C branch (which is not
-affected by ILS within the AB branch) showed a large spread, presumably
-depending on the differing degrees of ILS within the AB and ABC branches.
+(Figure~\ref{fig:spilsRates}). Substitution rates for the C branch (which are not
+affected by discordant coalescence events in the ABC branch) showed a large spread, presumably
+depending on the differing amount of discordant events in the ABC and ABCD branches.
 Substitution rates for the D and E branches were biased towards being slower
 than 1. No biases were observed in branch rates estimated using StarBEAST2
 (Figure~\ref{fig:spilsRates}).
@@ -503,7 +506,7 @@ than 1. No biases were observed in branch rates estimated using StarBEAST2
 \centering
 \includegraphics[width=\textwidth]{spils.pdf}
 \caption
-{Distributions of per-branch substitution rates inferred by concatenation and StarBEAST2. Estimated branch
+{Distributions of per-branch substitution rates inferred by BEAST concatenation and StarBEAST2. Estimated branch
 rates are the posterior expectation of the overall substitution rate for each
 species tree branch. Each panel shows the distributions for the labelled extant or
 ancestral branch. N = 96.}
@@ -511,17 +514,19 @@ ancestral branch. N = 96.}
 \end{figure*}
 
 A number of estimated branch rates had 95\% credible intervals that excluded the
-true rate of 1 when using concatenation, that is were false positives. Using the
-credible interval criterion, in 34 out of 96 replicates the clock rate of the D
-branch was inferred to be slower than 1 (Figure~\ref{fig:spilsFalsePositives}),
-despite the sequence data being simulated using a strict clock. No false
-positive results were produced using StarBEAST2.
+true rate of 1 when using concatenation. If a study is testing whether substitution rates
+vary across a species tree, those branch rates could be erroneously interpreted as faster
+or slower than average, which would be a false positive result. In our simulations, the
+clock rate of the D branch would be inferred to be slower than average in 35
+out of 96 replicates (Figure~\ref{fig:spilsFalsePositives}),
+despite the sequence data being simulated using a strict clock. In contrast, no false
+positive results would be inferred given the same data using StarBEAST2.
 
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=8cm]{false_positives.pdf}
 \caption
-{Number of false positive per-species substitution rates estimated using concatenation. False positive
+{Number of false positive per-species substitution rates estimated using BEAST concatenation. False positive
 branches are those with 95\% credibility intervals which do not include 1, the
 true rate of all branches. The first number above each branch is the count of
 false positive rates faster than 1, and second is the count of false positive
@@ -559,7 +564,7 @@ na\"ive NNI and SPR topology operators.
 The average convergence rate of StarBEAST2 with high performance settings
 was 6.6$\times$ that of *BEAST, with a 95\% confidence interval between
 5.7 and 7.6 (Figure~\ref{fig:simulatedEssPerHour}). However StarBEAST2 is still
-slower than concatenation with the same number of loci, which was 69$\times$
+slower than BEAST concatenation with the same number of loci, which was 69$\times$
 faster than *BEAST, with a 95\% confidence interval between 59 and 84. When
 concatenation was used with ten times the number of loci as *BEAST and StarBEAST2, the
 performance was similar to *BEAST --- 0.85$\times$, with a confidence interval
@@ -577,7 +582,7 @@ between 4.3 and 5.7 (Figure~\ref{fig:simulatedEssPerHour}).
 \includegraphics[width=8cm]{minimum_relative_ess_per_hour.pdf}
 \caption
 {Convergence of different methods applied to simulated data. Methods are
-concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
+BEAST concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
 *BEAST settings and 22 loci, and StarBEAST2 with high performance settings, 22 loci,
 and uncorrelated log-normal relaxed clocks applied to the gene trees (GT-UCLN) or
 to the species tree (ST-UCLN). Relative estimated sample size (ESS) per hour is the trimmed mean for all replicates of
@@ -590,7 +595,7 @@ bootstrapping. N = 96.}
 
 \subsection{Concatenation is a worse estimator of branch lengths than topology}
 
-The accuracy of StarBEAST2 relative to concatenation varied depending on the
+The accuracy of StarBEAST2 relative to BEAST concatenation varied depending on the
 type of error and whether equal numbers of loci were used. Relative species tree
 error measures the accuracy of estimated branch lengths; by that measure
 StarBEAST2 using 22 loci outperformed concatenation using 22 loci, and matched
@@ -609,7 +614,7 @@ choice of gene or species tree relaxed clocks affect the accuracy of StarBEAST2
 \centering
 \includegraphics[width=7.5cm]{tree_error.pdf}
 \caption
-{Accuracy of different methods applied to simulated data. Methods are concatenation with 22 loci, concatenation with 220 loci
+{Accuracy of different methods applied to simulated data. Methods are BEAST concatenation with 22 loci, concatenation with 220 loci
 (10X), StarBEAST2 with *BEAST settings and 22 loci, and StarBEAST2 with
 high performance settings, 22 loci, and uncorrelated log-normal relaxed clocks applied
 to the gene tree (GT-UCLN) or to the species tree (ST-UCLN). (A) Trimmed mean of
@@ -634,16 +639,16 @@ on the corresponding clade being monophyletic in the posterior samples) as the
 response variable. If all estimates equal the truth, then the $R^2$ coefficient
 of determination will equal 1.
 
-When estimating branch rates using concatenation with either 22 or 220 loci,
+When estimating branch rates using BEAST concatenation with either 22 or 220 loci,
 $R^2$ was very weak at $0.07$ and $0.09$ respectively. By applying a relaxed
 clock to the species tree using StarBEAST2, the $R^2$ was much higher at $0.21$
 using just 22 loci (Figure~\ref{fig:branchRates}).
 
 The standard deviation of simulated branch rates was 0.16, and the standard
-deviation for the 220 locus concatenation analysis was 0.14. In contrast the
+deviation for the 220 locus BEAST concatenation analysis was 0.14. In contrast the
 sample standard deviations for 22 locus analyses were 0.08 and 0.07 for
 concatenation and StarBEAST2 respectively. This is because when the sequence
-alignments are less informative for a given branch (as happens when less loci are
+alignments are less informative for a given branch (as happens when fewer loci are
 used), the posterior expectation of the rate will be close to the prior
 expectation which is 1. This is evident in Figure~\ref{fig:branchRates} as the
 large number of branch rates around 1 for both 22 locus analyses.
@@ -652,7 +657,7 @@ large number of branch rates around 1 for both 22 locus analyses.
 \centering
 \includegraphics[width=7.5cm]{branch_rates.pdf}
 \caption
-{Estimates of species tree branch rates using concatenation versus StarBEAST2.
+{Estimates of species tree branch rates using BEAST concatenation versus StarBEAST2.
 Methods are concatenation with 22 loci, concatenation with 220 loci (10X), and
 StarBEAST2 with high performance settings, 22 loci, and a relaxed clock applied
 to the species tree. Estimated rates are the posterior expectations of each
@@ -684,8 +689,9 @@ out the improved computational performance of StarBEAST2 compared to *BEAST.
 
 \subsection{Concatenation can still be inferior given intermediate branch lengths}
 
-For short branch lengths (in coalescent units), concatenation cannot accurately
-estimate branch lengths. *BEAST using just four loci will be more accurate than
+Likelihood-based or neighbor-joining concatenation cannot accurately
+estimate branch lengths in substitutions when branches have short lengths in coalescent units.
+*BEAST using just four loci will be more accurate than
 concatenation using 4096 loci in terms in relative species tree error and
 pendant edge bias. *BEAST will also be more accurate at estimating species tree
 topologies given the same number of loci as concatenation, but inferior when
@@ -694,9 +700,9 @@ concatenation can be used with a much greater number of loci
 
 We have shown that concatenation can still be inferior to *BEAST and StarBEAST2
 given longer intermediate branch lengths. For the same number of loci, a higher
-relative species tree error indicates that concatenation is less accurate at
+relative species tree error indicates that BEAST concatenation is less accurate at
 estimating branch lengths, and a large pendant edge bias indicates that
-concatenation tends to overestimate tip branch lengths --- equivalent to the
+it also tends to overestimate tip branch lengths --- equivalent to the
 ages of extant species given complete species sampling. Unlike the short branch
 length case, concatenation with 10 times more loci can catch up to StarBEAST2 in
 terms of relative species tree error, but is then slower than StarBEAST2 with
@@ -704,7 +710,7 @@ high performance settings. In other words, for intermediate branch lengths
 StarBEAST2 can be just as accurate as concatenation but needs less investment in
 both sequencing and computational time.
 
-Concatenation cannot catch up to StarBEAST2 in terms of pendant edge bias.
+BEAST concatenation cannot catch up to StarBEAST2 in terms of pendant edge bias.
 Pendant edge bias is important because many published phylogenies show evidence
 of a slowdown in diversification rate \citep{Moen2014190}. If the ages of extant
 species are overestimated, this will artificially reduce the number of recent
@@ -720,14 +726,14 @@ tree, substitutions along that branch must be attributed to multiple species tre
 branches in a concatenation analysis, lengthening those branches. Conversely,
 when a species tree contains a branch absent from a gene tree, no substitutions
 can be attributed to that branch, shortening the branch \citep{Mendes01072016}.
-We show that in an ultrametric framework using concatenation with a relaxed
+We show that by using BEAST concatenation with a relaxed
 clock, the estimated substitution rate of branches lengthened by
 SPILS will be increased, and estimated substitution rate of other
 branches will be decreased. This causes false positive results when asking if substitution rates
 are constant across a species tree. In contrast, StarBEAST2 is resistant to
 SPILS and did not produce any false positive results.
 
-When given intermediate branch lengths, concatenation is unable to accurately
+When given intermediate branch lengths, BEAST concatenation was unable to accurately
 estimate per-species substitution rates even when using 220 loci, and it is
 reasonable to assume that shorter coalescent branch lengths would
 exacerbate the problem. StarBEAST2 can recover many branch rates, and given a
@@ -742,7 +748,7 @@ primarily that branch length is confounded with substitution rate
 When estimating dates and rates, the choice is often between using a subset of
 available loci with a fully Bayesian MSC method, or all available loci with
 concatenation. Researchers have often opted for the second choice, but we have
-shown that concatenation cannot accurately estimate the ages of extant species
+shown that concatenation may not accurately estimate the ages of extant species
 or per-species substitution rates, even for trees of intermediate branch lengths. The
 increased performance of StarBEAST2 should further encourage the adoption of
 fully Bayesian MSC methods for estimating divergence times, and the new species
@@ -753,7 +759,7 @@ development history is available through GitHub
 
 \section{Materials and Methods}
 
-For all StarBEAST2 and concatenation analyses, the version of BEAST used was
+For all StarBEAST2 and BEAST concatenation analyses, the version of BEAST used was
 2.4.1. For all simulations, the version of biopy \citep{biopy} used was 0.1.9.
 
 \subsection{Mathematical correctness of StarBEAST2}
@@ -891,7 +897,7 @@ BEAST concatenation and StarBEAST2 were then used to estimate the branch rates
 and divergence times with the species tree topology fixed to the truth. The same
 substitution model used for simulating sequences (i.e. Jukes-Cantor, no rate
 variation among sites or loci) was also used for inference. UCLN relaxed
-clocks were applied to the tree inferred by BEAST concatenation and to the
+clocks were applied to the tree inferred by concatenation and to the
 StarBEAST2 species tree.
 
 A slightly modified strategy to ensure convergence was used compared to
@@ -1005,8 +1011,8 @@ testing StarBEAST2 before its official release, Timothy Vaughan for suggesting
 the addition of a root height changing operator, Joseph Heled for insight into
 the multispecies coalescent, and Graham Jones for input regarding operator
 performance. We also thank Tanja Stadler for hosting H.A.O. during part of the
-development of StarBEAST2, and F\'abio Mendes and Matthew Hahn for discussing
-the apparent substitution rate variation induced by SPILS.
+development of StarBEAST2, and F\'abio Mendes and Matthew Hahn for discussions around
+SPILS and suggesting improvements to this manuscript.
 
 \bibliographystyle{natbib}%%%%natbib.sty
 \bibliography{starbeast2-mbe}%%%refs.bib
