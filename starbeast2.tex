@@ -477,7 +477,7 @@ to ESS per hour and ESS per million states were observed for both gene tree and
 species tree relaxed clock analyses (Table~\ref{tab:convergenceLM}).
 
 \begin{table*}[htb!]
-\caption{Change in convergence performance induced by new features}
+\caption{Change in convergence rates of \textit{Pseudacris} reanalyses induced by new features}
 \label{tab:convergenceLM}
 \begin{threeparttable}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrrr@{}}
@@ -499,27 +499,26 @@ Species tree & million states & 6\%\hphantom{***} & 712\%{***} & 14\%\hphantom{*
 \subsection{Species tree relaxed clocks prevent SPILS}
 
 When using concatenation to infer a species tree, SPILS causes apparent
-substitution rate variation among predictable species tree branches. Given a
-species tree with the toplogy (((A,B),C),D),E, ILS within the AB branch is
-expected to increase the branch lengths of species A and B, and ILS within the
-ABC branch should increase the branch lengths of A, B and C. However in an
-ultrametric framework like BEAST, branch lengths are constrained so that
+substitution rate variation among predictable species tree branches. However in
+an ultrametric framework like BEAST, branch lengths are constrained so that
 terminal species begin at time zero. We hypothesized that if a relaxed clock is
 used with concatenation in an ultrametric framework, SPILS will be absorbed as
-faster substitution rates for branches that would be lengthened by SPILS in a
-non-ultrametric framework, and slower substitution rates for other branches.
+faster substitution rates for lineages that would be lengthened by SPILS in a
+non-ultrametric framework. Because we estimated relative rates this should also
+result in slower substitution rates for other lineages, to maintain a mean rate
+of 1.
 
 We used BEAST concatenation and StarBEAST2 with a species tree relaxed clock to
-infer the branch lengths and substitution rates of simulated species
-trees with the toplogy (((A,B),C),D),E, using sequence alignments simulated using
-a strict clock. As hypothesized, substitution rates for the A and B branches
-(which are affected by discordant coalescence events in the ABC and ABCD branches) inferred using
-concatenation were biased towards being faster than the true rate of 1
-(Figure~\ref{fig:spilsRates}). Substitution rates for the C branch (which are not
-affected by discordant coalescence events in the ABC branch) showed a large spread, presumably
-depending on the differing amount of discordant events in the ABC and ABCD branches.
-Substitution rates for the D and E branches were biased towards being slower
-than 1. No biases were observed in branch rates estimated using StarBEAST2
+infer the branch lengths and substitution rates of simulated species trees with
+the topology (((A,B),C),D),E, using sequence alignments simulated using a strict
+clock. Gene tree discordance will increase the estimated length of A, B and C
+branches for these species trees \citep{Mendes01072016}, and as hypothesized
+substitution rates for A and B branches inferred using concatenation were biased
+towards being faster than the true rate of 1 (Figure~\ref{fig:spilsRates}).
+Estimated substitution rates for the C branch were more variable, and could be
+faster or slower than 1. Substitution rates estimated for the D and E branches
+were biased towards being slower than 1, presumably to maintain a mean rate of
+1. No biases were observed in branch rates estimated using StarBEAST2
 (Figure~\ref{fig:spilsRates}).
 
 \begin{figure*}[htb!]
@@ -529,7 +528,7 @@ than 1. No biases were observed in branch rates estimated using StarBEAST2
 {Distributions of per-branch substitution rates inferred by BEAST concatenation and StarBEAST2. Estimated branch
 rates are the posterior expectation of the overall substitution rate for each
 species tree branch. Each panel shows the distributions for the labelled extant or
-ancestral branch. N = 96.}
+ancestral branch. N = 90.}
 \label{fig:spilsRates}
 \end{figure*}
 
@@ -538,7 +537,7 @@ true rate of 1 when using concatenation. If a study is testing whether substitut
 vary across a species tree, those branch rates could be erroneously interpreted as faster
 or slower than average, which would be a false positive result. In our simulations, the
 clock rate of the D branch would be inferred to be slower than average in 35
-out of 96 replicates (Figure~\ref{fig:spilsFalsePositives}),
+out of 90 replicates (Figure~\ref{fig:spilsFalsePositives}),
 despite the sequence data being simulated using a strict clock. In contrast, no false
 positive results would be inferred given the same data using StarBEAST2.
 
@@ -550,7 +549,7 @@ positive results would be inferred given the same data using StarBEAST2.
 branches are those with 95\% credibility intervals which do not include 1, the
 true rate of all branches. The first number above each branch is the count of
 false positive rates faster than 1, and second is the count of false positive
-rates slower than 1. The false positive counts are out of 96 total replicates.}
+rates slower than 1. The false positive counts are out of 90 total replicates.}
 \label{fig:spilsFalsePositives}
 \end{figure}
 
@@ -738,7 +737,7 @@ speciation events, mimicking a slowdown. We suggest that accurate inference of
 changing diversification rates requires species trees inferred by fully Bayesian MSC methods
 like StarBEAST2.
 
-\subsection{The multispecies coalescent should be used to infer per-species branch rates}
+\subsection{The multispecies coalescent should be used to infer per-species substitution rates}
 
 Concatenation is already known to have difficulty inferring branch lengths
 because of SPILS. When a gene tree contains a branch absent from the species
@@ -927,11 +926,12 @@ logged. Likewise for concatenation analyses mean population sizes and coalescent
 probabilities were not logged. For StarBEAST2 the initial chain length was
 $2^{24}$ states, sampling every $2^{11}$ states. For concatenation the initial
 chain length was $2^{22}$ states, sampling every $2^{9}$ states. By the time of
-submission all chains had converged.
+submission all 90 out of 96 chains had converged.
 
 For every converged chain, the posterior expectation and 95\% credibility
 intervals of per-species branch rates were calculated using the TreeAnnotator
-program supplied with BEAST.
+program supplied with BEAST. Chains which had not converged were excluded from
+further analysis.
 
 \subsection{Simulations to measure computational performance and statistical accuracy}
 
