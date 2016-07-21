@@ -484,13 +484,20 @@ an ultrametric framework like BEAST, branch lengths are constrained so that
 terminal species begin at time zero. We hypothesized that if a relaxed clock is
 used with concatenation in an ultrametric framework, SPILS will be absorbed as
 faster substitution rates for lineages that would be lengthened by SPILS in a
-non-ultrametric framework. Because we estimated relative rates this should also
-result in slower substitution rates for other lineages, to maintain a mean rate
-of 1.
+non-ultrametric framework.
+
+In an ultrametric (time tree) framework with a strict clock and no external (e.g. fossil,
+biogeographical or known clock rate)
+calibrations, the substitution rate of each branch is set to 1. This ensures that 1 unit of time
+is equivalent to 1 expected substitution. Using a relaxed clock with no external calibrations
+the substitution rate of each branch can vary, but the expectation of the mean rate of all
+branches is 1, preserving the relationship of 1 unit of time = 1 expected substitution.
+Therefore when SPILS causes the rates of some branches to be faster than 1,
+the rates of other branches will be slower than 1 to keep the expected mean constant.
 
 We used BEAST concatenation and StarBEAST2 with a species tree relaxed clock to
 infer the branch lengths and substitution rates of simulated species trees with
-the topology (((A,B),C),D),E, using sequence alignments simulated using a strict
+the topology ((((A,B),C),D),E), using sequence alignments simulated using a strict
 clock. Gene tree discordance will increase the estimated length of A, B and C
 branches for these species trees \citep{Mendes01072016}, and as hypothesized
 substitution rates for A and B branches inferred using concatenation were biased
@@ -880,7 +887,7 @@ coalescent length of all branches across all samples was taken as the average.
 
 To test how SPILS affected estimates of per-species branch substitution rates,
 96 fully asymmetric species trees were simulated with the topology
-(((A,B),C),D),E. All species trees were simulated according to a pure birth Yule
+((((A,B),C),D),E). All species trees were simulated according to a pure birth Yule
 process \citep{Yule21} with a speciation rate of 10.0.
 
 Haploid population sizes for each branch were chosen independently from an
