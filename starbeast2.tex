@@ -524,41 +524,36 @@ substitution rates for A and B branches inferred using concatenation were biased
 towards being faster than the true rate of 1 (Figure~\ref{fig:spilsRates}).
 Estimated substitution rates for the C branch were more variable, and could be
 faster or slower than 1. Substitution rates estimated for the D and E branches
-were biased towards being slower than 1, presumably to maintain a mean rate of
-1. No biases were observed in branch rates estimated using StarBEAST2
+were biased towards being slower than 1, presumably to maintain the mean rate. Concatenation also overestimated the lengths of tip branches, another known
+bias when using concatenation to infer a species tree \citep{Ogilvie01052016}. No biases were observed for the branch rates or lengths estimated using StarBEAST2
 (Figure~\ref{fig:spilsRates}).
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{spils.pdf}
+\includegraphics[width=\textwidth]{scatter.pdf}
 \caption
-{Distributions of per-branch substitution rates inferred by BEAST concatenation and StarBEAST2. Estimated branch
-rates are the posterior expectation of the overall substitution rate for each
-species tree branch. Each panel shows the distributions for the labelled extant or
-ancestral branch. N = 93.}
+{Accuracy of branch substitution rates and lengths inferred by BEAST
+concatenation and StarBEAST2. Deviation is the difference of each estimated
+rate and length from the true value. Estimated rates and lengths are the posterior
+expectation of the overall substitution rate and length for each species tree
+branch. Black crosses in each panel indicate the point of perfect accuracy. Each
+panel shows the distributions for the labelled extant or ancestral branch. N =
+93.}
 \label{fig:spilsRates}
 \end{figure*}
 
 A number of estimated branch rates had 95\% credible intervals that excluded the
-true rate of 1 when using concatenation. If a study is testing whether substitution rates
-vary across a species tree, those branch rates could be erroneously interpreted as faster
-or slower than average, which would be a false positive result. In our simulations, the
-clock rate of the D branch would be inferred to be slower than average in 37
-out of 93 replicates (Figure~\ref{fig:spilsFalsePositives}),
-despite the sequence data being simulated using a strict clock. In contrast, no false
-positive results would be inferred given the same data using StarBEAST2.
-
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=8cm]{false_positives.pdf}
-\caption
-{Number of false positive per-species substitution rates estimated using BEAST concatenation. False positive
-branches are those with 95\% credibility intervals which do not include 1, the
-true rate of all branches. The first number above each branch is the count of
-false positive rates faster than 1, and second is the count of false positive
-rates slower than 1. The false positive counts are out of 93 total replicates.}
-\label{fig:spilsFalsePositives}
-\end{figure}
+true rate of 1 when using concatenation. If a study is testing whether
+substitution rates vary across a species tree, those branch rates could be
+erroneously interpreted as faster or slower than average. In our simulations,
+the clock rate of the D branch would be inferred as slower than average in 36
+out of 93 replicates (Figure~S9), despite the sequence data being simulated
+using a strict clock. When applying the same 95\% credible intervals to branch
+lengths, the true simulated length was excluded (with just one exception) for
+all tip branches across all replicates using concatenation (Figure~S10). In
+contrast, no erroneous results would be inferred for branch rates given the same
+data using StarBEAST2, and out of the 744 total simulated non-root branch
+lengths, only five erroneous results would be inferred (Figure~S9,S10).
 
 \subsection{StarBEAST2 is approximately 6.6 times faster than *BEAST}
 
@@ -755,9 +750,9 @@ can be attributed to that branch, shortening the branch \citep{Mendes01072016}.
 We show that by using BEAST concatenation with a relaxed
 clock, the estimated substitution rate of branches lengthened by
 SPILS will be increased, and estimated substitution rate of other
-branches will be decreased. This causes false positive results when asking if substitution rates
+branches will be decreased. This causes erroneous results when asking if substitution rates
 are constant across a species tree. In contrast, StarBEAST2 is resistant to
-SPILS and did not produce any false positive results.
+SPILS and did not produce any erroneous results.
 
 When given intermediate branch lengths, BEAST concatenation was unable to accurately
 estimate per-species substitution rates even when using 220 loci, and it is
@@ -933,12 +928,14 @@ logged. Likewise for concatenation analyses mean population sizes and coalescent
 probabilities were not logged. For StarBEAST2 the initial chain length was
 $2^{24}$ states, sampling every $2^{11}$ states. For concatenation the initial
 chain length was $2^{22}$ states, sampling every $2^{9}$ states. By the time of
-submission all 93 out of 96 chains had converged.
+submission, both concatenation and StarBEAST2 chains had converged for 93
+replicates; in two replicates StarBEAST2 not converged and in the third
+replicate concatenation had not converged.
 
 For every converged chain, the posterior expectation and 95\% credibility
 intervals of per-species branch rates were calculated using the TreeAnnotator
-program supplied with BEAST. Chains which had not converged were excluded from
-further analysis.
+program supplied with BEAST. Replicates with chains that had not converged were
+excluded from further analysis.
 
 \subsection{Simulations to measure computational performance and statistical accuracy}
 
@@ -1024,7 +1021,7 @@ rooted Robinson-Foulds distance is the average of all distances between each
 estimated tree and the true tree for all posterior samples.
 
 \section{Supplementary Material}
-Supplementary figures S1--S8 will be made available online.
+Supplementary figures S1--S10 will be made available online.
 
 \section{Acknowledgments}
 

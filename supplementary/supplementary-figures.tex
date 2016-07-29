@@ -212,6 +212,36 @@ means of million states per hour were calculated from independent chains (N =
 \label{fig:mstatesPerHour}
 \end{figure}
 
+\clearpage
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=7cm]{false_branch_rates.pdf}
+\caption
+{Number of erroneous per-species substitution rates estimated using BEAST concatenation and StarBEAST2. Erroneous
+branch rates are those with 95\% credibility intervals which do not include the true rate of 1.
+Numbers above a branch are the counts of erroneous branches for concatenation, and those
+below are the counts for StarBEAST2, both out of 93 replicates. The first count is
+the number of branch rates inferred to be faster than the true length, and the
+second is the number inferred to be slower.}
+\label{fig:spilsBranchRates}
+\end{figure}
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=7cm]{false_branch_lengths.pdf}
+\caption
+{Number of erroneous branch lengths estimated using BEAST concatenation and StarBEAST2. Erroneous
+branch lengths are those with 95\% credibility intervals which do not include the true simulated length for a given branch.
+Numbers above a branch are the counts of erroneous branches for concatenation, and those
+below are the counts for StarBEAST2, both out of 93 replicates. The first count is
+the number of branch lengths inferred to be longer than the true length, and the
+second is the number inferred to be shorter.}
+\label{fig:spilsBranchLengths}
+\end{figure}
+
+\clearpage
+
 \begin{table}[htb!]
 \centering
 \caption{Average ESS per hour convergence for \textit{Pseudacris} data.}
