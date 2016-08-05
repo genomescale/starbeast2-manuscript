@@ -538,7 +538,7 @@ rate and length from the true value. Estimated rates and lengths are the posteri
 expectation of the overall substitution rate and length for each species tree
 branch. Black crosses in each panel indicate the point of perfect accuracy. Each
 panel shows the distributions for the labelled extant or ancestral branch. N =
-93.}
+96.}
 \label{fig:spilsRates}
 \end{figure*}
 
@@ -546,13 +546,13 @@ A number of estimated branch rates had 95\% credible intervals that excluded the
 true rate of 1 when using concatenation. If a study is testing whether
 substitution rates vary across a species tree, those branch rates could be
 erroneously interpreted as faster or slower than average. In our simulations,
-the clock rate of the D branch would be inferred as slower than average in 36
-out of 93 replicates (Figure~S9), despite the sequence data being simulated
+the clock rate of the D branch would be inferred as slower than average in 37
+out of 96 replicates (Figure~S9), despite the sequence data being simulated
 using a strict clock. When applying the same 95\% credible intervals to branch
-lengths, the true simulated length was excluded (with just one exception) for
+lengths, the true simulated length was excluded (with just two exceptions) for
 all tip branches across all replicates using concatenation (Figure~S10). In
 contrast, no erroneous results would be inferred for branch rates given the same
-data using StarBEAST2, and out of the 744 total simulated non-root branch
+data using StarBEAST2, and out of the 768 total simulated non-root branch
 lengths, only five erroneous results would be inferred (Figure~S9,S10).
 
 \subsection{StarBEAST2 is approximately 6.6 times faster than *BEAST}
@@ -928,14 +928,12 @@ logged. Likewise for concatenation analyses mean population sizes and coalescent
 probabilities were not logged. For StarBEAST2 the initial chain length was
 $2^{24}$ states, sampling every $2^{11}$ states. For concatenation the initial
 chain length was $2^{22}$ states, sampling every $2^{9}$ states. By the time of
-submission, both concatenation and StarBEAST2 chains had converged for 93
-replicates; in two replicates StarBEAST2 not converged and in the third
-replicate concatenation had not converged.
+submission, both concatenation and StarBEAST2 chains had converged for
+all replicates.
 
 For every converged chain, the posterior expectation and 95\% credibility
 intervals of per-species branch rates were calculated using the TreeAnnotator
-program supplied with BEAST. Replicates with chains that had not converged were
-excluded from further analysis.
+program supplied with BEAST.
 
 \subsection{Simulations to measure computational performance and statistical accuracy}
 
