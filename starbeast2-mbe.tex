@@ -580,7 +580,7 @@ concatenation with 22 and 220 loci was 647.3 and 7.9 respectively (Table~S3).
 \centering
 \includegraphics[width=8cm]{combined_ess_per_hour.pdf}
 \caption
-{Convergence of different methods applied to simulated and empirical datasets. The estimated sample size (ESS) per hour for a
+{Convergence of different methods applied to simulated and empirical data sets. The estimated sample size (ESS) per hour for a
 given replicate used the smallest ESS out of all recorded statistics. Methods are
 BEAST concatenation with 22 loci, concatenation with 220 loci (10X), StarBEAST2 with
 *BEAST settings and 22 loci, and StarBEAST2 with high performance settings, 22 loci,
@@ -675,6 +675,12 @@ with *BEAST, StarBEAST2 can alternatively be used to analyze more data for more
 precise estimates of species trees and other parameters in the same amount of
 time as a more limited *BEAST analysis.
 
+However our results indicate that the performance increase will depend on the
+data set being analyzed, as StarBEAST2 was 5.9$\times$ faster for the simulated
+data set compared to 3.0$\times$ faster for the \textit{Pseudacris} data set. It
+will also vary between MCMC chains for the same data set, as seen by the spread
+of ESS rates in our results.
+
 Previous research on the scaling behaviour of *BEAST has shown that the
 relationship between the number of loci in a given analysis and the convergence
 in terms of ESS per hour follows a power law with the coefficient $-2.81$ for
@@ -682,13 +688,8 @@ the log number of loci \citep{Ogilvie01052016}. If the number of loci for a
 given analysis is doubled, the convergence rate is therefore
 expected to be $\exp(-2.81 \cdot \ln(2)) = 0.143 \approx \nicefrac{1}{7}$ that
 of the original analysis, approximately cancelling
-out the improved computational performance of StarBEAST2 compared to *BEAST.
-
-However our results indicate that the performance increase will depend on the
-dataset being analyzed, as StarBEAST2 was 5.9$\times$ faster for the simulated
-dataset compared to 3.0$\times$ faster for the \textit{Pseudacris} dataset. It
-will also vary between MCMC chains for the same dataset, as seen by the spread
-of ESS rates in our results.
+out the improved computational performance of StarBEAST2 compared to *BEAST for
+the simulated data set.
 
 \subsection{Concatenation can still be inferior given intermediate branch lengths}
 
