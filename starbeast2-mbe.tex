@@ -114,7 +114,7 @@ tree topologies \citep{journal.pgen.0020068, Kubatko01022007}.
 
 More recently identified problems with likelihood-based concatenation are systematic errors when
 estimating branch lengths, including overestimation of divergence times. Because
-some time is required for genes to coalescence looking backwards in time from
+some time is required for genes to coalescence looking backwards from
 a speciation event, the expected molecular distance between two species is
 greater than the true divergence time. This leads concatenation to overestimate
 the divergence times across a species tree in proportion to effective population size
@@ -261,8 +261,8 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 
 \begin{align}
 \frac{\pi(x)}{\pi(x')} &= \frac{\lambda e^{-\lambda x}}{\lambda e^{-\lambda x'}} = \frac{e^{-\lambda x}}{e^{-\lambda x'}}\\
-\therefore \ln\frac{\pi(x)}{\pi(x')} &= \ln e^{-\lambda x} - \ln e^{-\lambda x'}\\
-& = \lambda x' \cdot \ln e - \lambda x \cdot \ln e\\
+\therefore \ln\left(\frac{\pi(x)}{\pi(x')}\right) &= \ln \left(e^{-\lambda x}\right) - \ln \left(e^{-\lambda x'}\right)\\
+& = \lambda x' \cdot \ln \left(e\right) - \lambda x \cdot \ln \left(e\right)\\
 & = \lambda \left(x' - x\right) = \lambda \epsilon
 \end{align}
 
@@ -271,16 +271,15 @@ $x'$ drawn from an exponential distribution with the rate $\lambda$:
 The overall rate of evolution occurring at a given locus within a species will
 be influenced by the nature of the particular gene and also by the natural
 history of the particular species. For a given gene, the average substitution
-rate may depend on the effects of selection such as the faster molecular
+rate may depend on the effects of selection such as the accelerated molecular
 evolution of sex-biased genes in \textit{Arabidopsis thaliana}
-\citep{Gossmann01032014}, or other processes such as the timing of replication
-for the corresponding genomic region in humans \citep{Stamatoyannopoulos2009}.
+\citep{Gossmann01032014}, or on within-genome variation in mutation rate \citep{Baer2007}.
 For a given species, the average substitution rate is correlated with a
 multitude of traits including metabolic rate, body size, and fecundity, although
 causal relationships are difficult to pin down \citep{Bromham2503}.
 Unsurprisingly in light of the above, empirical analysis has shown that two
-major factors contributing to rate variation among gene branches are the per-
-gene rate and the per-species rate \citep{Rasmussen01122007}.
+major factors contributing to rate variation among gene branches are the
+per-gene rate and the per-species rate \citep{Rasmussen01122007}.
 
 Because variation is expected in the nature of different genes and species, and
 therefore variation is also expected in the average substitution rate of different
@@ -335,7 +334,7 @@ The new species tree relaxed clock model is available in StarBEAST2. Branch rate
 models that can be used with a species tree relaxed clock currently include the
 well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
 (UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
-local clock (RLC) model \citep{Drummond2010}.
+local clock model \citep{Drummond2010}.
 
 \begin{figure}[htb!]
 \centering
@@ -392,12 +391,13 @@ convergence both effective sample size (ESS) per hour and ESS per million states
 were computed for each independent chain. ESS per hour can be used to calculate
 the total time required for a converged chain (nominally where ESS equals or
 exceeds 200), and reflects how effectively operators explore the space of trees
-and parameters, as well as the computational time required by each operator proposal
-and likelihood calculation. In contrast, ESS per million states reflects only
-the exploration of tree and parameter space independently of calculation times.
-A variety of statistics were recorded for each analysis (Table~S1,S2), and for
-each replicate the statistic with the slowest ESS rate for that particular chain
-was used when computing average ESS per hour and per million states.
+and parameters, as well as the computational time required by each operator
+proposal and likelihood calculation. In contrast, ESS per million states
+reflects only the exploration of tree and parameter space independently of
+calculation times. A variety of statistics were recorded for each analysis
+(Table~S1-S4), and for each replicate the statistic with the slowest ESS rate
+for that particular chain was used when computing the mean and standard
+deviation of ESS per hour and per million states.
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of coordinated topology changing operators,
@@ -409,6 +409,26 @@ exponentiating the coefficient for each addition
 operators and population size integration was included because visualization of
 ESS rates (Figure~\ref{fig:realEssPerHour}) suggested such an interaction existed.
 
+\begin{table*}[ht!]
+\caption{Relative performance of operators, population size integration and clock models applied to \textit{Pseudacris} reanalyses.}
+\label{tab:convergenceLM}
+\begin{threeparttable}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrrr@{}}
+\hline
+Relaxed clock & ESS rate per & Topology & H(eight) & A(nalytical) & H $\times$ A\tabularnewline
+\hline
+Gene trees & hour & 83\%{***} & 247\%{***} & 107\%\hphantom{***} & 131\%{**}\hphantom{*}\tabularnewline
+Gene trees & million states & 101\%\hphantom{***} & 278\%{***} & 110\%\hphantom{***} & 130\%{*}\hphantom{**}\tabularnewline
+Species tree & hour & 91\%\hphantom{***} & 753\%{***} & 110\%\hphantom{***} & 124\%{*}\hphantom{**}\tabularnewline
+Species tree & million states & 106\%\hphantom{***} & 805\%{***} & 113\%\hphantom{***} & 124\%{*}\hphantom{**}\tabularnewline
+\hline
+\end{tabular*}
+\begin{tablenotes}
+\item {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
 Coordinated topology operators had a significantly negative effect on ESS per
 hour of gene tree relaxed clock analyses, but no significant effect on ESS per
 million states (Table~\ref{tab:convergenceLM}), suggesting that coordinated
@@ -417,7 +437,7 @@ states. A decrease in the number of states per hour (Figure~S8) shows that they
 are more computationally expensive than na\"ive operators, and explains the
 negative effect on ESS per hour.
 
-\begin{figure*}[htb!]
+\begin{figure*}[hb!]
 \centering
 \includegraphics[width=\textwidth]{minimum_ess_per_hour_boxplot.pdf}
 \caption
@@ -452,26 +472,6 @@ size integration had no significant effect on performance under any
 circumstance. However when combined with those operators, significant increases
 to ESS per hour and ESS per million states were observed for both gene tree and
 species tree relaxed clock analyses (Table~\ref{tab:convergenceLM}).
-
-\begin{table*}[htb!]
-\caption{Relative performance of operators, population size integration and clock models applied to \textit{Pseudacris} reanalyses.}
-\label{tab:convergenceLM}
-\begin{threeparttable}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}rlrrrr@{}}
-\hline
-Relaxed clock & ESS rate per & Topology & H(eight) & A(nalytical) & H $\times$ A\tabularnewline
-\hline
-Gene trees & hour & 83\%{***} & 247\%{***} & 107\%\hphantom{***} & 131\%{**}\hphantom{*}\tabularnewline
-Gene trees & million states & 101\%\hphantom{***} & 278\%{***} & 110\%\hphantom{***} & 130\%{*}\hphantom{**}\tabularnewline
-Species tree & hour & 91\%\hphantom{***} & 753\%{***} & 110\%\hphantom{***} & 124\%{*}\hphantom{**}\tabularnewline
-Species tree & million states & 106\%\hphantom{***} & 805\%{***} & 113\%\hphantom{***} & 124\%{*}\hphantom{**}\tabularnewline
-\hline
-\end{tabular*}
-\begin{tablenotes}
-\item {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$.
-\end{tablenotes}
-\end{threeparttable}
-\end{table*}
 
 \subsection{Species tree relaxed clocks prevent SPILS}
 
@@ -526,7 +526,7 @@ erroneously interpreted as faster or slower than average. In our simulations,
 the clock rate of the D branch would be inferred as slower than average in 37
 out of 96 replicates (Figure~S9), despite the sequence data being simulated
 using a strict clock. When applying the same 95\% credible intervals to branch
-lengths, the true simulated length was excluded (with just two exceptions) for
+lengths, the true simulated length was excluded with just two exceptions for
 all tip branches across all replicates using concatenation (Figure~S10). In
 contrast, no erroneous results would be inferred for branch rates given the same
 data using StarBEAST2, and out of the 768 total simulated non-root branch
@@ -538,7 +538,7 @@ Our reanalysis of \textit{Pseudacris} sequence data shows that coordinated heigh
 and analytical integration of population sizes when combined with those operators,
 improve convergence. To show that this increased performance is generally
 applicable, and to demonstrate that StarBEAST2 can accurately reconstruct
-species trees, we needed to apply StarBEAST2 to a simulated data set for
+species trees, we needed to apply StarBEAST2 to simulated data sets for
 which the true species trees are known. To accomplish this we simulated 96 species
 trees of 19 taxa each under a birth-death model with log-normally distributed
 branch rates. Gene trees evolving within each species tree were simulated
@@ -550,7 +550,7 @@ average simulated branch length was $\nicefrac{3.22\tau}{2N_e}$, the same as for
 \textit{Pseudacris} to two decimal places.
 
 Simulated data was analyzed using concatenation with BEAST and using the MSC with
-StarBEAST2. The different settings used for StarBEAST2 were *BEAST settings,
+StarBEAST2 with *BEAST settings,
 high performance settings with gene tree relaxed clocks, and high performance settings with
 species tree relaxed clocks. *BEAST settings matched the configuration of *BEAST
 before StarBEAST2; explicit MCMC integration of population sizes, no
@@ -558,26 +558,37 @@ coordinated operators, na\"ive NNI and SPR topology operators, and a UCLN
 relaxed clock applied to each gene tree. High performance settings included analytical
 integration of population sizes, coordinated height changing operators, and
 na\"ive NNI and SPR topology operators. Again multiple statistics were recorded
-to compute the minimum ESS rate for each replicate (Table~S3,S4).
+to compute the minimum ESS rate for each replicate (Table~S5-S8).
 
 Our simulation study confirmed that StarBEAST2 is several times faster than
 *BEAST (Figure~\ref{fig:simulatedEssPerHour}). For simulated data the average
-convergence rate of StarBEAST2 with high performance settings and gene tree
-relaxed clocks was 56.9 ESS per hour. This compares to 9.7 ESS per hour
-using *BEAST settings, a 5.9$\times$ increase in performance (Table~S3). However
-for \textit{Pseudacris} reanalyses the average was 38.7 for StarBEAST2 compared
-to 13.0 for *BEAST, a smaller increase of 3.0$\times$ (Table~S1).
+log convergence rate of StarBEAST2 with high performance settings and gene tree
+relaxed clocks was $4.01\ln(\nicefrac{ESS}{hour})$. This compares to
+$2.18\ln(\nicefrac{ESS}{hour})$ using *BEAST settings, an increase in performance of
+$\exp(4.01 - 2.18) = 6.2$ times (Table~S5). However
+for \textit{Pseudacris} reanalyses the average was 3.66 for StarBEAST2 compared
+to 2.52 for *BEAST, a smaller increase of 3.1 times (Table~S1).
 
 StarBEAST2 with a species tree relaxed clock is slower than using gene tree relaxed
-clocks (Figure~\ref{fig:simulatedEssPerHour}). The average rate for simulated
+clocks (Figure~\ref{fig:simulatedEssPerHour}). The average log rate for simulated
 data when using a species tree relaxed clock with high performance settings was
-46.2 ESS per hour, which is 4.8$\times$ faster than *BEAST settings (Table~S3). Again
+3.74, which is 4.8 times faster than *BEAST settings (Table~S5). Again
 the difference was smaller for \textit{Pseudacris} reanalyses, with a rate of
-28.6 for StarBEAST2, an increase of 2.2$\times$ (Table~S1).
+3.36 for StarBEAST2, an increase of 2.3 times (Table~S1).
+
+The computational performance of StarBEAST2 was also more consistent than
+*BEAST. The standard deviations of the log rate using StarBEAST2 to analyse
+simulated data sets were 0.44 and 0.46 for gene and species tree relaxed clocks
+respectively, compared to 0.73 for *BEAST (Table~S7). The standard deviations
+when reanalyzing \textit{Pseudacris} were 0.23, 0.26 and 0.55 for StarBEAST2
+with gene tree relaxed clocks, StarBEAST2 with species tree relaxed clocks, and
+*BEAST respectively. The higher spread for simulated data reflects the fact that
+each replicate used a different species tree and different genes and sequence
+alignemnts.
 
 Concatenation with the same number of loci is much faster than StarBEAST2, but
-concatenation using 220 loci was slower than either StarBEAST2 or *BEAST (Figure~\ref{fig:simulatedEssPerHour}). The ESS per hour rates for
-concatenation with 22 and 220 loci were 647.3 and 7.9 respectively (Table~S3).
+concatenation using 220 loci was slower than StarBEAST2
+(Figure~\ref{fig:simulatedEssPerHour}).
 
 \begin{figure}[htb!]
 \centering
@@ -782,14 +793,14 @@ rate of one every 1000 after a 10\% burn-in period.
 Identical parameters were used for the simulation and for the StarBEAST2 run
 including the prior distributions (Table~\ref{tab:correctParameters}). The
 number of species and haplotypes per species were fixed at 5 and 1 respectively.
-The birth and death rates were fixed at 200.0 and 100.0 respectively. Haploid
+The birth and death rates were fixed at 200 and 100 respectively. Haploid
 population sizes followed an inverse gamma distribution with shape $\alpha =
-3.0$ and scale $\beta = 0.004$. Two gene trees were sampled within each gene
-tree a mean clock rates of 0.5 for the first gene tree and 2.0 for the second.
+3$ and scale $\beta = 0.004$. Two gene trees were sampled within each gene
+tree a mean clock rates of 0.5 for the first gene tree and 2 for the second.
 
 This entire procedure was repeated separately for UCLN and for UCED species
 branch rates. Branch rates were sampled from a UCLN or UCED distribution, either
-with a mean of 1.0, discretized into 100 bins. The standard deviation of the
+with a mean of 1, discretized into 100 bins. The standard deviation of the
 UCLN distribution was 0.16.
 
 \subsection{Preprocessing of \textit{Pseudacris} sequence data}
@@ -871,7 +882,7 @@ coalescent length of all branches across all samples was taken as the average.
 To test how SPILS affected estimates of per-species branch substitution rates,
 96 fully asymmetric species trees were simulated with the topology
 ((((A,B),C),D),E). All species trees were simulated according to a pure birth Yule
-process \citep{Yule21} with a speciation rate of 10.0.
+process \citep{Yule21} with a speciation rate of 10.
 
 Haploid population sizes for each branch were chosen independently from an
 inverse gamma distribution with a shape of 3 and a scale of 0.2. 100 gene trees
@@ -910,8 +921,8 @@ or estimated from the \textit{Pseudacris} data set.
 
 First, 96 species trees were simulated according to a birth-death process
 \citep{Gernhard2008769} using biopy with 19 extant species, a speciation rate of
-160.0 and a death rate of 80.0. This corresponds to a net diversification rate
-of 80.0 and an extinction fraction of 0.5. Haploid population sizes
+160 and a death rate of 80. This corresponds to a net diversification rate
+of 80 and an extinction fraction of 0.5. Haploid population sizes
 for each branch were chosen independently from an inverse gamma distribution
 with a shape of 3 and a scale of 0.004. For a species with annual generation
 times, as is the case for at least some \textit{Pseudacris} species
