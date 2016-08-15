@@ -44,13 +44,12 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 % \editor{Robb Brumfield}
 
 \abstract{The multispecies coalescent (MSC) is a popular model for
-reconstructing species trees from a set of genes. Fully Bayesian MSC methods
+reconstructing species trees from a set of genes, and fully Bayesian MSC methods
 like *BEAST jointly estimate species and gene trees from multiple sequence
 alignments. Since the advent of next generation sequencing (NGS), vast numbers
 of genes can be sequenced for a given study, for which fully Bayesian MSC
-methods are intractably slow. One alternative is to assumes the evolutionary
-history of each gene is identical to the species tree, and concatenate the set
-of alignments. This is an inconsistent estimator of species tree topology, and
+methods are intractably slow. One alternative is concatenation, which assumes
+the evolutionary history of each gene tree is identical to the species tree. This is an inconsistent estimator of species tree topology, and
 an even worse estimator of divergence times. Concatenation also induces spurious
 substitution rate variation because of substitutions produced by incomplete
 lineage sorting. Another alternative is MSC methods which take summary
@@ -59,15 +58,15 @@ unsatisfactory because they infer branch lengths in coalescent units, and so
 cannot infer divergence times. To enable fuller use of NGS data and more
 accurate inference of species tree topologies, divergence times, and
 substitution rates, we have developed a new version of *BEAST called StarBEAST2.
-To improve convergence rates we add analytical integration of population sizes and new
-MCMC operators to StarBEAST2, which improves performance by 3.0x and 5.9x
-respectively when analysing an example empirical data set and our simulated
-data. To enable accurate estimates of per-species substitution rates, we have
-developed novel species tree relaxed clock models and we show that unlike
-concatenation, StarBEAST2 is a better estimator of substitution rates than
-concatenation and does not infer spurious rate variation where none exists.
-StarBEAST2 is available through the BEAUTi package manager in BEAST 2.4 and
-above.}
+To improve convergence rates we add analytical integration of population sizes
+and new MCMC operators which improved computational performance by 3.1$\times$
+when analyzing a single empirical data set, and an average of 6.2$\times$ when
+analyzing 96 simulated data sets. To enable accurate estimates of per-species
+substitution rates, we have developed novel species tree relaxed clock models
+and we show that StarBEAST2 is a better estimator of
+substitution rates than concatenation and does not infer spurious rate variation
+where none exists. StarBEAST2 is available through the BEAUTi package manager in
+BEAST 2.4 and above.}
 
 \keyword{Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation, incomplete lineage sorting.}
 
