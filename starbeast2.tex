@@ -90,7 +90,7 @@ relaxed clocks, and show that StarBEAST2 is a more powerful and robust estimator
 of rate variation than concatenation. StarBEAST2 is available through the BEAUTi
 package manager in BEAST 2.4 and above.
 
-Keywords: Phylogenetic methods, substitution rate, relaxed clock, multispecies coalescent, concatenation, incomplete lineage sorting.
+Keywords: Multispecies coalescent, concatenation, phylogenetic methods, incomplete lineage sorting, relaxed clocks, species trees.
 
 \section{Introduction}
 
@@ -429,7 +429,7 @@ exponentiating the coefficient for each addition
 operators and population size integration was included because visualization of
 ESS rates (Figure~\ref{fig:realEssPerHour}) suggested such an interaction existed.
 
-\begin{table*}[ht!]
+\begin{table*}[htb!]
 \caption{Relative performance of operators, population size integration and clock models applied to \textit{Pseudacris} reanalyses.}
 \label{tab:convergenceLM}
 \begin{threeparttable}
@@ -457,7 +457,7 @@ states. A decrease in the number of states per hour (Figure~S8) shows that they
 are more computationally expensive than na\"ive operators, and explains the
 negative effect on ESS per hour.
 
-\begin{figure*}[hb!]
+\begin{figure*}[htb!]
 \centering
 \includegraphics[width=\textwidth]{minimum_ess_per_hour_boxplot.pdf}
 \caption
