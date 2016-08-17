@@ -43,24 +43,23 @@ $^{3}$Department of Computer Science, University of Auckland, Auckland, New Zeal
 
 % \editor{Robb Brumfield}
 
-\abstract{The multispecies coalescent (MSC) is a popular model for
-reconstructing species trees from a set of genes, and fully Bayesian MSC methods
-like *BEAST estimate species trees from multiple sequence alignments. Today vast
-numbers of genes can be sequenced for a given study, but attempting to use
-hundreds of genes with *BEAST is intractably slow. One alternative is
-concatenation, which assumes that the evolutionary history of each gene tree is
-identical to the species tree. This is an inconsistent estimator of species tree
-topology, and a worse estimator of divergence times. Concatenation also induces
-spurious substitution rate variation when
-incomplete lineage sorting is present. Another alternative is to use summary MSC methods
+\abstract{The multispecies coalescent (MSC) reconstructs species trees from a set of
+genes, and fully Bayesian MSC methods like *BEAST estimate species trees from
+multiple sequence alignments. Today thousands of genes can be sequenced for a
+given study, but using that many genes with *BEAST is intractably slow. One
+alternative is concatenation, which assumes that the evolutionary history of
+each gene tree is identical to the species tree. This is an inconsistent
+estimator of species tree topology, and a worse estimator of divergence times.
+Concatenation also induces spurious substitution rate variation when incomplete
+lineage sorting is present. Another alternative is to use summary MSC methods
 like ASTRAL, but such methods are also unsatisfactory because they infer branch
 lengths in coalescent units, and so cannot estimate divergence times. To enable
-fuller use of NGS data and more accurate inference of species tree topologies,
-divergence times, and substitution rates, we have developed a new version of
-*BEAST called StarBEAST2. To improve convergence rates we add analytical
-integration of population sizes and novel MCMC operators which improved
-computational performance by 3.1$\times$ when analyzing a single empirical data
-set, and an average of 6.2$\times$ across 96 simulated data sets.
+fuller use of available data and more accurate inference of species tree
+topologies, divergence times, and substitution rates, we have developed a new
+version of *BEAST called StarBEAST2. To improve convergence rates we add
+analytical integration of population sizes and novel MCMC operators which
+improved computational performance by 3.1$\times$ when analyzing a single
+empirical data set, and an average of 6.2$\times$ across 96 simulated data sets.
 Convergence rates are also more consistent between chains than *BEAST. To enable
 accurate estimates of per-species substitution rates we introduce species tree
 relaxed clocks, and show that StarBEAST2 is a more powerful and robust estimator
