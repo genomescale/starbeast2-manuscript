@@ -57,7 +57,7 @@
 
 \begin{document}
 
-\title{Supplementary figures and tables for StarBEAST2}
+\title{Supplementary material for StarBEAST2}
 \author[1,2]{Huw A. Ogilvie\thanks{huw.ogilvie@anu.edu.au}}
 \author[2,3]{Alexei J. Drummond}
 \affil[1]{Division of Evolution, Ecology and Genetics, Research School of Biology, Australian National University, Canberra, Australia}
@@ -67,6 +67,8 @@
 \maketitle
 
 \clearpage
+
+\section{Supplementary figures}
 
 \justifying
 
@@ -174,16 +176,16 @@ indicating that StarBEAST2 is mathematically correct.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=\textwidth]{minimum_ess_per_mstates_boxplot.pdf}
+\includegraphics[width=\textwidth]{minimum_ess_per_mstates_starbeast2.pdf}
 \caption
-{Impact of operators, population size integration and clock models on effective
-sample size (ESS) per million states of \textit{Pseudacris} reanalyses. The
-estimated sample size (ESS) per hour for a given replicate used the smallest ESS
-out of all recorded statistics. Topology refers to the replacement of na\"ive
-nearest-neighbor interchange and subtree prune and regraft operators with
-coordinated operators. Height refers to the addition of operators which make
-coordinated changes to node heights. Uncorrelated log-normal (UCLN) relaxed
-clocks were applied to either each gene tree or to the species tree. N = 32.}
+{Impact of operators, population size integration and clock models on
+convergence. The estimated sample size (ESS) per million states for a given replicate
+used the smallest ESS out of all recorded statistics. Topology refers to the
+replacement of na\"ive nearest-neighbor interchange and subtree prune and
+regraft operators with coordinated operators. Height refers to the addition of
+operators which make coordinated changes to node heights. Uncorrelated log-
+normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
+the species tree (ST-UCLN). N = 30.}
 \label{fig:realEssPerMstates}
 \end{figure}
 
@@ -191,16 +193,15 @@ clocks were applied to either each gene tree or to the species tree. N = 32.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=\textwidth]{mstates_rates.pdf}
+\includegraphics[width=\textwidth]{mstates_per_hour.pdf}
 \caption
-{Impact of operators, population size integration and clock models on the
-calculation time for each state. The estimated sample size (ESS) per hour for a
-given replicate used the smallest ESS out of all recorded statistics. Topology
-refers to the replacement of na\"ive nearest-neighbor interchange and subtree
-prune and regraft operators with coordinated operators. Height refers to the
-addition of operators which make coordinated changes to node heights.
-Uncorrelated log-normal (UCLN) relaxed clocks were applied to either each gene
-tree or to the species tree. N = 32.}
+{Impact of operators, population size integration and clock models on
+the calculation time for each state. Topology refers to the
+replacement of na\"ive nearest-neighbor interchange and subtree prune and
+regraft operators with coordinated operators. Height refers to the addition of
+operators which make coordinated changes to node heights. Uncorrelated log-
+normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
+the species tree (ST-UCLN). N = 30.}
 \label{fig:mstatesPerHour}
 \end{figure}
 
@@ -233,6 +234,8 @@ second is the number inferred to be shorter.}
 \end{figure}
 
 \clearpage
+
+\section{Supplementary tables}
 
 \begin{table}[htb!]
 \centering
@@ -795,5 +798,18 @@ Substitution model $\kappa$ & 0.34 (0.10--0.55) & 0.43 (0.37--0.48) & 0.77 (0.64
 \end{table}
 
 \end{landscape}
+
+\section{CoordinatedUniform proposal example}
+
+Given a species tree with the topology ((A,B),C),D there are two non-leaf, non-root
+nodes: . The CoordinatedUniform move samples 
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=\textwidth]{coordinated_uniform.pdf}
+\caption
+{Zounds}
+\label{fig:cuni}
+\end{figure}
 
 \end{document}

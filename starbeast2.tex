@@ -83,7 +83,7 @@ times. To enable fuller use of available data and more accurate inference of
 species tree topologies, divergence times, and substitution rates, we have
 developed a new version of *BEAST called StarBEAST2. To improve convergence
 rates we add analytical integration of population sizes, novel MCMC operators
-and other optimisations which improved computational performance
+and other optimizations which improved computational performance
 $13.0\times$ to $14.6\times$ when analyzing empirical data sets, and an average of
 $33.1\times$ across 30 simulated data sets. To enable accurate estimates of
 per-species substitution rates we introduce species tree relaxed clocks, and
@@ -173,9 +173,9 @@ Another issue with summary methods is concatalescence, where the assumption of
 no recombination within loci is frequently violated \citep{Gatesy26032013}. To
 resolve larger and deeper species trees using summary methods, longer and more
 informative loci may be required to infer more accurate gene trees. However
-the larger and deeper a tree, the more recombination events will have occured.
+the larger and deeper a tree, the more recombination events will have occurred.
 The use of longer loci and the higher incidence of recombination will both
-increase the risk of recombination occuring within loci, which as been dubbed
+increase the risk of recombination occurring within loci, which as been dubbed
 the ``recombination ratchet'' \citep{Springer20161}.
 
 As an alternative to increasing locus length, fully Bayesian MSC methods like
@@ -618,7 +618,7 @@ the species tree (ST-UCLN). N = 30.}
 \label{fig:realEssPerHour}
 \end{figure*}
 
-Coordinated height changing operators consistiently and significantly
+Coordinated height changing operators consistently and significantly
 increased ESS per hour and ESS per million states, however the degree of
 improvement depended on the clock model (Figure~\ref{fig:realEssPerHour}). For
 strict clock analyses the increase in ESS per hour was modest at 1.2 times and
@@ -669,7 +669,7 @@ increase in performance of $\exp(5.54 - 2.04) = 33.1$ times (Table~S5). Even
 when using 52 loci --- twice as many as used with *BEAST --- StarBEAST2 was
 $\exp(4.18 - 2.04) = 8.5$ times faster.
 
-StarBEAST2 was still an order of magnitude faster when analysing either
+StarBEAST2 was still an order of magnitude faster when analyzing either
 empirical data set. For gene tree relaxed clock reanalyses of
 \textit{Pseudacris} the difference was $\exp(3.98 - 1.42) = 13.0$ times. For
 50-locus \textit{Crocidura} reanalyses it was $\exp(2.79 - 0.11) = 14.6$ times
@@ -747,7 +747,7 @@ phylogenetic methods (including BEAST concatenation) as base call errors,
 indicating the nucleotide at a given site could be one of several
 possibilities. When used with unphased sequences, they actually indicate the
 presence of two nucleotides simultaneously, which is therefore a model violation.
-Using concatenation to analyse unlinked loci is also a model violation, but in
+Using concatenation to analyze unlinked loci is also a model violation, but in
 the region of parameter space investigated by this simulation study the two
 errors may \textit{partially} cancel out.
 
@@ -859,7 +859,7 @@ Phased and aligned \textit{Pseudacris} sequence data were retrieved from Dryad
 analysis we applied the HKY nucleotide substitution model \citep{Hasegawa1985}
 to 22 out of 26 nuclear loci and the GTR model \citep{Tavare1986} to the
 remaining 4. For all models we used four discrete $\Gamma$ categories to
-accomodate among-site rate variation \citep{Yang1994}. Transition/transversion
+accommodate among-site rate variation \citep{Yang1994}. Transition/transversion
 rates and ratios and rate variation shape parameters were estimated, and
 empirical base frequencies used, all separately for each locus. The relative
 substitution rate of each locus was estimated using a lognormal prior with a
@@ -1023,7 +1023,7 @@ loci, the best fitting substitution model was either HKY or a nested model
 and nested loci. For each replicate we ran *BEAST with a strict clock or gene
 tree relaxed clock and a subset of 50 loci, StarBEAST2 with all three clock
 models and the same subset, and StarBEAST2 with all three clock models and all
-100 loci. The same priors, substutition model and convergence strategies were
+100 loci. The same priors, substitution model and convergence strategies were
 used as for the simulated data set.
 
 \subsection{Measurements of species tree accuracy}
