@@ -169,7 +169,7 @@ used to estimate branch lengths or divergence times for a fixed species tree
 topology estimated using a summary method, then those estimates will be
 unreliable for the same reasons as pure concatenation.
 
-Another issue with summary methods is concatalescence, where the assumption of
+Another issue with summary methods is concatalescence, which is where the assumption of
 no recombination within loci is frequently violated \citep{Gatesy26032013}. To
 resolve larger and deeper species trees using summary methods, longer and more
 informative loci may be required to infer more accurate gene trees. However
@@ -188,8 +188,8 @@ still cannot be used for molecular dating.
 With the aim of improving the computational performance of fully Bayesian MSC
 inference of species trees, we have developed an upgrade to *BEAST ---
 StarBEAST2 --- which is available as a package for BEAST 2
-\citep{10.1371/journal.pcbi.1003537}. By improving computational performance,
-StarBEAST2 should enable the use of more loci and thereby improve the
+\citep{10.1371/journal.pcbi.1003537}. By improving computational performance
+StarBEAST2 enables the use of more loci, which will improve the
 precision of estimated parameters and provide an alternative to concatenation.
 We have also developed and include in StarBEAST2 new MSC relaxed clock models
 to enable accurate inference of per-species substitution rates.
@@ -350,9 +350,32 @@ number of substitutions $\Sigma \mathbb{E}(S)$ accumulated along the entire
 length of a gene tree branch. Substitutions are expected to be accumulated at
 the mean clock rate of the gene tree $c$, multiplied by the lengths of time
 $L$ spent traversing each species tree branch, multiplied by the rates $R$ of
-the corresponding species tree branches (Table~\ref{tab:branchRateModel}).
+the corresponding species tree branches.
 Typical substitution rates for mammals are around $10^{-3}$ substitutions per
 site per million years \citep{Phillips06102009}.
+
+The gene tree branch rates $r$ can then be derived by dividing the total
+expected number of substitutions by the total length of that branch $l$. The
+gene tree branch rates for the illustrated example
+(Figure~\ref{fig:branchRateModel}; Table~\ref{tab:branchRateModel}) are
+therefore:
+
+\begin{align}
+r_a &= \frac{\Sigma \mathbb{E}(S_a)}{l_a} = \frac{0.00135}{1.5} = 0.0009\\
+r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.00165}{1.5} = 0.0011
+\end{align}
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=80mm]{relaxed_clock.pdf}
+\caption
+{Two-species phylogeny used to illustrate species tree relaxed
+clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
+Within the species tree there is a single gene tree with extant individuals ``a''
+and ``b''. The single speciation event occurs at time T1, and the single coalescence
+event occurs at time t1. Gene tree rates are computed according to Table~\ref{tab:branchRateModel}}
+\label{fig:branchRateModel}
+\end{figure}
 
 \begin{table*}[htb!]
 \caption{Expected number of substitutions $\Sigma \mathbb{E}(S)$ for gene branches \textit{a, b} under a species tree relaxed clock}
@@ -375,34 +398,11 @@ b & & 0.0 & 1.0 & 0.5 & & & & 0.00000 & 0.00100 & 0.00065 & 0.00165\tabularnewli
 \end{threeparttable}
 \end{table*}
 
-The gene tree branch rates $r$ can then be derived by dividing the total
-expected number of substitutions by the total length of that branch $l$. The
-gene tree branch rates for the illustrated example
-(Figure~\ref{fig:branchRateModel}; Table~\ref{tab:branchRateModel}) are
-therefore:
-
-\begin{align}
-r_a &= \frac{\Sigma \mathbb{E}(S_a)}{l_a} = \frac{0.00135}{1.5} = 0.0009\\
-r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.00165}{1.5} = 0.0011
-\end{align}
-
 The new species tree relaxed clock model is available in StarBEAST2. Branch rate
 models that can be used with a species tree relaxed clock currently include the
 well-established uncorrelated log-normal (UCLN) and uncorrelated exponential
 (UCED) models \citep{10.1371/journal.pbio.0040088}, as well as the newer random
 local clock model \citep{Drummond2010}.
-
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=80mm]{relaxed_clock.pdf}
-\caption
-{Two-species phylogeny used to illustrate species tree relaxed
-clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
-Within the species tree there is a single gene tree with extant individuals ``a''
-and ``b''. The single speciation event occurs at time T1, and the single coalescence
-event occurs at time t1.}
-\label{fig:branchRateModel}
-\end{figure}
 
 \section{Results and Discussion}
 
@@ -497,23 +497,23 @@ population size integration and relaxed clocks, we tested StarBEAST2 using
 empirical and simulated sequence data. The empirical data set used for this
 analysis is from the North American chorus frog genus \textit{Pseudacris}, and
 was originally collected and analyzed by \cite{Barrow201478}. This data set
-has 26 nuclear locus sequences from 44 sampled individuals. The individuals
+has sequences from 26 nuclear loci across 44 sampled individuals. The individuals
 belong to 19 extant \textit{Pseudacris} lineages and two outgroup species.
 \cite{Barrow201478} reported phased haplotypes but to avoid wasting
 computational resources we used a single haplotype per individual.
 
 A key metric of phylogenies that can be used to judge whether it is necessary
 to employ MSC models is the average branch length in coalescent units
-$\nicefrac{\tau}{2N_e}$. In this study, $N_e$ will always refer to the
+$\tau(2N_e)^{-1}$. In this study, $N_e$ will always refer to the
 effective population size of diploid individuals. Given short branch lengths,
 likelihood-based or neighbor-joining concatenation is unable to infer accurate
 species trees regardless of the number of loci used, but for long branch
 lengths, concatenation is approximately as accurate as *BEAST
 \citep{Ogilvie01052016}. Using StarBEAST2, the average branch length within
-this genus was estimated to be $\nicefrac{2.81\tau}{2N_e}$. This is an
+this genus was estimated to be $2.81\tau(2N_e)^{-1}$. This is an
 intermediate average length compared to the shallow simulations analyzed by
 \cite{Ogilvie01052016} which had a shorter average length of
-$\nicefrac{1.08\tau}{2N_e}$.
+$1.08\tau(2N_e)^{-1}$.
 
 Each replicate of each \textit{Pseudacris} empirical analysis used the same
 sequence data, and the true species tree topology, dates and rates were not
@@ -528,7 +528,7 @@ haplotypes per species, very similar to the empirical data set size. The
 simulation parameters, including the birth rate, death rate and population
 sizes, were also chosen to be similar to estimated \textit{Pseudacris}
 parameters. The simulated data set had an average branch length of
-$\nicefrac{2.99\tau}{2N_e}$, so the relative accuracy of MSC models compared
+$2.99\tau(2N_e)^{-1}$, so the relative accuracy of MSC models compared
 to concatenation should be comparable with empirical systems like
 \textit{Pseudacris}.
 
@@ -547,7 +547,8 @@ million states reflects only the exploration of tree and parameter space
 independently of calculation times. A variety of statistics were recorded for
 each analysis (Table~S1-S4), and for each replicate the statistic with the
 slowest ESS rate for that particular chain was used when computing the mean
-and standard deviation of ESS per hour and per million states.
+and standard deviation of ESS per hour and per million states, and in the
+rest of the paper.
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of coordinated topology changing
@@ -590,7 +591,7 @@ ST-UCLN & million states & 89\%\hphantom{***} & 923\%{***} & 144\%{**}\hphantom{
 \item[3] Coordinated topology changing operators relative to na\"ive operators
 \item[4] Addition of coordinated height changing operators
 \item[5] Analytical integration of population sizes relative to MCMC integration
-\item {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$. N = 30.
+\item Values higher than 100\% indicates faster convergence, lower than 100\% incidicates slower. {*}: $p < 0.05$, {**}: $p < 0.01$, {***}: $p < 0.001$. N = 30.
 \end{tablenotes}
 \end{threeparttable}
 \end{table*}
@@ -644,14 +645,14 @@ tree relaxed clocks (Figure~S8).
 \subsection{StarBEAST2 is an order of magnitude faster than *BEAST}
 
 StarBEAST2 also optimizes the core multispecies coalescent algorithms by
-replacing recursion with loops and caching intermediate values. Operator
-weights have also been tweaked by manual iteration for better performance.
+caching intermediate values and by using fast data structures. Operator
+weights have also been refined by manual iteration for better performance.
 Building on our results, by default StarBEAST2 enables coordinated height
 changing operators and analytical population size integration, but keeps
 na\"ive topology operators. To measure the combined improvement when
 StarBEAST2 is applied to \textit{Pseudacris} data we compared the performance
 of StarBEAST2 with default settings to *BEAST. For the simulation data set, we
-compare StarBEAST2 with *BEAST and also concatenation.
+compare StarBEAST2 with *BEAST and also with concatenation.
 
 NGS data sets may have hundreds or thousands of loci. To gauge the performance
 of StarBEAST2 applied to these data sets, we tested an empirical NGS data set;
@@ -885,7 +886,7 @@ equal to the number of estimated branch rates (as is the default in BEAST 2),
 and the standard deviation of the UCLN clock model was fixed at 0.3.
 
 To ensure convergence of all chains, we ran each chain for an initial length
-of $2^{24} = 16777216$ states, sampling every $2^{11} = 2048$ states. Initial
+of $2^{24} =$ 16,777,216 states, sampling every $2^{11} =$ 2,048 states. Initial
 chain lengths and sampling rates for all other analyses are in Table~SXXX. ESS
 values were computed for all recorded statistics after discarding 12.5\% of
 state samples as burn-in. Recorded statistics included (1) the posterior
@@ -916,7 +917,7 @@ output (after discarding the first 12.5\% of states as burn-in from each
 chain) of all 30 chains which used the combination of MCMC population size
 integration, na\"ive topology operators, coordinated node height operators and
 species tree branch rates. For every sample in the combined posterior
-distribution, the coalescent length of each branch $\nicefrac{\tau}{2N_e}$ was
+distribution, the coalescent length of each branch $\tau(2N_e)^{-1}$ was
 calculated from its length in substitution units $\tau$ and its effective
 population size $N_e$. The mean coalescent length of all branches across all
 samples was taken as the average.
