@@ -801,15 +801,67 @@ Substitution model $\kappa$ & 0.34 (0.10--0.55) & 0.43 (0.37--0.48) & 0.77 (0.64
 
 \section{CoordinatedUniform proposal example}
 
-Given a species tree with the topology ((A,B),C),D there are two non-leaf, non-root
-nodes: . The CoordinatedUniform move samples 
+The CoordinatedUniform operator will pick one non-leaf, non-root species tree
+node uniformly at random to be moved, dubbed $S$. Given a species tree with
+the topology ((A,B),C),D there are two non-leaf, non-root nodes: the common
+ancestor of species A and B (AB) and the common ancestor of species A, B and C
+(ABC). We illustrate an example where the ABC node is chosen
+(Figure~\ref{fig:coordinatedUniform}).
 
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=\textwidth]{coordinated_uniform.pdf}
 \caption
-{Zounds}
-\label{fig:cuni}
+{Illustration of the CoordinatedUniform move. An example gene tree is embedded
+within a four-taxon asymmetric species tree. Internal gene tree nodes
+are numbered, species leaves lettered. The ABC node is represented by a star
+in the middle step. Dashed lines are connected component and ABC
+node child and parent branches.}
+\label{fig:coordinatedUniform}
 \end{figure}
+
+The next step is to determine which internal gene tree nodes will also be
+moved with the species tree node. CoordinatedUniform selects gene tree nodes
+which meet all of the following requirements:
+
+\begin{enumerate}
+\item at least one descendant individual of $s$ is also a
+descendant individual of the \textit{left} child of $S$
+\item at least one descendant individual of $s$ is also a
+descendant individual of the \textit{right} child of $S$
+\item all descendent individuals of $s$ are also
+descendent individuals of $S$
+\end{enumerate}
+
+In the example, the left child of $S$ is the AB node, and the right child of
+$S$ is the C node. The following internal nodes in the gene tree meet
+requirement (1) 12, 13, 14, 15, 16, 20, 22; requirement (2) 13, 16, 17, 21,
+22; and requirement (3) 12, 13, 14, 15, 16, 17, 20.
+
+The only nodes in the example meeting all three requirements are 13 and 16.
+These nodes are connected by a gene tree branch, making them a single
+connected component. The connected component has three child branches (dashed
+red, yellow and blue lines) and one parent branch (dashed orange line).
+
+To determine the lower bound for the move, we must first identify the shortest
+branch out of all connected component child branches and species tree node $S$
+child branches. In the example the connected component child branches have
+lengths of 3, 7 and 8.5, and the species tree node child branches have lengths 4
+and 6 (Figure~\ref{fig:coordinatedUniform}). The lower bound is therefore the
+original species tree node height $t(S) - 3 = 6 - 3 = 3$.
+
+To determine the upper bound we use the shortest branch out of all connected
+component parent branches and the species tree node $S$ parent branch. The
+parent branch of the single connected component has a length of 2.5, and
+the parent branch of $S$ has a length of 4. The upper bound is therefore
+$t(S) + 2.5 = 6 + 2.5 = 8.5$.
+
+A new species tree node height $t'(S)$ is chosen uniformly at random from the
+range 3 to 8.5. Within this range, if the connected component node heights are
+changed by $\eta = t'(S) - t(S)$, no topology changes are induced or required. In our
+example the new height is 5, so $\eta = 5 - 6.5 = -1.5$. After the height of
+the species tree node $S$ and all connected component gene tree nodes are
+changed by $\eta = -1.5$ the proposal is complete
+(Figure~\ref{fig:coordinatedUniform}).
 
 \end{document}
