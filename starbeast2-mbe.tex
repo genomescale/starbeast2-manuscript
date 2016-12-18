@@ -485,12 +485,14 @@ computational resources we used a single haplotype per individual.
 
 A key metric of phylogenies that can be used to judge whether it is necessary
 to employ MSC models is the average branch length in coalescent units
-$\tau(2N_e)^{-1}$. In this study, $N_e$ will always refer to the
+$\tau(2N_e)^{-1}$. In this study $N_e$ will always refer to the
 effective population size of diploid individuals. Given short branch lengths,
 likelihood-based or neighbor-joining concatenation is unable to infer accurate
 species trees regardless of the number of loci used, but for long branch
 lengths, concatenation is approximately as accurate as *BEAST
-\citep{Ogilvie01052016}. Using StarBEAST2, the average branch length within
+\citep{Ogilvie01052016}. Indeed concatenation can be considered a special
+case of the MSC as the models converge when gene
+trees are identical to the species tree \citep{NYAS:NYAS12747}. Using StarBEAST2, the average branch length within
 this genus was estimated to be $2.81\tau(2N_e)^{-1}$. This is an
 intermediate average length compared to the shallow simulations analyzed by
 \cite{Ogilvie01052016} which had a shorter average length of
@@ -594,8 +596,7 @@ convergence. The estimated sample size (ESS) per hour for a given replicate
 used the smallest ESS out of all recorded statistics. Topology refers to the
 replacement of na\"ive nearest-neighbor interchange and subtree prune and
 regraft operators with coordinated operators. Height refers to the addition of
-operators which make coordinated changes to node heights. Uncorrelated log-
-normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
+operators which make coordinated changes to node heights. Uncorrelated log-normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
 the species tree (ST-UCLN). N = 30.}
 \label{fig:realEssPerHour}
 \end{figure*}
@@ -763,8 +764,7 @@ $0.39$ and by doubling the number of loci to 52 was increased to $0.43$. In
 contrast the $R^2$ when using concatenation with 26 loci was $0.26$ and even after
 increasing the number of loci to 130 it was only $0.34$, in either case worse
 than StarBEAST2 using 26 loci (Figure~\ref{fig:branchRates}). StarBEAST2 is
-clearly superior to concatenation at inferring branch rates, possibly even
-more so than for branch lengths and topology.
+clearly superior to concatenation at inferring branch rates.
 
 Concatenation is an even worse estimator of branch rates when using unphased
 sequences with ambiguity codes for heterozygous sites. When applying
@@ -921,7 +921,7 @@ clocks were applied to the tree inferred by concatenation and to the
 StarBEAST2 species tree.
 
 The same strategy as applied to \textit{Pseudacris} was used to ensure
-convergence of StarBEAST2, but mean population sizes and coalescent
+convergence of StarBEAST2, but for concatenation mean population sizes and coalescent
 probabilities are not part of the model and so were not recorded.
 
 For every converged chain, the posterior expectation and 95\% credibility
@@ -952,8 +952,7 @@ species were simulated according to the MSC process using biopy. The mean
 clock rate for each locus was chosen from a log-normal distribution with a
 mean in real space of 1 and a standard deviation of 0.6.
 
-For each gene tree, 600nt long sequence alignments were simulated using Seq-
-Gen \citep{Rambaut01061997}. An HKY model was used for all sequence alignments
+For each gene tree, 600nt long sequence alignments were simulated using Seq-Gen \citep{Rambaut01061997}. An HKY model was used for all sequence alignments
 with equal base frequencies, a $\kappa$ value of 3, and a four rate category
 discretized gamma model of among-site rate variation with a shape $\alpha$
 value of 0.2. Hence all inference based on simulated data applied the HKY+$\Gamma$
@@ -995,8 +994,8 @@ We also generated 30 replicates from a UCE data set of \textit{Crocidura}
 shrews to show that StarBEAST2 can scale to 100 loci. For 1020 out of 1112
 loci, the best fitting substitution model was either HKY or a nested model
 \citep{Giarla01092015}. To simplify configuring substitution models, we chose
-100 unique loci at random, and separately for each replicate, from the set of HKY
-and nested loci. For each replicate we ran *BEAST with a strict clock or gene
+100 unique loci at random, and separately for each replicate, from the set of loci
+which best fit HKY or a nested model. For each replicate we ran *BEAST with a strict clock or gene
 tree relaxed clock and a subset of 50 loci, StarBEAST2 with all three clock
 models and the same subset, and StarBEAST2 with all three clock models and all
 100 loci. The same priors, substitution model and convergence strategies were

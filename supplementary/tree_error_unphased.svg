@@ -124,10 +124,10 @@
      id="namedview3582"
      showgrid="false"
      inkscape:zoom="1.4807843"
-     inkscape:cx="154.57539"
+     inkscape:cx="-49.370586"
      inkscape:cy="300.76757"
-     inkscape:window-x="0"
-     inkscape:window-y="55"
+     inkscape:window-x="3840"
+     inkscape:window-y="415"
      inkscape:window-maximized="1"
      inkscape:current-layer="g3588"
      units="px"
@@ -1339,4 +1339,36 @@
              sodipodi:role="line"
              y="0"
              x="0 9.1630001 15.279 21.395 27.511 30.569 34.231998 40.348 46.464001 49.521999 55.638 61.754002 64.811996 72.753998 79.474998 82.532997 88.649002 91.091003 96.591003 99.649002 105.765 111.881 117.381">Mean rooted RF distance</tspan></text>
-</g></g></g></svg>
+</g></g><g
+       id="g4754"
+       transform="translate(-96.185857,-74.267231)"><text
+         transform="scale(1,-1)"
+         id="text3883-8"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="242.895"
+         y="-549.12799"><tspan
+           id="tspan3885-2"
+           sodipodi:role="line"
+           y="-549.12799"
+           x="242.895">A</tspan></text>
+<text
+         transform="scale(1,-1)"
+         id="text3883-8-5"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="243.22501"
+         y="-389.51099"><tspan
+           id="tspan3885-2-3"
+           sodipodi:role="line"
+           y="-389.51099"
+           x="243.22501">B</tspan></text>
+<text
+         transform="scale(1,-1)"
+         id="text3883-8-4"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="242.631"
+         y="-229.69901"><tspan
+           id="tspan3885-2-9"
+           sodipodi:role="line"
+           y="-229.69901"
+           x="242.631">C</tspan></text>
+</g></g></svg>
