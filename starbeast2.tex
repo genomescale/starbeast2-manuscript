@@ -76,8 +76,7 @@ alternative is concatenation, which assumes that the evolutionary history of
 each gene tree is identical to the species tree. This is an inconsistent
 estimator of species tree topology, and a worse estimator of divergence times.
 Concatenation also induces spurious substitution rate variation when
-incomplete lineage sorting is present. Another alternative is to use summary
-MSC methods like ASTRAL, but such methods are also unsatisfactory because they
+incomplete lineage sorting is present. Another alternative is to use heuristic methods consistent with the MSC, but such methods are also unsatisfactory because they
 infer branch lengths in coalescent units, and so cannot estimate divergence
 times. To enable fuller use of available data and more accurate inference of
 species tree topologies, divergence times, and substitution rates, we have
@@ -154,21 +153,22 @@ produces apparent substitution rate variation where none exists
 concatenation are therefore not a reliable approximation of the species tree
 in terms of branch lengths or topology.
 
-As an alternative to concatenation, MSC methods which use summary statistics
-instead of sequence alignments have been developed for use with phylogenomic
-data. Popular summary methods include MP-EST and ASTRAL \citep{Liu2010,
-Mirarab01092014}, but recent results show that MP-EST should be used with
-caution as it is sensitive to gene tree errors \citep{Mirarab15062015,
-Xi201563}. At low levels of ILS, MP-EST is less accurate than likelihood-based
-or neighbor-joining concatenation at inferring topologies, and even at high
-levels of ILS it may be no more accurate than concatenation
-\citep{Ogilvie01052016}. While other methods like ASTRAL may be more
-reliable than MP-EST, summary MSC methods estimate branch lengths in coalescent
-units instead of substitutions. Molecular-clock informed divergence times
-therefore cannot be reconstructed using summary methods. If concatenation is
-used to estimate branch lengths or divergence times for a fixed species tree
-topology estimated using a summary method, then those estimates will be
-unreliable for the same reasons as pure concatenation.
+As an alternative to concatenation for use with phylogenomic data, MSC methods
+such as MP-EST \citep{Liu2010} which use summary statistics instead of
+sequence alignments have been developed. Recent results show that MP-EST
+should be used with caution as it is sensitive to gene tree errors
+\citep{Mirarab15062015, Xi201563}. At low levels of ILS, MP-EST is less
+accurate than likelihood-based or neighbor-joining concatenation at inferring
+topologies, and even at high levels of ILS it may be no more accurate than
+concatenation \citep{Ogilvie01052016}. More recently developed quartet methods
+which are statistically consistent with the MSC include ASTRAL and SVDquartets
+\citep{Mirarab01092014,doi:10.1093/bioinformatics/btu530}. No available
+quartet or summary method can infer branch lengths in substitution units, and
+therefore cannot be used to estimate molecular-clock informed divergence
+times. If concatenation is used to estimate branch lengths or divergence times
+for a fixed species tree topology estimated using a summary or quartet method,
+then those estimates will be unreliable for the same reasons as pure
+concatenation.
 
 Another issue with summary methods is when the assumption of
 no recombination within loci is frequently violated because overly long loci are used \citep{Gatesy26032013}. To
@@ -215,7 +215,7 @@ the likelihood of each site is calculated for all possible discrete gamma rates
 at each step, so individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
-implemented as part of BEST \citep{EVO:EVO414}. The analytic solution, which we
+implemented as part of BEST \citep{EVO:EVO414}, and is described in detail by \cite{Jones2016}. The analytic solution, which we
 have added to StarBEAST2, uses an inverse gamma conjugate prior for population
 sizes. By default StarBEAST2 fixes the shape of the distribution $\alpha = 3$
 and only estimates the mean of the distribution $\mu$, which is proportional to the
@@ -753,7 +753,7 @@ errors may \textit{partially} cancel out.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=70mm]{tree_error_phased.png}
+\includegraphics[width=70mm]{tree_scores_boxplots_phased.png}
 \caption
 {Accuracy of different methods applied to simulated data. Methods are StarBEAST2,
 *BEAST and BEAST concatenation with uncorrelated log-normal relaxed clocks applied
