@@ -76,7 +76,7 @@ alternative is concatenation, which assumes that the evolutionary history of
 each gene tree is identical to the species tree. This is an inconsistent
 estimator of species tree topology, and a worse estimator of divergence times.
 Concatenation also induces spurious substitution rate variation when
-incomplete lineage sorting is present. Another alternative is to use heuristic methods consistent with the MSC, but such methods are also unsatisfactory because they
+incomplete lineage sorting is present. Another alternative is to use shortcut methods consistent with the MSC, but such methods are also unsatisfactory because they
 infer branch lengths in coalescent units, and so cannot estimate divergence
 times. To enable fuller use of available data and more accurate inference of
 species tree topologies, divergence times, and substitution rates, we have
@@ -112,8 +112,7 @@ causes *BEAST to become intractably slow after a certain number of loci
 \citep[the exact number will depend on other parameters of the data set, see][]{Ogilvie01052016}.
 Given the current challenges of using large phylogenomic data sets with *BEAST
 there have been three broad alternatives available to researchers; concatenate
-sequences from multiple loci, use alternative MSC methods which are based on
-summary statistics instead of sequence alignments, or choose a tractable
+sequences from multiple loci, use shortcut methods statistically consistent with the MSC, or choose a tractable
 subset of loci to use with a fully Bayesian method like *BEAST, BEST \citep{Liu01112008}, or BPP
 \citep{Yang854}.
 
@@ -153,24 +152,27 @@ produces apparent substitution rate variation where none exists
 concatenation are therefore not a reliable approximation of the species tree
 in terms of branch lengths or topology.
 
-As an alternative to concatenation for use with phylogenomic data, MSC methods
-such as MP-EST \citep{Liu2010} which use summary statistics instead of
-sequence alignments have been developed. Recent results show that MP-EST
+As an alternative to concatenation for use with phylogenomic data, ``shortcut''
+methods which do not perform phylogenetic likelihood calculations but are statistically
+consistent with the MSC have been developed. These include summary methods
+which utilize distributions of estimated gene tree topologies as input, such as the
+triplet method MP-EST \citep{Liu2010} and the quartet method ASTRAL
+\citep{Mirarab01092014}. Another quartet method is SVDquartets, which
+utilizes single-nucleotide polymorphism (SNP) matrices
+\citep{doi:10.1093/bioinformatics/btu530}. Recent results show that MP-EST
 should be used with caution as it is sensitive to gene tree errors
 \citep{Mirarab15062015, Xi201563}. At low levels of ILS, MP-EST is less
 accurate than likelihood-based or neighbor-joining concatenation at inferring
 topologies, and even at high levels of ILS it may be no more accurate than
-concatenation \citep{Ogilvie01052016}. More recently developed quartet methods
-which are statistically consistent with the MSC include ASTRAL and SVDquartets
-\citep{Mirarab01092014,doi:10.1093/bioinformatics/btu530}. No available
-quartet or summary method can infer branch lengths in substitution units, and
+concatenation \citep{Ogilvie01052016}. No available
+shortcut method can infer branch lengths in substitution units, and
 therefore cannot be used to estimate molecular-clock informed divergence
 times. If concatenation is used to estimate branch lengths or divergence times
-for a fixed species tree topology estimated using a summary or quartet method,
+for a fixed species tree topology estimated using a shortcut method,
 then those estimates will be unreliable for the same reasons as pure
 concatenation.
 
-Another issue with summary methods is when the assumption of
+An issue specific to summary methods is when the assumption of
 no recombination within loci is frequently violated because overly long loci are used \citep{Gatesy26032013}. To
 resolve larger and deeper species trees using summary methods, longer and more
 informative loci may be required to infer more accurate gene trees. However
