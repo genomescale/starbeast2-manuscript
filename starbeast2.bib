@@ -952,3 +952,35 @@ doi = {10.1093/bioinformatics/btu530},
 URL = { + http://dx.doi.org/10.1093/bioinformatics/btu530},
 eprint = {/oup/backfile/Content_public/Journal/bioinformatics/30/23/10.1093/bioinformatics/btu530/2/btu530.pdf}
 }
+
+@article {Liu171,
+	author = {Liu, Liang and Edwards, Scott V.},
+	title = {Comment on ``{Statistical binning enables an accurate coalescent-based estimation of the avian tree}''},
+	volume = {350},
+	number = {6257},
+	pages = {171},
+	year = {2015},
+	doi = {10.1126/science.aaa7343},
+	publisher = {American Association for the Advancement of Science},
+	abstract = {Mirarab et al. (Research Article, 12 December 2014, p. 1250463) introduced statistical binning to improve the signal in phylogenetic methods using the multispecies coalescent model. We show that all forms of binning{\textemdash}na{\"\i}ve, statistical, and weighted statistical{\textemdash}display poor performance and are statistically inconsistent in large regions of parameter space, unlike unbinned sequence data used with species tree methods.},
+	issn = {0036-8075},
+	URL = {http://science.sciencemag.org/content/350/6257/171.1},
+	eprint = {http://science.sciencemag.org/content/350/6257/171.1.full.pdf},
+	journal = {Science}
+}
+
+@article {Mirarab1250463,
+	author = {Mirarab, Siavash and Bayzid, Md. Shamsuzzoha and Boussau, Bastien and Warnow, Tandy},
+	title = {Statistical binning enables an accurate coalescent-based estimation of the avian tree},
+	volume = {346},
+	number = {6215},
+	year = {2014},
+	pages = {1337},
+	doi = {10.1126/science.1250463},
+	publisher = {American Association for the Advancement of Science},
+	abstract = {IntroductionReconstructing species trees for rapid radiations, as in the early diversification of birds, is complicated by biological processes such as incomplete lineage sorting (ILS) that can cause different parts of the genome to have different evolutionary histories. Statistical methods, based on the multispecies coalescent model and that combine gene trees, can be highly accurate even in the presence of massive ILS; however, these methods can produce species trees that are topologically far from the species tree when estimated gene trees have error. We have developed a statistical binning technique to address gene tree estimation error and have explored its use in genome-scale species tree estimation with MP-EST, a popular coalescent-based species tree estimation method.The statistical binning pipeline for estimating species trees from gene trees. Loci are grouped into bins based on a statistical test for combinabilty, before estimating gene trees.RationaleIn statistical binning, phylogenetic trees on different genes are estimated and then placed into bins, so that the differences between trees in the same bin can be explained by estimation error (see the figure). A new tree is then estimated for each bin by applying maximum likelihood to a concatenated alignment of the multiple sequence alignments of its genes, and a species tree is estimated using a coalescent-based species tree method from these supergene trees.ResultsUnder realistic conditions in our simulation study, statistical binning reduced the topological error of species trees estimated using MP-EST and enabled a coalescent-based analysis that was more accurate than concatenation even when gene tree estimation error was relatively high. Statistical binning also reduced the error in gene tree topology and species tree branch length estimation, especially when the phylogenetic signal in gene sequence alignments was low. Species trees estimated using MP-EST with statistical binning on four biological data sets showed increased concordance with the biological literature. When MP-EST was used to analyze 14,446 gene trees in the avian phylogenomics project, it produced a species tree that was discordant with the concatenation analysis and conflicted with prior literature. However, the statistical binning analysis produced a tree that was highly congruent with the concatenation analysis and was consistent with the prior scientific literature.ConclusionsStatistical binning reduces the error in species tree topology and branch length estimation because it reduces gene tree estimation error. These improvements are greatest when gene trees have reduced bootstrap support, which was the case for the avian phylogenomics project. Because using unbinned gene trees can result in overestimation of ILS, statistical binning may be helpful in providing more accurate estimations of ILS levels in biological data sets. Thus, statistical binning enables highly accurate species tree estimations, even on genome-scale data sets.Gene tree incongruence arising from incomplete lineage sorting (ILS) can reduce the accuracy of concatenation-based estimations of species trees. Although coalescent-based species tree estimation methods can have good accuracy in the presence of ILS, they are sensitive to gene tree estimation error. We propose a pipeline that uses bootstrapping to evaluate whether two genes are likely to have the same tree, then it groups genes into sets using a graph-theoretic optimization and estimates a tree on each subset using concatenation, and finally produces an estimated species tree from these trees using the preferred coalescent-based method. Statistical binning improves the accuracy of MP-EST, a popular coalescent-based method, and we use it to produce the first genome-scale coalescent-based avian tree of life.},
+	issn = {0036-8075},
+	URL = {http://science.sciencemag.org/content/346/6215/1250463},
+	eprint = {http://science.sciencemag.org/content/346/6215/1250463.full.pdf},
+	journal = {Science}
+}
