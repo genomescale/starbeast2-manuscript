@@ -600,8 +600,8 @@ Strict & hour & 70\%{***} & 137\%{***} & 208\%{***}\tabularnewline
 Strict & million states & 100\%\hphantom{***} & 148\%{***} & 225\%{***}\tabularnewline
 GT-UCLN & hour & 68\%{***} & 231\%{***} & 228\%{***}\tabularnewline
 GT-UCLN & million states & 98\%\hphantom{***} & 248\%{***} & 248\%{***}\tabularnewline
-ST-UCLN & hour & 71\%{*}\hphantom{**} & 940\%{***} & 136\%{*}\hphantom{**}\tabularnewline
-ST-UCLN & million states & 86\%\hphantom{***} & 920\%{***} & 145\%{**}\hphantom{*}\tabularnewline
+ST-UCLN & hour & 72\%{*}\hphantom{**} & 927\%{***} & 135\%{*}\hphantom{**}\tabularnewline
+ST-UCLN & million states & 86\%\hphantom{***} & 907\%{***} & 144\%{**}\hphantom{*}\tabularnewline
 \hline
 \end{tabular*}
 \begin{tablenotes}
@@ -625,7 +625,7 @@ the negative effect on ESS per hour.
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{minimum_ess_per_hour_starbeast2.png}
+\includegraphics[width=\textwidth]{minimum-ess_per_hour-starbeast2.png}
 \caption
 {Impact of operators, population size integration and clock models on
 convergence. The estimated sample size (ESS) per hour for a given replicate
@@ -642,7 +642,7 @@ increased ESS per hour and ESS per million states, however the degree of
 improvement depended on the clock model (Figure~\ref{fig:realEssPerHour}). For
 strict clock analyses the increase in ESS per hour was modest at 1.2 times and
 1.37 times for empirical and simulated data respectively, whereas for species
-tree relaxed clocks the increase was 4.99 times and 9.40 times respectively
+tree relaxed clocks the increase was 4.99 times and 9.27 times respectively
 (Table~\ref{tab:convergenceLM}). The difference in species tree relaxed clock
 performance suggests that coordinated height changing operators are necessary
 for practical implementations of that model.
@@ -706,7 +706,7 @@ using StarBEAST2 were still faster than gene tree relaxed clocks using *BEAST
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{minimum_ess_per_hour_comparison.png}
+\includegraphics[width=\textwidth]{minimum-ess_per_hour-comparison.png}
 \caption
 {Convergence of different methods applied to simulated and empirical data
 sets. The estimated sample size (ESS) per hour for a given replicate used the
@@ -835,14 +835,14 @@ length is confounded with substitution rate \citep{Thorne01092002}.
 For analyses of simulated data using 26 loci the $R^2$ using StarBEAST2 was
 $0.39$ and by doubling the number of loci to 52 was increased to $0.43$. In
 contrast the $R^2$ when using concatenation with 26 loci was $0.26$ and even after
-increasing the number of loci to 130 it was only $0.34$, in either case worse
+increasing the number of loci to 130 it was only $0.33$, in either case worse
 than StarBEAST2 using 26 loci (Figure~\ref{fig:branchRates}). StarBEAST2 is
 clearly superior to concatenation at inferring branch rates.
 
 Concatenation is an even worse estimator of branch rates when using unphased
 sequences with ambiguity codes for heterozygous sites. When applying
-concatenation to either 26 or 130 loci, $R^2$ was very weak at $0.12$ and
-$0.13$ respectively (Figure~S12).
+concatenation to either 26 or 130 loci, $R^2$ was very weak at $0.12$ regardless
+of the number of loci (Figure~S12).
 
 \begin{figure}[htb!]
 \centering
@@ -950,7 +950,10 @@ after discarding 12.5\% of state samples. The length of a chain was
 continually doubled and ESS values re-evaluated until the ESS values of all
 recorded statistics were above 200. The rate at which trees and statistics
 were sampled was halved with every chain doubling so that the total number of
-samples remained constant.
+samples remained constant. Two *BEAST GT-UCLN chains still had insufficient
+ESS values after running for $2^{34} =$ 17,179,869,184 states, but all other
+chains had converged. Estimated ESS values for all chains were used for
+analyses of computational performance.
 
 ESS per hour was calculated by dividing the final ESS value for a given
 statistic by 87.5\% of the total CPU time used by that chain to account for
@@ -1035,7 +1038,12 @@ The same combinations of clock models, population size integration and new
 operators were explored using the simulated data as for \textit{Pseudacris} to
 provide more generally applicable results regarding those new techniques. The
 same number of loci, convergence strategy and calculations of ESS rates were
-used for both. Both haplotype sequences were used for each species.
+used for both. Both haplotype sequences were used for each species for *BEAST
+and StarBEAST2. One concatenation chain using phased haplotypes and a relaxed
+clock still had insufficient ESS values after running for $2^{33} =$
+8,589,934,592 states, but all other chains had converged. Estimated ESS
+values for all chains were used for analyses of computational performance and
+statistical accuracy and coverage.
 
 \subsection{Comparison of StarBEAST2 with *BEAST and concatenation}
 
@@ -1073,6 +1081,7 @@ with a strict clock or gene tree relaxed clock and a subset of 50 loci,
 StarBEAST2 with all three clock models and the same subset, and StarBEAST2
 with all three clock models and all 100 loci. The same priors, substitution
 model and convergence strategies were used as for the simulated data set.
+All \textit{Crocidura} MCMC chains converged.
 
 \subsection{Measurements of species tree accuracy and coverage}
 
@@ -1083,7 +1092,7 @@ tree branch $b$ in a set of branch lengths $B$. Total branch length bias is
 defined as $\nicefrac{\sum_b{\hat{l}_b} - \sum_b{l_b}}{\sum_b{l_b}}$. In this
 study, $B$ is either the set of tip branches, or the set of internal branches
 excluding the root branch. Point estimates of branch lengths were calculated
-using the common ancestor method applied to the true simulated topology
+using the common ancestor method conditioned on the true simulated topology
 \citep{Heled2013}. Highest posterior density regions were used for all
 credible intervals.
 
