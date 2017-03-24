@@ -75,7 +75,7 @@
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{species_topology_frequencies.pdf}
+\includegraphics[width=130mm]{species_topology_frequencies.pdf}
 \caption
 {Frequency of five-taxon species tree topologies sampled from a birth-death prior
 distribution. Topologies were sampled by simulating trees using biopy (red), or
@@ -92,7 +92,7 @@ e.g. (((a,b),(c,d)),e), and low probability unbalanced topologies e.g.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{gene_topology_frequencies.pdf}
+\includegraphics[width=130mm]{gene_topology_frequencies.pdf}
 \caption
 {Frequency of five-taxon gene tree topologies sampled from a multispecies
 coalescent prior distribution. Topologies were sampled by simulating gene trees
@@ -112,7 +112,7 @@ from left to right --- high probability balanced topologies e.g.
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{species_node_heights.pdf}
+\includegraphics[width=130mm]{species_node_heights.pdf}
 \caption
 {Probability densities of five-taxon species tree node heights sampled from a
 birth-death prior distribution. Node heights were sampled by simulating trees
@@ -127,7 +127,7 @@ from noise, indicating that StarBEAST2 is mathematically correct.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{gene_node_heights.pdf}
+\includegraphics[width=130mm]{gene_node_heights.pdf}
 \caption
 {Probability densities of five-taxon gene tree node heights sampled from a
 multispecies coalescent prior distribution. Node heights were sampled by
@@ -145,7 +145,7 @@ noise, indicating that StarBEAST2 is mathematically correct.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{gene_branch_rates.pdf}
+\includegraphics[width=130mm]{gene_branch_rates.pdf}
 \caption
 {Probability densities of five-taxon gene tree branch rates produced by a
 species tree uncorrelated lognormal (UCLN) relaxed clock. Branch rates were
@@ -161,7 +161,7 @@ indicating that StarBEAST2 is mathematically correct.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=16cm]{exp_gene_branch_rates.pdf}
+\includegraphics[width=130mm]{exp_gene_branch_rates.pdf}
 \caption
 {Probability densities of five-taxon gene tree branch rates produced by a
 species tree uncorrelated exponential (UCED) relaxed clock. Branch rates were
@@ -177,7 +177,7 @@ indicating that StarBEAST2 is mathematically correct.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=7cm]{false_branch_rates.pdf}
+\includegraphics[width=70mm]{false_branch_rates.pdf}
 \caption
 {Number of erroneous per-species substitution rates estimated using BEAST concatenation and StarBEAST2. Erroneous
 branch rates are those with 95\% credibility intervals which do not include the true rate of 1.
@@ -190,7 +190,7 @@ second is the number inferred to be slower than 1.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=7cm]{false_branch_lengths.pdf}
+\includegraphics[width=70mm]{false_branch_lengths.pdf}
 \caption
 {Number of erroneous branch lengths estimated using BEAST concatenation and StarBEAST2. Erroneous
 branch lengths are those with 95\% credibility intervals which do not include the true simulated length for a given branch.
@@ -205,7 +205,7 @@ second is the number inferred to be shorter.}
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=\textwidth]{mstates_per_hour.pdf}
+\includegraphics[width=130mm]{mstates_per_hour.pdf}
 \caption
 {Impact of operators, population size integration and clock models on
 the calculation time for each state. Topology refers to the
@@ -213,57 +213,56 @@ replacement of na\"ive nearest-neighbor interchange and subtree prune and
 regraft operators with coordinated operators. Height refers to the addition of
 operators which make coordinated changes to node heights. Uncorrelated
 log-normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
-the species tree (ST-UCLN). N $\ge$ 30.}
+the species tree (ST-UCLN). N = 30.}
 \label{fig:mstatesPerHour}
 \end{figure}
 
 \clearpage
 
-% \begin{figure}[htb!]
-% \centering
-% \includegraphics[width=\textwidth]{minimum_ess_per_mstates_starbeast2.pdf}
-% \caption
-% {Impact of operators, population size integration and clock models on
-% estimated sample size (ESS) per million states. Topology refers to the
-% replacement of na\"ive nearest-neighbor interchange and subtree prune and
-% regraft operators with coordinated operators. Height refers to the addition of
-% operators which make coordinated changes to node heights. Uncorrelated log-
-% normal relaxed clocks were applied to either each gene tree (GT-UCLN) or to
-% the species tree (ST-UCLN). N $\ge$ 22.}
-% \label{fig:realEssPerMstates}
-% \end{figure}
-
-\clearpage
-
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=80mm]{tree_error_unphased.pdf}
+\includegraphics[width=130mm]{branch_length_accuracy_unphased.pdf}
 \caption
-{Accuracy of different methods applied to simulated data. Methods are StarBEAST2,
+{Accuracy and coverage of species branch lengths using different methods. Methods are StarBEAST2,
 *BEAST and unphased BEAST concatenation with uncorrelated log-normal relaxed clocks applied
-to the gene tree (GT-UCLN) or to the species tree (ST-UCLN). (A) Trimmed mean of
-relative species tree error, a measure of branch length error. (B) Trimmed
-mean of mean pendant edge bias, which measures biased estimates of the ages of
-extant species. (C) Trimmed mean of mean rooted Robinson-Foulds (RF) distances, a
-measure of topological error. 25\% trim was used to reduce the
-influence of outliers. All error bars are 95\% confidence intervals calculated
-by bootstrapping. N $\ge$ 22.}
-\label{fig:unphasedSpeciesTreeError}
+to the gene tree (GT-UCLN) or to the species tree (ST-UCLN). (A,B) The sum of absolute
+differences between estimated and simulated branch lengths as a percentage of true
+tree length. (C,D) The difference between the sum of estimated branch lengths and the
+sum of true branch lengths as a percentage of the sum of true branch lengths. (E,F) The
+percentage of true branch lengths present within the corresponding 95\% highest posterior density (HPD)
+credible intervals. N = 30.}
+\label{fig:branchLengthsError}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=80mm]{branch_rates_unphased.pdf}
+\includegraphics[width=70mm]{topology_accuracy_unphased.pdf}
+\caption
+{Accuracy and coverage of species tree topologies using different methods.
+Methods are StarBEAST2, *BEAST and unphased BEAST concatenation with uncorrelated
+log-normal relaxed clocks applied to the gene tree (GT-UCLN) or to the species
+tree (ST-UCLN). (A) The average rooted Robinson-Foulds (RF) distance between the
+maximum clade credibility (MCC) species tree topology and the
+simulated true topology. (B) The percentage of true species tree topologies
+within the 95\% credible set of topologies. Error bars are 95\% confidence
+intervals calculated by bootstrapping. N = 30.}
+\label{fig:treeTopologyError}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=70mm]{branch_rates_unphased.pdf}
 \caption
 {Estimates of species tree branch rates using unphased BEAST concatenation versus
 StarBEAST2. Estimated rates are the posterior expectations of each branch rate
 from each replicate. Root branch rates, which were fixed at 1, were excluded.
 In blue are simple linear regression lines of best fit, and in red are the $y
-= x$ lines showing a perfect relationship between estimates and truth. N $\ge$
-22.}
-\label{fig:unphasedBranchRates}
+= x$ lines showing a perfect relationship between estimates and truth. N = 30.}
+\label{fig:branchRates}
 \end{figure}
 
 \clearpage
@@ -530,7 +529,7 @@ ancestor of species A and B (AB) and the common ancestor of species A, B and C
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=\textwidth]{coordinated_uniform.pdf}
+\includegraphics[width=130mm]{coordinated_uniform.pdf}
 \caption
 {Illustration of the CoordinatedUniform move. An example gene tree is embedded
 within a four-taxon asymmetric species tree. Internal gene tree nodes

@@ -252,11 +252,11 @@ the same step. \cite{Yang01122014} introduced a Metropolis-Hastings \citep[MH;][
 operator which makes nearest-neighbour interchange (NNI) changes to the species
 tree topology, and simultaneously makes changes to gene tree topologies which
 preserve compatibility of the gene trees within the proposed species tree.
-Later, both \cite{Jones2016} and \cite{2015arXiv151203843R} introduced more
+Later, both \cite{Jones2016} and \cite{rannala2017efficient} introduced more
 general coordinated operators which make subtree prune and regraft (SPR) changes
 to the species tree. We have reimplemented these coordinated NNI and SPR moves
 in StarBEAST2 as a single new operator called ``CoordinatedExchange''.
-\cite{2015arXiv151203843R} also describe a proposal distribution which favours
+\cite{rannala2017efficient} also describe a proposal distribution which favours
 topological changes on shorter branches as well as less radical changes in
 topology. StarBEAST2 implements a simpler proposal distribution but still
 favours less radical changes by applying adjustable proposal probability weights
@@ -378,7 +378,7 @@ r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.00165}{1.5} = 0.0011
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=80mm]{relaxed_clock.png}
+\includegraphics[width=70mm]{relaxed_clock.png}
 \caption
 {Two-species phylogeny used to illustrate species tree relaxed
 clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
@@ -475,7 +475,7 @@ rates or lengths estimated using StarBEAST2 (Figure~\ref{fig:spilsRates}).
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{scatter.png}
+\includegraphics[width=130mm]{scatter.png}
 \caption
 {Accuracy of branch substitution rates and lengths inferred by BEAST
 concatenation and StarBEAST2. Deviation is the difference of each estimated
@@ -625,7 +625,7 @@ the negative effect on ESS per hour.
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{minimum-ess_per_hour-starbeast2.png}
+\includegraphics[width=130mm]{minimum-ess_per_hour-starbeast2.png}
 \caption
 {Impact of operators, population size integration and clock models on
 convergence. The estimated sample size (ESS) per hour for a given replicate
@@ -706,7 +706,7 @@ using StarBEAST2 were still faster than gene tree relaxed clocks using *BEAST
 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\textwidth]{minimum-ess_per_hour-comparison.png}
+\includegraphics[width=130mm]{minimum-ess_per_hour-comparison.png}
 \caption
 {Convergence of different methods applied to simulated and empirical data
 sets. The estimated sample size (ESS) per hour for a given replicate used the
@@ -763,7 +763,7 @@ by concatenation (Figure~\ref{fig:branchLengthsError}F).
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=125mm]{branch_length_accuracy_phased.png}
+\includegraphics[width=130mm]{branch_length_accuracy_phased.png}
 \caption
 {Accuracy and coverage of species branch lengths using different methods. Methods are StarBEAST2,
 *BEAST and BEAST concatenation with uncorrelated log-normal relaxed clocks applied
@@ -778,7 +778,8 @@ credible intervals. N = 30.}
 
 Using unphased sequences with ambiguity codes for heterozygous sites improved
 the accuracy of concatenation by reducing the bias in tip lengths to less than
-40\% (Figure~S10). Ambiguity codes are treated by most
+40\% (Figure~S10). Topological accuracy was not improved by using unphased
+sequences (Figure~S11). Ambiguity codes are treated by most
 phylogenetic methods (including BEAST) as base call uncertainty,
 indicating the nucleotide at a given site could be one of several
 possibilities. When used with unphased sequences, they actually indicate the
