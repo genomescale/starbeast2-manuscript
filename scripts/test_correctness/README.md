@@ -1,4 +1,4 @@
-# Scripts for testing correctness of analytical population sizes
+# Scripts for testing correctness of StarBEAST2
 
 These are all scripts used to test the correctness of the StarBEAST2
 implementation of the multispecies coalescent and species tree relaxed clocks.

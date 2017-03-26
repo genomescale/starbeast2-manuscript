@@ -43,7 +43,7 @@ Runs each simulate python script with the settings used for our SPILS study.
 
 ## spils_branch_rates.py
 
-Calculates estimated branch rates and collates with true rates. Calculates
+Calculates estimated branch rates and collates with true rates. Also calculates
 false positive branch rates used in Figures S7 and S8. Path to the BEAST
 treeannotator binary must be supplied as a command line argument.
 
