@@ -355,7 +355,7 @@ email: journals.permissions@oup.com}
 \end{center}\vspace*{4pt}}
 \end{boxedminipage}\\[34pt]
 {\it Syst. Biol.} \@jvolume(\@jissue):\@firstpage\@pageinfo, \@pubyear\\
-\copyright\ The Author(s) 2016. Published by Oxford University Press, on behalf of the Society of Systematic Biologists. All rights reserved.\\
+\copyright\ The Author(s) 2017. Published by Oxford University Press, on behalf of the Society of Systematic Biologists. All rights reserved.\\
 For Permissions, please email: journals.permissions@oup.com\\
 DOI:10.1093/sysbio/\@jshort\@artid\\
 \accessfont{\@access}
