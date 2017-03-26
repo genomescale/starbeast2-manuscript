@@ -1,9 +1,5 @@
 #!/bin/bash
 
-rm biopy.species.trees
-rm biopy.gene0.trees
-rm biopy.gene1.trees
-
 echo "Simulating species trees..."
 sample_species_tree -o biopy.species.trees -p i,3,0.004 -b 200.0 -d 100.0 -n 100000 species0,species1,species2,species3,species4
 
