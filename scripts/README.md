@@ -42,6 +42,14 @@ simulated data in the `21-species` folder as well as empirical data sets
 in the `pseudacris` and `crocidura` folders. `calculate_ess_rates.py` must
 be run first.
 
+## mean_branch_lengths.py
+
+Calculates the mean diploid population size, mean branch length in units of
+time or expected substitutions, mean branch length in coalescent units, and
+mean root node height from a collection of species trees. Input files can be
+`*.tree` files for e.g. a single simulated species tree or `*.trees` files for
+e.g. a posterior distribution of species trees.
+
 ## measure_trees.py
 
 Summarizes the posterior probability of each species tree topology present in

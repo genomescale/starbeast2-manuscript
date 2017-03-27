@@ -300,7 +300,7 @@ An example of how gene tree nodes are selected and node heights shifted is
 given in Supplementary Material.
 
 We have also developed a new adaptive MH \citep{Andrieu2008} operator called
-``CoordinatedExponential'' which also changes the height of the species tree
+``CoordinatedExponential'' which changes the height of the species tree
 root node and the height of connected components by an amount $\eta$. The gene
 trees nodes to be shifted are chosen using identical criteria as for
 CoordinatedUniform. Because this operator changes the height of the root node,
@@ -335,7 +335,7 @@ be influenced by the nature of the particular gene and also by the natural
 history of the particular species. For a given gene, the average substitution
 rate may depend on the effects of selection such as the accelerated molecular
 evolution of sex-biased genes in \textit{Arabidopsis thaliana}
-\citep{Gossmann01032014}, or on within-genome variation in mutation rate \citep{Baer2007}.
+\citep{Gossmann01032014}, and on within-genome variation in mutation rate \citep{Baer2007}.
 For a given species, the average substitution rate is correlated with a
 multitude of traits including metabolic rate, body size, and fecundity, although
 causal relationships are difficult to pin down \citep{Bromham2503}.
@@ -384,7 +384,7 @@ r_b &= \frac{\Sigma \mathbb{E}(S_b)}{l_b} = \frac{0.00165}{1.5} = 0.0011
 clocks. There are two extant species ``A'' and ``B'', and one ancestral species ``AB''.
 Within the species tree there is a single gene tree with extant individuals ``a''
 and ``b''. The single speciation event occurs at time T1, and the single coalescence
-event occurs at time t1. Gene tree rates are computed according to Table~\ref{tab:branchRateModel}}
+event occurs at time t1. Gene tree rates are computed according to Table~\ref{tab:branchRateModel}.}
 \label{fig:branchRateModel}
 \end{figure}
 
@@ -441,7 +441,7 @@ implementation.
 \subsection{Species tree relaxed clocks prevent SPILS}
 
 When using concatenation to infer a species tree, SPILS causes apparent
-substitution rate variation among predictable species tree branches. However
+substitution rate variation. However
 in an ultrametric (time tree) framework like BEAST, branch lengths are
 constrained so that terminal species begin at time zero. We hypothesised that
 if a relaxed clock is used with concatenation in an ultrametric framework,
@@ -564,10 +564,9 @@ space of trees and parameters, as well as the computational time required by
 each operator proposal and likelihood calculation. In contrast, ESS per
 million states reflects only the exploration of tree and parameter space
 independently of calculation times. A variety of statistics were recorded for
-each analysis (Table~S2-S7), and for each replicate the statistic with the
-slowest ESS rate for that particular chain was used when computing the mean
-and standard deviation of ESS per hour and per million states, and in the
-rest of the paper.
+each analysis (Table~S2-S7), and for each replicate the slowest ESS rate
+out of all statistics recorded for that individual chain was used for all
+subsequent analyses.
 
 Multiple linear regressions with log transformed ESS rates as the response
 variables were used to measure the effect of coordinated topology changing
@@ -638,7 +637,7 @@ the species tree (ST-UCLN). N = 30.}
 \end{figure*}
 
 Coordinated height changing operators consistently and significantly
-increased ESS per hour and ESS per million states, however the degree of
+increased ESS per hour and per million states, however the degree of
 improvement depended on the clock model (Figure~\ref{fig:realEssPerHour}). For
 strict clock analyses the increase in ESS per hour was modest at 1.2 times and
 1.37 times for empirical and simulated data respectively, whereas for species
@@ -647,11 +646,10 @@ tree relaxed clocks the increase was 4.99 times and 9.27 times respectively
 performance suggests that coordinated height changing operators are necessary
 for practical implementations of that model.
 
-Analytical population size integration significantly improved ESS per hour
-performance in all cases, with the exception of gene tree relaxed clocks
-applied to the \textit{Pseudacris} data set. For the simulated analyses there
-was a significant improvement to ESS per hour and ESS per million states
-regardless of clock model (Table~\ref{tab:convergenceLM}).
+Analytical population size integration significantly improved ESS per hour and
+per million states performance in all cases, with the exception of gene tree
+relaxed clocks applied to the \textit{Pseudacris} data set.
+(Table~\ref{tab:convergenceLM}).
 
 Even with new operators and analytical population size integration, the ESS
 per hour rates for species tree relaxed clocks were slower than for other
@@ -678,7 +676,7 @@ ultraconserved element \citep[UCE;][]{Faircloth01102012} sequences from
 Philippine shrews of the genus \textit{Crocidura} \citep{Giarla01092015}. This
 data set consists of 1112 loci sampled from a total of 19 individuals, which
 belong to 9 extant lineages. Again multiple statistics were recorded to
-compute the ESS rate means and standard deviations.
+compute ESS rates for each replicate.
 
 Our simulation study confirmed that StarBEAST2 is many times faster than
 *BEAST (Figure~\ref{fig:essPerHourComparison}). For simulated data the average
@@ -691,8 +689,8 @@ was when analysing 26.
 
 StarBEAST2 was an order of magnitude faster when analysing either
 empirical data set. For gene tree relaxed clock reanalyses of
-\textit{Pseudacris} the difference was $\exp(3.98 - 1.41) = 13.1$ times. For
-50-locus \textit{Crocidura} reanalyses it was $\exp(2.79 - 0.11) = 13.8$ times
+\textit{Pseudacris} the difference was $\exp(3.98 - 1.38) = 13.5$ times. For
+50-locus \textit{Crocidura} reanalyses it was $\exp(2.79 - 0.17) = 13.8$ times
 (Table~S4,S6).
 
 The ESS per hour convergence of species tree relaxed clocks was lower than for
@@ -830,7 +828,7 @@ posterior expectation of the rate of that branch (conditional on the
 corresponding clade being monophyletic in the posterior samples) as the
 response variable. If all estimates are equally proportional to the truth,
 then the $R^2$ coefficient of determination will equal 1. There are intrinsic
-limits to our ability to estimate substitution rates, primarily that branch
+limits to our ability to estimate substitution rates, namely that branch
 length is confounded with substitution rate \citep{Thorne01092002}.
 
 For analyses of simulated data using 26 loci the $R^2$ using StarBEAST2 was
@@ -863,7 +861,7 @@ When estimating divergence dates and substitution rates, the choice is often
 between using a subset of available loci with a fully Bayesian MSC method, or
 all available loci with concatenation. Researchers have often opted for the
 second choice, but we have shown that concatenation may not accurately
-estimate the ages of extant species or per-species substitution rates, even
+estimate species ages or per-species substitution rates, even
 for trees of intermediate branch lengths. The increased performance of
 StarBEAST2 should further encourage the adoption of fully Bayesian MSC methods
 for estimating divergence times, and the new species tree relaxed clock will
@@ -894,7 +892,7 @@ gene trees were sampled from the prior at a rate of one every 1000 after a
 
 Identical parameters were used for the simulation and for the StarBEAST2 run
 including the prior distributions. We fixed the number of species at 5 and the
-number of haplotypes per species at 1. The birth and death rates were fixed at
+number of sampled haplotypes per species at 1. The birth and death rates were fixed at
 200 and 100 per substitution respectively. Haploid population sizes followed
 an inverse gamma distribution with shape $\alpha = 3$ and scale $\beta =
 0.004$.
@@ -909,7 +907,7 @@ Phased and aligned \textit{Pseudacris} sequence data were retrieved from Dryad
 (\url{http://dx.doi.org/10.5061/dryad.23rc0}). Replicating the original
 analysis we applied the HKY nucleotide substitution model \citep{Hasegawa1985}
 to 22 out of 26 nuclear loci and the GTR model \citep{Tavare1986} to the
-remaining 4. For all models we used four discrete $\Gamma$ categories to
+remaining 4. For all models we used four discrete gamma categories to
 accommodate among-site rate variation \citep{Yang1994}. Transition/transversion
 rates and ratios and rate variation shape parameters were estimated, and
 empirical base frequencies used, all separately for each locus. The relative
@@ -1101,7 +1099,7 @@ credible intervals.
 In this study, the rooted Robinson-Foulds distance \citep{ROBINSON1981131} is
 the number of clades present in only one of the true tree $T_1$ or the maximum
 clade credibility tree $T_2$. Each 95\% credible set of tree topologies was
-selected from topologies present in the posterior sample, in order from high
+selected from topologies present in a given posterior sample, in order from high
 to low posterior probability, until the cumulative probability
 reached or exceeded 95\%.
 
