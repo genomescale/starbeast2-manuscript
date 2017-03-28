@@ -365,7 +365,7 @@ DOI:10.1093/sysbio/\@jshort\@artid\\
 \\[-30.4pt]
 \if@bookreview\\[48.2pt]\else\\[-15.4pt]\fi
 %{\it Syst. Biol.gdsgfs} \@jvolume(\@jissue):\@firstpage\@pageinfo, \@pubyear\\
-\copyright\ The Authors 2016. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. All rights reserved.\\ For permissions, please email: journals.permissions@oup.com\\
+\copyright\ The Authors 2017. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution. All rights reserved.\\ For permissions, please email: journals.permissions@oup.com\\
 \rule[4pt]{\textwidth}{.5pt}\\
 {\fontsize{10}{10}\selectfont{\it Mol. Biol. Evol.} \@jvolume(\@jissue):\@firstpage\@pageinfo\quad doi:10.1093/molbev/\@jshort\@artid}\quad \accessfont{\@access\hfill{\foliofont \thepage}}\\[38pt]
 \end{tabular}}}
