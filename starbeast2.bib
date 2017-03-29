@@ -1,13 +1,3 @@
-%% This BibTeX bibliography file was created using BibDesk.
-%% http://bibdesk.sourceforge.net/
-
-%% Created for adru001 at 2016-12-16 16:24:44 +1300 
-
-
-%% Saved with string encoding Unicode (UTF-8) 
-
-
-
 @article{Barrow201478,
 	Abstract = {Abstract The field of phylogenetics is changing rapidly with the application of high-throughput sequencing to non-model organisms. Cost-effective use of this technology for phylogenetic studies, which often include a relatively small portion of the genome but several taxa, requires strategies for genome partitioning and sequencing multiple individuals in parallel. In this study we estimated a multilocus phylogeny for the North American chorus frog genus Pseudacris using anonymous nuclear loci that were recently developed using a reduced representation library approach. We sequenced 27 nuclear loci and three mitochondrial loci for 44 individuals on 1/3 of an Illumina MiSeq run, obtaining 96.5% of the targeted amplicons at less than 20% of the cost of traditional Sanger sequencing. We found heterogeneity among gene trees, although four major clades (Trilling Frog, Fat Frog, crucifer, and West Coast) were consistently supported, and we resolved the relationships among these clades for the first time with strong support. We also found discordance between the mitochondrial and nuclear datasets that we attribute to mitochondrial introgression and a possible selective sweep. Bayesian concordance analysis in \{BUCKy\} and species tree analysis in *BEAST produced largely similar topologies, although we identify taxa that require additional investigation in order to clarify taxonomic and geographic range boundaries. Overall, we demonstrate the utility of a reduced representation library approach for marker development and parallel tagged sequencing on an Illumina MiSeq for phylogenetic studies of non-model organisms. },
 	Author = {Lisa N. Barrow and Hannah F. Ralicki and Sandra A. Emme and Emily Moriarty Lemmon},
@@ -85,25 +75,27 @@
 	Bdsk-Url-2 = {http://dx.doi.org/10.1093/molbev/msu279}}
 
 @article{rannala2017efficient,
-	title={Efficient Bayesian species tree inference under the multispecies coalescent},
+	title={Efficient {Bayesian} species tree inference under the multispecies coalescent},
 	author={Rannala, Bruce and Yang, Ziheng},
 	journal={Systematic Biology},
-	pages={syw119},
+	note={Advance Access},
 	year={2017},
 	publisher={Oxford University Press}
 }
 
-@article{Jones2016,
-	Abstract = {The focus of this article is a Bayesian method for inferring both species delimitations and species trees under the multispecies coalescent model using molecular sequences from multiple loci. The species delimitation requires no a priori assignment of individuals to species, and no guide tree. The method is implemented in a package called STACEY for BEAST2, and is a extension of the author's DISSECT package. Here we demonstrate considerable efficiency improvements by using three new operators for sampling from the posterior using the Markov chain Monte Carlo algorithm, and by using a model for the population size parameters along the branches of the species tree which allows these parameters to be integrated out. The correctness of the moves is demonstrated by tests of the implementation. The practice of using a pipeline approach to species delimitation under the multispecies coalescent, has been shown to have major problems on simulated data (Olave et al. in Syst Biol 63:263--271. doi:10.1093/sysbio/syt106, 2014). The same simulated data set is used to demonstrate the accuracy and improved convergence of the present method. We also compare performance with *BEAST for a fixed delimitation analysis on a large data set, and again show improved convergence.},
-	Author = {Jones, Graham},
-	Doi = {10.1007/s00285-016-1034-0},
-	Issn = {1432-1416},
-	Journal = {Journal of Mathematical Biology},
-	Note = {Advance access},
-	Title = {Algorithmic improvements to species delimitation and phylogeny estimation under the multispecies coalescent},
-	Url = {http://dx.doi.org/10.1007/s00285-016-1034-0},
-	Year = {2016},
-	Bdsk-Url-1 = {http://dx.doi.org/10.1007/s00285-016-1034-0}}
+@Article{Jones2017,
+author="Jones, Graham",
+title="Algorithmic improvements to species delimitation and phylogeny estimation under the multispecies coalescent",
+journal="Journal of Mathematical Biology",
+year="2017",
+volume="74",
+number="1",
+pages="447--467",
+abstract="The focus of this article is a Bayesian method for inferring both species delimitations and species trees under the multispecies coalescent model using molecular sequences from multiple loci. The species delimitation requires no a priori assignment of individuals to species, and no guide tree. The method is implemented in a package called STACEY for BEAST2, and is a extension of the author's DISSECT package. Here we demonstrate considerable efficiency improvements by using three new operators for sampling from the posterior using the Markov chain Monte Carlo algorithm, and by using a model for the population size parameters along the branches of the species tree which allows these parameters to be integrated out. The correctness of the moves is demonstrated by tests of the implementation. The practice of using a pipeline approach to species delimitation under the multispecies coalescent, has been shown to have major problems on simulated data (Olave et al. in Syst Biol 63:263--271. doi:                  10.1093/sysbio/syt106                                  , 2014). The same simulated data set is used to demonstrate the accuracy and improved convergence of the present method. We also compare performance with *BEAST for a fixed delimitation analysis on a large data set, and again show improved convergence.",
+issn="1432-1416",
+doi="10.1007/s00285-016-1034-0",
+url="http://dx.doi.org/10.1007/s00285-016-1034-0"
+}
 
 @article{Andrieu2008,
 	Abstract = {We review adaptive Markov chain Monte Carlo algorithms (MCMC) as a mean to optimise their performance. Using simple toy examples we review their theoretical underpinnings, and in particular show why adaptive MCMC algorithms might fail when some fundamental properties are not satisfied. This leads to guidelines concerning the design of correct algorithms. We then review criteria and the useful framework of stochastic approximation, which allows one to systematically optimise generally used criteria, but also analyse the properties of adaptive MCMC algorithms. We then propose a series of novel adaptive algorithms which prove to be robust and reliable in practice. These algorithms are applied to artificial and high dimensional scenarios, but also to the classic mine disaster dataset inference problem.},
@@ -284,7 +276,6 @@
 @article{Rambaut01061997,
 	Abstract = {Motivation: Seq-Gen is a program that will simulate the evolution of nucleotide sequences along a phylogeny, using common models of the substitution process. A range of models of molecular evolution are implemented, including the general reversible model. Nucleotide frequencies and other parameters of the model may be given and site-specific rate heterogeneity can also be incorporated in a number of ways. Any number of trees may be read in and the program will produce any number of data sets for each tree. Thus, large sets of replicate simulations can be easily created. This can be used to test phylogenetic hypotheses using the parametric bootstrap.Availability: Seq-Gen can be obtained by WWW from http://evolve.zoo.ox.ac.uk/Seq-Gen/seq-gen.html or by FTP from ftp://evolve.zoo.ox.ac.uk/packages/Seq-Gen/. The package includes the source code, manual and example files. An Apple Macintosh version is available from the same sites.},
 	Author = {Rambaut, Andrew and Grassly, Nicholas C.},
-	Date-Modified = {2016-12-16 03:23:27 +0000},
 	Doi = {10.1093/bioinformatics/13.3.235},
 	Eprint = {http://bioinformatics.oxfordjournals.org/content/13/3/235.full.pdf+html},
 	Journal = {Computer applications in the biosciences},
@@ -303,7 +294,6 @@
 	Doi = {http://dx.doi.org/10.1016/0025-5564(81)90043-2},
 	Issn = {0025-5564},
 	Journal = {Mathematical Biosciences},
-	Number = {1--2},
 	Pages = {131--147},
 	Title = {Comparison of phylogenetic trees},
 	Url = {http://www.sciencedirect.com/science/article/pii/0025556481900432},
@@ -318,8 +308,7 @@
 	Doi = {10.1186/1471-2148-13-221},
 	Issn = {1471-2148},
 	Journal = {BMC Evolutionary Biology},
-	Number = {1},
-	Pages = {1--11},
+	Pages = {221},
 	Title = {Looking for trees in the forest: summary tree from posterior samples},
 	Url = {http://dx.doi.org/10.1186/1471-2148-13-221},
 	Volume = {13},
@@ -707,7 +696,7 @@
 	Eprint = {http://rstb.royalsocietypublishing.org/content/213/402-410/21.full.pdf},
 	Issn = {0264-3960},
 	Journal = {Philosophical Transactions of the Royal Society B: Biological Sciences},
-	Number = {402-410},
+	Number = {403},
 	Pages = {21--87},
 	Publisher = {The Royal Society},
 	Title = {A Mathematical Theory of Evolution, Based on the Conclusions of {Dr. J. C. Willis, F.R.S.}},
@@ -764,7 +753,6 @@
 	Doi = {10.1146/annurev.ecolsys.33.010802.150500},
 	Eprint = {http://dx.doi.org/10.1146/annurev.ecolsys.33.010802.150500},
 	Journal = {Annual Review of Ecology and Systematics},
-	Number = {1},
 	Pages = {707--740},
 	Title = {Estimating Divergence Times from Molecular Data on Phylogenetic and Population Genetic Timescales},
 	Url = {http://dx.doi.org/10.1146/annurev.ecolsys.33.010802.150500},
@@ -838,7 +826,7 @@
 	Doi = {10.1186/1471-2164-15-S6-S11},
 	Issn = {1471-2164},
 	Journal = {BMC Genomics},
-	Number = {6},
+	Number = {Suppl 6},
 	Pages = {S11},
 	Title = {{BBCA}: Improving the scalability of {*BEAST} using random binning},
 	Url = {http://dx.doi.org/10.1186/1471-2164-15-S6-S11},

@@ -201,7 +201,7 @@ the likelihood of each site is calculated for all possible discrete gamma rates
 at each step, so individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
-implemented as part of BEST \citep{EVO:EVO414}, and is described in detail by \cite{Jones2016}. The analytic solution, which we
+implemented as part of BEST \citep{EVO:EVO414}, and is described in detail by \cite{Jones2017}. The analytic solution, which we
 have added to StarBEAST2, uses an inverse gamma conjugate prior for population
 sizes. By default StarBEAST2 fixes the shape of the distribution $\alpha = 3$
 and only estimates the mean of the distribution $\mu$, which is proportional to the
@@ -230,7 +230,7 @@ the same step. \cite{Yang01122014} introduced a Metropolis-Hastings \citep[MH;][
 operator which makes nearest-neighbour interchange (NNI) changes to the species
 tree topology, and simultaneously makes changes to gene tree topologies which
 preserve compatibility of the gene trees within the proposed species tree.
-Later, both \cite{Jones2016} and \cite{rannala2017efficient} introduced more
+Later, both \cite{Jones2017} and \cite{rannala2017efficient} introduced more
 general coordinated operators which make subtree prune and regraft (SPR) changes
 to the species tree. We have reimplemented these coordinated NNI and SPR moves
 in StarBEAST2 as a single new operator called ``CoordinatedExchange''.
@@ -243,7 +243,7 @@ to (less radical) NNI moves and (more radical) SPR moves.
 \subsection{Coordinated node height changing operators}
 
 A novel class of coordinated Metropolis operators was introduced by
-\cite{Jones2016}, which pick at random a non-root non-leaf species tree node
+\cite{Jones2017}, which pick at random a non-root non-leaf species tree node
 $S$ with an existing height of $t(S)$. A new height $t'(S)$ is chosen from a
 uniform distribution with lower and upper bounds $D$ and $U$. The height of
 the species tree node and the heights of subtrees of gene tree nodes (termed
@@ -252,7 +252,7 @@ the species tree node and the heights of subtrees of gene tree nodes (termed
 The $D$ and $U$ bounds limit the minimum and maximum values of $\eta$ to those
 which do not require modifying the topology of the gene tree or of the species
 tree, and the algorithm to determine those bounds is given by
-\cite{Jones2016}. The species tree root node is excluded because there is no
+\cite{Jones2017}. The species tree root node is excluded because there is no
 natural upper bound in that case. As long as the connected components are
 chosen with reference only to the topology of the species tree, the topology
 of the gene trees, and the mapping of sampled individuals to species,
@@ -285,7 +285,7 @@ CoordinatedUniform. Because this operator changes the height of the root node,
 a different method must be used to pick $\eta$ compared to CoordinatedUniform.
 
 First the lower bound $D$ is identified in the same way as for
-CoordinatedUniform and as described in \cite{Jones2016}. The difference
+CoordinatedUniform and as described in \cite{Jones2017}. The difference
 between $D$ and the current root height is referred to as $x$, and a new
 random value $x'$ is chosen from an exponential distribution. The value of $x'
 - x$ is then used for $\eta$. The median of the exponential distribution is
