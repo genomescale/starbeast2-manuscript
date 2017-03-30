@@ -19,22 +19,22 @@ levels = paste(rep(levels(topology_accuracy$method), c(3, 3, 3)), levels(topolog
 
 dodge = position_dodge(width = 0.9)
 
-mcc_rf_plot = ggplot(topology_accuracy, aes(x = analysis, y = mcc_rf_mean, fill = clock)) +
-  geom_bar(stat = "identity", position = dodge) +
+mcc_rf_plot = ggplot(topology_accuracy, aes(x = analysis, y = mcc_rf_mean, color = clock)) +
+  geom_point(stat = "identity", position = dodge) +
   geom_errorbar(aes(ymin = mcc_rf_low, ymax = mcc_rf_high), width = 0.5, position = dodge) +
   scale_y_continuous(breaks = seq(0, 10, 1)) +
   ylab("Mean MCC RF error") +
-  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
-  background_grid(major = "y", minor = "none")
-
-in_cs_plot = ggplot(topology_accuracy, aes(x = analysis, y = in_cs_prop, fill = clock)) +
-  geom_bar(stat = "identity", position = dodge) +
-  geom_errorbar(aes(ymin = in_cs_low, ymax = in_cs_high), width = 0.5, position = dodge) +
-  ylab("True topology in credible set") +
-  scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1.0), axis.title.x = element_blank(), legend.position = "none", legend.title = element_blank()) +
   background_grid(major = "y", minor = "none")
 
-plot_grid(mcc_rf_plot, in_cs_plot, labels = c("A", "B"), nrow = 2, rel_heights = c(1.0, 1.1), align = "v", vjust = c(4.0, 0.5))
+in_cs_plot = ggplot(topology_accuracy, aes(x = analysis, y = in_cs_prop, color = clock)) +
+  geom_point(stat = "identity", position = dodge) +
+  geom_errorbar(aes(ymin = in_cs_low, ymax = in_cs_high), width = 0.5, position = dodge) +
+  ylab("True topology in credible set") +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
+  background_grid(major = "y", minor = "none")
+
+plot_grid(in_cs_plot, mcc_rf_plot, labels = c("A", "B"), nrow = 2, rel_heights = c(1.0, 1.1), align = "v", vjust = c(4.0, 0.5))
 ggsave("topology_accuracy_phased.pdf", units = "mm", height = 200, width = 120)
 ggsave("topology_accuracy_phased.png", units = "mm", height = 200, width = 120)

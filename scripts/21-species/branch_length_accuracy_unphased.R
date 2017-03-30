@@ -28,14 +28,14 @@ tip_bias_plot = ggplot(branch_length_accuracy, aes(x = analysis, y = tip_length_
   geom_boxplot() +
   scale_y_continuous(labels = scales::percent) +
   ylab("Total tip length bias") +
-  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0), axis.title.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
   background_grid(major = "y", minor = "none")
 
 tip_hpd_plot = ggplot(branch_length_accuracy, aes(x = analysis, y = tip_truth_in_hpd, fill = clock)) +
   geom_boxplot() +
   scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
   ylab("Tip lengths in HPD") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1.0), axis.title.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
+  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
   background_grid(major = "y", minor = "none")
 
 internal_error_plot = ggplot(branch_length_accuracy, aes(x = analysis, y = internal_length_error, fill = clock)) +
@@ -49,17 +49,23 @@ internal_bias_plot = ggplot(branch_length_accuracy, aes(x = analysis, y = intern
   geom_boxplot() +
   scale_y_continuous(labels = scales::percent) +
   ylab("Total internal length bias") +
-  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0), axis.title.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
   background_grid(major = "y", minor = "none")
 
 internal_hpd_plot = ggplot(branch_length_accuracy, aes(x = analysis, y = internal_truth_in_hpd, fill = clock)) +
   geom_boxplot() +
   scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
   ylab("Internal lengths in HPD") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1.0), axis.title.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
+  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), legend.position = "top", legend.title = element_blank()) +
   background_grid(major = "y", minor = "none")
 
-prow = plot_grid(tip_error_plot + theme(legend.position = "none"), internal_error_plot + theme(legend.position = "none"), tip_bias_plot + theme(legend.position = "none"), internal_bias_plot + theme(legend.position = "none"), tip_hpd_plot + theme(legend.position = "none"), internal_hpd_plot + theme(legend.position = "none"), labels = c("A", "B", "C", "D", "E", "F"), nrow = 3, rel_heights = c(0.8, 0.8, 1.1), align = "v", vjust = c(1.0, 1.0, 1.0, 1.0, 1.0, 1.0))
+prow = plot_grid(tip_hpd_plot + theme(legend.position = "none"),
+  internal_hpd_plot + theme(legend.position = "none"),
+  tip_error_plot + theme(legend.position = "none"),
+  internal_error_plot + theme(legend.position = "none"),
+  tip_bias_plot + theme(legend.position = "none"),
+  internal_bias_plot + theme(legend.position = "none"),
+  labels = c("A", "B", "C", "D", "E", "F"), nrow = 3, rel_heights = c(0.8, 0.8, 1.1), align = "v", vjust = c(1.0, 1.0, 1.0, 1.0, 1.0, 1.0))
 legend = get_legend(tip_error_plot)
 plot_grid(legend, prow, ncol = 1, rel_heights = c(0.07, 1))
 
