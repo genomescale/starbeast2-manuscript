@@ -72,14 +72,16 @@ Multispecies coalescent (MSC) based methods reconstruct species trees from a
 set of genes, and fully Bayesian MSC methods like *BEAST estimate species
 trees from multiple sequence alignments. Today thousands of genes can be
 sequenced for a given study, but using that many genes with *BEAST is
-intractably slow. One alternative is concatenation, which assumes that the
+intractably slow. 
+An alternative is to use heuristic methods which compromise accuracy or completeness in return for speed.
+A common heuristic is concatenation, which assumes that the
 evolutionary history of each gene tree is identical to the species tree. This
 is an inconsistent estimator of species tree topology, and a worse estimator
 of divergence times. Concatenation also induces spurious substitution rate
-variation when incomplete lineage sorting is present. Another alternative is
-to use heuristic methods motivated by the MSC, but such methods are also
-unsatisfactory because they infer branch lengths in coalescent units, and so
-cannot estimate divergence times. To enable fuller use of available data and
+variation when incomplete lineage sorting is present. 
+Another class of heuristics directly motivated by the MSC avoids many of the pitfalls of concatenation, 
+but are generally incomplete, estimating the species topology but not divergence times in calendar units. 
+To enable fuller use of available data and
 more accurate inference of species tree topologies, divergence times, and
 substitution rates, we have developed a new version of *BEAST called
 StarBEAST2. To improve convergence rates we add analytical integration of
@@ -144,11 +146,11 @@ times across a species tree in proportion to effective population size
 
 Incomplete lineage sorting (ILS) also causes systematic errors in estimated
 branch lengths when using concatenation. When a gene tree topology is
-discordant with the species tree topology, certain branches of the gene tree
-will also be discordant because they will define a split that does not occur
-in the species tree. If a substitution occurs on a discordant gene tree
-branch, the resulting site pattern must be explained by substitutions
-occurring on multiple species tree branches. This is known as substitutions
+discordant with the species tree topology, 
+then the gene tree will contain one or more branches that define splits not occurring in the species tree.
+If a substitution occurs on one of these discordant gene tree
+branches, the resulting site pattern would define a homoplasy on the species tree, implying multiple substitutions. 
+This effect has been termed substitutions
 produced by ILS (SPILS) and causes concatenation to overestimate the lengths
 of specific branches and underestimate the lengths of others, which produces
 apparent substitution rate variation where none exists \citep{Mendes01072016}.
@@ -169,10 +171,9 @@ should be used with caution as it is sensitive to gene tree errors
 accurate than likelihood-based or neighbour-joining concatenation at inferring
 topologies, and even at high levels of ILS it may be no more accurate than
 concatenation \citep{Ogilvie01052016}. No available
-heuristic method can infer branch lengths in substitution units, and
-therefore cannot be used to estimate molecular-clock informed divergence
+heuristic method is both statistically consistent and can infer branch lengths in substitution units. Therefore heuristic methods cannot be reliably used to estimate divergence
 times. If concatenation is used to estimate branch lengths or divergence times
-for a fixed species tree topology estimated using a heuristic method,
+for a species tree topology estimated by another heuristic method,
 then those estimates will be unreliable for the same reasons as pure
 concatenation.
 
@@ -728,9 +729,8 @@ time as a more limited *BEAST analysis.
 \subsection{Species tree branch length coverage and accuracy}
 
 Bayesian methods like StarBEAST2 produce both point estimates and credible
-intervals of inferred parameters. Ideally the point estimates will be
-accurate, and the credible intervals will cover the corresponding true
-values. For well calibrated methods, a 95\% credible interval will include
+intervals of inferred parameters. Ideally the point estimates will have low error, and the credible intervals will cover the corresponding true
+values. For well calibrated Bayesian methods, a 95\% credible interval will include
 the true value 95\% of the time.
 
 Using a species tree relaxed clock with StarBEAST2 improved the coverage of
@@ -791,15 +791,15 @@ errors may \textit{partially} cancel out.
 
 \subsection{Species tree topology coverage and accuracy}
 
-We used the rooted Robinson-Foulds distance metric to measure the coverage of
-species tree topologies and the accuracy of maximum clade credibility (MCC)
+We measured the coverage of
+species tree topologies and used the rooted Robinson-Foulds distance metric to measure the error associated with the maximum clade credibility (MCC)
 topology point estimates. As with branch lengths, using a relaxed clock with
 concatenation or a species tree relaxed clock with StarBEAST2 improved
 coverage. Regardless of clock model the coverage of concatenation was low; in
 less than 50\% of replicates was the simulated topology in the credible set
 (Figure~\ref{fig:treeTopologyError}A).
 
-In terms of accuracy, using 130 loci was similar to StarBEAST2 using 26 loci
+In terms of error rates, using 130 loci was similar to StarBEAST2 using 26 loci
 (Figure~\ref{fig:treeTopologyError}B). Using species tree relaxed clocks with
 StarBEAST2 was slightly more accurate than using strict clocks, but relaxed
 clocks did not improve the accuracy of concatenation
