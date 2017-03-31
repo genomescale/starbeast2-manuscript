@@ -47,7 +47,7 @@ crocidura_rates$category = factor(crocidura_rates$category, levels = paste0(rep(
 ", levels(crocidura_rates$loci)))
 
 simulation_plot = ggplot(simulation_rates, aes(y = ess_per_hour, x = category, fill = clock)) +
-	geom_boxplot() +
+	geom_boxplot(lwd = 0.3) +
 	ylab("ESS per hour") +
 	scale_y_log10(limits = c(min(simulation_rates$ess_per_hour), 1000.0), breaks = 10^seq(-10, 10, 1), labels = comma) +
 	facet_grid(. ~ dataset) +
@@ -59,7 +59,7 @@ simulation_plot = ggplot(simulation_rates, aes(y = ess_per_hour, x = category, f
 	background_grid(major = "y", minor = "none")
 
 pseudacris_plot = ggplot(pseudacris_rates, aes(y = ess_per_hour, x = category, fill = clock)) +
-	geom_boxplot() +
+	geom_boxplot(lwd = 0.3) +
 	scale_y_log10(limits = c(min(simulation_rates$ess_per_hour), 1000.0), breaks = 10^seq(-10, 10, 1), labels = comma) +
 	facet_grid(. ~ dataset) +
 	theme(axis.text.x = element_text(angle = 45, hjust = 1.0),
@@ -74,7 +74,7 @@ pseudacris_plot = ggplot(pseudacris_rates, aes(y = ess_per_hour, x = category, f
 	background_grid(major = "y", minor = "none")
 
 crocidura_plot = ggplot(crocidura_rates, aes(y = ess_per_hour, x = category, fill = clock)) +
-	geom_boxplot() +
+	geom_boxplot(lwd = 0.3) +
 	scale_y_log10(limits = c(min(simulation_rates$ess_per_hour), 1000.0), breaks = 10^seq(-10, 10, 1), labels = comma) +
 	facet_grid(. ~ dataset) +
 	theme(axis.text.x = element_text(angle = 45, hjust = 1.0),

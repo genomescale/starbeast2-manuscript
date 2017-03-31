@@ -21,7 +21,7 @@ levels(starbeast2_rates$clock) = c("Strict clock", "Gene tree relaxed clocks", "
 levels(starbeast2_rates$operators) = c("Neither", "Topology changing", "Height changing", "Both")
 
 ggplot(starbeast2_rates, aes(y = mstates_rate, x = operators, fill = popsize_integration)) +
-	geom_boxplot() +
+	geom_boxplot(lwd = 0.3) +
 	xlab("Coordinated MCMC operators") +
 	ylab("Million states per hour") +
 	scale_y_continuous(limits = c(0, 25)) +
