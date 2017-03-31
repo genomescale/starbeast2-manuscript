@@ -72,23 +72,21 @@ Multispecies coalescent (MSC) based methods reconstruct species trees from a
 set of genes, and fully Bayesian MSC methods like *BEAST estimate species
 trees from multiple sequence alignments. Today thousands of genes can be
 sequenced for a given study, but using that many genes with *BEAST is
-intractably slow. 
-An alternative is to use heuristic methods which compromise accuracy or completeness in return for speed.
-A common heuristic is concatenation, which assumes that the
-evolutionary history of each gene tree is identical to the species tree. This
-is an inconsistent estimator of species tree topology, and a worse estimator
-of divergence times. Concatenation also induces spurious substitution rate
-variation when incomplete lineage sorting is present. 
-Another class of heuristics directly motivated by the MSC avoids many of the pitfalls of concatenation, 
-but are generally incomplete, estimating the species topology but not divergence times in calendar units. 
-To enable fuller use of available data and
-more accurate inference of species tree topologies, divergence times, and
-substitution rates, we have developed a new version of *BEAST called
-StarBEAST2. To improve convergence rates we add analytical integration of
-population sizes, novel MCMC operators and other optimisations which improved
-computational performance $13.5\times$ to $13.8\times$ when analysing
-empirical data sets, and an average of $33.1\times$ across 30 simulated data
-sets. To enable accurate estimates of per-species substitution rates we
+intractably slow. An alternative is to use heuristic methods which compromise
+accuracy or completeness in return for speed. A common heuristic is
+concatenation, which assumes that the evolutionary history of each gene tree
+is identical to the species tree. This is an inconsistent estimator of species
+tree topology, a worse estimator of divergence times, and induces spurious
+substitution rate variation when incomplete lineage sorting is present.
+Another class of heuristics directly motivated by the MSC avoids many of the
+pitfalls of concatenation but cannot be used to estimate divergence times. To
+enable fuller use of available data and more accurate inference of species
+tree topologies, divergence times, and substitution rates, we have developed a
+new version of *BEAST called StarBEAST2. To improve convergence rates we add
+analytical integration of population sizes, novel MCMC operators and other
+optimisations. Computational performance improved by 13.5$\times$ to 13.8$\times$ when
+analysing empirical data sets, and an average of 33.1$\times$ across 30 simulated
+data sets. To enable accurate estimates of per-species substitution rates we
 introduce species tree relaxed clocks, and show that StarBEAST2 is a more
 powerful and robust estimator of rate variation than concatenation. StarBEAST2
 is available through the BEAUTi package manager in BEAST 2.4 and above.
@@ -162,7 +160,7 @@ As an alternative to concatenation for use with phylogenomic data, heuristic
 methods which do not perform phylogenetic likelihood calculations but are statistically
 consistent with the MSC have been developed. These include summary methods
 which utilise distributions of estimated gene tree topologies as input, such as the
-triplet method MP-EST \citep{Liu2010} and the quartet method ASTRAL
+rooted triplet method MP-EST \citep{Liu2010} and the quartet method ASTRAL
 \citep{Mirarab01092014}. Another quartet method is SVDquartets, which
 utilises single-nucleotide polymorphism (SNP) matrices
 \citep{doi:10.1093/bioinformatics/btu530}. Recent results show that MP-EST
@@ -171,7 +169,7 @@ should be used with caution as it is sensitive to gene tree errors
 accurate than likelihood-based or neighbour-joining concatenation at inferring
 topologies, and even at high levels of ILS it may be no more accurate than
 concatenation \citep{Ogilvie01052016}. No available
-heuristic method is both statistically consistent and can infer branch lengths in substitution units. Therefore heuristic methods cannot be reliably used to estimate divergence
+heuristic method is both statistically consistent and can infer branch lengths in substitution or calendar units. Therefore heuristic methods cannot be reliably used to estimate divergence
 times. If concatenation is used to estimate branch lengths or divergence times
 for a species tree topology estimated by another heuristic method,
 then those estimates will be unreliable for the same reasons as pure
@@ -673,7 +671,7 @@ of StarBEAST2 with default settings to *BEAST. For the simulation data set, we
 compare StarBEAST2 with *BEAST and also with concatenation.
 
 NGS data sets may have hundreds or thousands of loci. To gauge the performance
-of StarBEAST2 applied to these data sets, we tested an empirical NGS data set;
+of StarBEAST2 applied to these data sets we tested an empirical NGS data set;
 ultraconserved element \citep[UCE;][]{Faircloth01102012} sequences from
 Philippine shrews of the genus \textit{Crocidura} \citep{Giarla01092015}. This
 data set consists of 1112 loci sampled from a total of 19 individuals, which
