@@ -83,8 +83,8 @@ enable fuller use of available data and more accurate inference of species
 tree topologies, divergence times, and substitution rates, we have developed a
 new version of *BEAST called StarBEAST2. To improve convergence rates we add
 analytical integration of population sizes, novel MCMC operators and other
-optimisations. Computational performance improved by 13.5$\times$ to 13.8$\times$ when
-analysing empirical data sets, and an average of 33.1$\times$ across 30 simulated
+optimisations. Computational performance improved by 13.5$\times$ and 13.8$\times$ respectively
+analysing two empirical data sets, and an average of 33$\times$ across 30 simulated
 data sets. To enable accurate estimates of per-species substitution rates we
 introduce species tree relaxed clocks, and show that StarBEAST2 is a more
 powerful and robust estimator of rate variation than concatenation. StarBEAST2
@@ -96,7 +96,7 @@ Keywords: Multispecies coalescent, concatenation, phylogenetic methods, incomple
 
 \section{Introduction}
 
-The throughput of sequencing technologies has improved many-fold over the past
+The throughput of sequencing technologies has improved remarkably over the past
 two decades culminating in next generation sequencing (NGS), and it is now
 feasible to sequence whole or partial genomes or transcriptomes for phylogenetic
 studies \citep{annurev-ecolsys-110512-135822}. NGS produces hundreds or
@@ -105,7 +105,7 @@ with potentially millions of sites spread across a data set of multiple
 sequence alignments.
 
 While NGS offers hundreds or thousands of loci at relatively low cost, making
-accurate inferences from the enormous amount of data produced is particularly
+accurate inferences from the enormous amount of data produced is
 challenging. In the case of *BEAST, a fully Bayesian method of species tree
 inference which implements a realistic and robust evolutionary model in the
 multispecies coalescent \citep[MSC;][]{Degnan2009332, Heled01032010}, it becomes exponentially
@@ -131,15 +131,14 @@ high confidence to incorrect nodes due to model misspecification
 \citep{NYAS:NYAS12747}. In the so-called ``anomaly zone'' of short branch
 lengths, the most probable gene tree topology will be different from the species
 tree, and estimated tree topologies will likely differ from the true species
-tree topologies \citep{journal.pgen.0020068, Kubatko01022007}.
+tree topology \citep{journal.pgen.0020068, Kubatko01022007}.
 
-More recently identified problems with likelihood-based concatenation are
+Likelihood-based concatenation has also been shown to produce
 systematic errors when estimating branch lengths, including overestimation of
 divergence times. Because some time is required for genes to coalesce
 looking backwards from a speciation event, the expected molecular distance
 between two species is greater than if coalescent events occurred
-simultaneously when
-gene flow ceases. This leads concatenation to overestimate the divergence
+simultaneously with the speciation event. This leads concatenation to overestimate the divergence
 times across a species tree in proportion to effective population size
 \citep{doi:10.1146/annurev.ecolsys.33.010802.150500, Ogilvie01052016}.
 
@@ -149,8 +148,8 @@ discordant with the species tree topology,
 then the gene tree will contain one or more branches that define splits not occurring in the species tree.
 If a substitution occurs on one of these discordant gene tree
 branches, the resulting site pattern would define a homoplasy on the species tree, implying multiple substitutions. 
-This effect has been termed substitutions
-produced by ILS (SPILS) and causes concatenation to overestimate the lengths
+This effect has been termed "substitutions
+produced by ILS" (SPILS) and causes concatenation to overestimate the lengths
 of specific branches and underestimate the lengths of others, which produces
 apparent substitution rate variation where none exists \citep{Mendes01072016}.
 For all the above reasons, trees inferred using concatenation are therefore
@@ -170,14 +169,14 @@ should be used with caution as it is sensitive to gene tree errors
 accurate than likelihood-based or neighbour-joining concatenation at inferring
 topologies, and even at high levels of ILS it may be no more accurate than
 concatenation \citep{Ogilvie01052016}. No available
-heuristic method is both statistically consistent and can infer branch lengths in substitution or calendar units. Therefore heuristic methods cannot be reliably used to estimate divergence
+heuristic method is both statistically consistent and can infer branch lengths in expected substitutions or calendar units. Therefore heuristic methods cannot be reliably used to estimate divergence
 times. If concatenation is used to estimate branch lengths or divergence times
 for a species tree topology estimated by another heuristic method,
 then those estimates will be unreliable for the same reasons as pure
 concatenation.
 
-An issue specific to summary methods is when the assumption of
-no recombination within loci is frequently violated because overly long loci are used \citep{Gatesy26032013}. To
+Another problem with summary methods occurs when the assumption of
+no recombination within loci is substantially violated because overly long loci are used \citep{Gatesy26032013}. To
 resolve larger and deeper species trees using summary methods, longer and more
 informative loci may be required to infer more accurate gene trees. However
 the larger and deeper a tree, the more recombination events will have occurred.
@@ -212,15 +211,15 @@ to enable accurate inference of per-species substitution rates.
 
 Markov Chain Monte Carlo (MCMC) methods like *BEAST jointly integrate
 over many parameters by proposing small changes at each step to eventually
-produce a probability distribution for all parameters. From a
-researcher's perspective, some may be ``nuisance'' parameters not of scientific
+produce a probability distribution over all random variables. From a
+researcher's perspective, some random variables may be ``nuisance'' parameters not of scientific
 interest. For example species tree topology and divergence times may be of
 interest, but not effective population sizes. For tractable parameters, an
 analytic solution will integrate over the entire range of values at each MCMC
 step, and may be faster than MCMC integration. However explicit
 estimates will not be produced so this approach is suitable only for nuisance
 parameters. Among-site rate variation is already integrated out at each step;
-the likelihood of each site is calculated for all possible discrete gamma rates
+the likelihood of each site is calculated for all possible discrete gamma rate categories
 at each step, so individual site rates are not estimated \citep{Yang1994}.
 
 Analytical integration of constant per-branch population sizes was first
